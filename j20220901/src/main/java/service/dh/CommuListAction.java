@@ -47,9 +47,10 @@ public class CommuListAction implements CommandProcess {
 			request.setAttribute("blockSize"   , blockSize);
 			request.setAttribute("startPage"   , startPage);
 			request.setAttribute("endPage"     , endPage);
+			System.out.println("list ->" + list);
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("commuListAction try ..." + e.getMessage());
 		}
 		
 		return "dh/commuList.jsp";

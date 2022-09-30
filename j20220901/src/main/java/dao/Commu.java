@@ -42,10 +42,17 @@ public class Commu {
 	}
 	
 	// community_img table
-	public class CommuImg {
+	public static class CommuImg {
+		private int    c_num;
 		private int    c_img_num;
 		private String c_img_path;
 		
+		public int getC_num() {
+			return c_num;
+		}
+		public void setC_num(int c_num) {
+			this.c_num = c_num;
+		}
 		public int getC_img_num() {
 			return c_img_num;
 		}
