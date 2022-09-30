@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<% String context = request.getContextPath(); %>
 <style type="text/css">
  	caption {
 	font-size: 24px;
@@ -141,7 +141,7 @@ function winop() {
 </header>
 		<tbody>
 		<div class="joinform" style="margin-top:200px; margin-left: 28%;">
-	<form  action="joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()">
+	<form  action="<%=context %>/joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()">
 		<table>
 		<thead>
 			<tr>

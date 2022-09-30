@@ -63,7 +63,7 @@
 						</div>
 						<div class="Button__ButtonWrapper-sc-1vcxcg6-0 oIYRb">
 							<button class="user-imfo usImfo">
-								<img src="images/vector_profile_default.svg"
+								<img src="<%=context %>${img}"
 									style="vertical-align: middle;">
 							</button>
 							<div class="header-mypage-logout">
