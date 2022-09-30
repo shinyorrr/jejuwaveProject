@@ -39,9 +39,7 @@ public class MypageCommunityAction implements CommandProcess {
 			int endPage = startPage + blockSize - 1;
 			// 작성자가 쓴 글 조회
 			List<Mypage> list = my.communityList(user_id,startRow,endRow);
-			String img = my.imageSelect(user_id);
 			
-			request.setAttribute("img", img);
 			request.setAttribute("totCnt", totCnt);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("currentPage", currentPage);

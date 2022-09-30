@@ -27,9 +27,8 @@ public class LoginAction implements CommandProcess {
 			if(result > 0) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", user_id);
+				session.setAttribute("img", img);
 			}
-			request.setAttribute("img", img);
-			request.setAttribute("user_id", user_id);
 			request.setAttribute("user_pw", user_pw);
 			request.setAttribute("result", result);
 		} catch (SQLException e) {

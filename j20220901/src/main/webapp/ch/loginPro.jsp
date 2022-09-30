@@ -13,7 +13,7 @@
 <body>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-		location.href = "<%=context%>/login.do"
+		location.href = "mainLogin.jsp";
 		</script>
 	</c:if>
 	
