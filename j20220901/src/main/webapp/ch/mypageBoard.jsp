@@ -93,6 +93,16 @@
 				</table>
 				</div>
 			</div>
+			<div style="padding-left : 43.5%;">
+		<c:if test="${startPage > blockSize }">
+			<a href = '<%=context%>/mypageTraveler.do?pageNum=${startPage-blockSize }'>[이전]</a>
+		</c:if>
+		<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
+			<a href='<%=context%>/mypageTraveler.do?pageNum=${i }'>[${i }]</a>
+		</c:forEach>
+		<c:if test="${endPage < pageCnt }">
+			<a href ='<%=context%>/mypageTraveler.do=${startPage+blockSize }'>[다음]</a>
+		</c:if>
 		</div>
 </main>
 <footer class="py-5 bg-dark" style="margin-top: 100px;">
