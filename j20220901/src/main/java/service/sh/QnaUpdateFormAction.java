@@ -29,7 +29,7 @@ public class QnaUpdateFormAction implements CommandProcess {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "qnaUpdateForm.jsp";
+		return "sh/qnaUpdateForm.jsp";
 	}
 
 }

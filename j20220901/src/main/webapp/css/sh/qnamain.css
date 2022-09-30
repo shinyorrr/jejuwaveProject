@@ -19,16 +19,16 @@
 /* 	border: 1px solid red; */
 	width: 1200px;
 }
-
+/* 
 .basic {
-	float: left; /*블록요소를 가로로 정렬*/
-	border: 1px solid orange; /*테두리*/
+	float: left; 블록요소를 가로로 정렬
+	border: 1px solid orange; 테두리
 }
 
 .basic1 {
 	width: 100px;
 	height: 100px;
-/* 	border: 1px solid pink; */
+	border: 1px solid pink;
 	float: left;
 	margin-left: 300px;
 	color: #FF3500;
@@ -40,8 +40,8 @@
 .basic2 {
 	width: 500px;
 	height: 100px;
-	/* border: 1px solid pink; */
-	/* float: left; */
+	border: 1px solid pink;
+	float: left;
 	display: inline;
 	text-align: inherit;
 }
@@ -53,12 +53,12 @@
 .basic3 {
 	width: auto;
 	height: 100px;
-/* 	border: 1px solid pink; */
+	border: 1px solid pink;
 	float: left;
 	margin-right: 200px;
 	
-}
-
+} 
+ */
 .tag1 {
 	width: 50;
 	margin-left: 10px;
@@ -105,6 +105,36 @@
 		
 	}
 	
-	
-	
+	.user_icon1{
+	float: left;
 
+	
+	}
+	
+.maintitle{
+	margin-left: 200px;
+	margin-right: 200px;
+	padding-bottom: 100px;
+	
+}
+	
+	
+.title2{
+	display : block;
+	
+}	
+
+
+.title1{
+	display: block;
+	
+	
+	
+}
+
+
+.one space{
+	margin-left: 50px;
+	
+	
+}

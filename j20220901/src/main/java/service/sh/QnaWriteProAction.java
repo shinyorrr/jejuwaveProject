@@ -35,7 +35,7 @@ public class QnaWriteProAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "qnaWritePro.jsp";
+		return "sh/qnaWritePro.jsp";
 	}
 
 }

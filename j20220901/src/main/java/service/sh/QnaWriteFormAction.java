@@ -19,7 +19,7 @@ public class QnaWriteFormAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "qnaWriteForm.jsp";
+		return "sh/qnaWriteForm.jsp";
 	}
 
 }
