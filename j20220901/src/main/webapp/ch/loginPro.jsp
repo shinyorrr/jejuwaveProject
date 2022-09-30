@@ -12,9 +12,16 @@
 %>
 <body>
 	<c:if test="${result > 0 }">
-		<script type="text/javascript">
-		location.href = "mainLogin.jsp";
-		</script>
+		<c:if test="${user_gubun > 0 }">
+			<script type="text/javascript">
+				location.href = "mainLogin.jsp";
+			</script>
+		</c:if>
+		<c:if test="${user_gubun == 0 }">
+			<script type="text/javascript">
+				location.href = "admain.do";
+			</script>
+		</c:if>
 	</c:if>
 	
 	<c:if test="${result == 0 }">
