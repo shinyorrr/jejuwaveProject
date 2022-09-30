@@ -180,7 +180,7 @@ public class MypageDao {
 			if(rs.next()) {
 				md.setUser_info(rs.getString("user_info"));
 				System.out.println(md.getUser_info());
-				md.setUser_birth(rs.getDate("user_birth"));
+				md.setUser_birth(rs.getString("user_birth"));
 				md.setUser_tel(rs.getString("user_tel"));
 				md.setUser_email(rs.getString("user_email"));
 				md.setUser_img(rs.getString("user_img"));

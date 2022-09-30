@@ -26,7 +26,7 @@ public class MypageCommunityAction implements CommandProcess {
 		try {
 			int totCnt = my.getTotalCntCommunity(user_id);
 			String pageNum = request.getParameter("pageNum");
-			if(pageNum == null || pageNum.equals("")) {pageNum = "1";}
+			if(pageNum == null || pageNum.equals("") || pageNum.equals("0")) {pageNum = "1";}
 			int currentPage = Integer.parseInt(pageNum);
 			int pageSize = 6, blockSize = 10;
 			int startRow = (currentPage - 1) * pageSize + 1;
