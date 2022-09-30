@@ -15,7 +15,7 @@ public class AdmainAction implements CommandProcess {
 			throws ServletException, IOException {
 		System.out.println("AdmainAction service start...");
 		
-		return "admain.jsp";
+		return "hs/admain.jsp";
 	}
 
 }
