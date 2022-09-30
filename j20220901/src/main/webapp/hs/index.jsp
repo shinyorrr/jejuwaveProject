@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+   String context = request.getContextPath();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +12,7 @@
 </head>
 <body>
 <script type="text/javascript">
-	location.href="admain.do";
+	location.href="<%=context%>/admain.do";
 </script>
 </body>
 </html>
