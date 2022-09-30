@@ -11,63 +11,25 @@ import javax.sql.DataSource;
 
 public class MemberDao {
 	private static MemberDao instance;
-
-	private MemberDao() {
-	}
-
+	private MemberDao() {} // 프라이빗으로 만들어 줘야 진짜 싱글턴 패턴
+	
 	public static MemberDao getInstance() {
-		if (instance == null) {
+		if(instance==null) {
 			instance = new MemberDao();
 		}
 		return instance;
 	}
-
-	private Connection getConnection() throws SQLException {
+	
+	private Connection getConnection() {
 		Connection conn = null;
-
 		try {
 			Context ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/OracleDB");
+			DataSource ds = (DataSource)ctx.lookup("java:comp/env/jdbc/OracleDB");
 			conn = ds.getConnection();
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			// e.printStackTrace();
-			System.out.println(e.getMessage());
+		}catch(Exception e) { 
+			System.out.println(e.getMessage());	
 		}
-
 		return conn;
-	}
-	public int check(String user_id, String user_pw) throws SQLException {
-		int result = 0;
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		String sql = "select  user_pw from member where user_id = ?";
-		try {
-			conn = getConnection();
-			System.out.println("connection 연결" + conn);
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_id);
-			rs = pstmt.executeQuery();
-			if(rs.next()){
-				String dbpasswd = rs.getString(1);
-				System.out.println("dbpasswd =>" + dbpasswd);
-				System.out.println("user_pw : " + user_pw);
-				System.out.println("db 탔음");
-				if(dbpasswd.equals(user_pw)) result = 1;
-				else result = 0;
-			} else result = -1;
-			
-		} catch(Exception e) {
-			System.out.println(e.getMessage());
-		} finally {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
-		}
-		
-		return result;
 	}
 	public int confirmId(String user_id) throws SQLException {
 		int result = 1;
@@ -153,6 +115,33 @@ public class MemberDao {
 		}
 		return member;
 	} 
+	
+	public Member select(String user_name,String user_tel) throws SQLException {
+		Member member = new Member();	
+		Connection conn = null;
+		String sql  = "select user_id from member where user_name=? and user_tel=?"; 
+		PreparedStatement pstmt = null; 
+		ResultSet rs = null;
+		try { 
+			conn  = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			pstmt.setString(1, user_name);
+			pstmt.setString(2, user_tel);
+			if (rs.next()) {
+				member.setUser_id(rs.getString(1));
+			} 
+		} catch(Exception e) { 
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn != null) conn.close();
+		}
+		return member;
+	} 
+	
+	
 	public int delete(String user_id, String user_pw) throws SQLException {
 		int result = 0;
 		Connection conn = null;
