@@ -1,4 +1,5 @@
-package service.sh;
+package service.dh;
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -7,19 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.CommandProcess;
 
-public class QnaWriteFormAction implements CommandProcess {
+public class CommuWriteProAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("QnaWriteFormAction start...");
-		try {
-			int b_num=0; 
-			request.setAttribute("b_num", b_num);		
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return "sh/qnaWriteForm.jsp";
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
