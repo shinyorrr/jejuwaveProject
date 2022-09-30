@@ -8,7 +8,7 @@ public class Member {
 	private String user_email;
 	private String user_name;
 	private String user_info;
-	private Date user_birth;
+	private String user_birth;
 	private String user_gender;
 	private String user_tel;
 	private int user_gubun;
@@ -44,10 +44,11 @@ public class Member {
 	public void setUser_info(String user_info) {
 		this.user_info = user_info;
 	}
-	public Date getUser_birth() {
+	
+	public String getUser_birth() {
 		return user_birth;
 	}
-	public void setUser_birth(Date user_birth) {
+	public void setUser_birth(String user_birth) {
 		this.user_birth = user_birth;
 	}
 	public String getUser_gender() {
