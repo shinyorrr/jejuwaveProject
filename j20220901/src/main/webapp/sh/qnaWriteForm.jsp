@@ -1,73 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<!DOCTYPE html>
-<html>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<head>
-
-
-<%@ include file ="header.jsp" %>
-<meta charset="UTF-8">
-<title>게시판 글쓰기</title>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+ <% String context = request.getContextPath(); %>
+<c:import url="${context}/sh/header.jsp"></c:import>
  <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
- <link rel="stylesheet" href="css/sh/qnamain.css">
+<link rel="stylesheet" href="<%=context %>/css/sh/qnamain.css">
+<link rel="stylesheet" href="<%=context %>/css/sh/qnaUpdate.css">
+    
+<!DOCTYPE html>
+<html>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+<meta charset="UTF-8">
+<title>게시판 글쓰기</title>
 
-
-<style type="text/css">
-
-
-
-	.mb-3 input{
-		background-image: url("sh_images/q.png");
-		background-repeat: no-repeat;
-		background-size: 30px;
-		background-position: 10px center;
-		text-indent: 50px;
-	}
-	.board_image{
-		/* margin-top: 200px; */
-		background-image: url("sh_images/qna_board.jpg");
-		background-repeat: no-repeat;
-		background-position: center;
-		width: 5500;
-		height: 220px;
-		
-
-	}
-	.tag{
-	 	width:1050px;
-	 	border: 5px red;
-	 	padding: 3px;
-		margin-left: auto; 
-		margin-right: auto;
-		text-align: center;
-		
-	}
-
-	
-</style>
-</head>
-
-
-	
-<div class="py-5 mb-5"
-	style="background-image: url('sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 73px;">
+<header class="py-5 mb-5"
+	style="background-image: url('<%=context %>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
 		<div class="text-center text-white">
 			<h3 class="display-5 fw-bolder">QnA게시판</h3>
 			<p class="lead fw-normal text-white-50 mb-0">여행에 대한 질문을 해보세요</p>
 		</div>
 	</div>
-</div>
-
-
+</header>
 
 <body>
 	
-	<form action="qnaWritePro.do">
+	<form action="<%=context %>/qnaWritePro.do">
 		
 		<!-- 태그 -->
 		<div class="tag">
@@ -103,7 +65,7 @@
 		<br>	
 		
 		<!-- 버튼 -->
-		<div style="display: flex; justify-content: center;">
+		<div class="button"  style="display: flex; justify-content: center;">
 			<input type="reset" value="취소" class="btn btn-secondary" style="margin-right: 15px; width:590px; height: 55px;background-color: #dbdbdb; border-color: #dbdbdb;font-size: 14px;font-weight: bolder;">
 			<input type="submit" value="완료" class="btn btn-success" style="width:590px;height: 55px; background-color: #FF3500;border-color: #FF3500;font-size: 14px;font-weight: bolder;">
 		</div>

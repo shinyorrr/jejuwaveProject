@@ -34,7 +34,7 @@ public class QnaUpdateProAction implements CommandProcess {
 			// TODO: handle exception
 		}
 		
-		return "qnaUpdatePro.jsp";
+		return "sh/qnaUpdatePro.jsp";
 		
 	}
 

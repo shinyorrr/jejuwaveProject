@@ -1,116 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
 <%
    String context = request.getContextPath();
 %>
 
-<c:import url="${context}/header.jsp"></c:import>
+<c:import url="${context}/sh/header.jsp"></c:import>
+<!DOCTYPE html>
+<html>
+
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
 <link rel="stylesheet" href="<%=context%>/css/sh/qnamain.css">
-<style type="text/css">
+<link rel="stylesheet" href="<%=context%>/css/sh/qnaWriteCheck.css">
 
+<header class="py-5 mb-5"
+	style="background-image: url('<%=context %>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
+	<div class="container px-4 px-lg-5 mt-5 mb-5">
+		<div class="text-center text-white">
+			<h3 class="display-5 fw-bolder">QnA게시판</h3>
+			<p class="lead fw-normal text-white-50 mb-0">여행에 대한 질문을 해보세요</p>
+		</div>
+	</div>
+</header>
 
-</style>
-
-<!--  <style type="text/css">
-/* 	.header {
-		width: 1500px;
-		height: 120px;
-		/* border: 1px solid red; */
-	}
-	 */
-	.title {
-		/* margin-top: 30px; */
-		width: 800px;
-		height: 80px;
-		/* 	border: 1px solid blue; */
-		margin-left: 250px;
-		display: inline;
-		font-size: 25px;
-		font-weight: bold;
-	}
-	
-	.button {
-		margin-top: 30px;
-		width: 800px;
-		height: 80px;
-		border: 1px solid orange;
-		margin-left: 250px;
-	}
-	
-	.main2 {
-		margin-top: 30px;
-		width: 700px;
-		height: 200px;
-		/* border: 1px solid orange; */
-		margin-left: 270px;
-	}
-	
-	.tag1 {
-		margin-top: 30px;
-		width: 1300px;
-		height: 90px;
-		display: inline;
-		/* border: 1px solid green; */
-		padding-left: 250px;
-	}
-	
-	.basic6 {
-		margin-top: 20px;
-		width: 7000px;
-		height: 40px;
-		display: inline;
-		border: 1px solid yellow;
-		margin-left: 250px;
-	}
-	
-	.comment {
-		margin-top: 30px;
-		width: 800px;
-		height: 110px;
-		/* 	border: 1px solid blue; */
-		margin-left: 250px;
-	}
-	
-	.gubun {
-		margin-left: 270px;
-	}
-	
-	.fw-bold {
-		color: #FF3500;
-	}
-	
-	.profile {
-		margin-left: 280px;
-		margin-top: 10px;
-	}
-	
-	.content {
-		margin-left: 250px;
-		margin-top: 150px;
-		width: 800px;
-		/* border: 1px solid yellow; */
-	}
-	
-	.button7{
-	   color:gray;
-	   font-size: 13px;
-	
-	} -->
-
-</head>
 <body>
-
-
-	<div style="margin-top: 200px;"></div>
-	
 
 		<div class="title">
 			<img src="<%=context %>/sh_images/qnaicon1.png"
@@ -138,7 +55,7 @@
 	</div>
 
 	
-		<div class="main2">
+		<div class="main">
 			<p>${board.b_content}</p>
 		</div>
 		<div class="tag1">
@@ -154,7 +71,7 @@
 			</p>
 		</div>
 		
-		<div class="content">
+		<div class="content" style="margin-left: 350px">
 				<form action="qnaCommentWrite.do" style="width: 2000px">
 				<input type="hidden" name="b_num" value="${board.b_num }">
 				<input type="hidden" name="user_id" value="${board.user_id }">	

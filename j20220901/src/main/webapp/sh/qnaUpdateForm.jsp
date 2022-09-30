@@ -3,58 +3,27 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<head>
  <% String context = request.getContextPath(); %>
-<%@ include file ="header.jsp" %>
+<c:import url="${context}/sh/header.jsp"></c:import>
 <meta charset="UTF-8">
 <title>게시글 수정</title>
  <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
  <link rel="stylesheet" href="<%=context %>/css/sh/qnamain.css">
-</head>
-<style type="text/css">
+ <link rel="stylesheet" href="<%=context%>/css/sh/qnaUpdate.css">
 
-
-	.mb-3 input{
-		background-image: url("images/q.png");
-		background-repeat: no-repeat;
-		background-size: 30px;
-		background-position: 10px center;
-		text-indent: 50px;
-	}
-	.board_image{
-		margin-top: 200px;
-		background-image: url("images/qna_board.jpg");
-		background-repeat: no-repeat;
-		background-position: center;
-		width: 5500;
-		height: 220px;
-		
-
-	}
-	.tag{
-	 	width:1050px;
-	 	border: 5px red;
-	 	padding: 3px;
-		margin-left: auto; 
-		margin-right: auto;
-		text-align: center;
-		
-	}
-
-	
-</style>
-<body>
-<div class="py-5 mb-5"
-	style="background-image: url('images/jeju_air44.jpg'); background-size: cover; margin-top: 73px;">
+<header class="py-5 mb-5"
+	style="background-image: url('<%=context %>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
 		<div class="text-center text-white">
 			<h3 class="display-5 fw-bolder">QnA게시판</h3>
 			<p class="lead fw-normal text-white-50 mb-0">여행에 대한 질문을 해보세요</p>
 		</div>
 	</div>
-</div>
+</header>
+
+<body>
 
 
 <form action="<%=context %>/qnaUpdatePro.do">
@@ -92,7 +61,7 @@
 		<br>	
 		
 		<!-- 버튼 -->
-		<div style="display: flex; justify-content: center;">
+		<div class="button" style="display: flex; justify-content: center;">
 			<input type="reset" value="취소" class="btn btn-secondary" style="margin-right: 15px; width:590px; height: 55px;background-color: #dbdbdb; border-color: #dbdbdb;font-size: 14px;font-weight: bolder;">
 			<input type="submit" value="완료" class="btn btn-success" style="width:590px;height: 55px;  background-color: #FF3500;border-color: #FF3500;font-size: 14px;font-weight: bolder;">
 		</div>
@@ -100,5 +69,7 @@
 
 
 </form>
+
+<c:import url="${context}/footer.jsp"></c:import>
 </body>
 </html>
