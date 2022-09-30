@@ -55,7 +55,7 @@
 								${travel.t_title}
 							</c:if>
 							<c:if test="${travel.t_relevel > 0}">
-								<img src="hs_images/adreply.png" width="${travel.t_relevel*10 }">
+								<img src="<%=context%>/hs_images/adreply.png" width="${travel.t_relevel*10 }">
 								${travel.t_content}
 							</c:if>
 							</td>
