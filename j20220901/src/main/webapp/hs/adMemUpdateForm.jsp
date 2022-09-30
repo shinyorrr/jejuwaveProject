@@ -12,7 +12,7 @@
 	<nav id="nav" class="nav">
 	<!-- 프로필 이미지 -->
 		<div class="card" id="cardpro">
-		  <img src="hs_images/adminpro.png" class="card-img-top" alt="...">
+		  <img src="<%=context%>/hs_images/adminpro.png" class="card-img-top" alt="...">
 		  <div class="card-body">
 		    <h5 class="card-title">Admin</h5>
 		    <p class="card-text">관리자입니다.</p>
