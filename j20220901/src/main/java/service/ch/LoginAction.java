@@ -22,11 +22,13 @@ public class LoginAction implements CommandProcess {
 		MypageDao my = MypageDao.getInstance();
 		
 		try {
+			String img = my.imageSelect(user_id);
 			int result = my.check(user_id,user_pw);
 			if(result > 0) {
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", user_id);
 			}
+			request.setAttribute("img", img);
 			request.setAttribute("user_id", user_id);
 			request.setAttribute("user_pw", user_pw);
 			request.setAttribute("result", result);

@@ -21,8 +21,10 @@ public class LoginOkAction implements CommandProcess {
 		try {
 			MypageDao my = MypageDao.getInstance();
 			String img = my.imageSelect(user_id);
+			System.out.println("LoginOkAction img session: " + img);
 			request.setAttribute("user_id", user_id);
 			request.setAttribute("img", img);
+			System.out.println("LoginOkAction : " + img);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
