@@ -1,0 +1,87 @@
+@charset "UTF-8";
+/* 사이드바 클릭 후 페이지 이동시마다 색깔이 바뀜 */
+.link_mypage_community{
+	height:50px;
+	line-height: 50px;
+	text-align: left;
+	background-color: rgba(255,53,0,0.5);
+	border : 1px solid rgb(204,204,204);
+	width : 100%;
+	padding-left: 30px;
+	border-radius: 30px 10px;
+}
+.link_mypage_community::after{
+	content: url("../../images/form_arrow_lightGray.svg");
+	position: absolute;
+	left: 33.5%;
+}
+.onerow{
+	display: flex;
+}
+.imgbox{
+	width : 120px;
+	padding-bottom : 10px;
+}
+.dealstatus{
+	font-family: 'Noto Sans KR';
+    color: rgb(0, 206, 124);
+    font-weight: 500;
+    margin-right: 4px;
+    padding-left : 20px;
+}
+.t_titleTD{
+	font-size: 16px;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-drag: none;
+     padding-left : 20px;
+}
+.t_content{
+	font-size: 14px;
+	width : 400px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-drag: none;
+    padding-left : 20px;
+}
+.button_update{
+	user-select: none;
+    -webkit-user-drag: none;
+    color: rgb(106, 106, 106);
+    float: left;
+    font-family: 'korean';
+    font-size: 14px;
+    background: rgba(0, 206, 124 ,0.3);
+    border-radius: 80%;
+    margin-right: 8px;
+}
+.button_delete{
+	user-select: none;
+    -webkit-user-drag: none;
+    color: rgb(106, 106, 106);
+    font-family: 'korean';
+    font-size: 14px;
+    background: rgba(0, 206, 124 ,0.3);
+    border-radius: 80%;
+}
+table {
+	border-bottom: 1px solid rgb(204,204,204);
+}
+.imgbox{
+	border-radius: 35%;
+}
+.t_title{
+	font-family: 'korean';
+}
+.button_updateform{
+	padding-right: 10px;
+	padding-left : 20px;
+}
+.t_content{
+		font-family: 'Noto Sans KR Light';
+}

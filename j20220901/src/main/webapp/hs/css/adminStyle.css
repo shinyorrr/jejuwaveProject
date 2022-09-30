@@ -1,0 +1,122 @@
+@charset "UTF-8";
+
+* {
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* 내비 아티글 */
+#nav, #article { 
+	display: inline-block;
+}
+
+#nav {
+	position : fixed;
+	width: 200px;
+	height: 100%;
+	overflow: hidden;
+	margin-top : 100px;
+	border: 1px solid #D5D5D5;
+	background-color: white;
+}
+
+#article {
+	margin-top : 100px;
+	margin-left: 250px;
+	width:1300px;
+	height:800px;
+}
+
+/* 이미지 */
+.card {
+	width: 200px;
+	height: 200px;
+	margin-bottom: 20px;
+}
+
+.card img {
+	padding-top : 20px;
+	width: 100px;
+	height: 150px;
+	display: block;
+	margin: auto;
+}
+.card-body h5, p{
+	text-align: center;
+}
+
+#navmenu {
+	width: 200px;
+	
+}
+#navmenu button {
+	width : 180px;
+	margin: auto;
+	background-color: #03A7B8;
+	color : white;
+	border-style: none;
+	box-shadow: 2px 2px 5px rgb(0,0,0.12);
+	
+}
+
+#navmenu button:active {
+	background-color: black;
+}
+
+/* 공지사항 */
+.contents {
+	padding-top : 100px;
+	width : 1300px;
+	margin: 0;
+}
+.notice-card {
+	width: 900px;
+	/* margin-left: 50px; */
+}
+
+.table caption {
+  caption-side: top
+}
+
+/* 회원정보 수정페이지 */
+#memform {
+	border: 1px solid #D5D5D5;
+	width : 500px;
+	height: 500px;
+	padding: 20px;
+	line-height: 25px;
+}
+
+#memform .btn-primary {
+	background-color: #03A7B8;
+	border-style : none;
+	color : #fff;
+	
+}
+
+.mybtn {
+	margin-left: 150px;
+}
+
+#textinfo textarea[readonly] {
+	background-color: white;
+}
+
+#textinfo {
+	margin-bottom: 15px;
+}
+
+/* 테이블 설정 */
+table {
+	width: 100%;
+}
+
+
+/* 페이징 */
+
+.pagination {
+	justify-content: center;
+}
+
+.pagination li a{
+	color: black;
+}

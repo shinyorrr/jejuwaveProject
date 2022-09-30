@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/* 사이드바 클릭 후 페이지 이동시마다 색깔이 바뀜 */
+.link_mypage_board{
+	height:50px;
+	line-height: 50px;
+	text-align: left;
+	background-color: rgba(255,53,0,0.5);
+	border : 1px solid rgb(204,204,204);
+	width : 100%;
+	padding-left: 30px;
+	border-radius: 30px 10px;
+}
+.link_mypage_board::after{
+	content: url("../../images/form_arrow_lightGray.svg");
+	position: absolute;
+	left: 33.5%;
+}
