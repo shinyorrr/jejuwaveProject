@@ -8,7 +8,7 @@
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-</head>
+</head>0
 <body>
 <script type="text/javascript">
     location.href="<%=context %>/qnaList.do"; 

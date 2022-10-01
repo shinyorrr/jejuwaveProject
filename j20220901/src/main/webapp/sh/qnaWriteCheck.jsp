@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
    String context = request.getContextPath();
 %>
@@ -71,70 +72,40 @@
 			</p>
 		</div>
 		
-		<div class="content" style="margin-left: 350px">
+		<!-- 댓글 등록 -->
+		<div class="content" >
 				<form action="qnaCommentWrite.do" style="width: 2000px">
 				<input type="hidden" name="b_num" value="${board.b_num }">
 				<input type="hidden" name="user_id" value="${board.user_id }">	
 				<textarea name="com_content" rows="" cols="" style="width: 1100px; height: 90px; vertical-align: middle; border-color: #dbdbdb;outline-color: #FF3500"></textarea>					
-					<input type="submit" value="등록"  style="vertical-align: middle; width: 120px; height: 90px; background-color: #FF3500;border-color: #FF3500; color: white; border-radius: 10%;">
+					<input type="submit" value="등록"  style="vertical-align: middle; width: 120px; height: 90px; background-color: #FF3500; border-color: #FF3500; font-weight:bold; color: white; border-radius: 10%;">
 				</form>
 		</div>
 		
 		
-<!-- 			<br>
-		    <div  style="clear: both;">
-		      <input type="text" >
-		      <span class="input-group-btn">
-			<button  type="submit">등록</button>
-		      </span>
-		    </div> -->
+		
+		<!-- 댓글 목록 -->
+		<div style="margin-left: 350px">
+			<br><br>
+			<div class="count" style="font-size: 14px; font-weight: bold;" ><font color="#FF3500">${fn:length(list)}</font>개의 답변</div>
+			
+			<c:forEach var="comment" items="${list }" varStatus="inum">
+			<p>
+			<div style="margin-top: 25px;">
+					<div style="float: left;">
+						<img src="<%=context %>/sh_images/user_icon0${inum.count }.png" width="40" height="40"
+							class="userIconColor-1 rounded-circle me-2  align-center bg-white">
+					</div>
+					
+					<div class="fw-bold" style="font-size: 17px; line-height: 1.1" >${comment.user_id }</div>
+					<div style="font-size: 12px; color:gray; margin-bottom : 10px">${comment.com_date}</div> 
+					
+					<div style="margin-left: 60px; margin-bottom: 25px;">${comment.com_content }</div>
+					<hr width="1100px">
+			</div>				
+			</c:forEach>
+		</div>
 
-			<!-- 댓글 -->
-<!-- 			<div>
-				<form action="">
-					<div class="comment">
-						<label for="exampleFormControlTextarea1" class="form-label">
-						2개의 답변</label>
-						<textarea class="form-control" name="com_content"
-							id="exampleFormControlTextarea1" rows="3">댓글 남겨주세요</textarea>
-
-				</div>
-				</form> -->
-						
-				<!-- 댓글 달리는 부분 -->
-				<div class="content" style="clear: both;">
-					<div class="d-flex mt-4">
-						<div class="flex-shrink-0 ms-2">
-							<img src="sh_images/user_icon03.png" width="25" height="25"
-								class="userIconColor-1 rounded-circle me-2  align-center bg-white">
-						</div>
-						<div class="ms-3">
-							<div class="fw-bold">kong</div>
-							한라산 어떠신가요
-						</div>
-					</div>
-					<div class="d-flex mt-4">
-						<div class="flex-shrink-0 ms-2">
-							<img src="sh_images/user_icon02.png" width="25" height="25"
-								class="userIconColor-1 rounded-circle me-2  align-center bg-white">
-						</div>
-						<div class="ms-3">
-							<div class="fw-bold">kong</div>
-							한라산 어떠신가요
-						</div>
-					</div>
-					<div class="d-flex mt-4">
-						<div class="flex-shrink-0 ms-2">
-							<img src="sh_images/user_icon01.png" width="25" height="25"
-								class="userIconColor-1 rounded-circle me-2  align-center bg-white">
-						</div>
-						<div class="ms-3">
-							<div class="fw-bold">kong</div>
-							한라산 어떠신가요
-						</div>
-					</div>
-				</div>
-	
 
 			<div style="margin-top: 200px;"></div>
 			<%@ include file="footer.jsp"%>
