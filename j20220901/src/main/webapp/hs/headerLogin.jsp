@@ -16,7 +16,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="<%=context%>/css/header_content.css">
+<link rel="stylesheet" href="<%=context%>/hs/css/header_content.css">
 
 <!-- Bootstrap CSS -->
 <link
@@ -47,7 +47,7 @@
 		<div class="Headers__InnerSection bQvPOR">
 			<div class="Headers__HeaderTopWrapDiv kKJwFS">
 				<div class="Headers_HeaderTopInnerDiv cMXtHR">
-					<img src="hs_images/brand_logo.png" alt="logo"
+					<img src="<%=context%>/hs_images/brand_logo.png" alt="logo"
 						class="WebHeader_LogoImg hsELiP"
 						onClick="location.href='index.jsp'">
 				</div>

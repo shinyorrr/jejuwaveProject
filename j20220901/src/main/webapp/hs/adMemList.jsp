@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
    String context = request.getContextPath();
 %>
-<c:import url="${context}/headerLogin.jsp"></c:import>
-<link rel="stylesheet" href="$<%=context%>/css/adminStyle.css">
+<c:import url="${context}/hs/headerLogin.jsp"></c:import>
+<link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<!-- 네비게이션메뉴바 -->
