@@ -46,7 +46,7 @@ function chk() {
 	});
 }); */
 function winop() {
-	window.open("idCheckForm.do?user_id=" + user_id, "kkk",	"width=300 height=300");
+	window.open("<%=context%>idCheckForm.do?user_id=" + user_id, "kkk",	"width=300 height=300");
 }
 </script>
 <link
@@ -56,7 +56,7 @@ function winop() {
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/header_main.css">
+<link rel="stylesheet" href="<%=context %>css/header_main.css">
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -189,7 +189,7 @@ function winop() {
 					title="2,3자리-3,4자리-4자리"></td>
 			</tr>
 			<tr>
-				<td>회원구분<input type="hidden" name="user_gubun"></td>
+				<td>회원구분<input type="hidden" name="user_gubun" value="1"></td>
 			</tr>
 			<tr>
 				<td>이미지</td>
