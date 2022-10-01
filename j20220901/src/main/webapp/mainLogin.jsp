@@ -35,9 +35,69 @@
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+<!-- fontawesome icon -->	
+<script src="https://kit.fontawesome.com/1f609f562c.js" crossorigin="anonymous"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- 날씨 API JQUERY -->
+<script type="text/javascript"
+	src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	// 현재 날씨
+	$
+			.getJSON(
+					'https://api.openweathermap.org/data/2.5/weather?lat=33.5097&lon=126.5219&appid=6a893cd9f6fd12f3a0920aa11a2462c7&units=metric',
+					function(result) {
+						var ctemp = result.main.temp;
+						$('.ctemp').append(ctemp.toFixed(1)+'°C');
 
+						var wiconUrl = '<img src="http://openweathermap.org/img/wn/'+ result.weather[0].icon +'.png" alt="' + result.weather[0].description+'">'
+						$('.icon').html(wiconUrl);
+
+						var ct = result.dt;
+
+						function converntTime(t) {
+							var ot = new Date(t * 1000);
+							var dt = ot.getDate();
+							var hr = ot.getHours();
+							var m = ot.getMinutes();
+
+							return dt + '일' + hr + '시' + m + '분'
+						}
+						var currentTime = converntTime(ct);
+						$('.time').append(currentTime);
+					});
+	// 주간 날씨
+	$
+			.getJSON(
+					'https://api.openweathermap.org/data/2.5/forecast?lat=33.5097&lon=126.5219&appid=6a893cd9f6fd12f3a0920aa11a2462c7&units=metric',
+					function(result) {
+
+						for (var i = 0; i < 40; i++) {
+							if (i % 8 == 0) {
+
+								var ctime = result.list[i].dt;
+								var ctemp = result.list[i].main.temp;
+				
+								function converntTime(t) {
+									var ot = new Date(t * 1000);
+									var dt = ot.getDate();
+									/* var ht = ot.getHours(); */
+									return dt + '일'
+								}
+								var currentTime = converntTime(ctime);
+								var wiconUrl = '<img src="http://openweathermap.org/img/wn/'+ result.list[i].weather[0].icon +'.png" alt="' + result.list[i].weather[0].description+'">'
+
+								var tableHtml = '<div>' + '<div>'+ currentTime + '</div>' +'<br>'
+														+ '<div>' + wiconUrl   + '</div>' +'<br>'
+														+ '<div>' + ctemp.toFixed(1) +'°C'+ '</div>'
+														+ '</div>';
+								$('.week').append(tableHtml);
+							}
+						}
+
+					});
+</script>
 
 </head>
 <%
@@ -64,14 +124,20 @@
 						<div class="Button__ButtonWrapper-sc-1vcxcg6-0 oIYRb">
 							<button class="user-imfo usImfo">
 								<img src="<%=context %>${img}"
-									style="vertical-align: middle;">
+									style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;" >
+								<img src="images/form_arrow_black_fill.svg">	
 							</button>
 							<div class="header-mypage-logout">
 								<div style="display: flex; border-bottom: 1px solid #dfdfdf;">
 									<button onClick="location.href='<%= context %>/mypageUpdate.do'"
-										class="header-mypage">
-										<p>${user_id }</p>
-										<p style="margin-left: 50px;">마이페이지</p>
+										class="header-mypage" style="display: flex;">
+										<div class="header-mypage-icon">
+										<img src="<%=context %>${img}" style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
+										</div>
+										<div style="text-align: left; margin-left: 15px;">
+										<p style="margin-bottom: 5px;s">${user_id }</p>
+										<p style="font-size: 13px; color: #FF3500;">마이페이지 ></p>
+										</div>
 									</button>
 								</div>
 								<div>
@@ -84,7 +150,7 @@
 						</div>
 						<div class="Button_dropdown oIYRb">
 							<button width="100px" height="40px" font-style="" type="button"
-								class="ButtonStyle kRVxKH">글쓰기</button>
+								class="ButtonStyle kRVxKH">글쓰기 <i class="fa-solid fa-caret-down"></i></button>
 							<div class="Popups__HeaderWritePopupDiv cymdDn">
 								<button onClick="location.href='content.jsp'"
 									class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHljB">
@@ -302,10 +368,16 @@
 					</div>
 				</div>
 				<div class="weather">
-					<div style="font-weight: bold; position: relative; width: 33%;">
+					<div style="font-weight: bold; position: relative; width: 33%; padding-top: 15px;">
 						제주날씨</div>
-					<div id="weather_result"
-						style="text-align: center; width: 80%; min-height: 255px; display: inline-block; border: 2px solid;">
+					<div class="today"  style="display: flex; align-items: center; padding-left: 60px; padding-top: 20px;">
+						
+						<div class="icon" ></div>
+						<div class="ctemp"></div>
+					</div>
+					<div class="week" id="weather_result"
+						style="display: flex; justify-content: space-between; width: 90%; min-height: 255px;  align-items: center; padding-right: 10px;">
+						<span style="position: relative; padding: 10px 0px 200px 60px;">주간 날씨</span>
 					</div>
 				</div>
 			</section>

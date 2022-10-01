@@ -54,7 +54,7 @@ public class AdTravelFormAction implements CommandProcess {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return "adTravelForm.jsp";
+		return "hs/adTravelForm.jsp";
 	}
 
 }

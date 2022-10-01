@@ -24,7 +24,7 @@ public class IdCheckProAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "idCheckPro.jsp";
+		return "ry/idCheckPro.jsp";
 	}
 
 }

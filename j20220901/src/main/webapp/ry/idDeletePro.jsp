@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%
+   String context = request.getContextPath();
+%>
 </head>
 <body>
 	<c:if test="${result > 0 }">
