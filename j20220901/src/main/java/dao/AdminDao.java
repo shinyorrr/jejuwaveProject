@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +36,7 @@ public class AdminDao {
 		return conn;
 	}
 	
+	// 회원수
 	public int getTotalCnt() throws SQLException {
 		int tot = 0;
 		Connection conn = null;
@@ -58,6 +60,7 @@ public class AdminDao {
 		
 	}
 	
+	// 동행자 찾기 게시글 수
 	public int getTravelCnt() throws SQLException {
 		int tot = 0;
 		Connection conn = null;
@@ -80,15 +83,43 @@ public class AdminDao {
 		return tot;
 	}
 	
+	public int getQnaCnt() throws SQLException {
+		int tot = 0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sql = "select (select count(*) from qna_board)+"
+				+ "(select count(*) from qna_comment)"
+				+ "from dual";
+		System.out.println("Dao getQnaCnt sql->"+sql);
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs =stmt.executeQuery(sql);
+			if(rs.next()) tot = rs.getInt(1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if( rs!= null) 	 rs.close();
+			if( stmt!=null ) stmt.close();
+			if( conn!=null ) conn.close();
+		}
+		return tot;
+	}
+	
+	// 회원 리스트
 	public List<Member> memList(int startRow, int endRow) throws SQLException {
 		List<Member> list = new ArrayList<Member>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from"
-				+ "       ( select rownum rn, a.* from (select * from member order by user_gubun) a)"
-				+ "where rn between ? and ?";
+		String sql = "select * "
+				+ " 	from  ( select rownum rn, a.*, board_count(a.user_id) bc, comment_count(a.user_id) cc from (select * from member order by user_gubun) a)"
+				+ " where rn between ? and ?";
+		
 		System.out.println("Dao memList sql->"+sql);
+
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -104,7 +135,7 @@ public class AdminDao {
 					m.setUser_email(rs.getString("user_email"));
 					m.setUser_name(rs.getString("user_name"));
 					m.setUser_info(rs.getString("user_info"));
-					m.setUser_birth(rs.getDate("user_birth"));
+					m.setUser_birth(rs.getString("user_birth"));
 					m.setUser_gender(rs.getString("user_gender"));
 					m.setUser_tel(rs.getString("user_tel"));
 					m.setUser_gubun(rs.getInt("user_gubun"));
@@ -121,6 +152,7 @@ public class AdminDao {
 		return list;
 	}
 	
+	// 회원 아이디에 따른 정보
 	public Member select(String user_id) throws SQLException {
 		Member m = new Member();
 		Connection conn = null;
@@ -139,7 +171,7 @@ public class AdminDao {
 				m.setUser_email(rs.getString("user_email"));
 				m.setUser_name(rs.getString("user_name"));
 				m.setUser_info(rs.getString("user_info"));
-				m.setUser_birth(rs.getDate("user_birth"));
+				m.setUser_birth(rs.getString("user_birth"));
 				m.setUser_gender(rs.getString("user_gender"));
 				m.setUser_tel(rs.getString("user_tel"));
 				m.setUser_gubun(rs.getInt("user_gubun"));
@@ -155,6 +187,7 @@ public class AdminDao {
 		return m;
 	}
 	
+	//회원리스트
 	public List<Member> list() throws SQLException {
 		List<Member> list = new ArrayList<Member>();
 		Connection conn = null;
@@ -174,7 +207,7 @@ public class AdminDao {
 					m.setUser_email(rs.getString("user_email"));
 					m.setUser_name(rs.getString("user_name"));
 					m.setUser_info(rs.getString("user_info"));
-					m.setUser_birth(rs.getDate("user_birth"));
+					m.setUser_birth(rs.getString("user_birth"));
 					m.setUser_gender(rs.getString("user_gender"));
 					m.setUser_tel(rs.getString("user_tel"));
 					m.setUser_gubun(rs.getInt("user_gubun"));
@@ -192,7 +225,7 @@ public class AdminDao {
 		return list;
 	}
 	
-	
+	//회원정보수정
 	public int update(Member member) throws SQLException {
 		int result = 0;
 		Connection conn = null;
@@ -214,6 +247,7 @@ public class AdminDao {
 		return result;
 	}
 	
+	//동행자 찾기
 	public List<Travel> travelList(int startRow, int endRow) throws SQLException {
 		List<Travel> list = new ArrayList<Travel>();
 		Connection conn = null;
@@ -256,6 +290,14 @@ public class AdminDao {
 			if(pstmt!=null) pstmt.close();
 			if(conn!=null)  conn.close();
 		}
+		return list;
+	}
+	
+	// QnA 게시판
+	public List<Qna_Comment> qnaList(int startRow, int endRow) {
+		List<Qna_Comment> list = new ArrayList<Qna_Comment>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		return list;
 	}
 }

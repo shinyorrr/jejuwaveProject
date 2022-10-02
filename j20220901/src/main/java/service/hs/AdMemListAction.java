@@ -54,7 +54,7 @@ public class AdMemListAction implements CommandProcess {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		return "adMemList.jsp";
+		return "hs/adMemList.jsp";
 	}
 
 }

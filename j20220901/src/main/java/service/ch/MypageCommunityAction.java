@@ -26,7 +26,7 @@ public class MypageCommunityAction implements CommandProcess {
 		try {
 			int totCnt = my.getTotalCntCommunity(user_id);
 			String pageNum = request.getParameter("pageNum");
-			if(pageNum == null || pageNum.equals("")) {pageNum = "1";}
+			if(pageNum == null || pageNum.equals("") || pageNum.equals("0")) {pageNum = "1";}
 			int currentPage = Integer.parseInt(pageNum);
 			int pageSize = 6, blockSize = 10;
 			int startRow = (currentPage - 1) * pageSize + 1;
@@ -36,13 +36,15 @@ public class MypageCommunityAction implements CommandProcess {
 			int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
 			
 			int startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
+			System.out.println("MypageCommunityAction => " + startPage );
 			int endPage = startPage + blockSize - 1;
 			// 작성자가 쓴 글 조회
 			List<Mypage> list = my.communityList(user_id,startRow,endRow);
-			String img = my.imageSelect(user_id);
 			
-			request.setAttribute("img", img);
+			if (endPage > pageCnt) endPage = pageCnt; 
+			
 			request.setAttribute("totCnt", totCnt);
+			request.setAttribute("startPage", startPage);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("pageSize", pageSize);
@@ -50,6 +52,9 @@ public class MypageCommunityAction implements CommandProcess {
 			request.setAttribute("startRow", startRow);
 			request.setAttribute("endRow", endRow);
 			request.setAttribute("list", list);
+			request.setAttribute("startNum", startNum);
+			request.setAttribute("endPage", endPage);
+			
 			
 			
 		} catch (Exception e) {

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -107,8 +108,10 @@
 				</div>
 			</div>	
 		</section>
+		<!-- form 시작 -->
 		<div class="row m-5 justify-content-md-center">
-			<form>
+			<!-- do 요청 위치 -->
+			<form action="commuWritePro.do?pageNum=${pageNum }" method="post">
 				<div class="custom-file row">
 	         <!-- 	<input type="file" class="custom-file-input" id="validatedCustomFile" required> -->
 					<input type="file" class="custom-file-input"  id="validatedCustomFile" required style="display: none; margin: 0px; padding: 0px;">
@@ -120,10 +123,10 @@
 				</div>
 				
 				<div class="form-group">
-					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="9" placeholder="게시글 내용을 입력하세요"></textarea>
+					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="9" name="c_content" placeholder="게시글 내용을 입력하세요"></textarea>
 				</div>
 				<div class="form-group">
-					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="1" placeholder="태그를 입력하세요. 입력 예시 : #제주도#음식#카페"></textarea>
+					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="1" name="c_hash"    placeholder="태그를 입력하세요. 입력 예시 : #제주도#음식#카페"></textarea>
 				</div>
 				<div class="mt-5 row">
 					<div class="col-md-6">

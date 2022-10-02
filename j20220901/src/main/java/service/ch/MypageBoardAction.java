@@ -36,7 +36,6 @@ public class MypageBoardAction implements CommandProcess {
 			 System.out.println("MypageBoardAction : " + startRow); 
 			 // 작성자가 쓴 글 조회
 			 List<Mypage> list =my.boardList(user_id,startRow,endRow);
-			 String img = my.imageSelect(user_id);
 			 
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);
 		 
@@ -53,7 +52,6 @@ public class MypageBoardAction implements CommandProcess {
 		 request.setAttribute("startPage", startPage);
 		 request.setAttribute("endPage", endPage);
 		 request.setAttribute("user_id", user_id);
-		 request.setAttribute("img", img);
 		 System.out.println("MypageBoardAction : " + list);
 		  
 		 } catch(Exception e) { 

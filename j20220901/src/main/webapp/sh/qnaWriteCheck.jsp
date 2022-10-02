@@ -83,6 +83,7 @@
 		</div>
 		
 		
+
 		
 		<!-- 댓글 목록 -->
 		<div style="margin-left: 350px">
@@ -106,6 +107,8 @@
 			</c:forEach>
 		</div>
 
+
+			
 
 			<div style="margin-top: 200px;"></div>
 			<%@ include file="footer.jsp"%>
