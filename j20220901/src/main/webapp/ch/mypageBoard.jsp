@@ -93,23 +93,24 @@
 				</table>
 				</div>
 			</div>
-			<div style="padding-left : 43.5%;">
-		<c:if test="${startPage > blockSize }">
-			<a href = '<%=context%>/mypageTraveler.do?pageNum=${startPage-blockSize }'>[이전]</a>
-		</c:if>
-		<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-			<a href='<%=context%>/mypageTraveler.do?pageNum=${i }'>[${i }]</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCnt }">
-			<a href ='<%=context%>/mypageTraveler.do=${startPage+blockSize }'>[다음]</a>
-		</c:if>
-		</div>
+			<div class = "page_nation" style="padding-left : 62%;">
+				<c:if test="${startPage > blockSize }">
+					<a class = "page_nation" href = '<%=context%>/mypageTraveler.do?pageNum=${startPage-blockSize }'>[이전]</a>
+				</c:if>
+				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
+					<a class = "page_nation" href='<%=context%>/mypageTraveler.do?pageNum=${i }'>[${i }]</a>
+				</c:forEach>
+				<c:if test="${endPage < pageCnt }">
+					<a class = "page_nation" href ='<%=context%>/mypageTraveler.do=${startPage+blockSize }'>[다음]</a>
+				</c:if>
+			</div>
 </main>
-<footer class="py-5 bg-dark" style="margin-top: 100px;">
+<footer class="py-5 bg-dark" style="top: 125%;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
 				Website 2022</p>
 		</div>
 </footer>
 </body>
+
 </html>

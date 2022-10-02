@@ -17,6 +17,7 @@
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageCommunity.css?after">
 </head>
 <body>
+<div class = "main" style="background-color: rgb(248,248,248);">
 <main id = "content" style="background-color: rgb(248,248,248);">
 	<div class = "mypage_set">
 		<div class="Mypage_Main">
@@ -108,13 +109,13 @@
 									</div>
 								</td>
 							</tr>
-							<c:set var="startNum" value="${startNum - 1 }" />
+							<c:set var="startNum" value="${startNum - 1}" />
 				</table>
 						</c:forEach> 
 					</c:if>
 			</div>
 		</div>
-				<div style="padding-left : 43.5%;">
+				<div style="padding-left : 62%;">
 				<c:if test="${startPage > blockSize }">
 					<a href = '<%=context%>/mypageTraveler.do?pageNum=${startPage-blockSize }'>[이전]</a>
 				</c:if>
@@ -127,7 +128,8 @@
 			</div>
 		</div>
 </main>
-<footer class="py-5 bg-dark" style="margin-top: 100px;">
+</div>
+<footer class="py-5 bg-dark" style="top: 125%;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
 				Website 2022</p>

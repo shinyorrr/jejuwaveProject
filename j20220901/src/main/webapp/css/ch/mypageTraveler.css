@@ -18,7 +18,7 @@
 .link_mypage_traveler::after{
 	content: url("../../images/form_arrow_lightGray.svg");
 	position: absolute;
-	left: 33.5%;
+	left: 23.5%;
 }
 .onerow{
 	display: flex;
