@@ -93,15 +93,39 @@
 				</table>
 				</div>
 			</div>
-			<div class = "page_nation" style="padding-left : 62%;">
-				<c:if test="${startPage > blockSize }">
-					<a class = "page_nation" href = '<%=context%>/mypageTraveler.do?pageNum=${startPage-blockSize }'>[이전]</a>
+			<div style="padding-left : 62%;">
+				<c:if test="${startPage > 1 }">
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-					<a class = "page_nation" href='<%=context%>/mypageTraveler.do?pageNum=${i }'>[${i }]</a>
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-					<a class = "page_nation" href ='<%=context%>/mypageTraveler.do=${startPage+blockSize }'>[다음]</a>
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">[다음]</button>
 				</c:if>
 			</div>
 </main>

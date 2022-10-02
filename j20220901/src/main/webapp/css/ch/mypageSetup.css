@@ -6,7 +6,7 @@
 /* 사이드바 설정 */
 .mypage_name, .user_id{
 	font-family: 'NotoSansKR';
-	font-style: italic;
+	font-size: smaller;
 }
 a{
 	text-decoration-line : none;
@@ -39,7 +39,7 @@ li, ul{
 	line-height: 50px;
 	text-align: left;
 	background-color: rgba(153,153,153,0.1);
-	border : 1px solid rgb(204,204,204);
+	border : 1px solid rgba(153,153,153,0.2);
 	width : 100%;
 	padding-left: 30px;
 	border-radius: 30px 10px;
@@ -48,9 +48,8 @@ li, ul{
 	background-color : white;
 	width : 250px;
 	height: 480px;
-	border: 1px solid rgba(153,153,153,0.7);
+	border: 1px solid rgba(153,153,153,0.2);
 	padding : 30px 20px 50px 20px;
-	border-radius: 5%;
 }
 .Profiles_image{
 	padding-left: 0px;
@@ -69,14 +68,13 @@ li:hover{
 	margin-left : 30px;
 	height : 1000px;
 	width : 700px;
-	border: 1px solid rgba(153,153,153,0.7);
+	border: 1px solid rgba(153,153,153,0.2);
 	padding : 50px;
-	border-radius: 2%;
 }
 .mypage_menu_h2{
 	padding : 10px;
-	border-bottom: 1px solid rgb(204,204,204);
-	font-size : 25px;
+	border-bottom: 1px solid rgba(153,153,153,0.2);
+	font-size : 20px;
 	font-family: 'NotoSansKR';
 	margin-bottom: 20px;
 }
@@ -86,11 +84,11 @@ li:hover{
 }
 .mypage_menu_h3{
 	padding-top: 5px;
-	font-size : 18px;
+	font-size : 15px;
 	font-family: 'NotoSansKR';
 }
 .content {
-	font-family: 'NotoSansKR';
+	font-family: inherit;
 }
 .profile_img{
 	width : 50px;
