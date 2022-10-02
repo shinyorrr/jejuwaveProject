@@ -1,0 +1,66 @@
+@charset "UTF-8";
+
+
+ *{font-family: 'Nanum Gothic', sans-serif;}
+ 
+/*  qnaWriteCheck.jsp 페이지  */
+ 
+	.title {
+		width: 800px;
+		height: 80px;
+		margin-left: 350px;
+		display: inline;
+		font-size: 25px;
+		font-weight: bold;
+	}
+	.profile {
+		margin-left: 400px;
+	}
+	.gubun {
+
+		margin-left: 350px;
+	}
+	.fw-bold {
+		color: #FF3500;
+	}
+	.main {
+		margin-top: 30px;
+		width: 700px;
+		height: 200px;
+		/* border: 1px solid orange; */
+		margin-left: 350px;
+	}
+
+	.tag1 {
+		margin-top: 30px;
+		width: 1300px;
+		height: 90px;
+		display: inline;
+		padding-left: 350px;
+	}
+	
+	.button7{
+	   color:gray;
+	   font-size: 13px;	
+	}
+	
+	.profile {
+		margin-left: 350px;
+		margin-top: 10px;
+	}	
+	
+	.content {
+		margin-left: 350px;
+		margin-top: 150px;
+		width: 800px;
+	}
+	
+/* 	.basic6 {
+		margin-top: 20px;
+		width: 7000px;
+		height: 40px;
+		display: inline;
+		border: 1px solid yellow;
+		margin-left: 250px;
+	} */
+	

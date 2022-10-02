@@ -37,7 +37,6 @@ public class MypageTravelerAction implements CommandProcess {
 			 int startNum = totCnt - startRow + 1;
 			 System.out.println(startRow); // 작성자가 쓴 글 조회
 			 List<Mypage> list =my.travelList(user_id,startRow,endRow);
-			 String img = my.imageSelect(user_id);
 			 
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);
 		 
@@ -55,7 +54,6 @@ public class MypageTravelerAction implements CommandProcess {
 		 request.setAttribute("startPage", startPage);
 		 request.setAttribute("endPage", endPage);
 		 request.setAttribute("user_id", user_id);
-		 request.setAttribute("img", img);
 		  
 		 } catch(Exception e) { 
 			 System.out.println("MypageBoardAction 오류 -->" + e.getMessage());

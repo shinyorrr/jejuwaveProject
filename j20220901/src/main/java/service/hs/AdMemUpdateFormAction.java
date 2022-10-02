@@ -31,7 +31,7 @@ public class AdMemUpdateFormAction implements CommandProcess {
 			System.out.println(e.getMessage());
 		}
 		
-		return "adMemUpdateForm.jsp";
+		return "hs/adMemUpdateForm.jsp";
 	}
 
 }

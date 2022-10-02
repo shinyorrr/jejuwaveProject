@@ -140,7 +140,7 @@ public class MypageDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select  user_pw from member where user_id = ?";
+		String sql = "select  user_pw, user_gubun from member where user_id = ?";
 		try {
 			conn = getConnection();
 			System.out.println("connection 연결" + conn);
@@ -148,7 +148,9 @@ public class MypageDao {
 			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-				String dbpasswd = rs.getString(1);
+				Member member = new Member();
+				String dbpasswd = rs.getString("user_pw");
+				member.setUser_gubun(rs.getInt("user_gubun"));
 				System.out.println("dbpasswd =>" + dbpasswd);
 				System.out.println("user_pw : " + user_pw);
 				System.out.println("db 탔음");
@@ -180,7 +182,7 @@ public class MypageDao {
 			if(rs.next()) {
 				md.setUser_info(rs.getString("user_info"));
 				System.out.println(md.getUser_info());
-				md.setUser_birth(rs.getDate("user_birth"));
+				md.setUser_birth(rs.getString("user_birth"));
 				md.setUser_tel(rs.getString("user_tel"));
 				md.setUser_email(rs.getString("user_email"));
 				md.setUser_img(rs.getString("user_img"));

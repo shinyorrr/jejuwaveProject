@@ -14,7 +14,7 @@ public class AdCommuAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		return "adCommuForm.jsp";
+		return "hs/adCommuForm.jsp";
 	}
 
 }

@@ -28,7 +28,7 @@ public class QnaDeleteAction implements CommandProcess {
 			System.out.println(e.getMessage());
 		}
 
-		return "qnaDelete.jsp";
+		return "sh/qnaDelete.jsp";
 	}
 
 }
