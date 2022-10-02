@@ -10,6 +10,8 @@
    String context = request.getContextPath();
 %>
 <c:import url="${context}/headerLogin.jsp"></c:import>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageInsert.css?after">
 </head>
@@ -97,12 +99,12 @@ $(function() {
 						<input type="text" class="input_user" id = "user_tel" name = "user_tel" value ="${member.user_tel }">
 						<h3 class = "mypage_menu_h3">이메일</h3>
 						<input type="text" class="input_user" id = "user_email" name = "user_email" value ="${member.user_email }"><p>
-						<div class = "submit">
+						<div class = "submitMain">
 							<input type="submit" id = "submit" value = "수정완료">
+							<button class="pw_search" onclick = "location.href='userPassword.jsp'">비밀번호찾기</button>
 						</div>
 					</form>	
 				</div>
-				<button class="pw_search" onclick = "location.href='userPassword.jsp'">비밀번호찾기</button>
 			</div>
 		</div>
 	</div>

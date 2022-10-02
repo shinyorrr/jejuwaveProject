@@ -123,17 +123,41 @@
 					</c:if>
 			</div>
 		</div>
-		<div style="padding-left : 62%;">
-		<c:if test="${startPage > blockSize }">
-			<a href = '<%=context%>/mypageTraveler.do?pageNum=${startPage-blockSize }'>[이전]</a>
-		</c:if>
-		<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-			<a href='<%=context%>/mypageTraveler.do?pageNum=${i }'>[${i }]</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCnt }">
-			<a href ='<%=context%>/mypageTraveler.do=${startPage+blockSize }'>[다음]</a>
-		</c:if>
-	</div>
+				<div style="padding-left : 62%;">
+				<c:if test="${startPage > 1 }">
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">이전</button>
+				</c:if>
+				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">${i }</button>
+				</c:forEach>
+				<c:if test="${endPage < pageCnt }">
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">[다음]</button>
+				</c:if>
+				</div>
 	</div>
 </main>
 <footer class="py-5 bg-dark" style="top: 125%;">
