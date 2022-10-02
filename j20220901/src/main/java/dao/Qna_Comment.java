@@ -45,4 +45,4 @@ public class Qna_Comment extends Qna_Board {
 	}
 
 
-}
+

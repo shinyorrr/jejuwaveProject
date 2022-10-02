@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Qna_Board;
 import dao.Qna_BoardDao;
+import dao.Qna_Comment;
+import dao.Qna_CommentDao;
 import service.CommandProcess;
 
 
@@ -24,14 +26,14 @@ public class QnaWriteCheckAction implements CommandProcess {
 		try {
 			// 2. BoardDao bd Instance
 			Qna_BoardDao bd = Qna_BoardDao.getInstance();
+			Qna_CommentDao cd = Qna_CommentDao.getInstance();
 			
-			
-			// 4. Board board = bd.select(num);
 			Qna_Board board = bd.select(b_num);   
-
+			Qna_Comment comment = cd.select(b_num);
 			
 			request.setAttribute("b_num", b_num);
-			request.setAttribute("board", board);		
+			request.setAttribute("board", board);
+			request.setAttribute("comment", comment);
 		} catch (Exception e) {
 			System.out.println(e.getMessage()); 
 		}

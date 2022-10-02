@@ -81,6 +81,22 @@
 		</div>
 		
 		
+	<!-- 	테스트중 -->
+		<div class="comment" style="margin-left: 350px">
+			<div class="basic2_2">
+				<img src="<%=context %>/sh_images/user_icon04.png"
+				class="userIconColor-1 rounded-circle me-2  align-center bg-white"
+				width="20" height="20">
+			</div>
+			<p class="basic2_2">${comment.user_id}</p>
+			<p>${comment.com_content}</p>
+		</div>
+		
+		
+		
+		
+		
+		
 <!-- 			<br>
 		    <div  style="clear: both;">
 		      <input type="text" >
