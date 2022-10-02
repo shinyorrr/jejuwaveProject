@@ -108,6 +108,29 @@ public class AdminDao {
 		return tot;
 	}
 	
+	public int getCommuCnt() throws SQLException {
+		int tot = 0;
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from community";
+		System.out.println("Dao getQnaCnt sql->"+sql);
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs =stmt.executeQuery(sql);
+			if(rs.next()) tot = rs.getInt(1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if( rs!= null) 	 rs.close();
+			if( stmt!=null ) stmt.close();
+			if( conn!=null ) conn.close();
+		}
+		return tot;
+	}
+	
 	// 회원 리스트
 	public List<Member> memList(int startRow, int endRow) throws SQLException {
 		List<Member> list = new ArrayList<Member>();
@@ -294,10 +317,78 @@ public class AdminDao {
 	}
 	
 	// QnA 게시판
-	public List<Qna_Comment> qnaList(int startRow, int endRow) {
+	public List<Qna_Comment> qnaList(int startRow, int endRow) throws SQLException {
 		List<Qna_Comment> list = new ArrayList<Qna_Comment>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from qna_board b, qan_comment c where b.b_num=c.b_num";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			System.out.println("startRow->"+startRow);
+			System.out.println("endRow->"+endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Qna_Comment qc = new Qna_Comment();
+				qc.setB_num(rs.getInt("b_num"));
+				qc.setUser_id(rs.getString("user_id"));
+				qc.setB_date(rs.getDate("b_date"));
+				qc.setB_title(rs.getString("b_title"));
+				qc.setB_theme(rs.getString("b_theme"));
+				qc.setCom_num(rs.getInt("com_num"));
+				qc.setCom_date(rs.getDate("com_date"));
+				qc.setCom_content(rs.getString("com_content"));
+				list.add(qc);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(rs!=null) 	rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
+		}
+		return list;
+	}
+	
+	//회원 커뮤니티
+	
+	public List<Commu> commuList(int startRow, int endRow) throws SQLException {
+		List<Commu> list = new ArrayList<Commu>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * "
+				+ "		from (select rownum rn, a.* from (select * from community order by c_date desc) a) "
+				+ " where rn between ? and ?";
+		System.out.println("commuList() sql->"+sql);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			System.out.println("startRow->"+startRow);
+			System.out.println("endRow->"+endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Commu com = new Commu();
+				com.setC_num(rs.getInt("c_num"));
+				com.setUser_id(rs.getString("user_id"));
+				com.setC_content(rs.getString("c_content"));
+				com.setC_date(rs.getDate("c_date"));
+				com.setC_hash(rs.getString("c_hash"));
+				list.add(com);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(rs!=null) 	rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
+		}
 		return list;
 	}
 }
