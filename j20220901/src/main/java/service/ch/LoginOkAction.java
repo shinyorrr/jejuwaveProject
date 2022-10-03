@@ -31,7 +31,7 @@ public class LoginOkAction implements CommandProcess {
 		String returnpage = null;
 		if(user_id != null) {
 			System.out.println("session"+ user_id);
-			returnpage = "mainLogin.jsp";
+			returnpage = "main.jsp";
 		} else returnpage = "ch/loginForm.jsp";
 		return returnpage;
 	}
