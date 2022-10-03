@@ -27,8 +27,8 @@ public class LoginAction implements CommandProcess {
 		try {
 			String img = my.imageSelect(user_id);
 			int result = my.check(user_id,user_pw);
-			Member member = new Member();
-			int user_gubun = member.getUser_gubun();
+			Member member = my.select(user_id);
+
 			
 			if(result > 0) {
 				HttpSession session = request.getSession();
@@ -36,7 +36,7 @@ public class LoginAction implements CommandProcess {
 				session.setAttribute("img", img);
 			}
 			
-			request.setAttribute("user_gubun", user_gubun);
+			request.setAttribute("user_gubun", member.getUser_gubun());
 			request.setAttribute("user_pw", user_pw);
 			request.setAttribute("result", result);
 		} catch (SQLException e) {

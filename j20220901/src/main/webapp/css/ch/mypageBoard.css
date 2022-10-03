@@ -13,5 +13,10 @@
 .link_mypage_board::after{
 	content: url("../../images/form_arrow_lightGray.svg");
 	position: absolute;
-	left: 33.5%;
+	left: 23.5%;
+}
+.page_nation:hover {
+	color:#fff;
+	border:1px solid #f40;
+	background-color:#f40;
 }
