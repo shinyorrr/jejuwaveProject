@@ -25,7 +25,7 @@ String context = request.getContextPath();
 		</div>
 	</div>
 </header>
-<body>
+<body>b
 	<div>
 		<table class="maintitle">
 			<c:forEach var="board" items="${list }">
