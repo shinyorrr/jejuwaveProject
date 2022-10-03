@@ -10,30 +10,27 @@ import dao.Qna_Comment;
 import dao.Qna_CommentDao;
 import service.CommandProcess;
 
-public class QnaCommentWriteAction implements CommandProcess {
+public class QnaCommentDeleteAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("QnaCommentWriteAction start..");
-		
 		try {
-			int com_num = 0;
 			Qna_Comment comment = new Qna_Comment();
-			comment.setCom_content(request.getParameter("com_content"));
-			comment.setB_num(Integer.parseInt(request.getParameter("b_num")));
-			comment.setCom_num(com_num);
-			comment.setUser_id(request.getParameter("user_id"));
 			Qna_CommentDao cd = Qna_CommentDao.getInstance();
-			int result = cd.insert(comment);
 			
+			int b_num = Integer.parseInt(request.getParameter("b_num"));
+			int com_num = Integer.parseInt(request.getParameter("com_num"));
+			
+			int result = cd.delete(b_num, com_num);
 			request.setAttribute("result", result);
-			request.setAttribute("b_num", comment.getB_num());
+			request.setAttribute("b_num", b_num);
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		return "sh/qnaCommentWrite.jsp";
+
+		return "sh/qnaCommentDelete.jsp";
 	}
 
 }

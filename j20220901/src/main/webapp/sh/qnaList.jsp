@@ -36,7 +36,7 @@ String context = request.getContextPath();
 					<div>
 						<p>
 						<th><a
-							href='<%=context %>/qnaWriteCheck.do?b_num=${board.b_num}'>
+							href='<%=context %>/qnaWriteCheck.do?b_num=${board.b_num}& user_id=${board.user_id}'>
 							${board.b_title}</a></th>
 						</p>							
 						<p class="user_icon1">						

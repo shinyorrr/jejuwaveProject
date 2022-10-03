@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="<%=context%>/css/sh/qnamain.css">
 <link rel="stylesheet" href="<%=context%>/css/sh/qnaWriteCheck.css">
 
+
 <header class="py-5 mb-5"
 	style="background-image: url('<%=context %>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
@@ -96,11 +97,17 @@
 					<div style="float: left;">
 						<img src="<%=context %>/sh_images/user_icon0${inum.count }.png" width="40" height="40"
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white">
+					</div>					
+					<div class="fw-bold" style="font-size: 17px; line-height: 1.1" >${comment.user_id }
+					
+						<!-- 댓글 삭제 -->
+						<c:if test="${user_id == comment.user_id }">
+							<span><a class="delete" href="<%=context %>/qnaCommentDelete.do?com_num=${comment.com_num}&b_num=${b_num}">
+							삭제<img src="<%=context %>/sh_images/trash" width="16" height="16" style="vertical-align: sub;" >
+							</a></span>
+						</c:if>
 					</div>
-					
-					<div class="fw-bold" style="font-size: 17px; line-height: 1.1" >${comment.user_id }</div>
-					<div style="font-size: 12px; color:gray; margin-bottom : 10px">${comment.com_date}</div> 
-					
+					<div style="font-size: 12px; color:gray; margin-bottom : 10px">${comment.com_date}</div> 				
 					<div style="margin-left: 60px; margin-bottom: 25px;">${comment.com_content }</div>
 					<hr width="1100px">
 			</div>				
