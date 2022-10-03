@@ -96,29 +96,23 @@ public class Qna_CommentDao {
 			if(conn!=null)conn.close();
 		}
 		return comment;
-	
-
 	}
 	
-	public int insert(Qna_Comment comment) {
+	public int insert(Qna_Comment comment) throws SQLException {
+		System.out.println("qnaComment insert start..");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		Resultset rs = null;
+		ResultSet rs = null;
 		int com_num = comment.getCom_num();
 		int result = 0;
-
-		 
-		/* String sql1 = "select nvl(max(" */
-
 		
-		String sql1 = "select nvl(max(com_num),0) from qna_comment";
-
+		String sql1 = "select nvl(max(com_num),0) from qna_comment where b_num=?";
 		String sql = "insert into qna_comment values(?,?,?,sysdate,?)";
 		
-	
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, comment.getB_num());
 			rs = pstmt.executeQuery();
 			rs.next();
 			int cnum =rs.getInt(1) +1 ;
@@ -128,19 +122,42 @@ public class Qna_CommentDao {
 			 pstmt = conn.prepareStatement(sql);
 			 pstmt.setInt(1, comment.getB_num());
 			 pstmt.setInt(2, cnum);
-			 pstmt.setString(3, comment.getUser_id());
+			 pstmt.setString(3, "aaaa"/*comment.getUser_id()*/);
 			 pstmt.setString(4, comment.getCom_content());
 			 result = pstmt.executeUpdate();
 			 pstmt.close();
-			 
+			 System.out.println("커멘트다오 내용-->"+comment.getCom_content());
 		} catch (Exception e) {
 			// TODO: handle exception
+		} finally {
+			if(conn!=null)conn.close();
+			if(pstmt!=null)pstmt.close();
 		}
 		
 		return result;
 	}
 	
-	
+	public int delete(int b_num, int com_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "delete from qna_comment where b_num=? and com_num=?";
+		
+		try {
+			conn=getConnection();
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			pstmt.setInt(2, com_num);
+			result=pstmt.executeUpdate();
+			pstmt.close();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(conn!=null)conn.close();
+			if(pstmt!=null)pstmt.close();
+		} return result;
+		
+	}
 	
 	
 	

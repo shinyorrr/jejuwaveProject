@@ -25,6 +25,8 @@ public class QnaWriteCheckAction implements CommandProcess {
 		System.out.println("ContentAction Service start...");
 		// 1. num , pageNum
 		int b_num = Integer.parseInt(request.getParameter("b_num"));
+		// 회원이랑 연결하고 나면 !!!!  String user_id = request.getParameter("user_id");
+		String user_id = "aaaa";
 		
 		try {
 			// 2. BoardDao bd Instance
@@ -44,6 +46,7 @@ public class QnaWriteCheckAction implements CommandProcess {
 			request.setAttribute("board", board);
 
 			request.setAttribute("list", list);
+			request.setAttribute("user_id", user_id);
 			request.setAttribute("inum", inum);
 			
 
