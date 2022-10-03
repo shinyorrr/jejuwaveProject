@@ -9,7 +9,7 @@ public class Travel {
 	private String 	t_title;
 	private String 	t_content;
 	private String 	t_gubun;
-	private Date 	t_date;
+	private String 	t_date;
 	private int 	t_person;
 	private String 	t_start;
 	private String 	t_end;
@@ -17,8 +17,22 @@ public class Travel {
 	private int 	t_ref;
 	private int 	t_relevel;
 	private int 	t_restep;
+	private int 	result;
+	private int 	reply_cnt;
 	
 	
+	public int getResult() {
+		return result;
+	}
+	public void setResult(int result) {
+		this.result = result;
+	}
+	public int getReply_cnt() {
+		return reply_cnt;
+	}
+	public void setReply_cnt(int reply_cnt) {
+		this.reply_cnt = reply_cnt;
+	}
 	public int getT_num() {
 		return t_num;
 	}
@@ -55,10 +69,10 @@ public class Travel {
 	public void setT_gubun(String t_gubun) {
 		this.t_gubun = t_gubun;
 	}
-	public Date getT_date() {
+	public String getT_date() {
 		return t_date;
 	}
-	public void setT_date(Date t_date) {
+	public void setT_date(String t_date) {
 		this.t_date = t_date;
 	}
 	public int getT_person() {
@@ -103,5 +117,4 @@ public class Travel {
 	public void setT_restep(int t_restep) {
 		this.t_restep = t_restep;
 	}
-	
 }
