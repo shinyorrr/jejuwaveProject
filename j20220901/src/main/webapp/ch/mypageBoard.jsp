@@ -9,7 +9,7 @@
 <%
    String context = request.getContextPath();
 %>
-<c:import url="${context}/headerLogin.jsp"></c:import>
+<c:import url="${context}/header.jsp"></c:import>
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageTraveler.css?after">
 </head>
@@ -128,6 +128,7 @@
 						">[다음]</button>
 				</c:if>
 			</div>
+		</div>
 </main>
 <footer class="py-5 bg-dark" style="top: 125%;">
 		<div class="container">

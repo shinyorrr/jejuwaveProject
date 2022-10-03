@@ -33,7 +33,7 @@
 	
 	<c:if test="${result < 0 }">
 		<script type="text/javascript">
-		/* alert("등록되지 않은 아이디입니다"); */
+		alert("등록되지 않은 아이디입니다")
 		location.href = "ch/loginForm.jsp";
 		</script>
 	</c:if>
