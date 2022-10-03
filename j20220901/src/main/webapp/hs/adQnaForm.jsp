@@ -36,32 +36,55 @@
 			    <tr>
 			      <th scope="col">번호</th>
 			      <th scope="col">제목</th>
-			      <th scope="col">작성자</th>
 			      <th scope="col">아이디</th>
 			      <th scope="col">테마</th>
-				  <th scope="col">조회수</th>
-				  <th scope="col">댓글수</th>
+			      <th scope="col">해결여부</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col">삭제</th>
 			    </tr>
 			  </thead>
 			  <tbody>
-			    <tr>
-			      <th scope="row">1</th>
-			      <td>저 혼자 뚜벅이 여행갈 곳이 있나요</td>
-			      <td>손신효</td>
-			      <td>bb</td>
-			      <td>여행</td>
-			      <td>5</td>
-			      <td>2</td>
-			      <td>22.09.24</td>
-			      <td><input type="button" value="삭제"></td>
-			    </tr>
+			    <c:if test="${totCnt > 0}">
+			  		<c:forEach var="board" items="${list}">
+			  			<tr>
+			  				<th scope="row"  width="50">${startNum}</th>
+			  				<td width="500">
+			  				<a href="<%=context%>/adQnaContent.do?b_num=${board.b_num}&pageNum=${currentPage}">${board.b_title}</a>
+			  				</td>
+			  				<td width="100">${board.user_id}</td>
+			  				<td width="100">${board.b_theme}</td>
+			  				<td width="100">${board.b_success}</td>
+			  				<td width="100">${board.b_date}</td>
+			  				<td width="100"><input type="submit" value="삭제"></td>
+			  			</tr>
+			  			<c:set var="startNum" value="${startNum - 1}"></c:set>
+			  		</c:forEach>
+			  	</c:if>
+		  	<c:if test="${totCnt == 0}">
+		  		<tr>
+		  			<td colspan="7">데이터가 없네</td>
+		  		</tr>
+		  	</c:if>
 			  </tbody>
 		  </table>
 		</div>
 		
-		<!-- 페이지네비게이션 -->
+		<!-- 페이지내비게이션 -->
+		<nav class="pagenav" aria-label="Page navigation example">
+		  <ul class="pagination">
+		  	<c:if test="${startPage > blockSize}">
+				<li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${startPage-blocksize}">Previous</a></li>
+			</c:if>
+		    
+		    <c:forEach var="i" begin="${startPage}" end="${endPage}">
+				<li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${i}">[${i}]</a></li>
+			</c:forEach>
+		    
+		    <c:if test="${endPage < pageCnt}">
+				 <li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${startPage+blockSize }">Next</a></li>
+			</c:if>
+		  </ul>
+		 </nav>
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>

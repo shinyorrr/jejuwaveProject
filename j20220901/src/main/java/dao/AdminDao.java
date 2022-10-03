@@ -1,6 +1,5 @@
 package dao;
 
-import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,15 +82,12 @@ public class AdminDao {
 		return tot;
 	}
 	
-	public int getQnaCnt() throws SQLException {
+	public int getQnabrdCnt() throws SQLException {
 		int tot = 0;
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "select (select count(*) from qna_board)+"
-				+ "(select count(*) from qna_comment)"
-				+ "from dual";
-		System.out.println("Dao getQnaCnt sql->"+sql);
+		String sql = "select count(*) from qna_board";
 		
 		try {
 			conn = getConnection();
@@ -138,9 +134,8 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * "
-				+ " 	from  ( select rownum rn, a.*, board_count(a.user_id) bc, comment_count(a.user_id) cc from (select * from member order by user_gubun) a)"
+				+ " 	from  ( select rownum rn, a.*, board_count(a.user_id), comment_count(a.user_id) from (select * from member order by user_gubun) a)"
 				+ " where rn between ? and ?";
-		
 		System.out.println("Dao memList sql->"+sql);
 
 		try {
@@ -296,7 +291,7 @@ public class AdminDao {
 				t.setT_title(rs.getString("t_title"));
 				t.setT_content(rs.getString("t_content"));
 				t.setT_gubun(rs.getString("t_gubun"));
-				t.setT_date(rs.getDate("t_date"));
+				t.setT_date(rs.getString("t_date"));
 				t.setT_person(rs.getInt("t_person"));
 				t.setT_start(rs.getString("t_start"));
 				t.setT_end(rs.getString("t_end"));
@@ -317,12 +312,14 @@ public class AdminDao {
 	}
 	
 	// QnA 게시판
-	public List<Qna_Comment> qnaList(int startRow, int endRow) throws SQLException {
-		List<Qna_Comment> list = new ArrayList<Qna_Comment>();
+	public List<Qna_Board> qnaList(int startRow, int endRow) throws SQLException {
+		List<Qna_Board> list = new ArrayList<Qna_Board>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from qna_board b, qan_comment c where b.b_num=c.b_num";
+		String sql = "select * "
+				+ "		from (select rownum rn, a.* from (select * from qna_board order by b_date desc) a) "
+				+ "where rn between ? and ?";
 		
 		try {
 			conn = getConnection();
@@ -333,15 +330,48 @@ public class AdminDao {
 			System.out.println("endRow->"+endRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
+				Qna_Board qb = new Qna_Board();
+				qb.setB_num(rs.getInt("b_num"));
+				qb.setUser_id(rs.getString("user_id"));
+				qb.setB_date(rs.getDate("b_date"));
+				qb.setB_title(rs.getString("b_title"));
+				qb.setB_success(rs.getString("b_success"));
+				qb.setB_theme(rs.getString("b_theme"));
+				list.add(qb);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(rs!=null) 	rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
+		}
+		return list;
+	}
+	
+	// QnA 게시판 댓글 조회
+	public List<Qna_Comment> qnaComList(int b_num) throws SQLException {
+		List<Qna_Comment> list = new ArrayList<Qna_Comment>();
+		Connection conn = null;
+		String sql = "select b.b_num, c.com_num, c.user_id, c.com_date, c.com_content"
+				+ " from qna_board b, qna_comment c"
+				+ " where b.b_num=c.com_num and com_num=?";
+		System.out.println("Dao qnaComList sql->"+sql);
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
 				Qna_Comment qc = new Qna_Comment();
 				qc.setB_num(rs.getInt("b_num"));
-				qc.setUser_id(rs.getString("user_id"));
-				qc.setB_date(rs.getDate("b_date"));
-				qc.setB_title(rs.getString("b_title"));
-				qc.setB_theme(rs.getString("b_theme"));
 				qc.setCom_num(rs.getInt("com_num"));
-				qc.setCom_date(rs.getDate("com_date"));
+				qc.setUser_id(rs.getString("user_id"));
 				qc.setCom_content(rs.getString("com_content"));
+				qc.setCom_date(rs.getDate("com_date"));
 				list.add(qc);
 			}
 		} catch (Exception e) {
