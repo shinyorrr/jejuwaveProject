@@ -133,12 +133,15 @@ console.log(count);
 		<!-- 검색창 -->
 		<section class="container">
 			<div class="row m-5 justify-content-md-center">	
-			<div	
+				<div	
 					class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 					<span
 					class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN" style="margin-left: 5px;"></span>
 					<button style="margin-left: 10px;"></button>
 					<input placeholder="동행을 찾아보세요!" value="">
+				</div>
+				<div class="com-md-auto">
+					<a class="btn btn-success" role="button" href="<%=context%>/commuWriteForm.do">글쓰기</a>
 				</div>
 			</div>	
 			<!-- list start -->
