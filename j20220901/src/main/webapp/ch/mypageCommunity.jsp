@@ -10,7 +10,7 @@
 <%
    String context = request.getContextPath();
 %>
-<c:import url="${context}/headerLogin.jsp"></c:import>
+<c:import url="${context}/header.jsp"></c:import>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
