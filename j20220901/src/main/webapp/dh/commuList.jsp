@@ -146,7 +146,7 @@ console.log(count);
 			</div>	
 			<!-- list start -->
 			<c:if test="${totCnt > 0 }">
-				<c:forEach var="commu" items="${list }">	
+				<c:forEach var="commu" items="${list }" varStatus="status">	
 					<div class="row m-5 justify-content-md-center">	
 						
 						<div class="col-md-auto">
@@ -165,7 +165,9 @@ console.log(count);
 								  		</ul>
 									</div>
 								</div>
-								<button class="nav-link" data-remote="<%=context%>/commuContent.do?c_num=${commu.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl"><img class="rounded card-img-top" src="dh_images/5_2.jpg"></button>								
+								<button class="nav-link" data-remote="<%=context%>/commuContent.do?c_num=${commu.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
+			<!-- 게시글이미지 -->	<img class="rounded card-img-top" src="${imgList[status.index].c_img_path }">
+								</button>								
 								<div class="card-body d-flex">
 									<p class="card-text">${commu.c_content }</p>
 									

@@ -1,19 +1,21 @@
 package service.dh;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
-
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+import javax.servlet.http.Part;
 
 import dao.Commu;
 import dao.Commu.CommuImg;
@@ -34,37 +36,52 @@ public class CommuWriteProAction implements CommandProcess {
 			String user_id = "andew"; //임시 아이디
 			CommuDao cd = CommuDao.getInstance();
 			
-			// community_img table insert pro
+			// insert dao에 보낼 community_img table setting(form value 받기)
 			System.out.println("img upload start...");
-			int    maxSize     = 100 * 1024 * 1024;
-			String imgFileSave = "dh/imgFileSave";
-			String realPath    = request.getSession().getServletContext().getRealPath(imgFileSave);
-			System.out.println("realPath ->" + realPath);
-			//upload
-			MultipartRequest multi = new MultipartRequest(request , realPath , maxSize , "utf-8" , new DefaultFileRenamePolicy());
-			Enumeration      en    = multi.getFileNames();
-			List<String> fileNames = new ArrayList<String>();
-			// get path
-			while (en.hasMoreElements()) {
-				fileNames.add("imgFileSave\\" + multi.getFilesystemName((String)en.nextElement()));
-			}
-			// commuImg 에 path담기
 			List<Commu.CommuImg> commuImgList = new ArrayList<Commu.CommuImg>();
-			for (String fileName : fileNames) {
+			Collection<Part> parts = request.getParts(); // 모든 part들을 가져옴
+			System.out.println("request.getParts ->" + parts);
+			for (Part file : parts) {
+				System.out.println("for start...");
+				if(!file.getName().equals("file")) continue; // name이 file인 경우에만 실행
+				// 사용자가 업로드한 파일 이름 알아오기
+				String originName = file.getSubmittedFileName();
+				//
+				
+				// 사용자가 업로드한 파일에 input stream 연결
+				InputStream fis = file.getInputStream();
+				// 저장할 경로
+				String realPath = request.getServletContext().getRealPath("dh/imgFileSave");
+				// 파일 경로
+				String filePath = realPath + File.separator + originName;
+				System.out.println("파일경로 filePath ->" + filePath);
+				// 파일 저장
+				FileOutputStream fos = new FileOutputStream(filePath);
+				// table에 저장될 file path
+				String imgPath = "dh/imgFileSave\\" + originName;
+				byte[] buf = new byte[1024];
+				int size = 0;
+				while ((size = fis.read(buf)) != -1) {
+					fos.write(buf, 0, size);
+				}
+				// commuImgList에 파일경로 setting
 				Commu.CommuImg commuImg = new CommuImg();
-				commuImg.setC_img_path(fileName);
+				commuImg.setC_img_path(imgPath);
 				commuImgList.add(commuImg);
+				
+				fis.close();
+				fos.close();
+				
 			}
-			System.out.println("commuImgList->" + commuImgList);
-			
-			// community table insert pro
+			System.out.println("after setting commuImgList ->" + commuImgList);
+			// insert dao에 보낼 community table setting(form value데이터 받기)
 			Commu commu = new Commu();
 			commu.setUser_id(user_id);
-			commu.setC_content(multi.getParameter("c_content"));
-			commu.setC_hash(multi.getParameter("c_hash"));
+			commu.setC_content(request.getParameter("c_content"));
+			commu.setC_hash(request.getParameter("c_hash"));
 			System.out.println("writeActionPro user_id->" + user_id);
-			System.out.println("writeActionPro c_content->" + multi.getParameter("c_content"));
-			System.out.println("writeActionPro c_hash->" + multi.getParameter("c_hash"));
+			System.out.println("writeActionPro c_content->" + request.getParameter("c_content"));
+			System.out.println("writeActionPro c_hash->" + request.getParameter("c_hash"));
 			// DAO insert 요청
 			int[] results = cd.insert(commu , commuImgList);
 			// request 객체에 result, pageNum

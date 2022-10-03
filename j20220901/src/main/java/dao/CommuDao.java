@@ -94,6 +94,46 @@ public class CommuDao {
 		return list;
 	}
 	
+	// 게시글 list 대표이미지 list get
+	public List<Commu.CommuImg> CommuListImg(int startRow , int endRow) throws SQLException {
+		List<Commu.CommuImg> imgList = new ArrayList<Commu.CommuImg>();
+		String sql = "select * "
+				+ "from ( "
+				+ "        select rownum rn , a.* "
+				+ "        from ("
+				+ "                select ci.c_num, min(c_img_path) keep (DENSE_RANK last order by ci.c_num) as f_c_img_path "
+				+ "                from community c, community_img ci "
+				+ "                where c.c_num = ci.c_num group by ci.c_num "
+				+ "                order by ci.c_num desc "
+				+ "             ) a "
+				+ "     ) "
+				+ "where rn between ? and ?";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
+		
+		try {
+			//community select(c_img 제외)
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Commu.CommuImg commuImg = new Commu.CommuImg();
+				commuImg.setC_img_path(rs.getString("f_c_img_path"));
+				imgList.add(commuImg);
+			}
+		} catch (Exception e) {
+			System.out.println("commuList select try...err" + e.getMessage());
+		} finally {
+			if (rs    != null) rs.close(); 
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 
+		}
+		return imgList;
+	}
+	
 	// commu content select
 	public Commu select(int c_num) throws SQLException {
 		Commu commu = new Commu();
@@ -194,7 +234,8 @@ public class CommuDao {
 			pstmt.close();
 			// insert community_img
 			System.out.println("insert img start...");
-			List<Integer> imgResults = new ArrayList<>();
+			System.out.println("before insert commiImgList->" + commuImgList);
+			List<Integer> imgResults = new ArrayList<>(); //img insert result list
 			for (Commu.CommuImg commuImg : commuImgList) {
 				pstmt = conn.prepareStatement(sql2);
 				pstmt.setInt   (1 , number);
