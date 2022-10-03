@@ -16,7 +16,8 @@ String context = request.getContextPath();
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/header_content.css">
+<!-- css -->
+<link rel="stylesheet" href="css/header_main.css">
 
 <!-- Bootstrap CSS -->
 <link
@@ -26,7 +27,7 @@ String context = request.getContextPath();
 	crossorigin="anonymous">
 
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="images/tangerine.png" />
 <!-- Bootstrap icons-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
