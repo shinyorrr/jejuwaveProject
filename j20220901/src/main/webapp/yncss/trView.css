@@ -34,6 +34,9 @@ body{
 #keyColor{
 	color:#ff3500;	
 }
+.keyColor{
+	color:#ff3500;
+}
 #userBox{
 	border: 1px; 
 	border-color: #4A3E37 ;
