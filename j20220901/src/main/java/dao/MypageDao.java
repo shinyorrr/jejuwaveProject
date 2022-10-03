@@ -168,12 +168,13 @@ public class MypageDao {
 		
 		return result;
 	}
+	
 	public Member select(String user_id) throws SQLException {
 		Member md = new Member();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select USER_INFO,USER_BIRTH,USER_TEL,USER_EMAIL,USER_IMG from member where user_id = ?";
+		String sql = "select USER_INFO,USER_BIRTH,USER_TEL,USER_EMAIL,USER_IMG, USER_GUBUN from member where user_id = ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -186,6 +187,7 @@ public class MypageDao {
 				md.setUser_tel(rs.getString("user_tel"));
 				md.setUser_email(rs.getString("user_email"));
 				md.setUser_img(rs.getString("user_img"));
+				md.setUser_gubun(rs.getInt("user_gubun"));
 				System.out.println(md.getUser_img());
 			}
 		} catch (SQLException e) {

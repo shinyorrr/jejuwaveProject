@@ -17,6 +17,7 @@
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageCommunity.css?after">
 </head>
 <body>
+<div class = "main" style="background-color: rgb(248,248,248);">
 <main id = "content" style="background-color: rgb(248,248,248);">
 	<div class = "mypage_set">
 		<div class="Mypage_Main">
@@ -69,65 +70,92 @@
 			<!-- 각 화면이 달라지는 부분 -->
 			<div class="content_section">
 				<h2 class = "mypage_menu_h2">내 커뮤니티</h2>
+					<div class = "communityForm">
 						<c:if test="${ totCnt > 0}">
-						<c:forEach var="board" items="${list }">
-					<table style = "border-bottom = 1px solid rgb(204,204,204)">
-							<tr>
-								<td rowspan="3" width = 50>
-									<div class = "imgboxform">
-										<img class = "imgbox" src="<%=context%>/${board.c_img_path }" width = "120px" padding-bottom = 10px>
-									</div>
-								</td>
-								<td class = "dealstatusTd" width = 90>
-									<div class = "dealstatus">
-										${board.c_hash}	
-									</div>
-								</td>
-								<td class = "t_titleTD" width = 200>
-									<div class = "t_title">${board.c_title }</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3" width = 2000>
-									<div class = "t_content">
-										${board.c_content}
-									</div>
-								</td>
-							<tr>
-								<td colspan="2">
-									<div class = "button_updateform">
-										<button class = "button_update" location.href = "Board.jsp">수정</button>
-									</div>
-									<div>
-										<button class = "button_delete">삭제</button>
-									</div>
-								</td>
-								<td>
-									<div class = "comment number">
-										${board.c_date}
-									</div>
-								</td>
-							</tr>
-							<c:set var="startNum" value="${startNum - 1 }" />
-				</table>
+							<c:forEach var="board" items="${list }">
+								<table style = "border-bottom = 1px solid rgb(204,204,204)">
+										<tr>
+											<td rowspan="3" width = 50>
+												<div class = "imgboxform">
+													<img class = "imgbox" src="<%=context%>/${board.c_img_path }" width = "120px" padding-bottom = 10px>
+												</div>
+											</td>
+											<td class = "dealstatusTd" width = 90>
+												<div class = "dealstatus">
+													${board.c_hash}	
+												</div>
+											</td>
+											<td class = "t_titleTD" width = 200>
+												<div class = "t_title">${board.c_title }</div>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="3" width = 2000>
+												<div class = "t_content">
+													${board.c_content}
+												</div>
+											</td>
+										<tr>
+											<td colspan="2">
+												<div class = "button_updateform">
+													<button class = "button_update" location.href = "Board.jsp">수정</button>
+												</div>
+												<div>
+													<button class = "button_delete">삭제</button>
+												</div>
+											</td>
+											<td>
+												<div class = "comment number">
+													${board.c_date}
+												</div>
+											</td>
+										</tr>
+										<c:set var="startNum" value="${startNum - 1}" />
+								</table>
 						</c:forEach> 
 					</c:if>
+					</div>
 			</div>
 		</div>
-				<div style="padding-left : 43.5%;">
-				<c:if test="${startPage > blockSize }">
-					<a href = '<%=context%>/mypageTraveler.do?pageNum=${startPage-blockSize }'>[이전]</a>
+				<div style="padding-left : 62%;">
+				<c:if test="${startPage > 1 }">
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-					<a href='<%=context%>/mypageTraveler.do?pageNum=${i }'>[${i }]</a>
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-					<a href ='<%=context%>/mypageTraveler.do=${startPage+blockSize }'>[다음]</a>
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">[다음]</button>
 				</c:if>
-			</div>
-		</div>
+				</div>
+	</div>
 </main>
-<footer class="py-5 bg-dark" style="margin-top: 100px;">
+</div>
+<footer class="py-5 bg-dark" style="top: 125%;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
 				Website 2022</p>

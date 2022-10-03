@@ -13,6 +13,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import dao.Commu.CommuImg;
+import oracle.net.aso.r;
 
 public class CommuDao {
 	private static CommuDao instance;
@@ -83,7 +84,7 @@ public class CommuDao {
 				list.add(commu);
 			}
 		} catch (Exception e) {
-			System.out.println("commuList select try" + e.getMessage());
+			System.out.println("commuList select try...err" + e.getMessage());
 		} finally {
 			if (rs    != null) rs.close(); 
 			if (pstmt != null) pstmt.close(); 
@@ -113,7 +114,7 @@ public class CommuDao {
 				commu.setC_hash(rs.getString("c_hash"));
 			}
 		} catch (Exception e) {
-			System.out.println("commu contetn select try..." + e.getMessage());
+			System.out.println("commu content select try...err" + e.getMessage());
 		} finally {
 			if (rs    != null) rs.close(); 
 			if (stmt  != null) stmt.close(); 
@@ -121,6 +122,8 @@ public class CommuDao {
 		}
 		return commu;
 	}
+	
+	// community_img select
 	public List<Commu.CommuImg> selectImg(int c_num) throws SQLException {
 		List<Commu.CommuImg> imgList = new ArrayList<Commu.CommuImg>();
 		String sql = "select c.c_num , ci.c_img_num , ci.c_img_path "
@@ -153,4 +156,69 @@ public class CommuDao {
 		}
 		return imgList;
 	}
+	
+	// write - community , community_img insert
+	public int[] insert(Commu commu , List<Commu.CommuImg> commuImgList) throws SQLException {
+		int[] results = new int[2];
+		String sql = "insert into community values(? , ? , ? , sysdate , ? )";
+		String sql1 = "select nvl(max(c_num) , 0) from community";
+		String sql2 = "insert into community_img values(? , seq_COM_IMG.nextval , ?)";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
+		try {
+			int commuResult = 0;
+			int imgResultSum = 0;
+			
+			//max c_num 받아서 c_num+1 
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql1);
+			rs = pstmt.executeQuery();
+			rs.next();
+			int number = rs.getInt(1) + 1;
+			System.out.println("get 게시글 number->" + number);
+			rs.close();
+			pstmt.close();
+			System.out.println("insert commu start...");
+			// insert community
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt   (1 , number);
+			pstmt.setString(2 , commu.getUser_id());
+			pstmt.setString(3 , commu.getC_content());
+			pstmt.setString(4 , commu.getC_hash());
+			System.out.println("insert user_id->" + commu.getUser_id());
+			System.out.println("insert c_content->" + commu.getC_content());
+			System.out.println("insert c_hash->" + commu.getC_hash());
+			commuResult = pstmt.executeUpdate();
+			System.out.println("dao commuResult->" + commuResult);
+			pstmt.close();
+			// insert community_img
+			System.out.println("insert img start...");
+			List<Integer> imgResults = new ArrayList<>();
+			for (Commu.CommuImg commuImg : commuImgList) {
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setInt   (1 , number);
+				pstmt.setString(2 , commuImg.getC_img_path());
+				System.out.println("insert img 게시글 number->" + number);
+				System.out.println("insert img c_img_path->" + commuImg.getC_img_path());
+				int imgResult = pstmt.executeUpdate();
+				System.out.println("imgResult->" + imgResult);
+				imgResults.add(imgResult);
+				pstmt.close();
+			}
+			imgResultSum = imgResults.stream().mapToInt(Integer::intValue).sum();
+			System.out.println("imgResultSum->" + imgResultSum);
+			results[0] = commuResult;
+			results[1] = imgResultSum;
+
+		} catch (Exception e) {
+			System.out.println("insert dao e.n->" + e.getMessage());
+		} finally {
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 
+		}
+		System.out.println("dao last results->" + results[0] + ", " + results[1]);
+		return results;
+	}
+	
 }
