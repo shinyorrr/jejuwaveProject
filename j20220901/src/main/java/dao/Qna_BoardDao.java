@@ -54,24 +54,37 @@ public class Qna_BoardDao {
 		}
 		return tot;
 	}
-	
-	public List<Qna_Board> boardList() throws SQLException {
+	//hj qna hash 추가 수정 -----------------------------------------------------------------	
+	public List<Qna_Board> getBoardList() throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
 		Connection conn = null;	
 		PreparedStatement pstmt= null;
 		ResultSet rs = null;
-		 String sql = "select * from qna_board";
+		 String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,b.l_hash1,b.l_hash2,b.l_hash3 "
+		 		+ "from qna_board A, qna_hash B "
+		 		+ "WHERE A.B_NUM = B.B_NUM";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
+								
 				Qna_Board board = new Qna_Board();
 				board.setB_num(rs.getInt("b_num"));
 				board.setUser_id(rs.getString("user_id"));
 				board.setB_title(rs.getString("b_title"));
 				board.setB_content(rs.getString("b_content"));
-				board.setB_date(rs.getDate("b_date"));
+				board.setL_hash1(rs.getString("l_hash1"));
+				board.setL_hash2(rs.getString("l_hash2"));
+				board.setL_hash3(rs.getString("l_hash3"));
+			
+				
+				if (rs.getString("b_success").equals("Y")) {  
+					board.setB_success("채택완료");
+
+				} else {
+					board.setB_success("답변대기");
+				}
 				list.add(board);
 			}
 		} catch(Exception e) {	
@@ -84,11 +97,18 @@ public class Qna_BoardDao {
 		return list;
 	}
 	
+	
+	//현지 추가 수정 -----------------------------------------------------------------	
+	
 	public Qna_Board select(int b_num) throws SQLException {
 		Connection conn = null;	
 		Statement stmt= null; 
 		ResultSet rs = null;
-		String sql = "select * from qna_board where b_num="+b_num;
+		String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,A.b_theme,A.b_date,b.l_hash1,b.l_hash2,b.l_hash3 \r\n"
+				+ "		 		from qna_board A, qna_hash B \r\n"
+				+ "		 		WHERE A.B_NUM = B.B_NUM \r\n"
+				+ "                and a.b_num ="+b_num;
+		
 		Qna_Board board = new Qna_Board();
 		try {
 			conn = getConnection();
@@ -100,8 +120,18 @@ public class Qna_BoardDao {
 				board.setB_title(rs.getString("b_title"));
 				board.setB_content(rs.getString("b_content"));
 				board.setB_date(rs.getDate("b_date"));
-				board.setB_success(rs.getString("b_success"));
+				board.setL_hash1(rs.getString("l_hash1"));
+				board.setL_hash2(rs.getString("l_hash2"));
+				board.setL_hash3(rs.getString("l_hash3"));
 				board.setB_theme(rs.getString("b_theme"));
+				
+				if (rs.getString("b_success").equals("Y")) {  
+					board.setB_success("채택완료");
+
+				} else {
+					board.setB_success("답변대기");
+				}
+				
 
 			}
 		} catch(Exception e) {	
@@ -136,7 +166,7 @@ public class Qna_BoardDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, number);
-			//�α��� ��� �߰��ϸ�//////////////////////////////////
+			// α         ߰  ϸ //////////////////////////////////
 			//pstmt.setString(2, board.getUser_id());
 			pstmt.setString(2, board.getB_title());
 			pstmt.setString(3, board.getB_content());
@@ -208,7 +238,7 @@ public class Qna_BoardDao {
 	
 	
 	
-	/* �����Ұ� *////////////////////////////
+	/* �����Ұ� *////////////////////////////
 
 
 
