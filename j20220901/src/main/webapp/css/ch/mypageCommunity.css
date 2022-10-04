@@ -48,6 +48,8 @@
     user-select: none;
     -webkit-user-drag: none;
     padding-left : 20px;
+    font-family: 'korean';
+    font-size: small;
 }
 .button_update{
 	user-select: none;
@@ -69,19 +71,15 @@
     background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
 }
-table {
-	border-bottom: 1px solid rgb(204,204,204);
-}
 .imgbox{
 	border-radius: 35%;
 }
 .t_title{
-	font-family: 'korean';
+	font-family: 'NotoSansKR';
+	font-size: 16px;
+    font-weight: 500;
 }
 .button_updateform{
 	padding-right: 10px;
 	padding-left : 20px;
-}
-.t_content{
-		font-family: 'Noto Sans KR Light';
 }

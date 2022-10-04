@@ -8,7 +8,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
 <title>Insert title here</title>
-<c:import url="../header.jsp" />
+<% 
+String context = request.getContextPath();
+%>
+<c:import url="${context}/header.jsp"></c:import>
 
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
@@ -38,9 +41,7 @@
 	<!-- Core theme JS-->
 <script src="js/index.js" defer="defer"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<% 
-String context = request.getContextPath();
-%>
+
 <!-- 커뮤니티 무한스크롤 ajax-->
 <script type="text/javascript">
 var count = 2;
@@ -60,67 +61,7 @@ console.log(count);
 </script>
 </head>
 <body>
-<!-- 	<header id="header" class="Headers_HeaderMainHeader burgkU">
-		<div class="Headers__InnerSection bQvPOR">
-			<div class="Headers__HeaderTopWrapDiv kKJwFS">
-				<div class="Headers_HeaderTopInnerDiv cMXtHR">
-					<img src="images/brand_logo.png" alt="logo" class="WebHeader_LogoImg hsELiP" onClick="location.href='index.jsp'">
-				</div>
-				<div class="Headers__HeaderTopInnerDiv-sc-1la7hl4-3 dnYUeR">
-					<div width="300px"
-						class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
-						<span
-							class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
-						<button></button>
-						<input placeholder="동행을 찾아보세요!" value="">
-					</div>
-					<div class="Button__ButtonWrapper-sc-1vcxcg6-0 oIYRb">
-						<button width="" height="" font-style="" type="button"
-							class="Button__ButtonStyle-sc-1vcxcg6-1 eVZkjB">
-							<a><p>로그인</p></a>
-						</button>
-					</div>
-					<div class="Button__ButtonWrapper-sc-1vcxcg6-0 oIYRb">
-						<button width="" height="" font-style="" type="button"
-							class="Button__ButtonStyle-sc-1vcxcg6-1 jRRCxU">
-							<a><p>회원가입</p></a>
-						</button>
-					</div>
-					<div class="Button_dropdown oIYRb">
-						<button width="100px" height="40px" font-style="" type="button"
-							class="ButtonStyle kRVxKH">글쓰기</button>
-						<div class="Popups__HeaderWritePopupDiv cymdDn">
-							<button onClick="location.href='content.jsp'"
-								class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHljB">
-								<img src="images/letter_color.svg" alt="이미지" style="width: 33px; height: 24px;">
-								<p>여행친구 찾기</p>
-							</button>
-							<button onclick="location.href='list.jsp'"
-								class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHlmB">
-								<img src="images/magnifier_color.svg" alt="이미지" style="width: 33px; height: 24px;">
-								<p>여행 질문하기</p>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="Headers__HeaderContentWrapper-sc-1la7hl4-4 iEbwCp"
-				style="justify-content: flex-start; margin: 0px 12px;">
-				<button width="auto" font-size="16px" font-weight="bold"
-					class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 leGRAZ"
-					onClick="location.href='header.jsp'">홈</button>
-				<button width="auto" font-size="16px" font-weight="400"
-					class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdv"
-					onClick="location.href='content.jsp'">동행</button>
-				<button width="auto" font-size="16px" font-weight="400"
-					class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdc"
-					onClick="location.href='list.jsp'">Q&amp;A</button>
-				<button width="auto" font-size="16px" font-weight="400"
-					class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdf"
-					onClick="location.href='commList.jsp'">여행 기록</button>
-			</div>
-		</div>
-	</header> -->
+
 <!-- main start -->	
 	<main style="margin-top: 148px;">
 		<!-- main 상단 고정이미지 -->
@@ -162,8 +103,8 @@ console.log(count);
 								  			<span class="bi bi-three-dots-vertical"></span>
 								  		</button>
 								  		<ul class="dropdown-menu">
-								    		<li><a class="dropdown-item" href="#">수정</a></li>
-								   			<li><a class="dropdown-item" href="#">삭제</a></li>
+								    		<li><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">수정</a></li>
+								   			<li><a class="dropdown-item" href="<%=context%>/commuDeleteForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">삭제</a></li>
 								  		</ul>
 									</div>
 								</div>

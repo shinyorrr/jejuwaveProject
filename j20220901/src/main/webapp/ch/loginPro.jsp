@@ -14,7 +14,7 @@
 	<c:if test="${result > 0 }">
 		<c:if test="${user_gubun > 0 }">
 			<script type="text/javascript">
-				location.href = "mainLogin.jsp";
+				location.href = "main.do";
 			</script>
 		</c:if>
 		<c:if test="${user_gubun == 0 }">
