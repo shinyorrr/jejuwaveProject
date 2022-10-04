@@ -66,7 +66,6 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 		<br>
 		
 		<!-- 해시태그 -->	
-		<input type="hidden" name="b_num" value="${b_num }">
 		<div class="mb-3" style="width: 1200px; margin-left: auto; margin-right: auto;">	 		
   			<input type="text" name="hashString" class="form-control card-title"  placeholder="#을붙여 태그를 입력하세요(최대 3개)" 
   					style="height: 60px; background-image: url('<%=context %>/sh_images/hashtag.png');">
