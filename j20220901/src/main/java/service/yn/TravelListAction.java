@@ -33,6 +33,8 @@ public class TravelListAction implements CommandProcess {
 			int startRow = (currentPage - 1) * pageSize + 1;  // 1     10   
 			int endRow   = startRow + pageSize - 1;           // 11    20 
 			int startNum = totCnt - startRow + 1; 
+			
+			
 				
 			List<Travel> travel = td.traveList(startRow, endRow);
 			System.out.println("ListAction Service totCnt-->"+totCnt);

@@ -80,7 +80,7 @@ public class TravelWriteProAction implements CommandProcess {
 				System.out.println("t_start===========>"+ multi.getParameter("t_start"));
 				System.out.println("t_end===========>"+ multi.getParameter("t_end"));
 				System.out.println("t_gubun==============>" + multi.getParameter("t_gubun"));
-				System.out.println("t_gubun==============>" + multi.getParameter("t_person"));
+				System.out.println("t_person==============>" + multi.getParameter("t_person"));
 //				travel.setT_num(request.getParameter("t_num"));
 				travel.setUser_id		(user_id);
 				travel.setT_img			(filename);
@@ -90,16 +90,25 @@ public class TravelWriteProAction implements CommandProcess {
 				travel.setT_person		(Integer.parseInt(multi.getParameter("t_person")));
 				travel.setT_start		(multi.getParameter("t_start"));
 				travel.setT_end			(multi.getParameter("t_end"));
+				travel.setT_relevel		(0);
+				travel.setT_restep		(0);
+				travel.setT_dealstatus	("0");
+				
 				
 				System.out.println("travle set 완료");
-				Travel maxNum = td.getMaxT_num();
 				
-				travel.setT_num(maxNum.getT_num());
-				travel.setT_ref(maxNum.getT_ref());
+				// t_num 최댓값 구하기
+				int maxTnum = td.getMaxT_num();
 				
+				// t_num 과 t_ref에 같은 값 넣어주기
+				travel.setT_num(maxTnum);
+				travel.setT_ref(maxTnum);
+				
+				// table insert
 				result = td.insert(travel);
 				System.out.println("travle insert 완료");
 				
+				// 출력값 셋팅
 				request.setAttribute("result", result.getResult());
 				request.setAttribute("t_num", result.getT_num());
 				

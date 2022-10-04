@@ -41,6 +41,7 @@
 	border-radius:4px;
 }
 
+
 .text-left p {
 	margin-bottom: 8px;
 }
@@ -65,14 +66,16 @@
 /* 폰트 등록 */
 @font-face{
     font-family : 'NotoSansKR-Regular';
-    src : url('../fonts/NotoSansKR-Regular.ttf') format('ttf'), url('../fonts/NotoSansKR-Regular.woff') format('woff');
+    src : url('../fonts/NotoSansKR-Regular.otf') format('otf');
+    src : url('../fonts/NotoSansKR-Regular.woff') format('woff');
+    src : url('../fonts/NotoSansKR-Regular.ttf') format('ttf');
     font-weight : normal;
     font-style : normal;
 }
 
 @font-face{
     font-family : 'NotoSansKR-Medium';
-    src : url('../fonts/NotoSansKR-Medium..ttf') format('ttf'), url('../fonts/NotoSansKR-Medium..woff') format('woff');
+    src : url('../fonts/NotoSansKR-Medium.ttf') format('ttf'), url('../fonts/NotoSansKR-Medium.woff') format('woff');
     font-weight : normal;
     font-style : normal;
 }
