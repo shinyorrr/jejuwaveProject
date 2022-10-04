@@ -75,50 +75,54 @@
 				<h2 class = mypage_menu_h2>내 게시글</h2>
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
-					<table style = "border-bottom = 1px solid rgb(204,204,204)">
-							<tr>
-								<td rowspan="3" width = 50>
-									<div class = "imgboxform">
-										<img class = "imgbox" src="<%=context%>/${board.t_img }" width = "120px" padding-bottom = 10px>
-									</div>
-								</td>
-								<td class = "dealstatusTd" width = 90>
-									<div class = "dealstatus">
-											<c:if test="${board.t_dealstatus == 1 }">
-											모집완료	
-											</c:if>
-											<c:if test="${board.t_dealstatus == 0 }">
-											모집중	
-											</c:if>
-									</div>
-								</td>
-								<td class = "t_titleTD" width = 200>
-									<div class = "t_title">${board.t_title }</div>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3" width = 2000>
-									<div class = "t_content">
-										${board.t_content}
-									</div>
-								</td>
-							<tr>
-								<td colspan="2">
-									<div class = "button_updateform">
-										<button class = "button_update" location.href = "Board.jsp">수정</button>
-									</div>
-									<div>
-										<button class = "button_delete">삭제</button>
-									</div>
-								</td>
-								<td>
-									<div class = "comment number">
-									댓글수
-									</div>
-								</td>
-							</tr>
-							<c:set var="startNum" value="${startNum - 1 }" />
-				</table>
+								<table style = "border-bottom = 1px solid rgb(204,204,204)">
+										<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
+											<td rowspan="3" width = 50>
+												<div class = "imgboxform">
+													<img class = "imgbox" src="<%=context%>/${board.t_img }" width = "120px" padding-bottom = 10px>
+												</div>
+											</td>
+											<td class = "dealstatusTd" width = 90>
+												<div class = "dealstatus">
+														<c:if test="${board.t_dealstatus == 1 }">
+														모집완료	
+														</c:if>
+														<c:if test="${board.t_dealstatus == 0 }">
+														모집중	
+														</c:if>
+												</div>
+											</td>
+											<td class = "t_titleTD" width = 200>
+												<div class = "t_title">${board.t_title }</div>
+											</td>
+											<td class = "t_date">
+											${board.t_date}
+											</td>
+										</tr>
+										<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
+											<td colspan="3" width = 2000>
+												<div class = "t_content">
+													${board.t_content}
+												</div>
+											</td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<div class = "button_updateform">
+													<button class = "button_update" onclick="location.href = 'Board.jsp'">수정</button>
+												</div>
+												<div>
+													<button class = "button_delete">삭제</button>
+												</div>
+											</td>
+											<td>
+												<div class = "comment number">
+												댓글수
+												</div>
+											</td>
+										</tr>
+										<c:set var="startNum" value="${startNum - 1 }" />
+							</table>
 						</c:forEach> 
 					</c:if>
 			</div>
