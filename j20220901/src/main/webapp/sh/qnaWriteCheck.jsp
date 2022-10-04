@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%
@@ -55,7 +57,14 @@ String context = request.getContextPath();
 		<div>
 			<br> <br> <span class="wait">상태</span> 
 
-		<span class="fw-bold me-2">${board.b_success }</span> <span class="wait">테마</span>             <!--  현지수정 -->
+		<span class="fw-bold me-2">
+			<c:if test="${board.b_success == 'Y' }">
+			 <span style="color: red;">${board.b_success }</span>
+			</c:if>
+			<c:if test="${board.b_success != 'Y' }">
+			 <span>${board.b_success }</span>
+			</c:if>
+			</span> <span class="wait">테마</span>             <!--  현지수정 -->
 			<span class="fw-bold me-2">${board.b_theme }</span>
 	
 
