@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
 <title>Insert title here</title>
+<c:import url="../header.jsp" />
+
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
 	rel="stylesheet">
@@ -58,7 +60,7 @@ console.log(count);
 </script>
 </head>
 <body>
-	<header id="header" class="Headers_HeaderMainHeader burgkU">
+<!-- 	<header id="header" class="Headers_HeaderMainHeader burgkU">
 		<div class="Headers__InnerSection bQvPOR">
 			<div class="Headers__HeaderTopWrapDiv kKJwFS">
 				<div class="Headers_HeaderTopInnerDiv cMXtHR">
@@ -118,7 +120,7 @@ console.log(count);
 					onClick="location.href='commList.jsp'">여행 기록</button>
 			</div>
 		</div>
-	</header>
+	</header> -->
 <!-- main start -->	
 	<main style="margin-top: 148px;">
 		<!-- main 상단 고정이미지 -->

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Qna_Board;
 import dao.Qna_BoardDao;
+import dao.Qna_Hash;
 import service.CommandProcess;
 
 public class QnaListAction implements CommandProcess {
@@ -19,13 +20,18 @@ public class QnaListAction implements CommandProcess {
 		// TODO Auto-generated method stub
 		System.out.println("ListAction Service start...");
 		
+		
 		Qna_BoardDao bd = Qna_BoardDao.getInstance();
 		
 		try {
 			int totCnt = bd.getTotalCnt();   // 37
 			request.setAttribute("totCnt", totCnt);
-			List<Qna_Board> list = bd.boardList(); 
-			request.setAttribute("list", list);   // ***
+
+			
+			List<Qna_Board> list = bd.getBoardList(); 
+			request.setAttribute("list", list);   
+			
+		
 
 		} catch (Exception e) {
 			System.out.println("ListAction e.getMessage()->"+e.getMessage());

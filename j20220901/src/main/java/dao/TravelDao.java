@@ -62,9 +62,10 @@ public class TravelDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from (select rownum r, a.*"
-				+ " from (select * from travel_board where t_Relevel= 0 order by t_ref desc, t_restep) a) "
-				+ " where r between ? and ? ";
+		String sql = "select * from (select rownum r, c.* from (select a.*, nvl(b.cnt,0) as reply_cnt "
+				+ " from (select * from travel_board where t_Relevel= 0 ) a, (select t_ref, count(t_ref) as cnt "
+				+ " from travel_board  where t_relevel !=0 group by t_ref) b where a.t_ref = b.t_ref(+) "
+				+ " order by t_num desc) c) where r between ? and ?";
 		
 		
 		System.out.println("TravelDao  traveList startRow-->"+startRow);
@@ -94,6 +95,7 @@ public class TravelDao {
 				travel.setT_ref			(rs.getInt		("t_ref"));
 				travel.setT_relevel		(rs.getInt		("t_relevel"));
 				travel.setT_restep		(rs.getInt		("t_restep"));
+				travel.setReply_cnt		(rs.getInt		("reply_cnt"));
 				
 				System.out.println("TravelDao  traveList t_title-->"+rs.getString	("t_title"));
 				
@@ -165,7 +167,8 @@ public class TravelDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select t_num, user_id, t_content, t_date, t_ref, t_relevel, t_restep from travel_board where t_ref=? and t_relevel != 0";
+		String sql = "select t_num, user_id, t_content, t_date, t_ref, t_relevel, t_restep "
+				  + " from travel_board where t_ref=? and t_relevel != 0 order by t_restep, t_relevel, t_date";
 		
 		System.out.println();
 		
@@ -248,11 +251,11 @@ public class TravelDao {
 
 			pstmt.setInt	(7,  travel.getT_person());
 			pstmt.setString	(8,	 travel.getT_start());
-			pstmt.setString	(9, travel.getT_end());
-			pstmt.setString	(10, "0");
+			pstmt.setString	(9,  travel.getT_end());
+			pstmt.setString	(10, travel.getT_dealstatus());
 			pstmt.setInt	(11, travel.getT_ref());
-			pstmt.setInt	(12, 0);
-			pstmt.setInt	(13, 0);
+			pstmt.setInt	(12, travel.getT_relevel());
+			pstmt.setInt	(13, travel.getT_restep());
 			
 			result = pstmt.executeUpdate();
 			if(result > 0) {
@@ -273,25 +276,23 @@ public class TravelDao {
 		return travel;
 	}
 	
-	public Travel getMaxT_num() throws SQLException {
+	public int getMaxT_num() throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql 	 = "select nvl(max(t_num), 0), nvl(max(t_ref), 0) from travel_board";
+		String sql 	 = "select nvl(max(t_num), 0) from travel_board";
 		
-		Travel travel = new Travel();
+		int result = 0;
 		
 		try {
 			conn 	= getConnection();
 			pstmt	= conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				travel.setT_num(rs.getInt(1) + 1);
-				travel.setT_ref(rs.getInt(2) + 1);
+				result = rs.getInt(1) + 1;
 			}
-			System.out.println("getMaxNum t_num====>" + travel.getT_num());
-			System.out.println("getMaxNum t_ref====>" + travel.getT_ref());
+			System.out.println("getMaxNum t_num====>" + result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -299,8 +300,9 @@ public class TravelDao {
 			if(pstmt != null) pstmt.close();
 			if(rs != null) rs.close();
 		}
-		return travel;
+		return result;
 	}
+	
 	public int delete(int t_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -340,5 +342,33 @@ public class TravelDao {
 			if(pstmt != null) pstmt.close();
 		}
 		return result; 
+	}
+	
+	public int getMaxT_restep(int t_ref) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql 	 = "select nvl(max(t_restep), 0) from travel_board where t_ref=? and t_relevel=1";
+		
+		int result = 0;
+		
+		try {
+			conn 	= getConnection();
+			pstmt	= conn.prepareStatement(sql);
+			pstmt.setInt(1, t_ref);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				result = rs.getInt(1) + 1;
+			}
+			System.out.println("getMaxNum t_restep====>" + result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(conn != null) conn.close();
+			if(pstmt != null) pstmt.close();
+			if(rs != null) rs.close();
+		}
+		return result;
 	}
 }

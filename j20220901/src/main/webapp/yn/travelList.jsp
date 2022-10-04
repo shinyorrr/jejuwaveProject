@@ -26,8 +26,8 @@ String context = request.getContextPath();
 	style="background-image: url('yn_images/travelerList_cate.jpg'); background-size: cover; ">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
 		<div class="text-center text-white">
-			<h3 class="display-5 fw-bolder">동행자게시판</h3>
-			<p class="lead fw-normal text-white-50 mb-0">함께해요 제주</p>
+			<h3 class="display-5 fw-bolder">동행자 게시판</h3>
+			<p class="lead fw-normal text-white-40 mb-0">동행과 함께하는 제주</p>
 		</div>
 	</div>
 </header>
@@ -147,7 +147,7 @@ String context = request.getContextPath();
 												<c:if test="" var="commCnt"></c:if>
 												<span id="comment"> <img
 													style="width: 16px; height: 16px; margin: 0 5px;"
-													src="yn_images/comm_icon.png">11
+													src="yn_images/comm_icon.png">${travel.reply_cnt}
 												</span>
 											</p>
 										</div>

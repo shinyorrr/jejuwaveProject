@@ -17,7 +17,8 @@ String context = request.getContextPath();
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet">
 <!-- main css -->
-<link rel="stylesheet" href="css/header_main.css">
+	<link rel="stylesheet" id="chacss" href="css/header_main.css">
+
 <!-- Bootstrap CSS -->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -41,6 +42,12 @@ String context = request.getContextPath();
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/index.js" defer="defer"></script>
+<script type="text/javascript">
+function chk() {
+	location.href='<%=context%>/commuList.do';
+	$('.cFXvdf').reomveClass('cFXvdf')
+}
+</script>
 </head>
 <body>
 	<header id="header" class="Headers_HeaderMainHeader burgkU">
@@ -49,7 +56,7 @@ String context = request.getContextPath();
 				<div class="Headers_HeaderTopInnerDiv cMXtHR">
 					<img src="images/brand_logo.png" alt="logo"
 						class="WebHeader_LogoImg hsELiP"
-						onClick="location.href='<%=context %>/main.do'">
+						onClick="location.href='<%=context%>/main.do'">
 				</div>
 				<div class="Headers__HeaderTopInnerDiv-sc-1la7hl4-3 dnYUeR">
 					<div class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
@@ -69,7 +76,7 @@ String context = request.getContextPath();
 								class="Button__ButtonStyle-sc-1vcxcg6-1 jRRCxU">
 								<a href="<%=context%>/joinForm.do ">회원가입</a>
 							</button>
-						</div>						
+						</div>
 					</c:if>
 					<!-- 로그인 상태 -->
 					<c:if test="${user_id !=null }">
@@ -95,7 +102,7 @@ String context = request.getContextPath();
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 											<c:if test="${img != null }">
-												<img src="<%=context %>${img}"
+												<img src="<%=context %>/${img}"
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 										</div>
@@ -119,13 +126,13 @@ String context = request.getContextPath();
 					<button width="100px" height="40px" font-style="" type="button"
 						class="ButtonStyle kRVxKH">글쓰기</button>
 					<div class="Popups__HeaderWritePopupDiv cymdDn">
-						<button onClick="location.href='content.do'"
+						<button onClick="location.href='<%=context%>/travelWrite.do'"
 							class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHljB">
 							<img src="images/letter_color.svg" alt="이미지"
 								style="width: 33px; height: 24px;">
 							<p>여행친구 찾기</p>
 						</button>
-						<button onclick="location.href='qnaWriteForm.do'"
+						<button onclick="location.href='<%=context%>/qnaWriteForm.do'"
 							class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHlmB">
 							<img src="images/magnifier_color.svg" alt="이미지"
 								style="width: 33px; height: 24px;">
@@ -141,14 +148,13 @@ String context = request.getContextPath();
 				onClick="location.href='<%=context%>/main.do'">홈</button>
 			<button width="auto" font-size="16px" font-weight="400"
 				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdv"
-				onClick="location.href='.do'">동행</button>
+				onClick="location.href='<%=context%>/travelListForm.do'">동행</button>
 			<button width="auto" font-size="16px" font-weight="400"
 				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdc"
-				onClick="location.href='<%=context %>/qnaList.do'">Q&amp;A</button>
+				onClick="location.href='<%=context%>/qnaList.do'">Q&amp;A</button>
 			<button width="auto" font-size="16px" font-weight="400"
 				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdf"
-				onClick="location.href='<%=context%>/commuList.do'">여행 기록</button>
-		</div>
+				onClick="chk()">여행 기록</button>
 		</div>
 	</header>
 </body>

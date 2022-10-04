@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -106,142 +109,104 @@ String context = request.getContextPath();
 </head>
 <body>
 	<div class="wrapper">
-		<!-- Section-->
+		<!-- Main 이미지 -->
 		<main class="main_page">
 			<div class="magin_image_box mibox">
 				<img class="main_img" src="images/main.jpg">
 			</div>
+			<!-- Section-->
 			<section class="py-1">
-				<div class="container px-4 px-lg-5 mt-5">
+				<div class="container px-4 px-lg-5 mt-3">
+
 					<div
 						class="row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
+						<c:if test="${totCnt > 0}">
+							<c:forEach var="travel" items="${travelList}">
+								<c:if test="${travel.t_relevel == 0}">
 
-						<div class="col mb-5">
-							<div class="card h-70">
-								<!-- Content image-->
-								<div id="pic">
-									<img class="card-img-top" src="images/jeju01.jpg" alt="..." />
-								</div>
-								<!-- Content details-->
-								<div class="card-body p-4">
-									<div class="text-left">
-										<!-- Content text-->
-										<p class="fw-bolder" id="title">
-											<b style="color: #ff3500;">모집중</b>&nbsp&nbsp제주도 동행 구해요~ 15일날
-											애월에서 서핑해요
-										</p>
-										<p id="content">남2 여1 동행하려고 대기중입니다. 다들 초면이고 여성분은 혼자셔서 이왕이면
-											여성분끼리 어울릴수 있게 되었으면 해서 같이 동행하실 여성분 있으실까 해서 글 올려봅니다.</p>
-										<p id="IdComment">
-											<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
-												src="images/tangerine.png">kk2k2 <span id="comment"><img
-												style="width: 16px; height: 16px;"
-												src="images/comm_icon.png">11</span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
+									<div class="col mb-5">
+										<div class="card h-70" style="cursor: pointer;"
+											onclick="location.href='travelContent.do?t_num=${travel.t_num}&pageNum=${currentPage}';">
 
-						<div class="col mb-5">
-							<div class="card h-70">
-								<!-- Content image-->
-								<div id="pic">
-									<img class="card-img-top" src="images/jeju02.jpg" alt="..." />
-								</div>
-								<!-- Content details-->
-								<div class="card-body p-4">
-									<div class="text-left">
-										<!-- Content text-->
-										<p class="fw-bolder" id="title">
-											<b style="color: #ff3500;">모집중</b>&nbsp&nbsp제주도 동행 구해요~ 15일날
-											애월에서 서핑해요
-										</p>
-										<p id="content">남2 여1 동행하려고 대기중입니다. 다들 초면이고 여성분은 혼자셔서 이왕이면
-											여성분끼리 어울릴수 있게 되었으면 해서 같이 동행하실 여성분 있으실까 해서 글 올려봅니다.</p>
-										<p id="IdComment">
-											<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
-												src="images/tangerine.png">kk2k2 <span id="comment"><img
-												style="width: 16px; height: 16px;"
-												src="images/comm_icon.png">11</span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
 
-						<div class="col mb-5">
-							<div class="card h-70">
-								<!-- Content image-->
-								<div id="pic">
-									<img class="card-img-top" src="images/jeju03.jpg" alt="..." />
-								</div>
-								<!-- Content details-->
-								<div class="card-body p-4">
-									<div class="text-left">
-										<!-- Content text-->
-										<p class="fw-bolder" id="title">
-											<b style="color: #ff3500;">모집중</b>&nbsp&nbsp제주도 동행 구해요~ 15일날
-											애월에서 서핑해요
-										</p>
-										<p id="content">남2 여1 동행하려고 대기중입니다. 다들 초면이고 여성분은 혼자셔서 이왕이면
-											여성분끼리 어울릴수 있게 되었으면 해서 같이 동행하실 여성분 있으실까 해서 글 올려봅니다.</p>
-										<p id="IdComment">
-											<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
-												src="images/tangerine.png">kk2k2 <span id="comment"><img
-												style="width: 16px; height: 16px;"
-												src="images/comm_icon.png">11</span>
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
+											<!-- Content 이미지-->
+											<div id="pic">
 
-						<div class="col mb-5">
-							<div class="card h-70">
-								<!-- Content image-->
-								<div id="pic">
-									<img class="card-img-top" src="images/jeju04.jpg" alt="..." />
-								</div>
-								<!-- Content details-->
-								<div class="card-body p-4">
-									<div class="text-left">
-										<!-- Content text-->
-										<p class="fw-bolder" id="title">
-											<b style="color: #ff3500;">모집중</b>&nbsp&nbsp제주도 동행 구해요~ 15일날
-											애월에서 서핑해요
-										</p>
-										<p id="content">남2 여1 동행하려고 대기중입니다. 다들 초면이고 여성분은 혼자셔서 이왕이면
-											여성분끼리 어울릴수 있게 되었으면 해서 같이 동행하실 여성분 있으실까 해서 글 올려봅니다.</p>
-										<p id="IdComment">
-											<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
-												src="images/tangerine.png">kk2k2 <span id="comment"><img
-												style="width: 16px; height: 16px;"
-												src="images/comm_icon.png">11</span>
-										</p>
+												<img src="<%=context %>${travel.t_img}"
+													class="card-img-top" />
+
+											</div>
+
+
+											<!-- Content details-->
+											<div class="card-body p-4">
+												<div class="text-left">
+													<!-- Content text-->
+													<p class="fw-bolder" id="title">
+														<c:choose>
+															<c:when test="${travel.t_dealstatus == 0}">
+																<b style="color: #ff3500; width: 64px;">모집중</b>&nbsp&nbsp
+												</c:when>
+															<c:otherwise>
+																<b style="color: #A6A6A6; width: 64px;">모집완료</b>&nbsp&nbsp
+												</c:otherwise>
+														</c:choose>
+
+
+														<!-- 제목 짜르기 -->
+														<span> <c:choose>
+																<c:when test="${fn:length(travel.t_title) > 12}">
+																	<c:out value="${fn:substring(travel.t_title,0,11)}" />...
+												</c:when>
+																<c:otherwise>
+																	<c:out value="${travel.t_title}" />
+																</c:otherwise>
+															</c:choose>
+														</span>
+													</p>
+
+													<!-- 본문 짜르기 -->
+
+													<p id="content">
+														<c:choose>
+															<c:when test="${fn:length(travel.t_content) > 35}">
+																<c:out value="${fn:substring(travel.t_content,0,34)}" />...
+												</c:when>
+															<c:otherwise>
+																<c:out value="${travel.t_content}" />
+															</c:otherwise>
+														</c:choose>
+													</p>
+
+													<p id="IdComment">
+														<img src="yn_images/user_icon01.png" width="20"
+															height="20" style="margin: 0 5px 6px 0;"
+															class="userIconColor-1 rounded-circle me-2  align-center ">
+														${travel.user_id}
+
+														<!-- 댓글개수 -->
+
+														<c:if test="" var="commCnt"></c:if>
+														<span id="comment"> <img
+															style="width: 16px; height: 16px; margin: 0 5px;"
+															src="yn_images/comm_icon.png">11
+														</span>
+													</p>
+												</div>
+											</div>
+										</div>
 									</div>
-								</div>
-							</div>
-						</div>
+
+								</c:if>
+								<c:set var="startNum" value="${startNum -1}" />
+							</c:forEach>
+						</c:if>
 					</div>
 					<!-- paging section-->
-					<nav aria-label="Page navigation example"
-						class="d-flex justify-content-center">
-						<ul class="pagination">
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-							</a></li>
-							<li class="page-item"><a class="page-link" href="#">1</a></li>
-							<li class="page-item"><a class="page-link" href="#">2</a></li>
-							<li class="page-item"><a class="page-link" href="#">3</a></li>
-							<li class="page-item"><a class="page-link" href="#"
-								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-							</a></li>
-						</ul>
-					</nav>
+
 				</div>
-				<!-- Notice board section -->
 			</section>
+			<!-- Notice board section -->
 			<section class="board">
 				<div class="board_content">
 					<div class="board_title"
@@ -252,17 +217,35 @@ String context = request.getContextPath();
 						<div class="content_first">
 							<!-- Content text-->
 							<p class="" id="">
-								<b style="color: #ff3500;">${b_title}</b>
+								<b style="color: #ff3500;"><a href="<%=context %>qnaWriteCheck.do">
+								<c:choose>
+									<c:when test="${fn:length(board.b_title) > 40}">
+										<c:out value="${fn:substring(board.b_title,0,39)}" />...
+									</c:when>
+									<c:otherwise>
+										<c:out value="${board.b_title}"/>
+									</c:otherwise>
+								</c:choose>
+								</a></b>
 							</p>
-							<p>${b_content}</p>
+							<p>
+								<c:choose>
+									<c:when test="${fn:length(board.b_content) > 40 }">
+										<c:out value="${fn:substring(board.b_content,0,39)}" />...
+								</c:when>
+									<c:otherwise>
+										<c:out value="${board.b_content}" />
+									</c:otherwise>
+								</c:choose>
+							</p>
 							<p id="IdComment">
 								<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
-									src="images/tangerine.png">{user_id}
+									src="images/tangerine.png">${board.user_id}
 							</p>
 						</div>
 					</c:forEach>
 				</div>
-
+				<!-- 날씨 API -->
 				<div class="weather">
 					<div
 						style="font-weight: bold; position: relative; width: 33%; padding-top: 15px;">
@@ -275,7 +258,7 @@ String context = request.getContextPath();
 					</div>
 					<div class="week" id="weather_result"
 						style="display: flex; justify-content: space-between; width: 90%; min-height: 255px; align-items: center; padding-right: 10px;">
-						<span style="position: relative; padding: 10px 0px 200px 60px;">주간
+						<span style="position: relative; padding: 10px 0px 200px 60px; font-weight: bolder;">주간
 							날씨</span>
 					</div>
 				</div>

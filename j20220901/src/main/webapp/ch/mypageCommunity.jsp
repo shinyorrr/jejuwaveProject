@@ -28,7 +28,7 @@
 						<img class = "profile_img" src="<%=context%>/images/vector_profile_default.svg" style="vertical-align:middle;">
 						</c:if>
 						<c:if test="${img != null}">
-						<img class = "profile_img" src="<%=context%>${img}" style="vertical-align:middle;">
+						<img class = "profile_img" src="<%=context%>/${img}" style="vertical-align:middle;">
 						</c:if>
 						<span class = "user_id">	
 						<c:if test="${user_id != null}">
@@ -74,7 +74,7 @@
 						<c:if test="${ totCnt > 0}">
 							<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
-										<tr>
+										<tr style= " cursor: pointer" onclick="location.href='commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}';">
 											<td rowspan="3" width = 50>
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.c_img_path }" width = "120px" padding-bottom = 10px>
@@ -119,7 +119,7 @@
 		</div>
 				<div style="padding-left : 62%;">
 				<c:if test="${startPage > 1 }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommunity.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -130,7 +130,7 @@
 						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommunity.do?pageNum=${i }'" 
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -141,7 +141,7 @@
 						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommunity.do=${startPage+1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -155,7 +155,7 @@
 	</div>
 </main>
 </div>
-<footer class="py-5 bg-dark" style="top: 125%;">
+<footer class="py-5 bg-dark" style="top: 180%;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
 				Website 2022</p>
