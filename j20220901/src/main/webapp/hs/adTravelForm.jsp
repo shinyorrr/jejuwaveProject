@@ -74,7 +74,7 @@
 			  				<fmt:parseDate value="${travel.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
 			  				<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
 			  				</td>
-			  				<td width="100"><input type="submit" value="삭제"></td>
+			  				<td width="100"><input type="submit" value="삭제" onclick="location.href='<%=context%>/adTravelDelete.do?t_num=${travel.t_num}&pageNum=${pageNum}'"></td>
 			  			</tr>
 			  			<c:set var="startNum" value="${startNum - 1}"></c:set>
 			  		</c:forEach>
