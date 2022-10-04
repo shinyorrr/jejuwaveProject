@@ -1,12 +1,13 @@
 @charset "UTF-8";
 
 	.mb-3 input{
-		background-image: url("images/q.png");
+		
 		background-repeat: no-repeat;
 		background-size: 30px;
-		background-position: 10px center;
-		text-indent: 50px;
+		background-position: 15px center;
+		text-indent: 45px;
 	}
+		
 
 	.tag{
 	 	width:1050px;

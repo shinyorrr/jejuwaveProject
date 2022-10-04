@@ -94,11 +94,7 @@ String context = request.getContextPath();
 				onclick="location.href='qnaDelete.do?b_num=${board.b_num}'">삭제</button>
 		</p>
 
-
-
-
-
-		
+	
 		<!-- 댓글 등록 -->
 		<div class="content" >
 				<form action="qnaCommentWrite.do" style="width: 2000px">
