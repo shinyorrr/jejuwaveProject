@@ -51,8 +51,8 @@
 			  		<td>${member.user_id}</td>
 			  		<td>${member.user_pw}</td>
 			  		<td>${member.user_name}</td>
-			  		<td>0</td>
-			  		<td>0</td>
+			  		<td>${member.board_count}</td>
+			  		<td>${member.comment_count}</td>
 			  		<td>${member.user_gubun}</td>
 			  		<td><input type="button" value="수정" onclick="location.href='<%=context%>/adMemUpdateForm.do?user_id=${member.user_id}&pageNum=${pageNum}'"></td>
 			  	</tr>

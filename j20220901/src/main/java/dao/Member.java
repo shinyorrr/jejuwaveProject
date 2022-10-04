@@ -14,6 +14,23 @@ public class Member {
 	private int user_gubun;
 	private String user_img;
 	
+	//조회용
+	private int board_count;
+	private int comment_count;
+	
+	public int getBoard_count() {
+		return board_count;
+	}
+	public void setBoard_count(int board_count) {
+		this.board_count = board_count;
+	}
+	public int getComment_count() {
+		return comment_count;
+	}
+	public void setComment_count(int comment_count) {
+		this.comment_count = comment_count;
+	}
+	
 	public String getUser_id() {
 		return user_id;
 	}
