@@ -97,7 +97,7 @@
 		</div>
 			<div style="padding-left : 62%;">
 				<c:if test="${startPage > 1 }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -108,7 +108,7 @@
 						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do?pageNum=${i }'" 
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -119,7 +119,7 @@
 						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do=${startPage+1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;

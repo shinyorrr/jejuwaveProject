@@ -108,24 +108,29 @@ public class MypageDao {
 			pstmt.setInt(2, startRow);
 			pstmt.setInt(3, endRow);
 			rs = pstmt.executeQuery();
+			
 			while(rs.next()) {
 				Mypage mypage = new Mypage();
-				mypage.setT_num(rs.getInt("t_num"));
-				mypage.setT_img(rs.getString("t_img"));
-				mypage.setUser_id(rs.getString("user_id"));
-				mypage.setT_title(rs.getString("t_title"));
-				mypage.setT_content(rs.getString("t_content"));
-				mypage.setT_gubun(rs.getString("t_gubun"));
-				mypage.setT_date(rs.getDate("t_date"));
-				mypage.setT_person(rs.getInt("t_person"));
-				mypage.setT_start(rs.getDate("t_start"));
-				mypage.setT_end(rs.getDate("t_end"));
-				mypage.setT_dealstatus(rs.getString("t_dealstatus"));
+				
+				mypage.setT_num			(rs.getInt("t_num"));
+				mypage.setT_img			(rs.getString("t_img"));
+				mypage.setUser_id		(rs.getString("user_id"));
+				mypage.setT_title		(rs.getString("t_title"));
+				mypage.setT_content		(rs.getString("t_content"));
+				mypage.setT_gubun		(rs.getString("t_gubun"));
+				mypage.setT_date		(rs.getDate("t_date"));
+				mypage.setT_person		(rs.getInt("t_person"));
+				mypage.setT_start		(rs.getDate("t_start"));
+				mypage.setT_end			(rs.getDate("t_end"));
+				mypage.setT_dealstatus	(rs.getString("t_dealstatus"));
+				
 				list.add(mypage);
 			}
 			System.out.println("list 값 찾기 :" + list);
+			
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
+			
 		} finally {
 			if(rs != null) rs.close();
 			if(pstmt != null) pstmt.close();
@@ -300,7 +305,7 @@ public class MypageDao {
 		List<Mypage> list = new ArrayList<Mypage>();
 		String sql = "select * from (\r\n"
 				+ "                select rownum rn, a.* from "
-				+ "                    (select t_content, t_date, b_content,b_date "
+				+ "                    (select t_num, t_content, t_date, b_num, b_content,b_date "
 				+ "                    from qna_board q, travel_board t "
 				+ "                    where q.user_id = t.user_id "
 				+ "                    and q.user_id = ? "
@@ -323,6 +328,8 @@ public class MypageDao {
 			
 			do{
 				Mypage mypage = new Mypage();
+				mypage.setB_num(rs.getInt("b_num"));
+				mypage.setT_num(rs.getInt("t_num"));
 				mypage.setT_content(rs.getString("t_content"));
 				mypage.setT_date(rs.getDate("t_date"));
 				mypage.setB_content(rs.getString("b_content"));
