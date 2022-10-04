@@ -161,6 +161,7 @@ public class AdminDao {
 					m.setBoard_count(rs.getInt("board_count"));
 					m.setComment_count(rs.getInt("comment_count"));
 					list.add(m);
+					
 				}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -274,7 +275,7 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * "
-					+ "		from (select rownum rn, a.* from (select * from travel_board order by t_ref desc, t_restep) a) "
+					+ "		from (select rownum rn, a.*, reply_cnt(a.t_ref) reply_cnt from (select * from travel_board order by t_ref desc, t_restep) a) "
 					+ "where rn between ? and ?";
 		System.out.println("Dao travelList sql->"+sql);
 		try {
@@ -301,6 +302,7 @@ public class AdminDao {
 				t.setT_ref(rs.getInt("t_ref"));
 				t.setT_relevel(rs.getInt("t_relevel"));
 				t.setT_restep(rs.getInt("t_restep"));
+				t.setReply_cnt(rs.getInt("reply_cnt"));
 				list.add(t);
 			}
 		} catch (Exception e) {
@@ -312,6 +314,7 @@ public class AdminDao {
 		}
 		return list;
 	}
+	
 	
 	// QnA 게시판
 	public List<Qna_Board> qnaList(int startRow, int endRow) throws SQLException {
@@ -355,9 +358,7 @@ public class AdminDao {
 	public List<Qna_Comment> qnaComList(int b_num) throws SQLException {
 		List<Qna_Comment> list = new ArrayList<Qna_Comment>();
 		Connection conn = null;
-		String sql = "select b.b_num, c.com_num, c.user_id, c.com_date, c.com_content"
-				+ " from qna_board b, qna_comment c"
-				+ " where b.b_num=c.com_num and com_num=?";
+		String sql = "select * from qna_comment where b_num = ?";
 		System.out.println("Dao qnaComList sql->"+sql);
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -372,8 +373,8 @@ public class AdminDao {
 				qc.setB_num(rs.getInt("b_num"));
 				qc.setCom_num(rs.getInt("com_num"));
 				qc.setUser_id(rs.getString("user_id"));
-				qc.setCom_content(rs.getString("com_content"));
 				qc.setCom_date(rs.getDate("com_date"));
+				qc.setCom_content(rs.getString("com_content"));
 				list.add(qc);
 			}
 		} catch (Exception e) {
@@ -423,4 +424,93 @@ public class AdminDao {
 		}
 		return list;
 	}
+	
+	// 동행자 게시글 댓글 삭제
+	public int travelDelete(int t_num) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt= null;
+		String sql = "delete from travel_board where t_num=?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, t_num);
+			result = pstmt.executeUpdate();
+			if(result > 0) result = 1;
+			else result = 0;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return result;
+	}
+	//회원 커뮤니티 게시글 삭제
+	public int commuDelete(int c_num) throws SQLException {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from community where c_num=?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c_num);
+			result = pstmt.executeUpdate();
+			if(result > 0) result = 1;
+			else result = 0;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
+		}
+		return result;
+	}
+	
+	// Qna 게시글 삭제
+	public int qnaDelete(int b_num) throws SQLException {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delect from qna_board where b_num=?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			result = pstmt.executeUpdate();
+			if(result > 0) result = 1;
+			else result = 0;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
+		}
+		return result;
+	}
+	
+	public int qnaComDelete(int b_num, int com_num) throws SQLException {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete from qna_comment where b_num=? and com_num=?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			pstmt.setInt(2, com_num);
+			result = pstmt.executeUpdate();
+			if(result > 0) result = 1;
+			else result = 0;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
+		}
+		return result;
+	}
+	
 }
