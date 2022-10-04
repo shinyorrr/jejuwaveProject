@@ -51,7 +51,7 @@
 	<div class="gubun">
 		<div>
 			<br> <br> <span class="wait">상태</span> <span
-				class="fw-bold me-2">답변대기</span> <span class="wait">테마</span> <span
+				class="fw-bold me-2">${board.b_success }</span> <span class="wait">테마</span> <span
 				class="fw-bold me-2">${board.b_theme }</span>
 		</div>
 	</div>
@@ -62,9 +62,10 @@
 		</div>
 		<div class="tag1">
 			<div class="btn-group btn-group-sm" role="group" aria-label="..." style="margin-bottom: 6px;">
-				<button type="button" class="btn btn-outline-secondary">#액티비티</button>
-				<button type="button" class="btn btn-outline-secondary">#여행지추천</button>
-				<button type="button" class="btn btn-outline-secondary">#20대</button>
+				<span class="hash">#${board.l_hash1}</span> 
+			<span class="hash">#${board.l_hash2}</span>
+			<span class="hash">#${board.l_hash3}</span>
+			
 			</div>
              <p class="button7">
 				${board.b_date} &nbsp;&nbsp;
