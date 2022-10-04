@@ -17,7 +17,9 @@ String context = request.getContextPath();
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet">
 <!-- main css -->
-	<link rel="stylesheet" id="chacss" href="css/header_main.css">
+
+<link rel="stylesheet" href="../css/header_main.css">
+
 
 <!-- Bootstrap CSS -->
 <link
@@ -40,8 +42,10 @@ String context = request.getContextPath();
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Core theme JS-->
+
 <script src="js/index.js" defer="defer"></script>
+
+
 </head>
 <body>
 	<header id="header" class="Headers_HeaderMainHeader burgkU">

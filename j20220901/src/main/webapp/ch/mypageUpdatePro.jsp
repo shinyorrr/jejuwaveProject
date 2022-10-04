@@ -10,12 +10,13 @@
 <body>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
-			alert("성공")
+			location.href = "mypageUpdate.do"
 		</script>
 	</c:if>
 	<c:if test="${result > 0 }">
 		<script type="text/javascript">
 			alert("실패")
+			history.back();
 		</script>
 	</c:if>
 </body>

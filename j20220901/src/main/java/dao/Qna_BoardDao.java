@@ -172,7 +172,7 @@ public class Qna_BoardDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, number);
-			// 慣         煞  玖 //////////////////////////////////
+      
 			//pstmt.setString(2, board.getUser_id());
 			pstmt.setString(2, board.getB_title());
 			pstmt.setString(3, board.getB_content());
@@ -248,12 +248,43 @@ public class Qna_BoardDao {
 		
 	}
 	
-	
-	
-	
-	
+	/* main화면 QnA list*/
+		public List<Qna_Board> mainbdlist(int startRow, int endRow) throws SQLException {
+		List<Qna_Board> list = new ArrayList<Qna_Board>();
+		Connection conn = null;	
+		PreparedStatement pstmt= null;
+		ResultSet rs = null;
+		 String sql = "select *"
+				 	+ "from (select rownum rn, a.*"
+				 	+ "from (select * from qna_board order by b_num desc) a)"
+				 	+ "where rn between ? and ?";
+		 
+		 System.out.println("mainbdlist startRow ->"+startRow);
+		 System.out.println("mainbdlist endRow ->"+endRow);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Qna_Board board = new Qna_Board();
+				board.setB_num(rs.getInt("b_num"));
+				board.setUser_id(rs.getString("user_id"));
+				board.setB_title(rs.getString("b_title"));
+				board.setB_content(rs.getString("b_content"));
+				board.setB_date(rs.getDate("b_date"));
+				list.add(board);
+			}
+		} catch(Exception e) {	
+			System.out.println(e.getMessage()); 
+		} finally {
+			if (rs !=null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn !=null) conn.close();
+		} 
+		return list;
+	}
 
-	
-	
 	
 }

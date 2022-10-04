@@ -217,7 +217,7 @@ String context = request.getContextPath();
 						<div class="content_first">
 							<!-- Content text-->
 							<p class="" id="">
-								<b style="color: #ff3500;">
+								<b style="color: #ff3500;"><a href="<%=context %>qnaWriteCheck.do">
 								<c:choose>
 									<c:when test="${fn:length(board.b_title) > 40}">
 										<c:out value="${fn:substring(board.b_title,0,39)}" />...
@@ -226,7 +226,7 @@ String context = request.getContextPath();
 										<c:out value="${board.b_title}"/>
 									</c:otherwise>
 								</c:choose>
-								</b>
+								</a></b>
 							</p>
 							<p>
 								<c:choose>
@@ -240,7 +240,7 @@ String context = request.getContextPath();
 							</p>
 							<p id="IdComment">
 								<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
-									src="images/tangerine.png">{board.user_id}
+									src="images/tangerine.png">${board.user_id}
 							</p>
 						</div>
 					</c:forEach>
@@ -258,7 +258,7 @@ String context = request.getContextPath();
 					</div>
 					<div class="week" id="weather_result"
 						style="display: flex; justify-content: space-between; width: 90%; min-height: 255px; align-items: center; padding-right: 10px;">
-						<span style="position: relative; padding: 10px 0px 200px 60px;">주간
+						<span style="position: relative; padding: 10px 0px 200px 60px; font-weight: bolder;">주간
 							날씨</span>
 					</div>
 				</div>
