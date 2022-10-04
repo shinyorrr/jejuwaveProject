@@ -27,7 +27,14 @@
 	<div style="margin-bottom: 400px" class="main">
 		<table class="mainTable">
 			<c:forEach var="board" items="${list}">
-				<th >${board.b_success}</th>
+				<th >			
+					<c:if test="${board.b_success eq '채택완료' }">
+					 	<span style="color: red;">${board.b_success }</span>
+					</c:if>
+					<c:if test="${board.b_success ne '채택완료' }">
+					 	<span>${board.b_success }</span>
+					</c:if> 
+				</th>
 				<th><a href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_title}</a></th>
 				<th><a href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_content }</a></th>
 				<tr class="last">

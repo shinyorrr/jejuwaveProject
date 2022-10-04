@@ -55,7 +55,7 @@ public class Qna_BoardDao {
 		return tot;
 	}
 
-	//hj qna hash 추가 수정 -----------------------------------------------------------------	
+	//hj qna hash 異붽� �닔�젙 -----------------------------------------------------------------	
 	public List<Qna_Board> getBoardList() throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
 		Connection conn = null;	
@@ -99,7 +99,7 @@ public class Qna_BoardDao {
 	}
 	
 	
-	//현지 추가 수정 -----------------------------------------------------------------	
+	//�쁽吏� 異붽� �닔�젙 -----------------------------------------------------------------	
 	
 	public Qna_Board select(int b_num) throws SQLException {
 		Connection conn = null;	
@@ -167,7 +167,7 @@ public class Qna_BoardDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, number);
-
+      
 			//pstmt.setString(2, board.getUser_id());
 			pstmt.setString(2, board.getB_title());
 			pstmt.setString(3, board.getB_content());
