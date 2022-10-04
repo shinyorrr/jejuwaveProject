@@ -2,25 +2,22 @@
 body {
   padding-top: 140px;
 }
-@font-face{
-    font-family : 'NotoSansKR-Regular';
-    src : url('../fonts/NotoSansKR-Regular.otf') format('otf');
-    src : url('../fonts/NotoSansKR-Regular.woff') format('woff');
-    font-weight : normal;
-    font-style : normal;
-}
+
 
 /* 폰트 등록 */
 @font-face{
     font-family : 'NotoSansKR-Regular';
-    src : url('../fonts/NotoSansKR-Regular.ttf') format('ttf'), url('../fonts/NotoSansKR-Regular.woff') format('woff');
+    src : url('../fonts/NotoSansKR-Regular.otf') format('otf');
+    src : url('../fonts/NotoSansKR-Regular.woff') format('woff');
+    src : url('../fonts/NotoSansKR-Regular.ttf') format('ttf');
     font-weight : normal;
     font-style : normal;
 }
 
 @font-face{
     font-family : 'NotoSansKR-Medium';
-    src : url('../fonts/NotoSansKR-Medium..ttf') format('ttf'), url('../fonts/NotoSansKR-Medium..woff') format('woff');
+    src : url('../fonts/NotoSansKR-Medium.ttf') format('ttf'); 
+    src : url('../fonts/NotoSansKR-Medium.woff') format('woff');
     font-weight : normal;
     font-style : normal;
 }
@@ -46,16 +43,17 @@ body{
 #trCommBtn {
 	height:34px;
 	width:131px;
-	background: #ff3500;
+	background-color: #FF3500;
 	color: white;
 	font-size: 14px;
 	border-radius: 20px;
 	
 }
 #commInsBtn {
-	background: #ff3500;
+	background-color: #FF3500;
 	color: white;
 	font-size: 14px;
+	border-right:none;
 }
 
 .fontColorGrey {
@@ -64,6 +62,11 @@ body{
 .fontSize-14{
 	font-size:14px;
 }
+.fontSize-12{
+	font-size:small;
+}
+
+
 .floatLL{
 	float:left;
 }
