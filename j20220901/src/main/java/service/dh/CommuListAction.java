@@ -39,6 +39,10 @@ public class CommuListAction implements CommandProcess {
 				endPage = pageCnt;
 			}
 			
+			//img list select dao 요청
+			List<Commu.CommuImg> imgList = cd.CommuListImg(startRow , endRow);
+			
+			//set commu list
 			request.setAttribute("list"        , list);
 			request.setAttribute("totCnt"      , totCnt);
 			request.setAttribute("pageNum"     , pageNum);
@@ -48,6 +52,9 @@ public class CommuListAction implements CommandProcess {
 			request.setAttribute("startPage"   , startPage);
 			request.setAttribute("endPage"     , endPage);
 			System.out.println("list ->" + list);
+			//set commu imgList
+			request.setAttribute("imgList", imgList);
+			System.out.println("imgList" + imgList);
 			
 		} catch (Exception e) {
 			System.out.println("commuListAction try ..." + e.getMessage());

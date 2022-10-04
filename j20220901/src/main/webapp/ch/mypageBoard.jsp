@@ -9,7 +9,7 @@
 <%
    String context = request.getContextPath();
 %>
-<c:import url="${context}/headerLogin.jsp"></c:import>
+<c:import url="${context}/header.jsp"></c:import>
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageTraveler.css?after">
 </head>
@@ -93,23 +93,49 @@
 				</table>
 				</div>
 			</div>
-			<div style="padding-left : 43.5%;">
-		<c:if test="${startPage > blockSize }">
-			<a href = '<%=context%>/mypageTraveler.do?pageNum=${startPage-blockSize }'>[이전]</a>
-		</c:if>
-		<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-			<a href='<%=context%>/mypageTraveler.do?pageNum=${i }'>[${i }]</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCnt }">
-			<a href ='<%=context%>/mypageTraveler.do=${startPage+blockSize }'>[다음]</a>
-		</c:if>
+			<div style="padding-left : 62%;">
+				<c:if test="${startPage > 1 }">
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">이전</button>
+				</c:if>
+				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">${i }</button>
+				</c:forEach>
+				<c:if test="${endPage < pageCnt }">
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						style ="
+					    border: #eeee 2px solid;
+					    background-color: white;
+					    color: black;
+					    padding: 10px 10px;
+					    margin:3px;
+					    font: bold 12px tahoma;
+						">[다음]</button>
+				</c:if>
+			</div>
 		</div>
 </main>
-<footer class="py-5 bg-dark" style="margin-top: 100px;">
+<footer class="py-5 bg-dark" style="top: 125%;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
 				Website 2022</p>
 		</div>
 </footer>
 </body>
+
 </html>

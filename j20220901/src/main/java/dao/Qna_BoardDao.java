@@ -54,6 +54,7 @@ public class Qna_BoardDao {
 		}
 		return tot;
 	}
+
 	//hj qna hash 추가 수정 -----------------------------------------------------------------	
 	public List<Qna_Board> getBoardList() throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
@@ -237,35 +238,7 @@ public class Qna_BoardDao {
 	
 	
 	
-	
-	/* �����Ұ� *////////////////////////////
 
-
-
-	
-
-//	
-//	public void readCount(int num) throws SQLException {
-//		Connection conn = null;	
-//		PreparedStatement pstmt = null;
-//		String sql = "update board set readcount=readcount+1 where num=?";
-//		Board board = new Board();
-//		
-//		try {
-//			conn = getConnection();
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, num);
-//			pstmt.executeUpdate();
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally {
-//			if (pstmt != null) pstmt.close();
-//			if (conn !=null) conn.close();
-//		}	
-//	}
-	
 	
 	
 	

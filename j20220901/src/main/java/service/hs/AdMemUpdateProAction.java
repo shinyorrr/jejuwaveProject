@@ -36,7 +36,7 @@ public class AdMemUpdateProAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "adMemUpdatePro.jsp";
+		return "hs/adMemUpdatePro.jsp";
 	}
 
 }

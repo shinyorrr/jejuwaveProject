@@ -1,28 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:import url="${context}/headerLogin.jsp"></c:import>
-<link rel="stylesheet" href="css/adminStyle.css">
+<%
+   String context = request.getContextPath();
+%>
+<c:import url="${context}/hs/headerLogin.jsp"></c:import>
+<link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
 	<!-- 네비게이션메뉴바 -->
 	<nav id="nav" class="nav">
 	<!-- 프로필 이미지 -->
 		<div class="card" id="cardpro">
-		  <img src="hs_images/adminpro.png" class="card-img-top" alt="...">
+		  <img src="<%=context%>/hs_images/adminpro.png" class="card-img-top" alt="...">
 		  <div class="card-body">
 		    <h5 class="card-title">Admin</h5>
 		    <p class="card-text">관리자입니다.</p>
 		  </div>
 		</div>
 		<div class="d-grid gap-2 col-6" id="navmenu">
-		  <button class="btn btn-primary" type="button" onclick="location.href='admain.do'">홈</button>
-		  <button class="btn btn-primary" type="button" onclick="location.href='adMemList.do'">회원 관리</button>
-		  <button class="btn btn-primary" type="button" onclick="location.href='adTravelForm.do'">동행자 찾기 관리</button>
-		  <button class="btn btn-primary" type="button" onclick="location.href='adQnaForm.do'">Q&A 게시판 관리</button>
-		  <button class="btn btn-primary" type="button" onclick="location.href='adCommuForm.do'">회원커뮤니티 관리</button>
+		  <button class="btn btn-primary" type="button" onclick="location.href='<%=context%>/admain.do'">홈</button>
+		  <button class="btn btn-primary" type="button" onclick="location.href='<%=context%>/adMemList.do'">회원 관리</button>
+		  <button class="btn btn-primary" type="button" onclick="location.href='<%=context%>/adTravelForm.do'">동행자 찾기 관리</button>
+		  <button class="btn btn-primary" type="button" onclick="location.href='<%=context%>/adQnaForm.do'">Q&A 게시판 관리</button>
+		  <button class="btn btn-primary" type="button" onclick="location.href='<%=context%>/adCommuForm.do'">회원커뮤니티 관리</button>
 		</div>
 	</nav>
 	
@@ -49,12 +51,11 @@
 			  		<td>${member.user_id}</td>
 			  		<td>${member.user_pw}</td>
 			  		<td>${member.user_name}</td>
-			  		<td>0</td>
-			  		<td>${commentCnt}</td>
+			  		<td>${member.board_count}</td>
+			  		<td>${member.comment_count}</td>
 			  		<td>${member.user_gubun}</td>
-			  		<td><input type="button" value="수정" onclick="location.href='adMemUpdateForm.do?user_id=${member.user_id}&pageNum=${pageNum}'"></td>
+			  		<td><input type="button" value="수정" onclick="location.href='<%=context%>/adMemUpdateForm.do?user_id=${member.user_id}&pageNum=${pageNum}'"></td>
 			  	</tr>
-			  	<%-- <c:set var="startNum" value="${startNum-1}"></c:set> --%>
 		  		</c:forEach>
 		  	</c:if>
 		  	<c:if test="${totCnt == 0}">
@@ -70,15 +71,15 @@
 		<nav class="pagenav" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${startPage > blockSize}">
-				<li class="page-item"><a class="page-link" href="adMemList.do?pageNum=${startPage-blocksize}">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${startPage-blocksize}">Previous</a></li>
 			</c:if>
 		    
 		    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<li class="page-item"><a class="page-link" href="adMemList.do?pageNum=${i}">[${i}]</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${i}">[${i}]</a></li>
 			</c:forEach>
 		    
 		    <c:if test="${endPage < pageCnt}">
-				 <li class="page-item"><a class="page-link" href="adMemList.do?pageNum=${startPage+blockSize }">Next</a></li>
+				 <li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${startPage+blockSize }">Next</a></li>
 			</c:if>
 		  </ul>
 		 </nav>	

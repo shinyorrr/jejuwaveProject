@@ -21,15 +21,17 @@ public class LoginOkAction implements CommandProcess {
 		try {
 			MypageDao my = MypageDao.getInstance();
 			String img = my.imageSelect(user_id);
+			System.out.println("LoginOkAction img session: " + img);
 			request.setAttribute("user_id", user_id);
 			request.setAttribute("img", img);
+			System.out.println("LoginOkAction : " + img);
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
 		String returnpage = null;
 		if(user_id != null) {
 			System.out.println("session"+ user_id);
-			returnpage = "mainLogin.jsp";
+			returnpage = "main.jsp";
 		} else returnpage = "ch/loginForm.jsp";
 		return returnpage;
 	}

@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<%
+   String context = request.getContextPath();
+%>
 <style type="text/css">
  	caption {
 	font-size: 24px;
@@ -23,8 +25,8 @@
 <script type="text/javascript" src="../js/jquery.js"></script>
 <script type="text/javascript">
 function winop() {
-	window.open("idCheckForm.do?user_id=" + user_id, "kkk",	"width=300 height=300");
-
+	window.open("<%=context%>/idCheckForm.do?user_id="+ user_id, "kkk",	"width=300 height=300");
+ 
 
 }
 /* $(function(){
@@ -43,7 +45,7 @@ function winop() {
 	});
 }); */
 function winop() {
-	window.open("idCheckForm.do?user_id=" + user_id, "kkk",	"width=300 height=300");
+	window.open("<%=context %>/idCheckForm.do?user_id=" + user_id, "kkk",	"width=300 height=300");
 }
 </script>
 <link
@@ -53,7 +55,7 @@ function winop() {
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/header_main.css">
+<link rel="stylesheet" href="<%=context %>/css/header_main.css">
 <!-- Bootstrap CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
@@ -138,7 +140,7 @@ function winop() {
 </header>
 		<tbody>
 		<div class="joinform" style="margin-top:200px; margin-left: 30%;">
-	<form  action="joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()">
+	<form  action="<%=context %>/joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()">
 		<table>
 		<thead>
 			<tr>
@@ -167,7 +169,7 @@ function winop() {
 		<div style="text-align: center;">
 			<input type="submit" value="아이디 찾기" onclick="winop();">
 			<input type="reset" value="취소"><p>
-			<input type="button" value="비밀번호찾기"><a href="pwFindForm.do"></a>
+			<input type="button" value="비밀번호찾기"><a href="<%=context %>pwFindForm.do"></a>
 		</div>
 	</form>	
 		</div>

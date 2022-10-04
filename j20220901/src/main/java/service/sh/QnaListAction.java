@@ -26,10 +26,12 @@ public class QnaListAction implements CommandProcess {
 		try {
 			int totCnt = bd.getTotalCnt();   // 37
 			request.setAttribute("totCnt", totCnt);
+
 			
 			List<Qna_Board> list = bd.getBoardList(); 
 			request.setAttribute("list", list);   
 			
+		
 
 		} catch (Exception e) {
 			System.out.println("ListAction e.getMessage()->"+e.getMessage());

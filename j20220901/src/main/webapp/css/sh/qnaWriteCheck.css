@@ -22,6 +22,7 @@
 	}
 	.fw-bold {
 		color: #FF3500;
+		
 	}
 	.main {
 		margin-top: 30px;
@@ -40,8 +41,13 @@
 	}
 	
 	.button7{
+		margin-left: 350px;
 	   color:gray;
 	   font-size: 13px;	
+	}
+	.button8{
+		color:gray;
+	    font-size: 13px;	
 	}
 	
 	.profile {
@@ -54,13 +60,18 @@
 		margin-top: 150px;
 		width: 800px;
 	}
-	
-/* 	.basic6 {
-		margin-top: 20px;
-		width: 7000px;
-		height: 40px;
-		display: inline;
-		border: 1px solid yellow;
-		margin-left: 250px;
-	} */
-	
+	.idCheck{
+		color: gray;
+		font-size: 11px;
+		font-weight: bold;
+		margin-left: 10px;
+	}
+	.delete{
+		margin-left: 960px;
+		color: #C3C3C3;
+		font-weight: bold;
+		font-size: 12px;
+		line-height: 1.1px;
+		
+	}
+

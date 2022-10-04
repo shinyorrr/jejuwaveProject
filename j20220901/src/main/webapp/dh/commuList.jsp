@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
 <title>Insert title here</title>
+<c:import url="../header.jsp" />
+
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
 	rel="stylesheet">
@@ -58,7 +60,7 @@ console.log(count);
 </script>
 </head>
 <body>
-	<header id="header" class="Headers_HeaderMainHeader burgkU">
+<!-- 	<header id="header" class="Headers_HeaderMainHeader burgkU">
 		<div class="Headers__InnerSection bQvPOR">
 			<div class="Headers__HeaderTopWrapDiv kKJwFS">
 				<div class="Headers_HeaderTopInnerDiv cMXtHR">
@@ -118,7 +120,7 @@ console.log(count);
 					onClick="location.href='commList.jsp'">여행 기록</button>
 			</div>
 		</div>
-	</header>
+	</header> -->
 <!-- main start -->	
 	<main style="margin-top: 148px;">
 		<!-- main 상단 고정이미지 -->
@@ -133,17 +135,20 @@ console.log(count);
 		<!-- 검색창 -->
 		<section class="container">
 			<div class="row m-5 justify-content-md-center">	
-			<div	
+				<div	
 					class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 					<span
 					class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN" style="margin-left: 5px;"></span>
 					<button style="margin-left: 10px;"></button>
 					<input placeholder="동행을 찾아보세요!" value="">
 				</div>
+				<div class="com-md-auto">
+					<a class="btn btn-success" role="button" href="<%=context%>/commuWriteForm.do">글쓰기</a>
+				</div>
 			</div>	
 			<!-- list start -->
 			<c:if test="${totCnt > 0 }">
-				<c:forEach var="commu" items="${list }">	
+				<c:forEach var="commu" items="${list }" varStatus="status">	
 					<div class="row m-5 justify-content-md-center">	
 						
 						<div class="col-md-auto">
@@ -162,7 +167,9 @@ console.log(count);
 								  		</ul>
 									</div>
 								</div>
-								<button class="nav-link" data-remote="<%=context%>/commuContent.do?c_num=${commu.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl"><img class="rounded card-img-top" src="dh_images/5_2.jpg"></button>								
+								<button class="nav-link" data-remote="<%=context%>/commuContent.do?c_num=${commu.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
+			<!-- 게시글이미지 -->	<img class="rounded card-img-top" src="${imgList[status.index].c_img_path }">
+								</button>								
 								<div class="card-body d-flex">
 									<p class="card-text">${commu.c_content }</p>
 									

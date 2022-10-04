@@ -31,7 +31,7 @@ public class IdDeleteFormAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "idDeleteForm.jsp";
+		return "ry/idDeleteForm.jsp";
 	}
 
 }

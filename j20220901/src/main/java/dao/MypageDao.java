@@ -140,7 +140,7 @@ public class MypageDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select  user_pw from member where user_id = ?";
+		String sql = "select  user_pw, user_gubun from member where user_id = ?";
 		try {
 			conn = getConnection();
 			System.out.println("connection 연결" + conn);
@@ -148,7 +148,9 @@ public class MypageDao {
 			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			if(rs.next()){
-				String dbpasswd = rs.getString(1);
+				Member member = new Member();
+				String dbpasswd = rs.getString("user_pw");
+				member.setUser_gubun(rs.getInt("user_gubun"));
 				System.out.println("dbpasswd =>" + dbpasswd);
 				System.out.println("user_pw : " + user_pw);
 				System.out.println("db 탔음");
@@ -166,12 +168,13 @@ public class MypageDao {
 		
 		return result;
 	}
+	
 	public Member select(String user_id) throws SQLException {
 		Member md = new Member();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select USER_INFO,USER_BIRTH,USER_TEL,USER_EMAIL,USER_IMG from member where user_id = ?";
+		String sql = "select USER_INFO,USER_BIRTH,USER_TEL,USER_EMAIL,USER_IMG, USER_GUBUN from member where user_id = ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -184,6 +187,7 @@ public class MypageDao {
 				md.setUser_tel(rs.getString("user_tel"));
 				md.setUser_email(rs.getString("user_email"));
 				md.setUser_img(rs.getString("user_img"));
+				md.setUser_gubun(rs.getInt("user_gubun"));
 				System.out.println(md.getUser_img());
 			}
 		} catch (SQLException e) {
@@ -360,7 +364,7 @@ public class MypageDao {
 		
 		return max;
 	}
-	public List<Mypage> communityList(String user_id, int startRow, int endRow) {
+	public List<Mypage> communityList(String user_id, int startRow, int endRow) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -394,9 +398,40 @@ public class MypageDao {
 			} while (rs.next());
 		} catch (Exception e) {
 			System.out.println("communityList 오류  :  " + e.getMessage());
+		} finally {
+			if(conn != null) conn.close();
+			if(pstmt != null) pstmt.close();
+			if(rs != null) rs.close();
 		}
 		
 		return list;
+		
+	}
+	public int update(String user_img, String user_info, String user_birth, String user_tel, String user_email, String user_id) throws SQLException {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "Update member set user_img = ?, user_info = ?,"
+				+ " user_birth = ?, user_tel = ?, user_email = ? where user_id = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_img);
+			pstmt.setString(2, user_info);
+			pstmt.setString(3, user_birth);
+			pstmt.setString(4, user_tel);
+			pstmt.setString(5, user_email);
+			pstmt.setString(6, user_id);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("update 오류 : " + e.getMessage());
+		} finally {
+			if(conn != null) conn.close();
+			if(pstmt != null) pstmt.close();
+		}
+		
+		return result;
 		
 	}
 	

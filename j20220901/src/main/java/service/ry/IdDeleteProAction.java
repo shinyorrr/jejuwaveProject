@@ -32,7 +32,7 @@ public class IdDeleteProAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "idDeletePro.jsp";
+		return "ry/idDeletePro.jsp";
 	}
 
 }

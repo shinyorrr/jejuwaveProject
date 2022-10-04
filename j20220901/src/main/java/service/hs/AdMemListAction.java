@@ -52,9 +52,9 @@ public class AdMemListAction implements CommandProcess {
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("startNum", startNum);
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
-		return "adMemList.jsp";
+		return "hs/adMemList.jsp";
 	}
 
 }

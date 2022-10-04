@@ -52,9 +52,9 @@ public class AdTravelFormAction implements CommandProcess {
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("startNum", startNum);
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println(e.getMessage());
 		}
-		return "adTravelForm.jsp";
+		return "hs/adTravelForm.jsp";
 	}
 
 }
