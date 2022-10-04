@@ -1,8 +1,10 @@
 package dao;
 
 import java.util.Date;
+                 
 
-public class Qna_Board {
+public class Qna_Board extends Qna_Hash {             //현지수정 
+
 	private int b_num;
 	private String user_id;
 	private Date b_date;

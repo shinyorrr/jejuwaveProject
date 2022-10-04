@@ -134,7 +134,7 @@ public class AdminDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select * "
-				+ " 	from  ( select rownum rn, a.*, board_count(a.user_id), comment_count(a.user_id) from (select * from member order by user_gubun) a)"
+				+ " 	from  ( select rownum rn, a.*, board_count(a.user_id) board_count , comment_count(a.user_id) comment_count from (select * from member order by user_gubun) a)"
 				+ " where rn between ? and ?";
 		System.out.println("Dao memList sql->"+sql);
 
@@ -158,6 +158,8 @@ public class AdminDao {
 					m.setUser_tel(rs.getString("user_tel"));
 					m.setUser_gubun(rs.getInt("user_gubun"));
 					m.setUser_img(rs.getString("user_img"));
+					m.setBoard_count(rs.getInt("board_count"));
+					m.setComment_count(rs.getInt("comment_count"));
 					list.add(m);
 				}
 		} catch (Exception e) {

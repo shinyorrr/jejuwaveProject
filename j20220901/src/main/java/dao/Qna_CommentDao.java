@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Connection;
+import java.sql.Connection; 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +13,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-import com.mysql.cj.protocol.Resultset;
 
 public class Qna_CommentDao {
 	private static Qna_CommentDao instance;
@@ -126,7 +125,7 @@ public class Qna_CommentDao {
 			 pstmt.setString(4, comment.getCom_content());
 			 result = pstmt.executeUpdate();
 			 pstmt.close();
-			 System.out.println("Ä¿¸àÆ®´Ù¿À ³»¿ë-->"+comment.getCom_content());
+			 System.out.println("Ä¿ï¿½ï¿½Æ®ï¿½Ù¿ï¿½ ï¿½ï¿½ï¿½ï¿½-->"+comment.getCom_content());
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {

@@ -10,6 +10,7 @@
    String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
@@ -57,7 +58,7 @@ const autoHyphen2 = (target) => {
 						<img class = "profile_img" src="<%=context%>/images/vector_profile_default.svg" style="vertical-align:middle;">
 						</c:if>
 						<c:if test="${member.user_img != null}">
-						<img class = "profile_img" src="<%=context%>${member.user_img}" style="vertical-align:middle;">
+						<img class = "profile_img" src="<%=context%>/${member.user_img}" style="vertical-align:middle;">
 						</c:if>
 						<span class = "user_id">	
 						<c:if test="${user_id != null}">
@@ -105,7 +106,7 @@ const autoHyphen2 = (target) => {
 							<span><img id="target_img" src="<%=context%>/images/vector_profile_default.svg"></span>
 						</c:if>
 						<c:if test="${member.user_img != null}">
-							<span><img id="target_img" src="<%=context%>${member.user_img}" width = "200px"></span>
+							<span><img id="target_img" src="<%=context%>/${member.user_img}" width = "200px"></span>
 						</c:if>
 					</div>
 					<form name = "user" action="<%=context %>/mypageUpdatePro.do" method="post" enctype="multipart/form-data">
@@ -132,7 +133,7 @@ const autoHyphen2 = (target) => {
 		</div>
 	</div>
 </main>
-<footer class="py-5 bg-dark" style="top : 125%;">
+<footer class="py-5 bg-dark" style="top : 180%;">
 	<div class="container">
 		<p class="m-0 text-center text-white">Copyright &copy; Your
 			Website 2022</p>

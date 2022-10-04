@@ -25,7 +25,7 @@
 						<img class = "profile_img" src="<%=context%>/images/vector_profile_default.svg" style="vertical-align:middle;">
 						</c:if>
 						<c:if test="${img != null}">
-						<img class = "profile_img" src="<%=context%>${img}" style="vertical-align:middle;">
+						<img class = "profile_img" src="<%=context%>/${img}" style="vertical-align:middle;">
 						</c:if>
 						<span class = "user_id">	
 						<c:if test="${user_id != null}">
@@ -130,7 +130,7 @@
 			</div>
 		</div>
 </main>
-<footer class="py-5 bg-dark" style="top: 125%;">
+<footer class="py-5 bg-dark" style="top: 180%;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
 				Website 2022</p>
