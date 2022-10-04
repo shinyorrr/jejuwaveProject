@@ -10,7 +10,7 @@
 String context = request.getContextPath();
 %>
 
-<c:import url="${context}/sh/header.jsp"></c:import>
+<c:import url="../header.jsp"></c:import>
 <!DOCTYPE html>
 <html>
 
