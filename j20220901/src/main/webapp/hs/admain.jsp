@@ -4,10 +4,12 @@
 <%
    String context = request.getContextPath();
 %>
-<c:import url="${context}/hs/headerLogin.jsp"></c:import>
+<c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
+<!-- header -->
+<link rel="stylesheet" href="css/header_main.css">
+<script src="js/index2.js" defer="defer"></script>
 	<!-- 네비게이션메뉴바 -->
 	<nav id="nav" class="nav">
 	<!-- 프로필 이미지 -->
