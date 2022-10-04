@@ -45,8 +45,11 @@ const autoHyphen2 = (target) => {
 	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> branch 'main' of https://github.com/reguluss82/jejuwaveProject.git
 
 
 </script>

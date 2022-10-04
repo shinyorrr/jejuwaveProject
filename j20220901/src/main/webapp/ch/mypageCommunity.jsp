@@ -85,9 +85,6 @@
 													${board.c_hash}	
 												</div>
 											</td>
-											<td class = "t_titleTD" width = 200>
-												<div class = "t_title">${board.c_title }</div>
-											</td>
 										</tr>
 										<tr>
 											<td colspan="3" width = 2000>

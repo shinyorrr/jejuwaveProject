@@ -38,6 +38,7 @@ public class MypageTravelerAction implements CommandProcess {
 			 System.out.println(startRow); // 작성자가 쓴 글 조회
 			 List<Mypage> list =my.travelList(user_id,startRow,endRow);
 			 
+			 
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);
 		 
 		 int startPage = (int)(currentPage-1)/blockSize*blockSize + 1; 

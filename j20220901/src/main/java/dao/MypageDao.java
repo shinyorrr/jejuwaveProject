@@ -101,6 +101,7 @@ public class MypageDao {
 				+	"(select rownum rn,a.* from"
 				+		"(select * from travel_board order by t_date desc) a"
 				+   ")where user_id = ? and rn BETWEEN ? and ? ";
+		System.out.println("travelList sql ===> " + sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -378,7 +379,7 @@ public class MypageDao {
 		ResultSet rs = null;
 		String sql = " select * from( "
 				+ "            select rownum rn, a.* from "
-				+ "            (select i.c_num, c_hash, c_title, c_content, c_date, c_img_path "
+				+ "            (select i.c_num, c_hash, c_content, c_date, c_img_path "
 				+ "            from community c, community_img i "
 				+ "            where c.c_num = i.c_num "
 				+ "            and rownum <= 1 "
@@ -396,7 +397,6 @@ public class MypageDao {
 			do {
 				Mypage mypage = new Mypage();
 				mypage.setC_num(rs.getInt("c_num"));
-				mypage.setC_title(rs.getString("c_title"));
 				mypage.setC_content(rs.getString("c_content"));
 				mypage.setC_date(rs.getDate("c_date"));
 				mypage.setC_hash(rs.getString("c_hash"));

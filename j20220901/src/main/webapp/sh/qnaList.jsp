@@ -24,6 +24,8 @@
 </header>
   <!-- -----------------------  현지수정----------------               -->
 <body>
+
+
 	<div style="margin-bottom: 400px" class="main">
 		<table class="mainTable">
 			<c:forEach var="board" items="${list}">
@@ -35,8 +37,10 @@
 					 	<span>${board.b_success }</span>
 					</c:if> 
 				</th>
-				<th><a href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_title}</a></th>
-				<th><a href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_content }</a></th>
+				<th class=" title2"><a href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_title}</a></th>
+				<th >
+				<a href='qnaWriteCheck.do?b_num=${board.b_num}'>
+					<span class="content1">${board.b_content }</span></a></th>
 				<tr class="last">
 					<td></td>
 					<td><img src="<%=context%>/sh_images/user_icon04.png"
