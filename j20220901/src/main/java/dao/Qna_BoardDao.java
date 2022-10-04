@@ -14,62 +14,69 @@ import javax.sql.DataSource;
 
 public class Qna_BoardDao {
 	private static Qna_BoardDao instance;
-	private Qna_BoardDao() {}
+
+	private Qna_BoardDao() {
+	}
+
 	public static Qna_BoardDao getInstance() {
-		if (instance == null) {	
-			instance = new Qna_BoardDao();		
+		if (instance == null) {
+			instance = new Qna_BoardDao();
 		}
 		return instance;
 	}
+
 	private Connection getConnection() {
 		Connection conn = null;
 		try {
 			Context ctx = new InitialContext();
-			DataSource ds = (DataSource)
-				ctx.lookup("java:comp/env/jdbc/OracleDB");
+			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/OracleDB");
 			conn = ds.getConnection();
-		}catch(Exception e) { 
-			System.out.println(e.getMessage());	
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		}
 		return conn;
 	}
-	
+
 	public int getTotalCnt() throws SQLException {
-		Connection conn = null;	
-		Statement stmt= null; 
-		ResultSet rs = null;    
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
 		int tot = 0;
 		String sql = "select count(*) from qna_board";
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
-			if (rs.next()) tot = rs.getInt(1);
-		} catch(Exception e) {	
-			System.out.println(e.getMessage()); 
+			if (rs.next())
+				tot = rs.getInt(1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		} finally {
-			if (rs !=null) rs.close();
-			if (stmt != null) stmt.close();
-			if (conn !=null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (stmt != null)
+				stmt.close();
+			if (conn != null)
+				conn.close();
 		}
 		return tot;
 	}
 
-	//hj qna hash 異붽� �닔�젙 -----------------------------------------------------------------	
+	// hj qna hash 異붽� �닔�젙
+	// -----------------------------------------------------------------
 	public List<Qna_Board> getBoardList() throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
-		Connection conn = null;	
-		PreparedStatement pstmt= null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		 String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,b.l_hash1,b.l_hash2,b.l_hash3 "
-		 		+ "from qna_board A, qna_hash B "
-		 		+ "WHERE A.B_NUM = B.B_NUM";
+		String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,b.l_hash1,b.l_hash2,b.l_hash3 "
+				+ "from qna_board A, qna_hash B " + "WHERE A.B_NUM = B.B_NUM";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-								
+
 				Qna_Board board = new Qna_Board();
 				board.setB_num(rs.getInt("b_num"));
 				board.setUser_id(rs.getString("user_id"));
@@ -78,9 +85,8 @@ public class Qna_BoardDao {
 				board.setL_hash1(rs.getString("l_hash1"));
 				board.setL_hash2(rs.getString("l_hash2"));
 				board.setL_hash3(rs.getString("l_hash3"));
-			
-				
-				if (rs.getString("b_success").equals("Y")) {  
+
+				if (rs.getString("b_success").equals("Y")) {
 					board.setB_success("채택완료");
 
 				} else {
@@ -88,34 +94,36 @@ public class Qna_BoardDao {
 				}
 				list.add(board);
 			}
-		} catch(Exception e) {	
-			System.out.println(e.getMessage()); 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		} finally {
-			if (rs !=null) rs.close();
-			if (pstmt != null) pstmt.close();
-			if (conn !=null) conn.close();
-		} 
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
 		return list;
 	}
-	
-	
-	//�쁽吏� 異붽� �닔�젙 -----------------------------------------------------------------	
-	
+
+	// �쁽吏� 異붽� �닔�젙
+	// -----------------------------------------------------------------
+
 	public Qna_Board select(int b_num) throws SQLException {
-		Connection conn = null;	
-		Statement stmt= null; 
+		Connection conn = null;
+		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,A.b_theme,A.b_date,b.l_hash1,b.l_hash2,b.l_hash3 \r\n"
-				+ "		 		from qna_board A, qna_hash B \r\n"
-				+ "		 		WHERE A.B_NUM = B.B_NUM \r\n"
-				+ "                and a.b_num ="+b_num;
-		
+		String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,A.b_theme,A.b_date, B.l_hash1, B.l_hash2, B.l_hash3 \r\n"
+				+ "		 		from qna_board A, qna_hash B \r\n" + "		 		WHERE A.B_NUM = B.B_NUM \r\n"
+				+ "                and a.b_num =" + b_num;
+
 		Qna_Board board = new Qna_Board();
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
-			if (rs.next()) {				
+			if (rs.next()) {
 				board.setB_num(rs.getInt("b_num"));
 				board.setUser_id(rs.getString("user_id"));
 				board.setB_title(rs.getString("b_title"));
@@ -125,65 +133,91 @@ public class Qna_BoardDao {
 				board.setL_hash2(rs.getString("l_hash2"));
 				board.setL_hash3(rs.getString("l_hash3"));
 				board.setB_theme(rs.getString("b_theme"));
-				
-				if (rs.getString("b_success").equals("Y")) {  
+
+				if (rs.getString("b_success").equals("Y")) {
 					board.setB_success("채택완료");
 
 				} else {
 					board.setB_success("답변대기");
 				}
-				
 
 			}
-		} catch(Exception e) {	
-			System.out.println(e.getMessage()); 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		} finally {
-			if (rs !=null) rs.close();
-			if (stmt != null) stmt.close();
-			if (conn !=null) conn.close();
+			if (rs != null)
+				rs.close();
+			if (stmt != null)
+				stmt.close();
+			if (conn != null)
+				conn.close();
 		}
 		return board;
-	}	
-	
-	public int insert(Qna_Board board) throws SQLException {
+	}
+
+	public int insert(Qna_Board board, String hashString) throws SQLException {
 		int b_num = board.getB_num();
 		System.out.println(b_num);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int result =0;
-		
+		int result = 0;
+			System.out.println("hashString-->"+hashString);
+		String[] hash = hashString.split("#");
+
 		String sql1 = "select nvl(max(b_num),0) from qna_board";
 		String sql = "insert into qna_board (b_num,user_id,b_date,b_title,b_content,b_success,b_theme) values(?,'aaaa',sysdate,?,?,?,?)";
-		
+		// 해시태그 삽입
+		String sql2 = "insert into qna_hash (b_num, l_hash1 , l_hash2 , l_hash3 ) values(?,?,?,?)";
+		System.out.println("Qna_BoardDao insert sql2-->"+sql2);
 		try {
-			conn=getConnection();
+			conn = getConnection();
 			pstmt = conn.prepareStatement(sql1);
-			rs=pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			rs.next();
-			int number = rs.getInt(1)+1;
+			int number = rs.getInt(1) + 1;
 			rs.close();
 			pstmt.close();
-			
+
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, number);
-      
-			//pstmt.setString(2, board.getUser_id());
+
+			// pstmt.setString(2, board.getUser_id());
 			pstmt.setString(2, board.getB_title());
 			pstmt.setString(3, board.getB_content());
 			pstmt.setString(4, board.getB_success());
 			pstmt.setString(5, board.getB_theme());
+			// Board Update
+			 result=pstmt.executeUpdate();
 			
-			result=pstmt.executeUpdate();
-			
+			pstmt.close();
+
+			 //해시태그 
+			 pstmt = conn.prepareStatement(sql2); 
+			 pstmt.setInt(1,number);
+			 System.out.println("hash첫번째-->"+hash[1]);
+			 pstmt.setString(2,hash[1]);
+			 System.out.println("hash두번째-->"+hash[2]);
+			 pstmt.setString(3,hash[2]);
+			 System.out.println("hash세번째-->"+hash[3]);
+			 pstmt.setString(4,hash[3]);
+			  
+			// 부모 Board , 나는 qna_hash(자식) Update
+			 result=pstmt.executeUpdate();
+			  
+			 
 		} catch (Exception e) {
-			// TODO: handle exception
-		}finally {
-			if(rs!=null)rs.close();
-			if(pstmt!=null)pstmt.close();
-			if(conn!=null)conn.close();
+			 System.out.println("Qna_BoardDao insert e.getMessage()->"+e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
 		}
-		return result;	
+		 System.out.println("Qna_BoardDao insert result->"+result);
+		return result;
 	}
 
 	public int update(Qna_Board board) throws SQLException {
@@ -191,62 +225,62 @@ public class Qna_BoardDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = "update qna_board set b_title=?,b_content=?, b_theme=? where b_num=?";
-		
-		
+
 		try {
-			conn=getConnection();
+			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, board.getB_title());
 			pstmt.setString(2, board.getB_content());
 			pstmt.setString(3, board.getB_theme());
 			pstmt.setInt(4, board.getB_num());
-			
-			
-			result = pstmt.executeUpdate()	;
+
+			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
-		}finally {
-			if(pstmt !=null) pstmt.close();
-			if(conn != null) conn.close();
+		} finally {
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
 		}
-		return result;			
+		return result;
 	}
-	
+
 	public int delete(int b_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = "delete from qna_board where b_num=?";
-		
+
 		try {
-			conn=getConnection();
+			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
-			result=pstmt.executeUpdate();
-			
+			result = pstmt.executeUpdate();
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		}finally {
-			if(conn!=null)conn.close();
-			if(pstmt!=null)pstmt.close();
+		} finally {
+			if (conn != null)
+				conn.close();
+			if (pstmt != null)
+				pstmt.close();
 		}
 		return result;
-		
+
 	}
-	
-	/* main화면 QnA list*/
-		public List<Qna_Board> mainbdlist(int startRow, int endRow) throws SQLException {
+
+	/* main화면 QnA list */
+	public List<Qna_Board> mainbdlist(int startRow, int endRow) throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
-		Connection conn = null;	
-		PreparedStatement pstmt= null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		 String sql = "select *"
-				 	+ "from (select rownum rn, a.*"
-				 	+ "from (select * from qna_board order by b_num desc) a)"
-				 	+ "where rn between ? and ?";
-		 
-		 System.out.println("mainbdlist startRow ->"+startRow);
-		 System.out.println("mainbdlist endRow ->"+endRow);
+		String sql = "select *" + "from (select rownum rn, a.*"
+				+ "from (select * from qna_board order by b_num desc) a)" + "where rn between ? and ?";
+
+		System.out.println("mainbdlist startRow ->" + startRow);
+		System.out.println("mainbdlist endRow ->" + endRow);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -262,15 +296,17 @@ public class Qna_BoardDao {
 				board.setB_date(rs.getDate("b_date"));
 				list.add(board);
 			}
-		} catch(Exception e) {	
-			System.out.println(e.getMessage()); 
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 		} finally {
-			if (rs !=null) rs.close();
-			if (pstmt != null) pstmt.close();
-			if (conn !=null) conn.close();
-		} 
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
 		return list;
 	}
 
-	
 }

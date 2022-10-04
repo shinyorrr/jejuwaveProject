@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%
@@ -92,11 +94,7 @@ String context = request.getContextPath();
 				onclick="location.href='qnaDelete.do?b_num=${board.b_num}'">삭제</button>
 		</p>
 
-
-
-
-
-		
+	
 		<!-- 댓글 등록 -->
 		<div class="content" >
 				<form action="qnaCommentWrite.do" style="width: 2000px">

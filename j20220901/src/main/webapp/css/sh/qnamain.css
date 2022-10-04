@@ -29,5 +29,29 @@
 .table, th{
 	padding-top: 30px;
 	
-}	
+
+}
+
+
+.content1{
+	padding-left: 30px;
+   width:730px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.title2{
+ 
+   width:200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+	
+}
+
 

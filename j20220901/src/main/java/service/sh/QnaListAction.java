@@ -20,6 +20,11 @@ public class QnaListAction implements CommandProcess {
 		// TODO Auto-generated method stub
 		System.out.println("ListAction Service start...");
 		
+
+		
+		
+		
+		
 		
 		Qna_BoardDao bd = Qna_BoardDao.getInstance();
 		
