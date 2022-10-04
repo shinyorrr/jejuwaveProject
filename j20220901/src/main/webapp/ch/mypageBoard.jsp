@@ -10,6 +10,8 @@
    String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageTraveler.css?after">
 </head>
@@ -71,21 +73,37 @@
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 							<tr>
-								<td colspan="3">${board.b_title}</td>
+								<td colspan="3">
+									<div class = "t_title">
+										${board.b_title}
+									</div>
+								</td>
 								<td>
+									<div class = "dealstatus">
 									<c:if test="${board.b_success == 'Y'}">
 										답변완료
 									</c:if>
 									<c:if test="${board.b_success == 'N'}">
 										답변대기중
 									</c:if>
+									</div>
 								</td>
 							</tr>
 							<tr>
-								<td colspan="4">${board.b_content }</td>
+								<td colspan="4">
+									<div class = "t_content">
+									${board.b_content }
+									</div>
+								</td>
 							</tr>
 							<tr>
-								<td><button location.href = "Board.jsp">수정</button></td><td><button>삭제</button></td><td></td><td>댓글수</td>
+								<td>
+									<button  class = "button_update" onclick="location.href = 'Board.jsp'">수정</button>
+								</td>
+								<td>
+									<button class = "button_delete">삭제</button>
+								</td>
+								<td></td><td>댓글수</td>
 							</tr>
 							<c:set var="startNum" value="${startNum - 1 }" />
 						</c:forEach> 
@@ -95,7 +113,7 @@
 			</div>
 			<div style="padding-left : 62%;">
 				<c:if test="${startPage > 1 }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageBoard.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -106,9 +124,9 @@
 						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageBoard.do?pageNum=${i }'" 
 						style ="
-					    border: #eeee 2px solid;
+					    border: #eeee 2px ;
 					    background-color: white;
 					    color: black;
 					    padding: 10px 10px;
@@ -117,7 +135,7 @@
 						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageBoard.do=${startPage+1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
