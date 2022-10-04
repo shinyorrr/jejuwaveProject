@@ -41,8 +41,13 @@
 	}
 	
 	.button7{
+		margin-left: 350px;
 	   color:gray;
 	   font-size: 13px;	
+	}
+	.button8{
+		color:gray;
+	    font-size: 13px;	
 	}
 	
 	.profile {

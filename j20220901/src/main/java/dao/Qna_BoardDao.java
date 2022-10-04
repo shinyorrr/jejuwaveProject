@@ -54,7 +54,8 @@ public class Qna_BoardDao {
 		}
 		return tot;
 	}
-	
+
+	//hj qna hash ì¶”ê°€ ìˆ˜ì • -----------------------------------------------------------------	
 	public List<Qna_Board> getBoardList() throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
 		Connection conn = null;	
@@ -80,10 +81,10 @@ public class Qna_BoardDao {
 			
 				
 				if (rs.getString("b_success").equals("Y")) {  
-					board.setB_success("Ã¤ÅÃ¿Ï·á");
+					board.setB_success("ì±„íƒì™„ë£Œ");
 
 				} else {
-					board.setB_success("´äº¯´ë±â");
+					board.setB_success("ë‹µë³€ëŒ€ê¸°");
 				}
 				list.add(board);
 			}
@@ -96,6 +97,9 @@ public class Qna_BoardDao {
 		} 
 		return list;
 	}
+	
+	
+	//í˜„ì§€ ì¶”ê°€ ìˆ˜ì • -----------------------------------------------------------------	
 	
 	public Qna_Board select(int b_num) throws SQLException {
 		Connection conn = null;	
@@ -123,10 +127,10 @@ public class Qna_BoardDao {
 				board.setB_theme(rs.getString("b_theme"));
 				
 				if (rs.getString("b_success").equals("Y")) {  
-					board.setB_success("Ã¤ÅÃ¿Ï·á");
+					board.setB_success("ì±„íƒì™„ë£Œ");
 
 				} else {
-					board.setB_success("´äº¯´ë±â");
+					board.setB_success("ë‹µë³€ëŒ€ê¸°");
 				}
 				
 
@@ -163,7 +167,7 @@ public class Qna_BoardDao {
 			
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, number);
-			//·Î±×ÀÎ ±â´É Ãß°¡ÇÏ¸é//////////////////////////////////
+			// Î±         ß°  Ï¸ //////////////////////////////////
 			//pstmt.setString(2, board.getUser_id());
 			pstmt.setString(2, board.getB_title());
 			pstmt.setString(3, board.getB_content());
@@ -234,35 +238,7 @@ public class Qna_BoardDao {
 	
 	
 	
-	
-	/* »èÁ¦ÇÒ°Í *////////////////////////////
 
-
-
-	
-
-//	
-//	public void readCount(int num) throws SQLException {
-//		Connection conn = null;	
-//		PreparedStatement pstmt = null;
-//		String sql = "update board set readcount=readcount+1 where num=?";
-//		Board board = new Board();
-//		
-//		try {
-//			conn = getConnection();
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setInt(1, num);
-//			pstmt.executeUpdate();
-//			
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}finally {
-//			if (pstmt != null) pstmt.close();
-//			if (conn !=null) conn.close();
-//		}	
-//	}
-	
 	
 	
 	

@@ -2,7 +2,9 @@ package dao;
 
 import java.util.Date;
                  
-public class Qna_Board extends Qna_Hash {             //ÇöÁö¼öÁ¤ 
+
+public class Qna_Board extends Qna_Hash {             //í˜„ì§€ìˆ˜ì • 
+
 	private int b_num;
 	private String user_id;
 	private Date b_date;
