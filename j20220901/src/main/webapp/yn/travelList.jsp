@@ -7,7 +7,7 @@
 <%
 String context = request.getContextPath();
 %>
-<c:import url="/yn/header.jsp"></c:import>
+<c:import url="../header.jsp"></c:import>
 
 <!-- 
 *********************************

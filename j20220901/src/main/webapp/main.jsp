@@ -189,7 +189,7 @@ String context = request.getContextPath();
 														<c:if test="" var="commCnt"></c:if>
 														<span id="comment"> <img
 															style="width: 16px; height: 16px; margin: 0 5px;"
-															src="yn_images/comm_icon.png">11
+															src="yn_images/comm_icon.png">${travel.reply_cnt}
 														</span>
 													</p>
 												</div>
@@ -217,7 +217,7 @@ String context = request.getContextPath();
 						<div class="content_first">
 							<!-- Content text-->
 							<p class="" id="">
-								<b style="color: #ff3500;"><a href="<%=context %>qnaWriteCheck.do">
+								<b style="color: #ff3500;"><a href='qnaWriteCheck.do?b_num=${board.b_num}' style="color: #ff3500;">
 								<c:choose>
 									<c:when test="${fn:length(board.b_title) > 40}">
 										<c:out value="${fn:substring(board.b_title,0,39)}" />...
