@@ -105,7 +105,7 @@ public class Qna_BoardDao {
 		Connection conn = null;	
 		Statement stmt= null; 
 		ResultSet rs = null;
-		String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,A.b_theme,A.b_date,b.l_hash1,b.l_hash2,b.l_hash3 \r\n"
+		String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,A.b_theme,A.b_date, B.l_hash1, B.l_hash2, B.l_hash3 \r\n"
 				+ "		 		from qna_board A, qna_hash B \r\n"
 				+ "		 		WHERE A.B_NUM = B.B_NUM \r\n"
 				+ "                and a.b_num ="+b_num;
@@ -145,7 +145,7 @@ public class Qna_BoardDao {
 		return board;
 	}	
 	
-	public int insert(Qna_Board board) throws SQLException {
+	public int insert(Qna_Board board, String hashString) throws SQLException {
 		int b_num = board.getB_num();
 		System.out.println(b_num);
 		Connection conn = null;
@@ -153,8 +153,13 @@ public class Qna_BoardDao {
 		ResultSet rs = null;
 		int result =0;
 		
+		String[] hash = hashString.split("#");
+		
 		String sql1 = "select nvl(max(b_num),0) from qna_board";
 		String sql = "insert into qna_board (b_num,user_id,b_date,b_title,b_content,b_success,b_theme) values(?,'aaaa',sysdate,?,?,?,?)";
+		//해시태그 삽입
+		String sql2 = "insert into qna_hash (b_num,l_hash1,l_hash2,l_hash3) values(?,?,?,?)";
+		
 		
 		try {
 			conn=getConnection();
@@ -173,6 +178,15 @@ public class Qna_BoardDao {
 			pstmt.setString(3, board.getB_content());
 			pstmt.setString(4, board.getB_success());
 			pstmt.setString(5, board.getB_theme());
+			
+			pstmt.close();
+			
+			//해시태그
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, b_num);
+			pstmt.setString(2,hash[1]);
+			pstmt.setString(3,hash[2]);
+			pstmt.setString(4,hash[3]);
 			
 			result=pstmt.executeUpdate();
 			
