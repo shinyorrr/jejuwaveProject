@@ -472,7 +472,7 @@ public class AdminDao {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "delect from qna_board where b_num=?";
+		String sql = "delete from qna_board where b_num=?";
 		
 		try {
 			conn = getConnection();

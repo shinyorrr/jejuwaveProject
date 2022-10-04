@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
    String context = request.getContextPath();
 %>
@@ -45,17 +46,19 @@
 			  </thead>
 			  <tbody>
 			    <c:if test="${totCnt > 0}">
-			  		<c:forEach var="board" items="${list}">
+			  		<c:forEach var="qna" items="${list}">
 			  			<tr>
 			  				<th scope="row"  width="50">${startNum}</th>
 			  				<td width="500">
-			  				<a href="<%=context%>/adQnaComment.do?b_num=${board.b_num}&pageNum=${currentPage}">${board.b_title}</a>
+			  				<a href="adQnaComment.do?b_num=${qna.b_num}&pageNum=${currentPage}">${qna.b_title}</a>
 			  				</td>
-			  				<td width="100">${board.user_id}</td>
-			  				<td width="100">${board.b_theme}</td>
-			  				<td width="100">${board.b_success}</td>
-			  				<td width="100">${board.b_date}</td>
-			  				<td width="100"><input type="submit" value="삭제"  onclick="<%=context%>/location.href='adQnaDelete.do?b_num=${qna.b_num}&pageNum=${pageNum}'"></td>
+			  				<td width="100">${qna.user_id}</td>
+			  				<td width="100">${qna.b_theme}</td>
+			  				<td width="100">${qna.b_success}</td>
+			  				<td width="100">
+			  				<fmt:formatDate value="${qna.b_date}" pattern="yy/MM/dd"/>
+			  				</td>
+			  				<td width="100"><input type="submit" value="삭제" onclick="location.href='<%=context%>/adQnaDelete.do?b_num=${qna.b_num}&pageNum=${pageNum}'"></td>
 			  			</tr>
 			  			<c:set var="startNum" value="${startNum - 1}"></c:set>
 			  		</c:forEach>

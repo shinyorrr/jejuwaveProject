@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<input type="hidden" name="c_num" value="${t_num}">
+	<input type="hidden" name="b_num" value="${b_num}">
 	<input type="hidden" name="pageNum" value="${pageNum}">
 	<c:if test="${result > 0}">
 		<script type="text/javascript">
