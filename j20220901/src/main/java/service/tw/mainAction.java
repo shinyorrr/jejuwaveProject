@@ -34,7 +34,7 @@ public class mainAction implements CommandProcess {
 			int endRow = startRow + pageSize - 1;				// 2
 			
 			// Board 조회
-			List<Qna_Board> list = bd.boardList();
+			List<Qna_Board> list = bd.mainbdlist(startRow, endRow);
 			int pageCnt = (int)Math.ceil((double)totCnt/pageSize);		//
 			int startPage = (int)(currentPage-1)/blockSize*blockSize + 1;
 			int endPage = startPage + blockSize -1;
