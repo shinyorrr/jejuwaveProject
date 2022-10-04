@@ -1,23 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-<%
-String context = request.getContextPath();
-%>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
-<link rel="stylesheet" href="<%=context%>/css/sh/qnamain.css">
-
+ <% String context = request.getContextPath(); %>
 <c:import url="${context}/sh/header.jsp"></c:import>
+<meta charset="UTF-8">
+<title>게시글 수정</title>
+ <link
+	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+	rel="stylesheet">
+ <link rel="stylesheet" href="<%=context %>/css/sh/qnamain.css">
+ <link rel="stylesheet" href="<%=context%>/css/sh/qnaUpdate.css">
 
 <header class="py-5 mb-5"
-	style="background-image: url('<%=context%>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
+	style="background-image: url('<%=context %>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
 		<div class="text-center text-white">
 			<h3 class="display-5 fw-bolder">QnA게시판</h3>
@@ -25,44 +22,29 @@ String context = request.getContextPath();
 		</div>
 	</div>
 </header>
-<body>b
-	<div>
-		<table class="maintitle">
-			<c:forEach var="board" items="${list }">
-				<div class="one space">
-					<td>답변대기</td>
-				</div>
-				<div>
-					<div>
-						<p>
-						<th><a
-							href='<%=context %>/qnaWriteCheck.do?b_num=${board.b_num}& user_id=${board.user_id}'>
-							${board.b_title}</a></th>
-						</p>							
-						<p class="user_icon1">						
-						<td><img src="<%=context%>/sh_images/user_icon02.png"
-							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
-							width="30" height="30">
-							</p>
-							<p>${board.user_id}</td>
-						</p>
-					</div>
-				</div>
-				<div class="title1">
-                 
-					<td>
-				<th><class="title2">
-						<td>${board.b_content }</th>
-					</td>					
-				</div>
+  <!-- -----------------------  현지수정----------------               -->
+<body>
+	<div style="margin-bottom: 400px" class="main">
+		<table class="mainTable">
+			<c:forEach var="board" items="${list}">
+				<th >${board.b_success}</th>
+				<th><a href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_title}</a></th>
+				<th><a href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_content }</a></th>
+				<tr class="last">
+					<td></td>
+					<td><img src="<%=context%>/sh_images/user_icon04.png"
+						class="userIconColor-1 rounded-circle me-2  align-center bg-white"
+						width="30" height="30">${board.user_id}</td>
+					<td><span  class="hash">#${board.l_hash1}</span>   &nbsp;  &nbsp;                      
+					<span class="hash">#${board.l_hash2}</span> &nbsp; &nbsp; 
+					<span class="hash">#${board.l_hash3}</span></td>
 				</tr>
 			</c:forEach>
 		</table>
+	</div>
 
 
-</div>
+
 <c:import url="${context}/footer.jsp"></c:import>
 </body>
-
-
 </html>

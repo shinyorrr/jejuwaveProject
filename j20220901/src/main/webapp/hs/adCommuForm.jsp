@@ -85,6 +85,6 @@
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>
-<c:import url="${context}/footer.jsp"></c:import>
+<c:import url="${context}/hs/footer.jsp"></c:import>
 </body>
 </html>
