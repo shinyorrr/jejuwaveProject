@@ -9,17 +9,10 @@ String context = request.getContextPath();
 String userId = (String) session.getAttribute("user_id");
 request.setAttribute("userId", userId);
 %>
+<!-- header 영역 -->
 <c:import url="../header.jsp"></c:import>
-<!-- modal 영역 -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+<!-- modal -->
+<script src="https://kit.fontawesome.com/1f609f562c.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/modal.css">
 
 <!-------------- body 영역 ------------>
@@ -100,10 +93,14 @@ request.setAttribute("userId", userId);
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">
-											<div>
-												<img src="images/vector_profile_default.svg"
-													style="vertical-align: middle;">
-											</div>
+											<c:if test="${img == null }">
+												<img src="<%=context%>/images/vector_profile_default.svg"
+													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
+											</c:if>
+											<c:if test="${img != null }">
+												<img src="<%=context %>/${img}"
+													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
+											</c:if>
 											<div>
 												<div class="modal-title moti" id="exampleModalLabel">
 													<p>${travelContent.user_id}</p>
@@ -113,16 +110,16 @@ request.setAttribute("userId", userId);
 												</div>
 											</div>
 											<div class="rating" data-rate="3">
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-												<i class="fas fa-star"></i>
-											    <i class="fas fa-star"></i>
-											    <i class="fas fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>
 											</div>
 											<button type="button" class="btn-close"
 												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-										<div class="modal-body">
+										<div class="modal-body ">
 											<div class="modal-body-top">
 												<div class="modal-body-top-title">
 													<div class="modal-body-top-title-cotents">
@@ -132,15 +129,43 @@ request.setAttribute("userId", userId);
 														<p>0</p>
 													</div>
 												</div>
-												<div class="modal-body-comment">
-													<div class=""></div>
+												<div class="modal-body-comment " style="overflow:auto;">
+													<div class="" style="background-color: yellow; height: 100px;">
+														<div>
+														<span>user_id</span>
+														<span>R_DATE</span>
+														</div>
+														<div>
+														<p>R_CONTENT</p>
+														</div>
+														<div>
+														<div class="rating" data-rate="3">
+												<i class="fa-solid fa-star"></i>
+												<i class="fa-solid fa-star"></i>
+												<i class="fa-solid fa-star"></i>
+												<i class="fa-solid fa-star"></i>
+												<i class="fa-solid fa-star"></i>
+											</div>
+														</div>
+													</div>
+													<div class="" style="background-color: red; height: 100px;">
+													
+													</div>
+													<div class="" style="background-color: green; height: 100px;">
+													
+													</div>
+													<div class="" style="background-color: yellow; height: 100px;">
+													
+													</div>
+													
+													
 												</div>
 											</div>
 										</div>
 										<div class="modal-footer" style="justify-content: flex-start;">
 											<div></div>
 											<div class="modal-footer-comment" style="width: 100%;">
-												<div class="make_star">
+												<div class="make_star" style="display: flex; margin-bottom: 15px;">
 													<select name="" id="makeStar">
 														<option value="1">1</option>
 														<option value="2">2</option>
@@ -149,14 +174,16 @@ request.setAttribute("userId", userId);
 														<option value="5">5</option>
 													</select>
 													<div class="rating" data-rate="3">
-														<i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-															class="fas fa-star"></i> <i class="fas fa-star"></i> <i
-															class="fas fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
+														<i class="fa-solid fa-star"></i>
 													</div>
 												</div>
-												<input type="text" placeholder="동행후기를 달아보세요!(40자 이내)"
+												<input type="text" placeholder="동행후기를 한줄평으로 달아보세요!"
 													onfocus="this.placeholder = ''"
-													onblur="this.placeholder = '동행후기를 달아보세요!(40자 이내)'">
+													onblur="this.placeholder = '동행후기를 한줄평으로 달아보세요!'">
 												<button>등록</button>
 											</div>
 										</div>
@@ -268,4 +295,11 @@ request.setAttribute("userId", userId);
 <!-- Bootstrap core JS-->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- modal Bootstrap  -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+
 <!-- Core theme JS-->
