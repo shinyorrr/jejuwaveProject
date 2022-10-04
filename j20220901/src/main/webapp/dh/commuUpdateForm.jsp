@@ -163,8 +163,10 @@
 		<!-- form 시작 -->
 		<div class="row m-5 justify-content-md-center">
 			<form action="commuUpdatePro.do?" method="post" enctype="multipart/form-data">
-				<input type="hidden" name="c_num"   value="${commu.num }"> <!-- pk 수정하지 않는다. db무결성 문제가능성 -->
-				<input type="hidden" name="pageNum" value="${pageNum }">	
+				<input type="hidden" name="c_num"   value="${commu.c_num }"> <!-- pk 수정하지 않는다. db무결성 문제가능성 -->
+				<input type="hidden" name="pageNum" value="${pageNum }">
+					
+					
 				<div class="form-group">
 				
 					<div id='image_preview'>
@@ -188,10 +190,29 @@
 					    // 이미지안에 표시되는 체크박스의 속성
 					    var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
 					                  + 'right:0px;bottom:0px;z-index:999;background-color:rgba(255,255,255,0.7);color:#f00';
-					  
+					    //미리 수정전 select된 이미지 표시
+					    window.onload = (function() {
+							var bfileList = new Array();
+							<c:forEach items="${imgList}" var="imgUrl">
+								bfileList.push("${imgUrl.c_img_path}");
+							</c:forEach>
+					    	var bfiles = new Array();
+							for (var i = 0; i < bfileList.length; i++) {
+								var bfile = new File("bfileList[i]");
+								bfiles.push(bfile);
+							}
+							var bfileArr = Array.prototype.slice.call(bfiles);
+							for(bf of bfileArr){
+								imageLoader(bf);
+							}
+						})				    
+					    
+					    //파일 첨부시 함수
 					    btnAtt.onchange = function(e){
 					      var files = e.target.files;
-					      var fileArr = Array.prototype.slice.call(files)
+					      var fileArr = Array.prototype.slice.call(files);
+					      console.log("files--" + files);
+					      console.log("fileArr" + fileArr);
 					      for(f of fileArr){
 					        imageLoader(f);
 					      }
@@ -224,18 +245,21 @@
 					    
 					
 					    
-					    /*첨부된 이미리들을 배열에 넣고 미리보기 */
+					    /*첨부된 이미지들을 배열에 넣고 미리보기 */
 					    imageLoader = function(file){
 					      sel_files.push(file);
+					      console.log("sel_files--" + sel_files);
 					      var reader = new FileReader();
 					      reader.onload = function(ee){
 					        let img = document.createElement('img')
 					        img.setAttribute('style', img_style)
 					        img.src = ee.target.result;
+					        console.log("ee.target.result --" + ee.target.result)
 					        attZone.appendChild(makeDiv(img, file));
 					      }
 					      
 					      reader.readAsDataURL(file);
+					      console("reader.readAsDataURL(file) --" + reader.readAsDataURL(file));
 					    }
 					    
 					    /*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */

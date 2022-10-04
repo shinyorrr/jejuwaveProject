@@ -160,8 +160,8 @@ console.log(count);
 								  			<span class="bi bi-three-dots-vertical"></span>
 								  		</button>
 								  		<ul class="dropdown-menu">
-								    		<li><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num)&pageNum=${currentPage}">수정</a></li>
-								   			<li><a class="dropdown-item" href="<%=context%>/commuDeleteForm.do?c_num=${commu.c_num)&pageNum=${currentPage}">삭제</a></li>
+								    		<li><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">수정</a></li>
+								   			<li><a class="dropdown-item" href="<%=context%>/commuDeleteForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">삭제</a></li>
 								  		</ul>
 									</div>
 								</div>
