@@ -24,7 +24,6 @@ public class JoinProAction implements CommandProcess {
 		System.out.println("JoinProAction Start..");
 		int maxSize = 5 * 1024 * 1024;
 		String fileSave = "/fileSave";
-
 		// Servlet 상속 받지 못했을 떄 realPath 불러 오는 방법
 		String realPath = request.getSession().getServletContext().getRealPath(fileSave);
 	//	String realPath = getServletContext().getRealPath(fileSave);
@@ -34,6 +33,7 @@ public class JoinProAction implements CommandProcess {
 		Enumeration en = multi.getFileNames();
 		// 서버에 저장된 파일 이름
 		String serverSaveFilename = "";
+		String upLoadFilename = "";
 		while (en.hasMoreElements()) {
 			//input 태그의 속성이 file인 태그의 name 속성값 :파라미터이름
 			String parameterName = (String) en.nextElement();
@@ -54,7 +54,15 @@ public class JoinProAction implements CommandProcess {
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
 		}
+		String fileusername = "fileSave\\"+serverSaveFilename;
 		String pageNum = request.getParameter("pageNum");
+		String name = multi.getParameter("name");
+		String title = multi.getParameter("title");
+		System.out.println("name ->"+ name);
+		System.out.println("title ->"+ title);
+		
+		upLoadFilename = realPath + "\\"+ serverSaveFilename;
+		System.out.println("전달 upLoadFilename ->"+ upLoadFilename);
 		
 		try {
 			MemberDao md = MemberDao.getInstance();
@@ -67,10 +75,14 @@ public class JoinProAction implements CommandProcess {
 			member.setUser_birth(multi.getParameter("user_birth"));
 			member.setUser_gender(multi.getParameter("user_gender"));
 			member.setUser_tel(multi.getParameter("user_tel"));
-			member.setUser_img(multi.getParameter("user_img"));
+			member.setUser_img(fileusername);
+			System.out.println("multi.getParameter(fileusername)"+fileusername);
 			int result = md.insert(member);
 			request.setAttribute("result", result);
 			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("filename", "fileSave\\"+serverSaveFilename);
+			request.setAttribute("upLoadFilename", upLoadFilename);
+			request.setAttribute("title", title);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
