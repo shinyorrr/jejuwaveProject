@@ -53,6 +53,9 @@
 			  				<td class="left" width="250">
 							<c:if test="${travel.t_relevel == 0}">
 								${travel.t_title}
+								<c:if test="${travel.reply_cnt != 0 }">
+									<span class="badge rounded-pill bg-secondary">${travel.reply_cnt}</span>
+								</c:if>
 							</c:if>
 							<c:if test="${travel.t_relevel > 0}">
 								<img src="<%=context%>/hs_images/adreply.png" width="${travel.t_relevel*10 }">
