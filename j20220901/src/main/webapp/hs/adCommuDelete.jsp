@@ -12,7 +12,7 @@
 	<input type="hidden" name="pageNum" value="${pageNum}">
 	<c:if test="${result > 0}">
 		<script type="text/javascript">
-			alert("삭제 완료!");
+			alert("회원 커뮤니티글 삭제 완료!");
 			location.href="adCommuForm.do?pageNum=${pageNum}";
 		</script>
 	</c:if>
