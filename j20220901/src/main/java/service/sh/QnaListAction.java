@@ -35,7 +35,7 @@ public class QnaListAction implements CommandProcess {
 			
 		
 			int currentPage = Integer.parseInt(pageNum); // 1 2
-			int pageSize = 5, blockSize = 10;
+			int pageSize = 20, blockSize = 10;
 			int startRow = (currentPage - 1) * pageSize + 1; // 1 11
 			int endRow = startRow + pageSize - 1; // 10 20
 			int startNum = totCnt - startRow + 1; // 38- 11 +1 28

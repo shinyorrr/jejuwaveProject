@@ -22,18 +22,19 @@ String context = request.getContextPath();
 <script type="text/javascript">
 var count = 2;
 $(window).scroll(function(){
-	if($(window).scrollTop() == $(document).height() - $(window).height()) {	
+	if($(window).scrollTop() >= $(document).height() - $(window).height()) {	
+		alert('scroll start..');
 		$.ajax({ 
 			url: "<%=context%>/qnaListScroll.do?pageNum="+count,
 			success: function(result){
 						$("#scroll").append(result);
 						count = count+1;
 					}
-		});
+		}); 
 	}
 });	
 console.log(count);
-console.log(result);		
+
 </script>
 
 
@@ -89,7 +90,7 @@ console.log(result);
 			<div id="scroll"></div>
 		</table>
 		
-	<!--1 2 3 번 페이지 버튼  -->
+ 	<!--1 2 3 번 페이지 버튼  -->
 		<div style="text-alile: center;">
 			<c:if test="${startPage > blockSize }">
 				<a href="<%=context%>/qnaList.do?pageNum=${startPage-blockSize }">[이전]</a>
