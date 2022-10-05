@@ -168,49 +168,70 @@ public class Qna_BoardDao {
 		return board;
 	}
 
-	public int insert(Qna_Board board) throws SQLException {
-		int b_num = board.getB_num();
-		System.out.println(b_num);
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int result = 0;
+	   public int insert(Qna_Board board, String hashString) throws SQLException {
+		      int b_num = board.getB_num();
+		      System.out.println(b_num);
+		      Connection conn = null;
+		      PreparedStatement pstmt = null;
+		      ResultSet rs = null;
+		      int result = 0;
+		         System.out.println("hashString-->"+hashString);
+		      String[] hash = hashString.split("#");
 
-		String sql1 = "select nvl(max(b_num),0) from qna_board";
-		String sql = "insert into qna_board (b_num,user_id,b_date,b_title,b_content,b_success,b_theme) values(?,'aaaa',sysdate,?,?,?,?)";
+		      String sql1 = "select nvl(max(b_num),0) from qna_board";
+		      String sql = "insert into qna_board (b_num,user_id,b_date,b_title,b_content,b_success,b_theme) values(?,'aaaa',sysdate,?,?,?,?)";
+		      //  빐 떆 깭洹   궫 엯
+		      String sql2 = "insert into qna_hash (b_num, l_hash1 , l_hash2 , l_hash3 ) values(?,?,?,?)";
+		      System.out.println("Qna_BoardDao insert sql2-->"+sql2);
+		      try {
+		         conn = getConnection();
+		         pstmt = conn.prepareStatement(sql1);
+		         rs = pstmt.executeQuery();
+		         rs.next();
+		         int number = rs.getInt(1) + 1;
+		         rs.close();
+		         pstmt.close();
 
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql1);
-			rs = pstmt.executeQuery();
-			rs.next();
-			int number = rs.getInt(1) + 1;
-			rs.close();
-			pstmt.close();
+		         pstmt = conn.prepareStatement(sql);
+		         pstmt.setInt(1, number);
 
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, number);
+		         // pstmt.setString(2, board.getUser_id());
+		         pstmt.setString(2, board.getB_title());
+		         pstmt.setString(3, board.getB_content());
+		         pstmt.setString(4, board.getB_success());
+		         pstmt.setString(5, board.getB_theme());
+		         // Board Update
+		          result=pstmt.executeUpdate();
+		         
+		         pstmt.close();
 
-			// pstmt.setString(2, board.getUser_id());
-			pstmt.setString(2, board.getB_title());
-			pstmt.setString(3, board.getB_content());
-			pstmt.setString(4, board.getB_success());
-			pstmt.setString(5, board.getB_theme());
-
-			result = pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			// TODO: handle exception
-		} finally {
-			if (rs != null)
-				rs.close();
-			if (pstmt != null)
-				pstmt.close();
-			if (conn != null)
-				conn.close();
-		}
-		return result;
-	}
+		          // 빐 떆 깭洹  
+		          pstmt = conn.prepareStatement(sql2); 
+		          pstmt.setInt(1,number);
+		          System.out.println("hash泥ル쾲吏 -->"+hash[1]);
+		          pstmt.setString(2,hash[1]);
+		          System.out.println("hash 몢踰덉㎏-->"+hash[2]);
+		          pstmt.setString(3,hash[2]);
+		          System.out.println("hash 꽭踰덉㎏-->"+hash[3]);
+		          pstmt.setString(4,hash[3]);
+		           
+		         // 遺 紐  Board ,  굹 뒗 qna_hash( 옄 떇) Update
+		          result=pstmt.executeUpdate();
+		           
+		          
+		      } catch (Exception e) {
+		          System.out.println("Qna_BoardDao insert e.getMessage()->"+e.getMessage());
+		      } finally {
+		         if (rs != null)
+		            rs.close();
+		         if (pstmt != null)
+		            pstmt.close();
+		         if (conn != null)
+		            conn.close();
+		      }
+		       System.out.println("Qna_BoardDao insert result->"+result);
+		      return result;
+		   }
 
 	public int update(Qna_Board board) throws SQLException {
 		Connection conn = null;
