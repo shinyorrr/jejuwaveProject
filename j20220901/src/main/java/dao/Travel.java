@@ -19,8 +19,14 @@ public class Travel {
 	private int 	t_restep;
 	private int 	result;
 	private int 	reply_cnt;
+	private String 	user_img;
 	
-	
+	public String getUser_img() {
+		return user_img;
+	}
+	public void setUser_img(String user_img) {
+		this.user_img = user_img;
+	}
 	public int getResult() {
 		return result;
 	}
