@@ -82,7 +82,7 @@ console.log(count);
 			</c:if>
 			<c:if test="${totCnt ==0 }">
 				<tr>
-					<td colspan=7>데이터가 없네</td>
+					<td colspan=7>데이터가 없네ㅜ</td>
 				</tr>
 
 			</c:if>
