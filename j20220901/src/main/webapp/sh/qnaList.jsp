@@ -18,24 +18,7 @@ String context = request.getContextPath();
 <link rel="stylesheet" href="<%=context%>/css/sh/qnamain.css">
 <link rel="stylesheet" href="<%=context%>/css/sh/qnaUpdate.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<!-- qna 무한스크롤 ajax-->
-<script type="text/javascript">
-var count = 2;
-$(window).scroll(function(){
-	if($(window).scrollTop() >= $(document).height() - $(window).height()) {	
-		alert('scroll start..');
-		$.ajax({ 
-			url: "<%=context%>/qnaListScroll.do?pageNum="+count,
-			success: function(result){
-						$("#scroll").append(result);
-						count = count+1;
-					}
-		}); 
-	}
-});	
-console.log(count);
 
-</script>
 
 
 <!-- ----------------상단 고정이미지 ---------------  -->
@@ -86,27 +69,33 @@ console.log(count);
 				</tr>
 
 			</c:if>
-			<!-- end list -->
-			<div id="scroll"></div>
+			
 		</table>
 		
- 	<!--1 2 3 번 페이지 버튼  -->
-		<div style="text-alile: center;">
-			<c:if test="${startPage > blockSize }">
-				<a href="<%=context%>/qnaList.do?pageNum=${startPage-blockSize }">[이전]</a>
-
-			</c:if>
-			<c:forEach var="i" begin="${startPage }" end="${endPage }">
-				<a href="<%=context%>/qnaList.do?pageNum=${i}">[${i}]</a>
-			</c:forEach>
-
-			<c:if test="${endPage<pageCnt }">
-				<a href="<%=context%>/qnaList.do?pageNum=${startPage+blockSize}">[다음]</a>
-			</c:if>
-
-		</div>
-
-		totCount : ${totCnt}
+ 	<!-- paging section-->
+ 		<br>	<br>
+		<nav  aria-label="Page navigation example"
+			class="d-flex justify-content-center">
+			<ul class="pagination">
+				<c:if test="${startPage > blockSize}">
+					<li class="page-item"><a class="page-link"
+						href='qnaList.do?pageNum=${startPage-blockSize}'
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+				</c:if>
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<li class="page-item"><a class="page-link"
+						href='qnaList.do?pageNum=${i}'>${i}</a></li>
+				</c:forEach>
+				<c:if test="${endPage < pageCnt}">
+					<li class="page-item"><a class="page-link"
+						href='qnaList.do?pageNum=${startPage+blockSize}'
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</c:if>
+			</ul>
+		</nav>
+	
 
 	</div>
 
