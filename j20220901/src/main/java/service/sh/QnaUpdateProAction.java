@@ -23,9 +23,11 @@ public class QnaUpdateProAction implements CommandProcess {
 			board.setB_title(request.getParameter("b_title"));
 			board.setB_content(request.getParameter("b_content"));
 			board.setB_theme(request.getParameter("b_theme"));
+			//해시태그받기
+			String hashString = request.getParameter("hashString");
 			
 			Qna_BoardDao bd = Qna_BoardDao.getInstance();
-			int result = bd.update(board); 
+			int result = bd.update(board, hashString); 
 			
 			request.setAttribute("result", result);
 			request.setAttribute("b_num", board.getB_num());

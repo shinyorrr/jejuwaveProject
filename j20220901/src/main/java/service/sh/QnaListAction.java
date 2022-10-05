@@ -30,7 +30,7 @@ public class QnaListAction implements CommandProcess {
 				pageNum = "1";
 			}
 			System.out.println("pageNum 출력");
-			System.out.println(request.getParameter("pageNum"));
+			System.out.println("QnaListAction pageNum->"+pageNum);
 			System.out.println("pageNum 출력완료");
 			
 		
@@ -50,8 +50,11 @@ public class QnaListAction implements CommandProcess {
 			int startPage = (int) (currentPage - 1) / blockSize * blockSize + 1; // 1 2
 			int endPage = startPage + blockSize - 1; // 10 11
 			// 공갈 page 방지 11> 4
-			if (endPage > pageCnt)
-				endPage = pageCnt;
+			if (endPage > pageCnt)			endPage = pageCnt;
+
+			System.out.println("ListAction startPage->" + startPage);
+			System.out.println("ListAction endPage->" + endPage);
+			System.out.println("ListAction list.size()->" + list.size());
 
 			request.setAttribute("list", list);
 			request.setAttribute("totCnt", totCnt);
