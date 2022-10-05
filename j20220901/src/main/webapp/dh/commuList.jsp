@@ -13,33 +13,7 @@ String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
 
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
-	rel="stylesheet">
 
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" href="css/header_main.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-<script src="js/index.js" defer="defer"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <!-- 커뮤니티 무한스크롤 ajax-->
@@ -59,6 +33,17 @@ $(window).scroll(function(){
 console.log(count);
 		
 </script>
+
+<!-- 삭제버튼 confirm -->
+<%-- <script type="text/javascript">
+function ConfirmDel() {
+	if (confirm("삭제 하시겠습니까?")) {
+		location.href="<%=context%>/commuDeleteForm.do?c_num=${commu.c_num}&pageNum=${currentPage}";
+	} else {
+		return false;
+	}
+}
+</script> --%>
 </head>
 <body>
 
@@ -104,7 +89,7 @@ console.log(count);
 								  		</button>
 								  		<ul class="dropdown-menu">
 								    		<li><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">수정</a></li>
-								   			<li><a class="dropdown-item" href="<%=context%>/commuDeleteForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">삭제</a></li>
+								   			<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" >삭제</a></li><!-- href='javascript:void(0);confirm();' onclick="ConfirmDel(); -->
 								  		</ul>
 									</div>
 								</div>
@@ -129,6 +114,26 @@ console.log(count);
 								</div>
 							</div>
 					    </div>
+					    <!-- deleteModal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
+	        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        게시글을 정말로 삭제하시겠습니까?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='<%=context%>/commuDeletePro.do?c_num=${commu.c_num}&pageNum=${currentPage}'">삭제</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 						<!-- end modal -->
 						<!-- Call modalContent.jsp Script -->
 						<script>
@@ -151,6 +156,8 @@ console.log(count);
 			<div id="scroll"></div>
 		</section>
 	</main>
+	
+	
 	
 	<footer class="py-5 bg-dark" style="margin-top: 100px;">
 		<div class="container">
