@@ -25,7 +25,7 @@
 }
 .imgbox{
 	width : 120px;
-	padding-bottom : 10px;
+	height: 130px;
 }
 .dealstatus{
 	font-family: 'Noto Sans KR';
@@ -89,6 +89,9 @@ table {
 }
 .t_title{
 	font-family: 'korean';
+	width: 220px;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 .button_updateform{
 	padding-right: 10px;

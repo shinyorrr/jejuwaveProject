@@ -105,7 +105,7 @@
 												</div>
 											</td>
 											<td class = "dealstatusTd" width = 90>
-												<div class = "dealstatus">
+												<div class = "dealstatus"  style="width: 100px;">
 														<c:if test="${board.t_dealstatus == 1 }">
 														모집완료	
 														</c:if>
@@ -134,7 +134,7 @@
 													<button class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'">수정</button>
 												</div>
 												<div>
-													<button class = "button_delete" onclick="deleteMsg()">삭제</button>
+													<button class = "button_delete" onclick="location.href = '<%=context%>/MypageTraveldelete.do?t_num=${board.t_num }'">삭제</button>
 												</div>
 											</td>
 											<td>
