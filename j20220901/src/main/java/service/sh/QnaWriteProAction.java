@@ -7,6 +7,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Qna_Board;
 import dao.Qna_BoardDao;
@@ -28,8 +29,6 @@ public class QnaWriteProAction implements CommandProcess {
 			board.setB_title(request.getParameter("b_title"));
 			board.setB_content(request.getParameter("b_content"));
 			board.setB_theme(request.getParameter("b_theme"));
-			
-		    
 			
 			Qna_BoardDao bd = Qna_BoardDao.getInstance();
 			int result = bd.insert(board, hashString);

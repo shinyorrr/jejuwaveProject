@@ -89,7 +89,7 @@ String context = request.getContextPath();
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 											<c:if test="${img != null }">
-												<img src="<%=context %>/${img}"
+												<img src="<%=context %>${img}"
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 										</div>

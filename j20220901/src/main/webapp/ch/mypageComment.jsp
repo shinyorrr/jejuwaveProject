@@ -10,10 +10,16 @@
    String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageComment.css?after">
+<style type="text/css">
+	table {
+		width: 100%;
+	}
+</style>
 </head>
 <body>
 
@@ -86,7 +92,7 @@
 								<td>${board.t_date }</td>
 							</tr>
 							<tr>
-								<td><button location.href = "Board.jsp">수정</button></td><td><button>삭제</button></td><td></td><td>댓글수</td>
+								<td><button location.href = "Board.jsp">수정</button><button>삭제</button></td>
 							</tr>
 						</table>
 							<c:set var="startNum" value="${startNum - 1 }" />

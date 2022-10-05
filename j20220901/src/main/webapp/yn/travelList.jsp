@@ -7,23 +7,15 @@
 <%
 String context = request.getContextPath();
 %>
-<c:import url="../header.jsp"></c:import>
-
-<!-- 
-*********************************
-*********************************
-부트스트랩 충돌 있는듯! 정리 필요.
-*********************************
-*********************************
- -->
+<c:import url="header.jsp"></c:import>
+<link rel="stylesheet" href="yncss/trList.css" type="text/css">
 
 
 <!------------------ body 영역 ------------>
 
-
 <!-- Header-->
 <header class="py-5 mb-5"
-	style="background-image: url('yn_images/travelerList_cate.jpg'); background-size: cover; ">
+		style="background-image: url('images/travelerList_cate.jpg'); background-size: cover; margin-top:148px;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
 		<div class="text-center text-white">
 			<h3 class="display-5 fw-bolder">동행자 게시판</h3>
@@ -41,28 +33,27 @@ String context = request.getContextPath();
 			<form action="#" class=" form-inline">
 				<span class="fw-bold align-middle me-5">날짜 선택</span>
 		  			
-					<div class="  my-0 mx-0 px-0" style="display:inline;">
-						<input oninput="getStartDate()" name="t_start" type="date" class="me-0" id="input_from" placeholder="시작 날짜" style="width:38%; height:34px;">
-						-
-						<input name="t_end" type="date" class=" ms-0" id="input_to" placeholder="종료 날짜" style="width:38%;height:34px;">
-					</div>
+				<div class="  my-0 mx-0 px-0" style="display:inline;">
+					<input oninput="getStartDate()" name="t_start" type="date" class="me-0" id="input_from" placeholder="시작 날짜" style="width:38%; height:34px;">
+					-
+					<input name="t_end" type="date" class=" ms-0" id="input_to" placeholder="종료 날짜" style="width:38%;height:34px;">
+				</div>
 			</form>
 		</div>
 		<div class="col-lg-6 col-sm-12 text-lg-end">
 			<div id="serchFilter" class=" mb-4">
 				<button name="t_gubun" value="전체" type="button" class="btn mx-1">전체
 				</button>
-				<button name="t_gubun" value="숙박" type="button" class="btn mx-1">숙박
+				<button name="t_gubun" value="숙박" type="button" class="btn mx-1">#숙박
 				</button>
-				<button name="t_gubun" value="레저" type="button" class="btn mx-1">레저
+				<button name="t_gubun" value="레저" type="button" class="btn mx-1">#레저
 				</button>
-				<button name="t_gubun" value="맛집" type="button" class="btn mx-1">맛집
+				<button name="t_gubun" value="맛집" type="button" class="btn mx-1">#맛집
 				</button>
-				<button name="t_gubun" value="카풀" type="button" class="btn mx-1">카풀
+				<button name="t_gubun" value="카풀" type="button" class="btn mx-1">#카풀
 				</button>
 				<div id="filter">
-					<button class="btn ms-3 px-3 me-0" id="filterBtn"
-						style="width: 105px;">검색</button>
+					<button class="btn ms-3 px-3 me-0" id="filterBtn" style="width: 105px;">검색</button>
 				</div>
 			</div>
 			<div id="filter">
@@ -88,70 +79,66 @@ String context = request.getContextPath();
 								 onclick="location.href='travelContent.do?t_num=${travel.t_num}&pageNum=${currentPage}';">
 									
 									
-									<!-- Content 이미지-->
-									<div id="pic">
-									
-										<img src="yn_images/upload/${travel.t_img}" class="card-img-top" />
-									
-									</div> 
-									
-									
-									<!-- Content details-->
-									<div class="card-body p-4">
-										<div class="text-left">
-											<!-- Content text-->
-											<p class="fw-bolder" id="title">
-											<c:choose>
-												<c:when test="${travel.t_dealstatus == 0}">
-													<b style="color: #ff3500; width: 64px;">모집중</b>&nbsp&nbsp
-												</c:when>
-												<c:otherwise>
-													<b style="color: #A6A6A6; width: 64px;">모집완료</b>&nbsp&nbsp
-												</c:otherwise>
-											</c:choose>
+								<!-- Content 이미지-->
+								<div id="pic">
+									<img src="images/upload/${travel.t_img}" class="card-img-top" />
+								</div> 
+								
+								<!-- Content details-->
+								<div class="card-body p-4">
+									<div class="text-left">
+										<!-- Content text-->
+										<p class="fw-bolder" id="title">
+										<c:choose>
+											<c:when test="${travel.t_dealstatus == 0}">
+												<b style="color: #ff3500; width: 64px;">모집중</b>&nbsp&nbsp
+											</c:when>
+											<c:otherwise>
+												<b style="color: #A6A6A6; width: 64px;">모집완료</b>&nbsp&nbsp
+											</c:otherwise>
+										</c:choose>
 
 
-												<!-- 제목 짜르기 -->
-												<span> <c:choose>
-														<c:when test="${fn:length(travel.t_title) > 12}">
-															<c:out value="${fn:substring(travel.t_title,0,11)}" />...
-												</c:when>
-														<c:otherwise>
-															<c:out value="${travel.t_title}" />
-														</c:otherwise>
-													</c:choose>
-												</span>
-											</p>
-
-											<!-- 본문 짜르기 -->
-
-											<p id="content">
+											<!-- 제목 짜르기 -->
+											<span>
 												<c:choose>
-													<c:when test="${fn:length(travel.t_content) > 35}">
-														<c:out value="${fn:substring(travel.t_content,0,34)}" />...
-												</c:when>
+													<c:when test="${fn:length(travel.t_title) > 12}">
+														<c:out value="${fn:substring(travel.t_title,0,11)}" />...
+													</c:when>
 													<c:otherwise>
-														<c:out value="${travel.t_content}" />
+														<c:out value="${travel.t_title}" />
 													</c:otherwise>
 												</c:choose>
-											</p>
+											</span>
+										</p>
 
-											<p id="IdComment">
-												<img src="yn_images/user_icon01.png" width="20" height="20"
-													style="margin: 0 5px 6px 0;"
-													class="userIconColor-1 rounded-circle me-2  align-center ">
-												${travel.user_id}
+										<!-- 본문 짜르기 -->
+										<p id="content">
+											<c:choose>
+												<c:when test="${fn:length(travel.t_content) > 35}">
+													<c:out value="${fn:substring(travel.t_content,0,34)}" />...
+											</c:when>
+												<c:otherwise>
+													<c:out value="${travel.t_content}" />
+												</c:otherwise>
+											</c:choose>
+										</p>
 
-												<!-- 댓글개수 -->
+										<p id="IdComment">
+											<img src='${travel.user_img}' width="20" height="20"
+												style="margin: 0 5px 2px 0;"
+												class="userIconColor-1 rounded-circle me-2  align-center ">
+											${travel.user_id}
 
-												<c:if test="" var="commCnt"></c:if>
-												<span id="comment"> <img
-													style="width: 16px; height: 16px; margin: 0 5px;"
-													src="yn_images/comm_icon.png">${travel.reply_cnt}
-												</span>
-											</p>
-										</div>
+											<!-- 댓글개수 -->
+											<c:if test="" var="commCnt"></c:if>
+											<span id="comment"> <img
+												style="width: 16px; height: 16px; margin: 0 5px;"
+												src="yn_images/comm_icon.png">${travel.reply_cnt}
+											</span>
+										</p>
 									</div>
+								</div>
 							</div>
 						</div>
 
@@ -161,9 +148,7 @@ String context = request.getContextPath();
 			</c:if>
 
 			<c:if test="${totCnt == 0 }">
-				<tr>
-					<td colspan="7">데이터가 없네</td>
-				</tr>
+				<tr><td colspan="7">데이터가 없네</td></tr>
 			</c:if>
 
 		</div>
@@ -194,7 +179,7 @@ String context = request.getContextPath();
 
 <div style="margin-top: 200px;"></div>
 <%-- <%@ include file="footer.jsp"%> --%>
-<c:import url="${context}/yn/footer.jsp"></c:import>
+<c:import url="${context}/footer.jsp"></c:import>
 <!-- Bootstrap core JS-->
 <script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>

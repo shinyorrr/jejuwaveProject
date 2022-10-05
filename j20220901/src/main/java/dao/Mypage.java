@@ -27,7 +27,21 @@ public class Mypage {
 	private String c_content;
 	private Date c_date;
 	private String c_hash;
+	private int t_recnt;
+	private int b_recnt;
 	
+	public int getB_recnt() {
+		return b_recnt;
+	}
+	public void setB_recnt(int b_recnt) {
+		this.b_recnt = b_recnt;
+	}
+	public int getT_recnt() {
+		return t_recnt;
+	}
+	public void setT_recnt(int t_recnt) {
+		this.t_recnt = t_recnt;
+	}
 	public int getC_img_num() {
 		return c_img_num;
 	}

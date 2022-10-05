@@ -1,5 +1,29 @@
 @charset "UTF-8";
 
+/************************************/
+/**********   List css   ************/
+/************************************/
+/* 폰트 등록 */
+@font-face{
+    font-family : 'NotoSansKR-Regular';
+    /* src : url('../font/NotoSansKR-Regular.otf') format('otf');
+    src : url('../font/NotoSansKR-Regular.woff') format('woff'); */
+    src : url('../font/NotoSansKR-Regular.ttf') format('ttf');
+    font-weight : normal;
+    font-style : normal;
+}
+
+@font-face{
+    font-family : 'NotoSansKR-Medium';
+    src : url('../font/NotoSansKR-Medium.ttf') format('ttf'), url('../fonts/NotoSansKR-Medium.woff') format('woff');
+    font-weight : normal;
+    font-style : normal;
+}
+
+body{
+	font-family: 'NotoSansKR-Regular';
+}
+
 #title {
 	white-space: nowrap;
 	overflow: hidden;
@@ -63,26 +87,7 @@
 	float: right;
 }
 
-/* 폰트 등록 */
-@font-face{
-    font-family : 'NotoSansKR-Regular';
-    src : url('../fonts/NotoSansKR-Regular.otf') format('otf');
-    src : url('../fonts/NotoSansKR-Regular.woff') format('woff');
-    src : url('../fonts/NotoSansKR-Regular.ttf') format('ttf');
-    font-weight : normal;
-    font-style : normal;
-}
 
-@font-face{
-    font-family : 'NotoSansKR-Medium';
-    src : url('../fonts/NotoSansKR-Medium.ttf') format('ttf'), url('../fonts/NotoSansKR-Medium.woff') format('woff');
-    font-weight : normal;
-    font-style : normal;
-}
-
-body{
-	font-family: 'NotoSansKR', Regular;
-}
 .fileRegiBtn label {
 	display: inline-block; 
 	padding: .5em .75em; 
@@ -108,5 +113,91 @@ body{
 	overflow: hidden; 
 	clip:rect(0,0,0,0); 
 	border: 0;
+}
+/************************************/
+/**********   View css   ************/
+/************************************/
+#dateViwer {
+	font-size: 90%;
+}
+#keyColor{
+	color:#ff3500;	
+}
+.keyColor{
+	color:#ff3500;
+}
+#userBox{
+	border: 1px; 
+	border-color: #4A3E37 ;
+	border-collapse:collapse;
+	border-radius: round;
+}
 
+
+.fontColorGrey {
+	color:#8C8C8C;
+}
+.fontSize-14{
+	font-size:14px;
+}
+.fontSize-12{
+	font-size:small;
+}
+
+.floatLL{
+	float:left;
+}
+.floatRR{
+	float:right;
+}
+#trCommBtn {
+	height:34px;
+	width:131px;
+	background-color: #FF3500;
+	color: white;
+	font-size: 14px;
+	border-radius: 20px;
+	
+}
+
+#commInsBtn {
+	background-color: #FF3500;
+	color: white;
+	font-size: 14px;
+	border-right:none;
+}
+
+/************************************/
+/**********   Write css   ************/
+/************************************/
+/*라벨은 원하는대로 커스텀하고*/
+
+.fileRegiBtn label {
+	display: inline-block; 
+	padding: .5em .75em; 
+	color: #ffffff; 
+	font-size: inherit; 
+	line-height: normal; 
+	vertical-align: middle; 
+	background-color: #ff3500; 
+	cursor: pointer; 
+	border: 1px solid #ebebeb; 
+	border-bottom-color: #e2e2e2; 
+	border-radius: .25em;
+}
+
+#fileName {
+	background-color: #e2e2e2;
+}
+/*파일선택시 선택된 파일명이 붙는것을 가려준다*/
+
+.fileRegiBtn input[type="file"]{
+	position: absolute; 
+	width: 1px; 
+	height: 1px; 
+	padding: 0; 
+	margin: -1px; 
+	overflow: hidden; 
+	clip:rect(0,0,0,0); 
+	border: 0;
 }

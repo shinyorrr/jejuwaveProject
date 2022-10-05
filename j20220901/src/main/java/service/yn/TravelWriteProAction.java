@@ -28,8 +28,9 @@ public class TravelWriteProAction implements CommandProcess {
 			
 			request.setCharacterEncoding("utf-8");
 			Travel result = null;
-			
-			String saveFolder = "C:\\Jsp\\jspSrc\\jejuwave_1001\\src\\main\\webapp\\yn_images\\upload\\";
+			System.out.println("getContextPath =======>" + request.getContextPath());
+			System.out.println("getRealPath =======>" + request.getSession().getServletContext().getRealPath("/"));
+			String saveFolder = "C:\\Jsp\\jspSrc\\jejuwave_1001\\src\\main\\webapp\\images\\upload\\";
 			String encType = "utf-8";
 			int maxSize = 5* 1024 *1024;
 		
@@ -47,19 +48,23 @@ public class TravelWriteProAction implements CommandProcess {
 				if(filename == null) {
 					switch (multi.getParameter("t_gubun")) {
 					case "숙박":
-						filename = "jejuRoom" + ((int)(Math.random()*4) + 1) + ".jpg";
+						filename = "random\\jejuRoom" + ((int)(Math.random()*4) + 1) + ".jpg";
 						break;
 					
 					case "레저":
-						filename = "jejuLes" + ((int)(Math.random()*4) + 1) + ".jpg";
+						filename = "random\\jejuLes" + ((int)(Math.random()*8) + 1) + ".jpg";
 						break;
 					
 					case "맛집":
-						filename = "jejuEat" + ((int)(Math.random()*4) + 1) + ".jpg";
+						filename = "random\\jejuEat" + ((int)(Math.random()*7) + 1) + ".jpg";
 						break;
 					
 					case "카풀":
-						filename = "jejuCar" + ((int)(Math.random()*4) + 1) + ".jpg";
+						filename = "random\\jejuCar" + ((int)(Math.random()*7) + 1) + ".jpg";
+						break;
+						
+					case "기타":
+						filename = "random\\jejuAll" + ((int)(Math.random()*7) + 1) + ".jpg";
 						break;
 
 					default:
@@ -85,7 +90,7 @@ public class TravelWriteProAction implements CommandProcess {
 				travel.setUser_id		(user_id);
 				travel.setT_img			(filename);
 				travel.setT_title		(multi.getParameter("t_title"));
-				travel.setT_content		(multi.getParameter("t_content"));
+				travel.setT_content		(multi.getParameter("t_content").replace("\r\n","<br>"));
 				travel.setT_gubun		(multi.getParameter("t_gubun"));
 				travel.setT_person		(Integer.parseInt(multi.getParameter("t_person")));
 				travel.setT_start		(multi.getParameter("t_start"));

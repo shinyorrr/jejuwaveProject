@@ -113,7 +113,7 @@ public class CommuDao {
 		ResultSet         rs    = null;
 		
 		try {
-			//community select(c_img 제외)
+			
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -262,4 +262,107 @@ public class CommuDao {
 		return results;
 	}
 	
+	// (수정용)deleteImages
+	public int deleteImg(List<Integer> targetNums) throws SQLException {
+		System.out.println("deleteImg dao start..");
+		int resultDeleteImg = 0;
+		String sql = "delete community_img where c_img_num=?";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			
+			for (Integer targetNum : targetNums) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, targetNum);
+				resultDeleteImg += pstmt.executeUpdate();
+				pstmt.close();
+			}
+		} catch (Exception e) {
+			System.out.println("deleteImg try...err" + e.getMessage());
+		} finally {
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 
+		}
+		return resultDeleteImg;
+	}
+	
+	// (수정용)Community_img insert
+	public int insertImg(List<Commu.CommuImg> commuImgList) throws SQLException {
+		int resultInsertImg = 0;
+		String sql = "insert into community_img values(? , seq_COM_IMG.nextval , ?)";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;		
+		try {
+			System.out.println("insert img start...");
+			System.out.println("before insert commuImgList->" + commuImgList);
+			List<Integer> imgResults = new ArrayList<>(); //img insert result list
+			conn = getConnection();
+			for (Commu.CommuImg commuImg : commuImgList) {
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt   (1 , commuImg.getC_num());
+				pstmt.setString(2 , commuImg.getC_img_path());
+				System.out.println("insert img 게시글 number->" + commuImg.getC_num());
+				System.out.println("insert img c_img_path->" + commuImg.getC_img_path());
+				int imgResult = pstmt.executeUpdate();
+				System.out.println("imgResult->" + imgResult);
+				imgResults.add(imgResult);
+				pstmt.close();
+			}
+			resultInsertImg = imgResults.stream().mapToInt(Integer::intValue).sum();
+		} catch (Exception e) {
+			System.out.println("update insertImg try...err ->" + e.getMessage());
+		} finally {
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 
+		}
+		return resultInsertImg;
+	}
+	
+	
+	// (수정용)Community table update(이미지제외)
+	public int update(Commu commu) throws SQLException {
+		System.out.println("Community table update start...");
+		int resultUpdateCommu = 0;
+		String sql = "update community set c_content = ? , c_hash = ? where c_num = ?";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt   (3 , commu.getC_num());
+			pstmt.setString(1 , commu.getC_content());
+			pstmt.setString(2 , commu.getC_hash());
+			resultUpdateCommu = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("commu update try...err -> " + e.getMessage());
+		} finally {
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 	
+		}
+		return resultUpdateCommu;
+	}
+	
+	// 게시글 삭제
+	public int delete(int c_num) throws SQLException {
+		int result = 0;
+		String sql = "delete community where c_num = ?";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("deleteDAO try...err->" + e.getMessage());
+		} finally {
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 
+		}
+		return result;
+	}
 }

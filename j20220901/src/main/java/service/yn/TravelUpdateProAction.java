@@ -24,7 +24,7 @@ public class TravelUpdateProAction implements CommandProcess {
 			request.setCharacterEncoding("utf-8");
 			int result = 0;
 			
-			String saveFolder = "C:\\Jsp\\jspSrc\\jejuwave_1001\\src\\main\\webapp\\yn_images\\upload\\";
+			String saveFolder = "C:\\Jsp\\jspSrc\\jejuwave_1001\\src\\main\\webapp\\images\\upload\\";
 			String encType = "utf-8";
 			int maxSize = 5* 1024 *1024;
 			

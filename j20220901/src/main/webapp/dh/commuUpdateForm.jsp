@@ -11,85 +11,9 @@
    String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
-	rel="stylesheet">
 
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" href="css/header_main.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-<script src="js/index.js" defer="defer"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<style type="text/css">
-#att_zone {
-  width: 100%;
-  min-height: 150px;
-  padding: 10px;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-}
 
-#att_zone:empty:before {
-  content: attr(data-placeholder);
-  color: #999;
-  font-size: .9em;
-}
-.close {
-    vertical-align: middle;
-    border: none;
-    color: inherit;
-    border-radius: 50%;
-    background: transparent;
-    position: relative;
-    width: 32px;
-    height: 32px;
-    opacity: 0.6;
-}
-.close:focus,
-.close:hover {
-    opacity: 1;
-    background: rgba(128, 128, 128, 0.5);
-}
-.close:active {
-    background: rgba(128, 128, 128, 0.9);
-}
-/* tines of the X */
-.close::before,
-.close::after {
-    content: " ";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 20px;
-    width: 4px;
-    background-color: currentColor;
-}
-.close::before {
-    transform: translate(-50%, -50%) rotate(45deg);
-}
-.close::after {
-    transform: translate(-50%, -50%) rotate(-45deg);
-}
-</style>
 </head>
 <body>
 	
@@ -106,150 +30,49 @@
 		</section>
 		<!-- form 시작 -->
 		<div class="row m-5 justify-content-md-center">
+			
+				
 			<form action="commuUpdatePro.do?" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="user_id" value="${commu.user_id }">
 				<input type="hidden" name="c_num"   value="${commu.c_num }"> <!-- pk 수정하지 않는다. db무결성 문제가능성 -->
 				<input type="hidden" name="pageNum" value="${pageNum }">
-					
-					
-				<div class="form-group">
+				<c:forEach items="${imgList }" var="img">
+					<input type="hidden" name="b_c_img_num" value="${img.c_img_num }">
+				</c:forEach>
 				
-					<div id='image_preview'>
-						<input type='file' id='btnAtt' name="file" multiple='multiple' />
-						<div id='att_zone' data-placeholder='사진을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
+				<div class="form-group file-group" id="file-list">
+					<div class="file-add">
+						<a href="#this" onclick="addFile()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> 파일추가</a>
 					</div>
-
-					<script>
-					( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
-					  imageView = function imageView(att_zone, btn){
-					
-					    var attZone = document.getElementById(att_zone);
-					    var btnAtt = document.getElementById(btn)
-					    var sel_files = [];
-					    
-					    // 이미지와 체크 박스를 감싸고 있는 div 속성
-					    var div_style = 'display:inline-block;position:relative;'
-					                  + 'width:300px;height:280px;margin:40px;border:1px solid #00f;border-radius:0.25rem;	z-index:1';
-					    // 미리보기 이미지 속성
-					    var img_style = 'width:100%;height:100%;z-index:none';
-					    // 이미지안에 표시되는 체크박스의 속성
-					    var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
-					                  + 'right:0px;bottom:0px;z-index:999;background-color:rgba(255,255,255,0.7);color:#f00';
-					    //미리 수정전 select된 이미지 표시
-					    window.onload = (function() {
-							var bfileList = new Array();
-							<c:forEach items="${imgList}" var="imgUrl">
-								bfileList.push("${imgUrl.c_img_path}");
-							</c:forEach>
-							console.log("bfileList->" + bfileList);
-							
-							
-					    	
-							
-							
-					    	var bfiles = new Array();
-							for (var i = 0; i < bfileList.length; i++) {
-								
-						    	bfiles.push(bfile);
-															}
-							var bfileArr = Array.prototype.slice.call(bfiles);
-							for(bf of bfileArr){
-								imageLoader(bf);
-							}
-						})				    
-					    
-					    //파일 첨부시 함수
-					    btnAtt.onchange = function(e){
-					      var files = e.target.files;
-					      var fileArr = Array.prototype.slice.call(files);
-					      console.log("files--" + files);
-					      console.log("fileArr" + fileArr);
-					      for(f of fileArr){
-					        imageLoader(f);
-					      }
-					    }  
-					    
-					  
-					    // 탐색기에서 드래그앤 드롭 사용
-					    attZone.addEventListener('dragenter', function(e){
-					      e.preventDefault();
-					      e.stopPropagation();
-					    }, false)
-					    
-					    attZone.addEventListener('dragover', function(e){
-					      e.preventDefault();
-					      e.stopPropagation();
-					      
-					    }, false)
-					  
-					    attZone.addEventListener('drop', function(e){
-					      var files = {};
-					      e.preventDefault();
-					      e.stopPropagation();
-					      var dt = e.dataTransfer;
-					      files = dt.files;
-					      for(f of files){
-					        imageLoader(f);
-					      }
-					      
-					    }, false)
-					    
-					
-					    
-					    /*첨부된 이미지들을 배열에 넣고 미리보기 */
-					    imageLoader = function(file){
-					      sel_files.push(file);
-					      console.log("sel_files--" + sel_files);
-					      var reader = new FileReader();
-					      reader.onload = function(ee){
-					        let img = document.createElement('img')
-					        img.setAttribute('style', img_style)
-					        img.src = ee.target.result;
-					        console.log("ee.target.result --" + ee.target.result)
-					        attZone.appendChild(makeDiv(img, file));
-					      }
-					      
-					      reader.readAsDataURL(file);
-					      console("reader.readAsDataURL(file) --" + reader.readAsDataURL(file));
-					    }
-					    
-					    /*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
-					    makeDiv = function(img, file){
-					      var div = document.createElement('div')
-					      div.setAttribute('style', div_style)
-					      
-					      var btn = document.createElement('button')
-					      btn.setAttribute('class', 'close')
-					      btn.setAttribute('delFile', file.name);
-					      btn.setAttribute('area-label', 'Close');
-					      btn.setAttribute('style', chk_style);
-					      btn.onclick = function(ev){
-					        var ele = ev.srcElement;
-					        var delFile = ele.getAttribute('delFile');
-					        for(var i=0 ;i<sel_files.length; i++){
-					          if(delFile== sel_files[i].name){
-					            sel_files.splice(i, 1);      
-					          }
-					        }
-					        
-					        dt = new DataTransfer();
-					        for(f in sel_files) {
-					          var file = sel_files[f];
-					          dt.items.add(file);
-					        }
-					        btnAtt.files = dt.files;
-					        var p = ele.parentNode;
-					        attZone.removeChild(p)
-					      }
-					      div.appendChild(img)
-					      div.appendChild(btn)
-					      return div
-					    }
-					  }
-					)('att_zone', 'btnAtt')
-					
-					</script>	
+					<c:forEach items="${imgList}" var="img">
+						<div class="file-input">
+							<span class="glyphicoin glyphicon-camera" aria-hidden="true"></span>
+							<img src="<%=context %>/${img.c_img_path}">
+							<input type="hidden" name="c_img_num " value="${img.c_img_num }">
+							<a href='#this' name='file-delete'>삭제</a>
+						</div>
+					</c:forEach>
 				</div>
-				
+				<!-- 이미지 미리보기 script -->
+				<script type="text/javascript">
+					$(document).ready(function() {
+						$("a[name='file-delete']").on("click", function(e) {
+							e.preventDefault();
+							deleteFile($(this));
+						});
+					})
+					function addFile() {
+						var str = "<div class='file-input'><input type='file' name='file'><a href='#this' name='file-delete'>삭제</a></div>";
+						$("#file-list").append(str);
+						$("a[name='file-delete']").on("click", function(e) {
+							e.preventDefault();
+							deleteFile($(this));
+						});
+					}
+					function deleteFile(obj) {
+						obj.parent().remove();
+					}
+				</script>
 				<div class="form-group">
 					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="9" name="c_content"  placeholder="게시글 내용을 입력하세요d">${commu.c_content }</textarea>
 				</div>

@@ -109,15 +109,15 @@
 										<tr>
 											<td colspan="2">
 												<div class = "button_updateform">
-													<button class = "button_update" onclick="location.href = 'Board.jsp'">수정</button>
+													<button class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'">수정</button>
 												</div>
 												<div>
 													<button class = "button_delete">삭제</button>
 												</div>
 											</td>
 											<td>
-												<div class = "comment number">
-												댓글수
+												<div class = "comment_cnt">
+													<img style="width: 16px; height: 16px; margin: 0 5px;" src="<%=context%>/yn_images/comm_icon.png">${board.t_recnt}
 												</div>
 											</td>
 										</tr>
