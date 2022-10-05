@@ -4,23 +4,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
 <%
    String context = request.getContextPath();
 %>
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
 	<c:if test="${result > 0}">
 		<script type="text/javascript">
 		alert("앞으로 잘 부탁드려요!");
-		location.href="main.do?pageNum=${pageNum}"
+		location.href="<%=context %>/main.do?pageNum=${pageNum}"
 		</script>
 	</c:if>
 	<c:if test="${result == 0}">
 		<script type="text/javascript">
 		alert("회원가입 실패 ㅠㅠ");
-		location.href="joinForm.do?pageNum=${pageNum}"
+		location.href="<%=context %>/joinForm.do?pageNum=${pageNum}"
 		</script>
 	</c:if>
 

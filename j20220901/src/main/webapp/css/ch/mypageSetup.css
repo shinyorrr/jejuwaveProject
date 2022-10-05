@@ -22,7 +22,7 @@ a{
 }
 .Mypage_Main{
 	display : flex;
-	padding : 0px 50px;
+	padding : 50px 50px;
 }
 li, ul{
 	list-style-type: none;

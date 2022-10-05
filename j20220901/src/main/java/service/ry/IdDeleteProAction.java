@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.MemberDao;
 
@@ -14,9 +15,9 @@ public class IdDeleteProAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("IdDeleteProAction Start...");
-		
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
 		try {
-			String user_id = request.getParameter("user_id");
 			String user_pw = request.getParameter("user_pw");
 			String pageNum = request.getParameter("pageNum");
 			
@@ -32,7 +33,7 @@ public class IdDeleteProAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "ry/idDeletePro.jsp";
+		return "idDeletePro.jsp";
 	}
 
 }

@@ -36,11 +36,12 @@ public class MemberDao {
 		PreparedStatement pstmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		String Sql = "select* From member where user_id = ?";
+		String sql = "select user_id From member where user_id = ?";
+		System.out.println("confirmId sql ->"+ sql);
 		try {
 			conn=getConnection();
-			pstmt=conn.prepareStatement(Sql);
-			pstmt.setString(1, "user_id");
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) result = 1;
 			else 		 result = 0;
@@ -116,8 +117,8 @@ public class MemberDao {
 		return member;
 	} 
 	
-	public Member select(String user_name,String user_tel) throws SQLException {
-		Member member = new Member();	
+	public int select(String user_name,String user_tel) throws SQLException {
+		int result = 1;
 		Connection conn = null;
 		String sql  = "select user_id from member where user_name=? and user_tel=?"; 
 		PreparedStatement pstmt = null; 
@@ -129,8 +130,11 @@ public class MemberDao {
 			pstmt.setString(1, user_name);
 			pstmt.setString(2, user_tel);
 			if (rs.next()) {
+				Member member = new Member();
 				member.setUser_id(rs.getString(1));
+				result = 1;
 			} 
+			else result = 0;
 		} catch(Exception e) { 
 			System.out.println(e.getMessage());
 		} finally {
@@ -138,7 +142,7 @@ public class MemberDao {
 			if (pstmt != null) pstmt.close();
 			if (conn != null) conn.close();
 		}
-		return member;
+		return result;
 	} 
 	
 	
@@ -174,5 +178,54 @@ public class MemberDao {
 		
 		
 		return result;
+	}
+	public String findId(String user_name, String user_email) throws SQLException {
+		String id = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select user_id from member where user_name = ? and user_email = ?";
+		System.out.println("findId sql start -> "+ sql);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_name);
+			pstmt.setString(2, user_email);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				id = rs.getString("user_id");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (conn != null) conn.close();
+			if (pstmt != null) pstmt.close();
+			if(rs != null) rs.close();
+		}
+		return id;
+	}
+	public String findpw(String  user_id, String user_name, String user_email) throws SQLException {
+		String pw = null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select user_pw from member where user_id = ? and user_name = ? and user_email = ?";
+		System.out.println("findId sql start -> "+ sql);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			pstmt.setString(2, user_name);
+			pstmt.setString(3, user_email);
+			rs = pstmt.executeQuery();
+			if(rs.next())
+				pw = rs.getString("user_pw");
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (conn != null) conn.close();
+			if (pstmt != null) pstmt.close();
+			if(rs != null) rs.close();
+		}
+		return pw;
 	}
 }

@@ -42,12 +42,6 @@ String context = request.getContextPath();
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/index.js" defer="defer"></script>
-<script type="text/javascript">
-function chk() {
-	location.href='<%=context%>/commuList.do';
-	$('.cFXvdf').reomveClass('cFXvdf')
-}
-</script>
 </head>
 <body>
 	<header id="header" class="Headers_HeaderMainHeader burgkU">
@@ -87,7 +81,7 @@ function chk() {
 										style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;">
 								</c:if>
 								<c:if test="${img != null }">
-									<img src="<%=context%>/${img}"
+									<img src="<%=context%>${img}"
 										style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;">
 								</c:if>
 								<img src="images/form_arrow_black_fill.svg">
@@ -154,7 +148,7 @@ function chk() {
 				onClick="location.href='<%=context%>/qnaList.do'">Q&amp;A</button>
 			<button width="auto" font-size="16px" font-weight="400"
 				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdf"
-				onClick="chk()">여행 기록</button>
+				onClick="location.href='<%=context%>/commuList.do'">여행 기록</button>
 		</div>
 	</header>
 </body>

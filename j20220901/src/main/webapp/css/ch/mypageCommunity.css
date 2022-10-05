@@ -21,6 +21,7 @@
 .imgbox{
 	width : 120px;
 	padding-bottom : 10px;
+	height: 120px;
 }
 .dealstatus{
 	font-family: 'Noto Sans KR';
@@ -41,14 +42,13 @@
 }
 .t_content{
 	font-size: 14px;
-	width : 400px;
+	width : 470px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     user-select: none;
     -webkit-user-drag: none;
     padding-left : 20px;
-    font-family: 'korean';
     font-size: small;
 }
 .button_update{
@@ -56,7 +56,7 @@
     -webkit-user-drag: none;
     color: rgb(106, 106, 106);
     float: left;
-    font-family: 'korean';
+    font-family: 'NotoSansKR';
     font-size: 14px;
     background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
@@ -66,7 +66,7 @@
 	user-select: none;
     -webkit-user-drag: none;
     color: rgb(106, 106, 106);
-    font-family: 'korean';
+    font-family: 'NotoSansKR';
     font-size: 14px;
     background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
@@ -82,4 +82,9 @@
 .button_updateform{
 	padding-right: 10px;
 	padding-left : 20px;
+}
+.community_date{
+	font-family: 'NotoSansKR';
+    font-size: smaller;
+    text-align: right;
 }
