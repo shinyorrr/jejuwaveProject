@@ -11,9 +11,8 @@ request.setAttribute("userId", userId);
 %>
 
 <!-- header 영역 -->
-<c:import url="../header.jsp"></c:import>
+<c:import url="${context}/header.jsp"></c:import>
 =======
-<c:import url="header.jsp"></c:import>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">	
 
 <!-------------- body 영역 ------------> 	
@@ -26,7 +25,7 @@ request.setAttribute("userId", userId);
 			<article class="mb-5 pb-3">
 				<!-- 게시물 이미지 -->
 				<figure class="mb-4">
-					<img class="img-fluid rounded mb-4" src="images/upload/${travelContent.t_img}" style="width:100%; height:280px; object-fit:cover;">
+					<img class="img-fluid rounded mb-4" src="${travelContent.t_img}" style="width:100%; height:280px; object-fit:cover;">
 				</figure>
 				
 				<!-- 글제목 -->
@@ -72,8 +71,7 @@ request.setAttribute("userId", userId);
 							<span name="user_id" class="h5">${travelContent.user_id}</span>
 							<!-- Button trigger modal -->
 							<button type="button" class="btn center mt-2" id="trCommBtn"
-								data-bs-toggle="modal" data-bs-target="#exampleModal">동행후기
-								보기</button>
+								data-bs-toggle="modal" data-bs-target="#exampleModal">동행후기보기</button>
 							<!-- Modal -->
 							<div class="modal fade" id="exampleModal" tabindex="-1"
 								aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -173,12 +171,12 @@ request.setAttribute("userId", userId);
 									</div>
 								</div>
 							</div>
-							<button type="button" class="btn center mt-2" id="trCommBtn">동행후기 보기</button>		
+							<!-- <button type="button" class="btn center mt-2" id="trCommBtn">동행후기 보기</button> -->		
 						</div>
 					</div>
 				</div>
 				<!-- 글 내용 -->
-				<section class="mb-5"><%-- ${travelContent.t_content} --%>
+				<section class="mb-5">
 					<p class="fs-6 mb-4" >${travelContent.t_content}</p>
 				</section>
 			</article>
