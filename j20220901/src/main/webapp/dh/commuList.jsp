@@ -13,33 +13,7 @@ String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
 
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
-	rel="stylesheet">
 
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" href="css/header_main.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-<script src="js/index.js" defer="defer"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <!-- 커뮤니티 무한스크롤 ajax-->
@@ -98,6 +72,7 @@ console.log(count);
 									<img class="mt-1 mb-1 img-fluid rounded-circle" alt="회원이미지" src="dh_images/user.png" style="height: 30px; margin-right: 5px;">
 									<span class="mt-2">${commu.user_id }</span>
 									<!-- dropdown menu는 작성자만 수정 삭제 접근가능, else alert("작성자만 수정 삭제 가능합니다.") -->
+									<button><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">수정</a></button>
 									<div class="dropdown ms-auto">
 								  		<button class="btn btn-icon-only" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								  			<span class="bi bi-three-dots-vertical"></span>
