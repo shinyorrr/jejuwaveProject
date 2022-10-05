@@ -71,7 +71,7 @@ action="travelWritePro.do" method="post" enctype="multipart/form-data">
 		  			<span class="fw-bold align-middle me-5">날짜 선택</span>
 		  			
 					<div class="  my-0 mx-0 px-0" style="display:inline;">
-						<input oninput="getStartDate()" name="t_start" type="date" class="me-0" id="input_from"  
+						<input onclick="getSysdate()" oninput="getStartDate()" name="t_start" type="date" class="me-0" id="input_from"  
 							   placeholder="시작 날짜를 입력해주세요" style="width:35%; height:34px;">
 						-
 						<input name="t_end" type="date" class=" ms-0" id="input_to" 
@@ -91,7 +91,7 @@ action="travelWritePro.do" method="post" enctype="multipart/form-data">
 			</div>
 					
 			<div class="bg-light mb-4 p-0 rounded selectCover" style="height:220px;">
-				<img id="cover" src="yn_images/file_icon.png" style="width:100%;height:240px; object-fit:cover; border-radius:4px;">
+				<img id="cover" src="images/file_icon.png" style="width:100%;height:240px; object-fit:cover; border-radius:4px;">
 			</div>
 					
 					
