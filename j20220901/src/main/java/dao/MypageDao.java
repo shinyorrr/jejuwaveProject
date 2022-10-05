@@ -55,9 +55,9 @@ public class MypageDao {
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(conn != null) conn.close();
-			if(pstmt != null) pstmt.close();
-			if(rs != null) rs.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		return max;
 	}
@@ -84,9 +84,9 @@ public class MypageDao {
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(conn != null) conn.close();
-			if(pstmt != null) pstmt.close();
-			if(rs != null) rs.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		return max;
 	}
@@ -97,20 +97,30 @@ public class MypageDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from"
-				+	"(select rownum rn,a.* from"
-				+		"(select * from travel_board order by t_date desc) a"
-				+   ")where user_id = ? and rn BETWEEN ? and ? ";
+		String sql = "select * \r\n"
+				+ " from (select rownum r, c.* \r\n"
+				+ "      from (  select a.*, nvl(b.cnt,0) as reply_cnt  \r\n"
+				+ "              from (select * from travel_board where t_Relevel= 0 and user_id = ? ) a, \r\n"
+				+ "                   (select t_ref, count(t_ref) as cnt  from travel_board where t_relevel !=0 group by t_ref) b \r\n"
+				+ "              where a.t_ref = b.t_ref(+)  order by t_num desc\r\n"
+				+ "           ) c) \r\n"
+				+ " where   r between ? and ?";
 		System.out.println("travelList sql ===> " + sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
+			System.out.println("pstmt == > " + pstmt);
 			pstmt.setString(1, user_id);
+			System.out.println("user_id == > " + user_id);
 			pstmt.setInt(2, startRow);
+			System.out.println("startRow == > " + startRow);
 			pstmt.setInt(3, endRow);
+			System.out.println("endRow == > " + endRow);
 			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+			System.out.println("travelList sql ===> " + sql);
+			System.out.println(rs);
+			System.out.println("MypageDao travelList rs.next()->"+rs.next());
+			do {
 				Mypage mypage = new Mypage();
 				
 				mypage.setT_num			(rs.getInt("t_num"));
@@ -124,18 +134,19 @@ public class MypageDao {
 				mypage.setT_start		(rs.getDate("t_start"));
 				mypage.setT_end			(rs.getDate("t_end"));
 				mypage.setT_dealstatus	(rs.getString("t_dealstatus"));
+				mypage.setT_recnt (rs.getInt("reply_cnt"));
 				
 				list.add(mypage);
-			}
+			} while(rs.next());
 			System.out.println("list 값 찾기 :" + list);
 			
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 			
 		} finally {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		return list;
 	}
@@ -167,9 +178,9 @@ public class MypageDao {
 		} catch(Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		return result;
@@ -199,9 +210,9 @@ public class MypageDao {
 		} catch (SQLException e) {
 			System.out.println("MemberDao select문 오류 : " + e.getMessage());
 		} finally {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		return md;
@@ -223,9 +234,9 @@ public class MypageDao {
 		} catch (SQLException e) {
 			System.out.println("MemberDao select문 오류 : " + e.getMessage());
 		} finally {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		return img;
@@ -234,10 +245,14 @@ public class MypageDao {
 		List<Mypage> list = new ArrayList<Mypage>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "select * from "
-				+	"(select rownum rn, a.* from "
-				+		"(select * from qna_board where user_id = ? order by b_num desc) a "
-				+   ") where rn BETWEEN ? and ? ";
+		String sql = "select *\r\n"
+				+ "from( select rownum r, c.*\r\n"
+				+ "     from(select a.*,nvl(b.cnt,0) as b_reply_cnt\r\n"
+				+ "             from (select * from qna_board where user_id = ?) a,\r\n"
+				+ "                   (select b_num , count(b_num) as cnt from qna_comment group by b_num) b\r\n"
+				+ "            where a.b_num = b.b_num(+) order by a.b_num desc\r\n"
+				+ "        ) c)  \r\n"
+				+ "where r between ? and ?";
 		System.out.println("boardList sql : " + sql);
 		try {
 			conn = getConnection();
@@ -261,13 +276,15 @@ public class MypageDao {
 				mypage.setB_title(rs.getString("b_title"));
 				mypage.setB_content(rs.getString("b_content"));
 				mypage.setB_success(rs.getString("b_success"));
+				mypage.setB_recnt(rs.getInt("b_reply_cnt"));
+				System.out.println("boardList B_recnt ===> " + mypage.getB_recnt());
 				list.add(mypage);
 			} while(rs.next());
 		} catch(Exception e) {
 			System.out.println("boardList e.getMessage()->"+e.getMessage());
 		} finally {
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		System.out.println("DAO boardList list.size()->"+list.size());
 		
@@ -296,9 +313,9 @@ public class MypageDao {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}  finally {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		return max;
 	}
@@ -341,9 +358,9 @@ public class MypageDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}  finally {
-			if(rs != null) rs.close();
-			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		return list;
@@ -365,9 +382,9 @@ public class MypageDao {
 		} catch (Exception e) {
 			System.out.println("getTotalCntCommunity 오류 : " + e.getMessage());
 		} finally {
-			if(conn != null) conn.close();
-			if(pstmt != null) pstmt.close();
-			if(rs != null) rs.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		return max;
@@ -406,9 +423,9 @@ public class MypageDao {
 		} catch (Exception e) {
 			System.out.println("communityList 오류  :  " + e.getMessage());
 		} finally {
-			if(conn != null) conn.close();
-			if(pstmt != null) pstmt.close();
-			if(rs != null) rs.close();
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		return list;
@@ -434,8 +451,8 @@ public class MypageDao {
 		} catch (Exception e) {
 			System.out.println("update 오류 : " + e.getMessage());
 		} finally {
-			if(conn != null) conn.close();
-			if(pstmt != null) pstmt.close();
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		return result;

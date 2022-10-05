@@ -87,7 +87,7 @@ function chk() {
 										style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;">
 								</c:if>
 								<c:if test="${img != null }">
-									<img src="<%=context%>${img}"
+									<img src="<%=context%>/${img}"
 										style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;">
 								</c:if>
 								<img src="images/form_arrow_black_fill.svg">
@@ -102,7 +102,7 @@ function chk() {
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 											<c:if test="${img != null }">
-												<img src="<%=context %>/${img}"
+												<img src="<%=context %>${img}"
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 										</div>

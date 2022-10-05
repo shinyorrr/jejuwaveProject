@@ -15,8 +15,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageCommunity.css?after">
+<style type="text/css">
+	table {
+		width: 100%;
+	}
+</style>
 </head>
 <body>
+
 <div class = "main" style="background-color: rgb(248,248,248);">
 <main id = "content" style="background-color: rgb(248,248,248);">
 	<div class = "mypage_set">
@@ -85,6 +91,11 @@
 													${board.c_hash}	
 												</div>
 											</td>
+											<td>
+												<div class = "community_date">
+													${board.c_date}
+												</div>
+											</td>
 										</tr>
 										<tr>
 											<td colspan="3" width = 2000>
@@ -95,15 +106,10 @@
 										<tr>
 											<td colspan="2">
 												<div class = "button_updateform">
-													<button class = "button_update" location.href = "Board.jsp">수정</button>
+													<button class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'" >수정</button>
 												</div>
 												<div>
 													<button class = "button_delete">삭제</button>
-												</div>
-											</td>
-											<td>
-												<div class = "comment number">
-													${board.c_date}
 												</div>
 											</td>
 										</tr>
