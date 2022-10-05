@@ -23,12 +23,12 @@
 }
 
 .table, td{
-	padding: 30px 50px;
+	padding: 30px 0px;
 
 }
 .table, th{
 	padding-top: 30px;
-	
+	vertical-align: super;
 }	
 
 .content1{

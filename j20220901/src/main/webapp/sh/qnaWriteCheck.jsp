@@ -58,13 +58,14 @@ String context = request.getContextPath();
 			<br> <br> <span class="wait">상태</span> 
 
 		<span class="fw-bold me-2">
+		
 			<c:if test="${board.b_success == 'Y' }">
 			 <span style="color: red;">${board.b_success }</span>
 			</c:if>
 			<c:if test="${board.b_success != 'Y' }">
 			 <span>${board.b_success }</span>
 			</c:if>
-			</span> <span class="wait">테마</span>             <!--  현지수정 -->
+			</span> <span class="wait">테마</span>            
 			<span class="fw-bold me-2">${board.b_theme }</span>
 	
 
