@@ -53,6 +53,9 @@
 			  				<td class="left" width="250">
 							<c:if test="${travel.t_relevel == 0}">
 								${travel.t_title}
+								<c:if test="${travel.reply_cnt != 0 }">
+									<span class="badge rounded-pill bg-secondary">${travel.reply_cnt}</span>
+								</c:if>
 							</c:if>
 							<c:if test="${travel.t_relevel > 0}">
 								<img src="<%=context%>/hs_images/adreply.png" width="${travel.t_relevel*10 }">
@@ -74,7 +77,7 @@
 			  				<fmt:parseDate value="${travel.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
 			  				<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
 			  				</td>
-			  				<td width="100"><input type="submit" value="삭제"></td>
+			  				<td width="100"><input type="submit" value="삭제" onclick="location.href='<%=context%>/adTravelDelete.do?t_num=${travel.t_num}&pageNum=${pageNum}'"></td>
 			  			</tr>
 			  			<c:set var="startNum" value="${startNum - 1}"></c:set>
 			  		</c:forEach>

@@ -13,7 +13,7 @@
 <body>
 	<c:if test="${result > 0}">
 		<script type="text/javascript">
-			alert("수정 완료!");
+			alert("회원 정보 수정 완료!");
 			location.href="<%=context%>/adMemList.do?pageNum=${pageNum}";
 		</script>
 	</c:if>
