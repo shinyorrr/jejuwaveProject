@@ -18,7 +18,7 @@ public class JoinFormAction implements CommandProcess {
 			// TODO: handle exception
 		}
 		
-		return "ry/joinForm.jsp";
+		return "joinForm.jsp";
 	}
 
 }
