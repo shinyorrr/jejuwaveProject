@@ -33,6 +33,17 @@ $(window).scroll(function(){
 console.log(count);
 		
 </script>
+
+<!-- 삭제버튼 confirm -->
+<%-- <script type="text/javascript">
+function ConfirmDel() {
+	if (confirm("삭제 하시겠습니까?")) {
+		location.href="<%=context%>/commuDeleteForm.do?c_num=${commu.c_num}&pageNum=${currentPage}";
+	} else {
+		return false;
+	}
+}
+</script> --%>
 </head>
 <body>
 
@@ -72,14 +83,13 @@ console.log(count);
 									<img class="mt-1 mb-1 img-fluid rounded-circle" alt="회원이미지" src="dh_images/user.png" style="height: 30px; margin-right: 5px;">
 									<span class="mt-2">${commu.user_id }</span>
 									<!-- dropdown menu는 작성자만 수정 삭제 접근가능, else alert("작성자만 수정 삭제 가능합니다.") -->
-									<button><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">수정</a></button>
 									<div class="dropdown ms-auto">
 								  		<button class="btn btn-icon-only" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								  			<span class="bi bi-three-dots-vertical"></span>
 								  		</button>
 								  		<ul class="dropdown-menu">
 								    		<li><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">수정</a></li>
-								   			<li><a class="dropdown-item" href="<%=context%>/commuDeleteForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">삭제</a></li>
+								   			<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" >삭제</a></li><!-- href='javascript:void(0);confirm();' onclick="ConfirmDel(); -->
 								  		</ul>
 									</div>
 								</div>
@@ -104,6 +114,26 @@ console.log(count);
 								</div>
 							</div>
 					    </div>
+					    <!-- deleteModal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
+	        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	        게시글을 정말로 삭제하시겠습니까?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary" onclick="location.href='<%=context%>/commuDeletePro.do?c_num=${commu.c_num}&pageNum=${currentPage}'">삭제</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 						<!-- end modal -->
 						<!-- Call modalContent.jsp Script -->
 						<script>
@@ -126,6 +156,8 @@ console.log(count);
 			<div id="scroll"></div>
 		</section>
 	</main>
+	
+	
 	
 	<footer class="py-5 bg-dark" style="margin-top: 100px;">
 		<div class="container">

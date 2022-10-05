@@ -13,7 +13,7 @@ String context = request.getContextPath();
 <body>
 <c:if test="${resultUpdateCommu > 0}">
 		<script type="text/javascript">
-			alert("게시글 작성 완료");
+			alert("게시글 수정 완료");
 			location.href="<%=context%>/commuList.do?pageNum=${pageNum }";
 		</script>
 	</c:if>

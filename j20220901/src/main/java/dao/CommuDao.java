@@ -343,5 +343,26 @@ public class CommuDao {
 		}
 		return resultUpdateCommu;
 	}
-
+	
+	// 게시글 삭제
+	public int delete(int c_num) throws SQLException {
+		int result = 0;
+		String sql = "delete community where c_num = ?";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("deleteDAO try...err->" + e.getMessage());
+		} finally {
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 
+		}
+		return result;
+	}
 }
