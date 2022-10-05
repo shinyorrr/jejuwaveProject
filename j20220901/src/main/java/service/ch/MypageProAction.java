@@ -21,8 +21,9 @@ public class MypageProAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		 // 이미지 업로드
+		  HttpSession session = request.getSession();
 	      request.setCharacterEncoding("utf-8");
-	      
+	      String user_img = (String) session.getAttribute("img");
 	      MultipartRequest multi = null;
 	      // 이미지 사이즈 설정
 	      int sizeLimit  = 5 * 1024 * 1024;
@@ -40,8 +41,9 @@ public class MypageProAction implements CommandProcess {
 	         serverSaveFilename = multi.getFilesystemName(parameterName);
 	         System.out.println("serverSaveFilename ====> " + serverSaveFilename);
 	      }
-	      
-	      String user_img = "fileSave\\" + serverSaveFilename;
+	      if(serverSaveFilename != null) {
+	    	  user_img = "fileSave\\" + serverSaveFilename; 	
+	      } 
 	      
 	      String user_info = multi.getParameter("user_info");
 	      
@@ -49,9 +51,10 @@ public class MypageProAction implements CommandProcess {
 	      
 	      String user_tel = multi.getParameter("user_tel");
 	      
-	      String user_email = multi.getParameter("user_email");
+	      String user_email = multi.getParameter("user_email1") + "@" + multi.getParameter("user_email2");
+	      System.out.println("user_email2 ===> " + multi.getParameter("user_email2"));
+	      System.out.println("user_email2 request ===> " + request.getParameter("user_email2"));
 	      
-	      HttpSession session = request.getSession();
 	  	  session.setAttribute("img", user_img);
 	      String user_id = (String) session.getAttribute("user_id");
 	      

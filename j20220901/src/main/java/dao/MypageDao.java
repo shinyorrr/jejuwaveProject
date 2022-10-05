@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 public class MypageDao {
@@ -338,8 +339,11 @@ public class MypageDao {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
+			System.out.println("commentList user_id => " + user_id);
 			pstmt.setInt(2, startRow);
+			System.out.println("commentList startRow => " + startRow);
 			pstmt.setInt(3, endRow);
+			System.out.println("commentList endRow => " + endRow);
 			rs = pstmt.executeQuery();
 			System.out.println("commentList : " + rs);
 			System.out.println("commentList rs.next () : " + rs.next());
