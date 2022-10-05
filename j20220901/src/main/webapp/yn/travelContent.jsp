@@ -2,18 +2,15 @@
 	pageEncoding="UTF-8" errorPage="dbError.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%
 String context = request.getContextPath();
 String userId = (String) session.getAttribute("user_id");
 request.setAttribute("userId", userId);
 %>
+
 <!-- header 영역 -->
 <c:import url="../header.jsp"></c:import>
-<!-- modal -->
-<script src="https://kit.fontawesome.com/1f609f562c.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="css/modal.css">
 
 <!-------------- body 영역 ------------>
 <div style="margin-top: 30px;"></div>
@@ -92,15 +89,18 @@ request.setAttribute("userId", userId);
 								aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
+									<div class="review">
 										<div class="modal-header">
-											<c:if test="${img == null }">
-												<img src="<%=context%>/images/vector_profile_default.svg"
-													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
-											</c:if>
-											<c:if test="${img != null }">
-												<img src="<%=context %>/${img}"
-													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
-											</c:if>
+											<div>
+												<c:if test="${img == null }">
+													<img src="<%=context%>/images/vector_profile_default.svg"
+														style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
+												</c:if>
+												<c:if test="${img != null }">
+													<img src="<%=context %>/${img}"
+														style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
+												</c:if>
+											</div>
 											<div>
 												<div class="modal-title moti" id="exampleModalLabel">
 													<p>${travelContent.user_id}</p>
@@ -109,15 +109,15 @@ request.setAttribute("userId", userId);
 													<p>30대 · 남성 · 대한민국</p>
 												</div>
 											</div>
-											<div class="rating" data-rate="3">
+											<div class="rating" data-rate="2" style="padding-left: 110px; padding-top: 48px;">											
+												<i class="fa fa-star"></i>												
+												<i class="fa fa-star"></i>												
+												<i class="fa fa-star"></i>											
 												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>																
 											</div>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
+											<p class="ratingScore" style="padding-top: 48px; padding-left: 15px; margin: 0px;">3.0</p>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-bottom: 30px; margin-right: 5px;"></button>
 										</div>
 										<div class="modal-body ">
 											<div class="modal-body-top">
@@ -129,43 +129,36 @@ request.setAttribute("userId", userId);
 														<p>0</p>
 													</div>
 												</div>
-												<div class="modal-body-comment " style="overflow:auto;">
-													<div class="" style="background-color: yellow; height: 100px;">
-														<div>
-														<span>user_id</span>
-														<span>R_DATE</span>
+													<div class="modal-body-comment " style="overflow: auto;">
+														<div class="" style="background-color: yellow; height: 100px;">
+															<div>
+																<span>${review.user_id }</span> <span>revlist.r_date</span>
+															</div>
+															<div>
+																<p>${review.r_content}</p>
+															</div>
+															<div>
+																<div class="rating" data-rate="3">											
+																	<i class="fa fa-star"></i>												
+																	<i class="fa fa-star"></i>												
+																	<i class="fa fa-star"></i>											
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>																
+																</div>
+															</div>
 														</div>
-														<div>
-														<p>R_CONTENT</p>
-														</div>
-														<div>
-														<div class="rating" data-rate="3">
-												<i class="fa-solid fa-star"></i>
-												<i class="fa-solid fa-star"></i>
-												<i class="fa-solid fa-star"></i>
-												<i class="fa-solid fa-star"></i>
-												<i class="fa-solid fa-star"></i>
-											</div>
-														</div>
+														<div class="" style="background-color: red; height: 100px;"></div>
+														<div class="" style="background-color: green; height: 100px;"></div>
+														<div class="" style="background-color: yellow; height: 100px;"></div>
 													</div>
-													<div class="" style="background-color: red; height: 100px;">
-													
-													</div>
-													<div class="" style="background-color: green; height: 100px;">
-													
-													</div>
-													<div class="" style="background-color: yellow; height: 100px;">
-													
-													</div>
-													
-													
 												</div>
 											</div>
 										</div>
 										<div class="modal-footer" style="justify-content: flex-start;">
 											<div></div>
 											<div class="modal-footer-comment" style="width: 100%;">
-												<div class="make_star" style="display: flex; margin-bottom: 15px;">
+												<div class="make_star"
+													style="display: flex; margin-bottom: 15px;">
 													<select name="" id="makeStar">
 														<option value="1">1</option>
 														<option value="2">2</option>
@@ -173,18 +166,18 @@ request.setAttribute("userId", userId);
 														<option value="4">4</option>
 														<option value="5">5</option>
 													</select>
-													<div class="rating" data-rate="3">
-														<i class="fa-solid fa-star"></i>
-														<i class="fa-solid fa-star"></i>
-														<i class="fa-solid fa-star"></i>
-														<i class="fa-solid fa-star"></i>
-														<i class="fa-solid fa-star"></i>
+															<div class="rating" data-rate="2">											
+																<i class="fa fa-star"></i>												
+																<i class="fa fa-star"></i>												
+																<i class="fa fa-star"></i>											
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>																
+															</div>
 													</div>
-												</div>
-												<input type="text" placeholder="동행후기를 한줄평으로 달아보세요!"
-													onfocus="this.placeholder = ''"
-													onblur="this.placeholder = '동행후기를 한줄평으로 달아보세요!'">
-												<button>등록</button>
+													<input type="text" placeholder="동행후기를 한줄평으로 달아보세요!"
+																		onfocus="this.placeholder = ''"
+																		onblur="this.placeholder = '동행후기를 한줄평으로 달아보세요!'">
+													<button type="submit">등록</button>
 											</div>
 										</div>
 									</div>
@@ -290,16 +283,40 @@ request.setAttribute("userId", userId);
 
 <div style="margin-top: 200px;"></div>
 <%@ include file="footer.jsp"%>
-
-
 <!-- Bootstrap core JS-->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- modal Bootstrap  -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
+<!-- modal -->
+<script src="https://kit.fontawesome.com/1f609f562c.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/modal.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	
 
-<!-- Core theme JS-->
+var rating =$('.review .rating');
+
+rating.each(function () {
+	var targetScore = $(this).attr('data-rate');
+	var firstdigit = targetScore.split('.');
+	if(firstdigit.length > 0){
+		for(var i = 0; i<targetScore; i++){
+			$(this).find('.fa-star:nth-child(-n+' +targetScore + ')').eq(i).css({color:'#f05522'});
+	}
+		/* $(this).find('.fa-star:nth-child(-n+' +targetScore + ')').css({color:'#f05522'}); */
+	}
+	
+	});
+	var userScore = $('#makeStar');
+	userScore.change(function () {
+		var userScoreNum = $(this).val();
+		$('.make_star .fa-star').css({color:'#000'});
+		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').css({color:'#f05522'});
+	});
+	$('.make_star .fa-star').click(function () {
+		var targetNum = $(this).index() + 1;
+		$('.make_star .fa-star').css({color:'#000'});
+		$('.make_star .fa-star:nth-child(-n+' + targetNum + ')').css({color:'#f05522'});
+	});
+});
+</script>
