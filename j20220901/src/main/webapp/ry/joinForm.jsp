@@ -1,11 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
+<%
+   String context = request.getContextPath();
+%>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<% String context = request.getContextPath(); %>
+
 <style type="text/css">
  	caption {
 	font-size: 24px;
@@ -20,7 +24,7 @@
 	font-color: #gray;
 }
 </style>
-<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 function chk() {
 	if (frm.user_pw.value != frm.user_pw2.value) {
@@ -28,184 +32,200 @@ function chk() {
 		frm.user_pw.focus();
 		return false;
 	}
-
+	if (frm.user_pw.value == frm.user_pw2.value) {
+		alert("암호가 같습니다!");
+		frm.user_email.focus();
+		return false;
+	}
+	return true;
 }
-/* $(function(){
-	$('#chk').click(function(){
-		var id       = $('#id').val();
-		var sendData = 'id='+id
-		alert('sendData->'+sendData);
-		$.ajax({
-			url      : 'idCheckForm.do', 
-			dataType : 'text',
-			data     : sendData,
-			success  : function(data1) {
-				$('#msg').html(data1);
-			}
-		});
-	});
-}); */
 function winop() {
-	window.open("<%=context%>idCheckForm.do?user_id=" + user_id, "kkk",	"width=300 height=300");
-}
+	window.open("<%=context %>/idCheckForm.do?user_id="+$('#user_id').val(), "kkk",	"width=500 height=300");
+} 
 </script>
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
-	rel="stylesheet">
-
-<link
-	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
-	rel="stylesheet">
-<link rel="stylesheet" href="<%=context %>css/header_main.css">
-<!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Core theme JS-->
-<script src="js/index.js" defer="defer"></script>
+<c:import url="${context }/header.jsp"/>
 </head>
 <body>
-<header id="header" class="Headers_HeaderMainHeader burgkU">
-		<div class="Headers__InnerSection bQvPOR">
-			<div class="Headers__HeaderTopWrapDiv kKJwFS">
-				<div class="Headers_HeaderTopInnerDiv cMXtHR">
-					<img src="images/brand_logo.png" alt="logo" class="WebHeader_LogoImg hsELiP" onClick="location.href='index.jsp'">
-				</div>
-				<div class="Headers__HeaderTopInnerDiv-sc-1la7hl4-3 dnYUeR">
-					<div width="300px"
-						class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
-						<span
-							class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
-						<button></button>
-						<input placeholder="동행을 찾아보세요!" value="">
-					</div>
-					<div class="Button__ButtonWrapper-sc-1vcxcg6-0 oIYRb">
-						<button width="" height="" font-style="" type="button"
-							class="Button__ButtonStyle-sc-1vcxcg6-1 eVZkjB">
-							<a><p>로그인</p></a>
-						</button>
-					</div>
-					<div class="Button__ButtonWrapper-sc-1vcxcg6-0 oIYRb">
-						<button width="" height="" font-style="" type="button"
-							class="Button__ButtonStyle-sc-1vcxcg6-1 jRRCxU">
-							<a><p>회원가입</p></a>
-						</button>
-					</div>
-					<div class="Button_dropdown oIYRb">
-						<button width="100px" height="40px" font-style="" type="button"
-							class="ButtonStyle kRVxKH">글쓰기</button>
-						<div class="Popups__HeaderWritePopupDiv cymdDn">
-							<button onClick="location.href='content.jsp'"
-								class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHljB">
-								<img src="images/letter_color.svg" alt="이미지" style="width: 33px; height: 24px;">
-								<p>여행친구 찾기</p>
-							</button>
-							<button onclick="location.href='list.jsp'"
-								class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHlmB">
-								<img src="images/magnifier_color.svg" alt="이미지" style="width: 33px; height: 24px;">
-								<p>여행 질문하기</p>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="Headers__HeaderContentWrapper-sc-1la7hl4-4 iEbwCp"
-				style="justify-content: flex-start; margin: 0px 12px;">
-				<button width="auto" font-size="16px" font-weight="bold"
-					class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 leGRAZ"
-					onClick="location.href='header.jsp'">홈</button>
-				<button width="auto" font-size="16px" font-weight="400"
-					class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdv"
-					onClick="location.href='content.jsp'">동행</button>
-				<button width="auto" font-size="16px" font-weight="400"
-					class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdc"
-					onClick="location.href='list.jsp'">Q&amp;A</button>
-				<button width="auto" font-size="16px" font-weight="400"
-					class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdc"
-					onClick="location.href='history.jsp'">여행 기록</button>
-			</div>
-		</div>
-</header>
 		<tbody>
 		<div class="joinform" style="margin-top:200px; margin-left: 28%;">
-	<form  action="<%=context %>/joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()">
+	<form  action="<%=context %>/joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()" enctype="multipart/form-data" >
 		<table>
 		<thead>
 			<tr>
-				<th colspan="3"><h3>회원가입</h3></th>
+				<th colspan="3" style="text-align: center;"><h3>회원가입</h3></th>
 		</thead>
 			<tr>
-				<td style="width: 120px;">아이디</td>
-				<td><input type="text"     name="user_id" id="user_id" required="required"></td>
-				<td style="width: 50px;"><input type="submit"   value="아이디체크" onclick="winop()"><span id = "msg"></span></td>
+				<td style="width: 120px; text-align: center;">아이디</td>
+				<td><input type="text" style="width: 100%;"     name="user_id" id="user_id" required="required"></td>
+				<td style="width: 50px; text-align: center;"><input type="button" value="중복체크" onclick="winop()"></td>
 			</tr>
 			<tr>
-				<td style="width: 120px;">비밀번호</td>
-				<td><input type="password" name="user_pw" id="user_pw" required="required" onclick=""></td>
+				<td style="width: 120px; text-align: center;">비밀번호</td>
+				<td><input type="password" style="width: 100%;"  name="user_pw" id="user_pw" required="required"></td>
 			</tr>
 			<tr>
-				<td style="width: 120px;">비밀번호확인</td>
-				<td><input type="password" name="user_pw2" id="user_pw2" required="required"></td>
-				<td><input type="button" value="비밀번호체크" onclick="chk()"></td>
+				<td style="width: 120px; text-align: center;">비밀번호확인</td>
+				<td><input type="password" style="width: 100%;"  name="user_pw2" id="user_pw2" required="required"></td>
+				<td style="text-align: center;"><input type="button" value="비밀번호체크" onclick="chk()"></td>
 			</tr>
 			<tr>
-				<td style="width: 120px;">이메일</td>
-				<td><input type="email" name="user_email" required="required" placeholder="example@naver.com" ></td>
+				<td style="width: 120px; text-align: center;">이메일</td>
+				<td><input type="email" style="width: 100%;"  name="user_email" required="required" placeholder="example@naver.com" ></td>
 			</tr>
 			<tr>
-				<td style="width: 120px;">이름</td>
-				<td><input type="text" name="user_name" required="required"></td>
+				<td style="width: 120px; text-align: center;">이름</td>
+				<td><input type="text" style="width: 100%;"  name="user_name" required="required"></td>
 			</tr>
 			<tr>
-				<td style="width: 120px;">본인 소개</td>
+				<td style="width: 120px; text-align: center;">본인 소개</td>
 				<td><textarea rows="10" cols="50" name="user_info" placeholder="다른 회원님들이 알 수 있도록 소개 부탁드려요!"></textarea> </td>
 			</tr>
 			<tr>
-				<td style="width: 120px;">생년월일</td>
-				<td><input type="date" name="user_birth" required="required" pattern="\d{8}" placeholder="생년월일8자리"></td>
+				<td style="width: 120px; text-align: center;">생년월일</td>
+				<td><input type="date" name="user_birth" style="width: 100%;"  required="required" pattern="\d{8}" placeholder="생년월일8자리"></td>
 			</tr>
 			<tr>
-				<td style="width: 120px;">성별</td>
+				<td style="width: 120px; text-align: center;">성별</td>
 				<td>남 <input type="radio" name="user_gender" value="M" checked="checked">
 					여 <input type="radio" name="user_gender" value="F"></td>
 			</tr>
 			<tr>
-				<td>전화번호</td>
-				<td><input type="tel" name="user_tel" required="required"
+				<td style="width: 120px; text-align: center;">전화번호</td>
+				<td><input type="tel" name="user_tel" required="required" style="width: 100%;" 
 					pattern="\d{2,3}-\d{3,4}-\d{4}" placeholder="010-xxxx-xxxx"
 					title="2,3자리-3,4자리-4자리"></td>
 			</tr>
 			<tr>
-				<td>회원구분<input type="hidden" name="user_gubun" value="1"></td>
+				<td style="width: 120px; text-align: center;">회원구분<input type="hidden" name="user_gubun" value="1"></td>
 			</tr>
 			<tr>
-				<td>이미지</td>
-				<td><input type="image" name="user_img"></td>
+				<td style="width: 120px; text-align: center;">이미지</td>
+				<td><input type="file" name="user_img"></td>
+				<!-- <td>이미지</td>
+				<div class="form-group">
+				<td style="text-align: center;">
+					<div id='image_preview'>
+						<input type='file' id='btnAtt' name="file" multiple='multiple' />
+						<div id='att_zone' data-placeholder='사진을 첨부 하려면 파일 선택 버튼을 클릭하거나 파일을 드래그앤드롭 하세요'></div>
+					</div>
+
+					<script>
+					( /* att_zone : 이미지들이 들어갈 위치 id, btn : file tag id */
+					  imageView = function imageView(att_zone, btn){
+					
+					    var attZone = document.getElementById(att_zone);
+					    var btnAtt = document.getElementById(btn)
+					    var sel_files = [];
+					    
+					    // 이미지와 체크 박스를 감싸고 있는 div 속성
+					    var div_style = 'display:inline-block;position:relative;'
+					                  + 'width:300px;height:280px;margin:40px;border:1px solid #00f;border-radius:0.25rem;	z-index:1';
+					    // 미리보기 이미지 속성
+					    var img_style = 'width:100%;height:100%;z-index:none';
+					    // 이미지안에 표시되는 체크박스의 속성
+					    var chk_style = 'width:30px;height:30px;position:absolute;font-size:24px;'
+					                  + 'right:0px;bottom:0px;z-index:999;background-color:rgba(255,255,255,0.7);color:#f00';
+					  
+					    btnAtt.onchange = function(e){
+					      var files = e.target.files;
+					      var fileArr = Array.prototype.slice.call(files)
+					      for(f of fileArr){
+					        imageLoader(f);
+					      }
+					    }  
+					    
+					  
+					    // 탐색기에서 드래그앤 드롭 사용
+					    attZone.addEventListener('dragenter', function(e){
+					      e.preventDefault();
+					      e.stopPropagation();
+					    }, false)
+					    
+					    attZone.addEventListener('dragover', function(e){
+					      e.preventDefault();
+					      e.stopPropagation();
+					      
+					    }, false)
+					  
+					    attZone.addEventListener('drop', function(e){
+					      var files = {};
+					      e.preventDefault();
+					      e.stopPropagation();
+					      var dt = e.dataTransfer;
+					      files = dt.files;
+					      for(f of files){
+					        imageLoader(f);
+					      }
+					      
+					    }, false)
+					    
+					
+					    
+					    /*첨부된 이미리들을 배열에 넣고 미리보기 */
+					    imageLoader = function(file){
+					      sel_files.push(file);
+					      var reader = new FileReader();
+					      reader.onload = function(ee){
+					        let img = document.createElement('img')
+					        img.setAttribute('style', img_style)
+					        img.src = ee.target.result;
+					        attZone.appendChild(makeDiv(img, file));
+					      }
+					      
+					      reader.readAsDataURL(file);
+					    }
+					    
+					    /*첨부된 파일이 있는 경우 checkbox와 함께 attZone에 추가할 div를 만들어 반환 */
+					    makeDiv = function(img, file){
+					      var div = document.createElement('div')
+					      div.setAttribute('style', div_style)
+					      
+					      var btn = document.createElement('button')
+					      btn.setAttribute('class', 'close')
+					      btn.setAttribute('delFile', file.name);
+					      btn.setAttribute('area-label', 'Close');
+					      btn.setAttribute('style', chk_style);
+					      btn.onclick = function(ev){
+					        var ele = ev.srcElement;
+					        var delFile = ele.getAttribute('delFile');
+					        for(var i=0 ;i<sel_files.length; i++){
+					          if(delFile== sel_files[i].name){
+					            sel_files.splice(i, 1);      
+					          }
+					        }
+					        
+					        dt = new DataTransfer();
+					        for(f in sel_files) {
+					          var file = sel_files[f];
+					          dt.items.add(file);
+					        }
+					        btnAtt.files = dt.files;
+					        var p = ele.parentNode;
+					        attZone.removeChild(p)
+					      }
+					      div.appendChild(img)
+					      div.appendChild(btn)
+					      return div
+					    }
+					  }
+					)('att_zone', 'btnAtt')
+					
+					</script>	
+				</div>
+				</td> -->
+				</tr>
 			<tr>
-				<th colspan="3"><input type="submit" value="가입">
-				<input type="reset" value="가입 취소"></th>
+				<td colspan="3" style="text-align: center;"><input type="submit" value="가입">
+				<input type="reset" value="가입 취소"></td>
 			</tr>
 		</table>
 	</form>	
 		</div>
 	</tbody>
+</body>
 	<footer class="py-5 bg-dark" style="margin-top: 100px;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your	Website 2022</p>
 		</div>
 	</footer>	
-</body>
 </html>
