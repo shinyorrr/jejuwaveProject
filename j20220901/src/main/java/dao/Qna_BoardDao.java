@@ -62,8 +62,6 @@ public class Qna_BoardDao {
 		return tot;
 	}
 
-	// hj qna hash 異붽   닔 젙
-	// -----------------------------------------------------------------
 	public List<Qna_Board> getBoardList(int startRow , int endRow) throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
 		
@@ -119,9 +117,6 @@ public class Qna_BoardDao {
 		}
 		return list;
 	}
-
-	//  쁽吏  異붽   닔 젙
-	// -----------------------------------------------------------------
 
 	public Qna_Board select(int b_num) throws SQLException {
 		Connection conn = null;
