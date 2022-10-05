@@ -41,7 +41,7 @@ public class LoginAction implements CommandProcess {
 			request.setAttribute("result", result);
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}  
 		
 		return "ch/loginPro.jsp";
 	}

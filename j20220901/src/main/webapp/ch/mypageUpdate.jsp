@@ -45,6 +45,12 @@ const autoHyphen2 = (target) => {
 	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 }
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> branch 'main' of https://github.com/reguluss82/jejuwaveProject.git
+
 
 </script>
 <body>
@@ -118,7 +124,7 @@ const autoHyphen2 = (target) => {
 						<%-- <input type="text" class="input_user" id = "user_info" name = "user_info" value = "${member.user_info }"
 							placeholder="소개글을 입력해주세요(1000자 이내)"> --%>
 						<h3 class = "mypage_menu_h3">생년월일</h3>
-						<input type="text" class="input_user" id = "user_birth" name = "user_birth" value ="${member.user_birth }">
+						<input type="text" class="input_user" id = "user_birth" name = "user_birth" value ="${member.user_birth }" oninput="autoHypehen1(this)" maxlength = 10>
 						<h3 class = "mypage_menu_h3">핸드폰</h3>
 						<input type="text" class="input_user" id = "user_tel" name = "user_tel" value ="${member.user_tel }" oninput="autoHyphen2(this)" maxlength="13">
 						<h3 class = "mypage_menu_h3">이메일</h3>

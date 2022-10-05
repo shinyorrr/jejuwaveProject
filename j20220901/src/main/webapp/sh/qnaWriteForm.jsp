@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <% String context = request.getContextPath(); %>
-<c:import url="${context}/sh/header.jsp"></c:import>
+<c:import url="../header.jsp"></c:import>
  <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
@@ -54,16 +54,23 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 		
 		<!-- 제목 -->
 		<input type="hidden" name="b_num" value="${b_num }">
-		<div class="mb-3" style="width: 1200px; margin-left: auto; margin-right: auto;"> 	 		
-  			<input type="text" name="b_title" class="form-control card-title"  placeholder="물음표로 끝나는 제목을 입력해보세요 (100자 이내)" style="height: 60px">
+		<div class="mb-3" style="width: 1200px; margin-left: auto; margin-right: auto; ">	 		
+  			<input type="text" name="b_title" class="form-control card-title"  placeholder="물음표로 끝나는 제목을 입력해보세요 (100자 이내)" 
+  					style="height: 60px; background-image: url('<%=context %>/sh_images/q.png');">
 		</div>	
 		
 		<!-- 내용 -->
 		<div style="display: flex; justify-content: center;" >
 	  		<textarea placeholder="내용을 입력해주세요" name="b_content" style="width: 1200px; height: 700px ;border-color:#ced4da  ;"></textarea>	  		
 		</div>
-		<br>	
+		<br>
 		
+		<!-- 해시태그 -->	
+		<div class="mb-3" style="width: 1200px; margin-left: auto; margin-right: auto;">	 		
+  			<input type="text" name="hashString" class="form-control card-title"  placeholder="#을붙여 태그를 입력하세요(최대 3개)" 
+  					style="height: 60px; background-image: url('<%=context %>/sh_images/hashtag.png');">
+  			
+		</div>	
 		<!-- 버튼 -->
 		<div class="button"  style="display: flex; justify-content: center;">
 			<input type="reset" value="취소" class="btn btn-secondary" style="margin-right: 15px; width:590px; height: 55px;background-color: #dbdbdb; border-color: #dbdbdb;font-size: 14px;font-weight: bolder;">
