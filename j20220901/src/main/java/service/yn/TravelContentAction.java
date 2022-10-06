@@ -41,24 +41,34 @@ public class TravelContentAction implements CommandProcess {
 			
 			// review Action
 			System.out.println("review Action Start...");
-			
 			ReviewDao rd = ReviewDao.getinstance();
 			try {
 				int totRev = rd.getTotalRev();
+				
 				String revPageNum = request.getParameter("revPageNum");
+				
 				if (revPageNum == null || revPageNum.equals("")) {revPageNum = "1";}
-				int revCurrentPage = Integer.parseInt(revPageNum);
-				int revPageSize = 4, revBlockSize = 10;
-				int revStartRow = (revCurrentPage - 1) * revPageSize + 1;
+				
+				int revCurrentPage = Integer.parseInt(revPageNum); // 1
+				int revPageSize = 15, revBlockSize = 10;
+				int revStartRow = (revCurrentPage - 1) * revPageSize + 1; //  
 				int revEndRow = revStartRow + revPageSize - 1;
 				int revStartNum = totRev - revStartRow + 1;
 				System.out.println("revPageNum -->"+revPageNum);
-				List<Review> revlist = rd.revList(revStartRow,revEndRow);
+				
+				// review 조회						1			4
+				List<Review> revlist = rd.revList(revStartRow,revEndRow,t_num);
+				//											11		4
 				int revPageCnt = (int)Math.ceil((double)totRev/revPageSize);
+				//								1				10			10
 				int revStartPage = (int)(revCurrentPage-1)/revBlockSize*revBlockSize + 1;
+				//					1				10
 				int revendPage = revStartPage + revBlockSize - 1;
+				// 공갈 Page 방지
 				if (revendPage > revPageCnt) revendPage = revPageCnt;
-				System.out.println("revlist -->"+totRev);
+				
+				System.out.println("revlist -->"+revlist);
+				
 				request.setAttribute("revlist", revlist);
 				request.setAttribute("totRev", totRev);
 				request.setAttribute("revPageNum", revPageNum);
@@ -68,7 +78,6 @@ public class TravelContentAction implements CommandProcess {
 				request.setAttribute("revPageCnt", revPageCnt);
 				request.setAttribute("revStartPage", revStartPage);
 				request.setAttribute("revendPage", revendPage);
-	
 			} catch (Exception e) {
 				System.out.println(e.getMessage());
 			}

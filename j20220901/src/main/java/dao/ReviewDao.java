@@ -54,19 +54,21 @@ public class ReviewDao {
 		return tot;	
 	}
 	
-	public List<Review> revList(int revStartRow, int revEndRow) throws SQLException{
+	public List<Review> revList(int revStartRow, int revEndRow, int t_num) throws SQLException{
 		List<Review> list = new ArrayList<Review>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from(select rownum rn, a.*"
-					+"from (select * from review order by r_num desc) a)"
+		String sql = "select * "
+					+"from(select rownum rn, a.*"
+					+"from (select * from review where t_num = ?  order by r_ref desc, r_restep) a)"
 					+"where rn between ? and ?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, revStartRow);
-			pstmt.setInt(2, revEndRow);
+			pstmt.setInt(1, t_num);
+			pstmt.setInt(2, revStartRow);
+			pstmt.setInt(3, revEndRow);
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Review review = new Review();
@@ -76,6 +78,8 @@ public class ReviewDao {
 				review.setR_content(rs.getString("r_content"));
 				review.setR_date(rs.getDate("r_date"));
 				review.setR_avg(rs.getInt("r_avg"));
+				review.setR_ref(rs.getInt("r_ref"));
+				review.setR_restep(rs.getInt("r_restep"));
 				list.add(review);
 			}
 		} catch (Exception e) {
@@ -86,5 +90,46 @@ public class ReviewDao {
 			if (conn != null) conn.close();
 		}
 		return list;
+	}
+	
+	public int insert(Review review) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		ResultSet rs = null;
+		System.out.println("99999");
+		String sql = "insert into review values (review_seq.nextval,?,?,sysdate,?,?,?,?)";
+		try {
+			System.out.println(review.getUser_id());
+			System.out.println("555555555");
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, review.getUser_id());
+			pstmt.setString(2, review.getR_content());
+			
+			pstmt.setInt(3, review.getR_avg());
+			pstmt.setInt(4, review.getT_num());
+			
+			 pstmt.setInt(5, review.getR_ref()); 
+			 pstmt.setInt(6, review.getR_restep());
+			
+			System.out.println("555555555");
+			result = pstmt.executeUpdate();
+			if(result > 0) {
+				System.out.println("insert 완료");
+			} else {
+				System.out.println("insert 실패");
+			}
+			
+			System.out.println("result -->"+result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}finally {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		}
+	
+		return result;
 	}
 }

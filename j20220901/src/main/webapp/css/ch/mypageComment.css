@@ -15,3 +15,41 @@
 	position: absolute;
 	left: 23.5%;
 }
+.c_date{
+	font-family: 'NotoSansKR';
+    font-size: smaller;
+    text-align: right;
+}
+.button_updateform{
+	padding-right: 10px;
+	padding-left : 20px;
+}
+.button_update{
+	user-select: none;
+    -webkit-user-drag: none;
+    color: rgb(106, 106, 106);
+    float: left;
+    font-family: 'NotoSansKR';
+    font-size: 14px;
+    background: rgba(0, 206, 124 ,0.3);
+    border-radius: 80%;
+    margin-right: 8px;
+}
+.button_delete{	
+	user-select: none;
+    -webkit-user-drag: none;
+    color: rgb(106, 106, 106);
+    font-family: 'NotoSansKR';
+    font-size: 14px;
+    background: rgba(0, 206, 124 ,0.3);
+    border-radius: 80%;
+}
+.c_content{
+	width : 470px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-drag: none;
+    padding-left : 20px;
+}

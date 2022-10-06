@@ -78,22 +78,42 @@
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 						<table>
-							<tr>
-								<td colspan="3">${board.b_content}</td>
-								<td>${board.b_date }</td>
+						<c:if test="${board.com_content != null }">
+							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
+								<td colspan="3">
+									<div class = "c_content">
+									${board.com_content}								
+									</div>
+								</td>
+								<td class = "c_date">${board.com_date }</td>
 							</tr>
 							<tr>
-								<td><button location.href = "Board.jsp">수정</button></td><td><button>삭제</button></td><td></td><td>댓글수</td>
+								<td>
+									<div class = "button_updateform">
+									<button class = "button_update" onclick = "location.href = 'Board.jsp'">수정</button>
+									<button class = "button_delete">삭제</button>
+									</div>
+								</td>
 							</tr>
-						</table>
-						<table>
+						</c:if>
+						<c:if test="${board.t_content != null }">
+							<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}';">
+								<td colspan="3">
+									<div class = "c_content">
+									${board.t_content}								
+									</div>
+								</td>
+								<td class = "c_date">${board.t_date }</td>
+							</tr>
 							<tr>
-								<td colspan="3">${board.t_content }</td>
-								<td>${board.t_date }</td>
+								<td>
+									<div class = "button_updateform">
+									<button class = "button_update" location.href = "Board.jsp">수정</button>
+									<button class = "button_delete">삭제</button>
+									</div>
+								</td>
 							</tr>
-							<tr>
-								<td><button location.href = "Board.jsp">수정</button><button>삭제</button></td>
-							</tr>
+						</c:if>
 						</table>
 							<c:set var="startNum" value="${startNum - 1 }" />
 						</c:forEach> 

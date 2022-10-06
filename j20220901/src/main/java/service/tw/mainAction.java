@@ -26,17 +26,16 @@ public class mainAction implements CommandProcess {
 		TravelDao td = TravelDao.getInstance();
 		
 		// 검색 기능
-		String column = request.getParameter("column");
-		String search = request.getParameter("search");
-		String isSearch = "n";
-		
-		if( column != null || search != null || !column.equals("")|| !search.equals("")) {isSearch = "y";}
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("column", column);
-		map.put("Search", search);
-		map.put("isSearch", isSearch);
-		Travel travel = new Travel();
-		List<Travel> list = td.search(map);
+		/*
+		 * String column = request.getParameter("column"); String search =
+		 * request.getParameter("search"); String isSearch = "n";
+		 * 
+		 * if( column != null || search != null || !column.equals("")||
+		 * !search.equals("")) {isSearch = "y";} HashMap<String, String> map = new
+		 * HashMap<String, String>(); map.put("column", column); map.put("Search",
+		 * search); map.put("isSearch", isSearch); Travel travel = new Travel();
+		 * List<Travel> list = td.search(map);
+		 */
 		
 		
 		
