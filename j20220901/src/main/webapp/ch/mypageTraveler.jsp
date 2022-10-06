@@ -22,16 +22,16 @@
 </style>
 <script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
-/* 	function deleteMsg(){
-		var t_num = "<c:out value = '${board.t_num}'/>";
+function deleteMsg(){
+		var t_num = document.getElementById('t_num').value;
 		var sendData = 't_num=' + t_num;
-		console.log = (t_num)
+		console.log = (t_num);
 		var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
 		if(!ans) return false;
 		
 		$.ajax({
-				url 	: '${context}/MypageTraveldelete.do'
-				dateType: 'text',
+				url 	: 'MypageTraveldelete.do',
+				dataType: 'text',
 				data	: sendData,
 				success	: function(data){
 						location.reload(); 
@@ -40,7 +40,7 @@
 					alert("댓글이 삭제되지 않았습니다.");
 				}
 			});
-		} */
+		}
 	
 </script>
 </head>
@@ -107,7 +107,7 @@
 						<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
 										<tr id = "travelurl" style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
-											<input id = "t_num" type="text" value = "${board.t_num }" hidden="true">
+											<input id = "t_num" type="text" value = "${board.t_num }" hidden = "true">
 											<td rowspan="3" width = 50>
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.t_img }" width = "120px" padding-bottom = 10px>
@@ -144,7 +144,7 @@
 													<button class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'">수정</button>
 												</div>
 												<div>
-												<button class = "button_delete" onclick="deleteMsg()">삭제</button>
+												<button id = "button_delete" class = "button_delete" onclick="deleteMsg()">삭제</button>
 											<%-- 	<button class = "button_delete" onclick="location.href = '<%=context%>/MypageTraveldelete.do?t_num=${board.t_num }'">삭제</button> --%>
 												</div>
 											</td>
