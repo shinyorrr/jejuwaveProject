@@ -13,7 +13,7 @@
 	<c:if test="${result >0 }">
 		<script type="text/javascript">
 			alert("채택 완료!");
-		 	location.href="<%=context %>/qnaWriteCheck.do?b_num=${b_num}&choose=${com_num}"; 
+		 	location.href="<%=context %>/qnaWriteCheck.do?b_num=${b_num}"; 
 		</script>
 	</c:if>
 	<c:if test="${result == 0 }"> 

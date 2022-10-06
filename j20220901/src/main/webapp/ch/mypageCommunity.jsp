@@ -11,6 +11,16 @@
    String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">		
+<!-- bootStrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!-- jQuery -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
@@ -25,6 +35,46 @@
 
 <div class = "main" style="background-color: rgb(248,248,248);">
 <main id = "content" style="background-color: rgb(248,248,248);">
+	<!-- Modal page-->
+						<div class="col-md-auto modal bd-modal-xl fade" tabindex="-1" role="dialog" aria-labelledby="bd-modal-xl" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-xl">
+								<div class="modal-content">
+
+								</div>
+							</div>
+					    </div>
+					    <!-- deleteModal -->
+						<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
+						        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        게시글을 정말로 삭제하시겠습니까?
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+						        <button type="button" class="btn btn-primary" onclick="location.href='<%=context%>/commuDeletePro.do?c_num=${commu.c_num}&pageNum=${currentPage}'">삭제</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						<!-- end modal -->
+						<!-- Call modalContent.jsp Script -->
+						<script>
+							$('.bd-modal-xl').on('show.bs.modal', function(e) {
+						
+								var button = $(e.relatedTarget);
+								var modal = $(this);
+								
+								modal.find('.modal-content').load(button.data("remote"));
+						
+							});
+						</script>
 	<div class = "mypage_set">
 		<div class="Mypage_Main">
 			<div class="Menu_section">
@@ -80,11 +130,15 @@
 						<c:if test="${ totCnt > 0}">
 							<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
-										<tr style= " cursor: pointer" onclick="location.href='commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}';">
+								<%-- 		<tr style= " cursor: pointer" onclick="location.href='commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}';"> --%>
+								
+										<tr>
 											<td rowspan="3" width = 50>
+												 <button class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.c_img_path }" width = "120px" padding-bottom = 10px>
 												</div>
+												</button>
 											</td>
 											<td class = "dealstatusTd" width = 90>
 												<div class = "dealstatus">
@@ -106,7 +160,7 @@
 										<tr>
 											<td colspan="2">
 												<div class = "button_updateform">
-													<button class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'" >수정</button>
+													<button class = "button_update" onclick="location.href = '<%=context%>/commuUpdateForm.do?c_num=${board.c_num }'" >수정</button>
 												</div>
 												<div>
 													<button class = "button_delete">삭제</button>
@@ -118,6 +172,7 @@
 						</c:forEach> 
 					</c:if>
 					</div>
+						
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">
 						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"

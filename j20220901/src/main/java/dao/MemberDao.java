@@ -147,12 +147,13 @@ public class MemberDao {
 	
 	
 	public int delete(String user_id, String user_pw) throws SQLException {
+		System.out.println("delete Start.....");
 		int result = 0;
 		Connection conn = null;
-		String sql1 = "select user_pw from member where user_id=?";
-		String sql = "delete from member where user_id=?";
-		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		String sql1 = "select user_pw from member where user_id = ?";
+		String sql = "delete member where user_id = ?";
+		PreparedStatement pstmt = null;
 		try {
 			String dbPasswd = "";
 			conn = getConnection();
@@ -160,25 +161,31 @@ public class MemberDao {
 			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				dbPasswd = rs.getString(user_pw);
+				dbPasswd = rs.getString(1);
+				System.out.println("dbPasswd->"+dbPasswd);
 				if(dbPasswd.equals(user_pw)) {
+					System.out.println("if dbPasswd->"+dbPasswd);
 					rs.close();
 					pstmt.close();
 					pstmt = conn.prepareStatement(sql);
 					pstmt.setString(1, user_id);
+					System.out.println("setString(1, \"user_id\")->"+user_id);
 					result = pstmt.executeUpdate();
+					System.out.println("delete result ->"+ result);
+					
 				}else result = 0;
 			}	else result = -1;
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
 			if(conn != null) conn.close();
 			if(pstmt != null)pstmt.close();
 		}
-		
-		
+		System.out.println("delete sql ->"+ sql);
+		System.out.println("delete result : "+result);
 		return result;
 	}
+	
 	public String findId(String user_name, String user_email) throws SQLException {
 		String id = null;
 		Connection conn = null;

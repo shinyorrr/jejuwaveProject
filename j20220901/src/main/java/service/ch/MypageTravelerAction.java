@@ -21,8 +21,13 @@ public class MypageTravelerAction implements CommandProcess {
 		System.out.println("mypageBoardAction Service start.....");
 		
 		 // 세션값 받아오기
+		 int t_dealstatus = 0;
 		 HttpSession session = request.getSession();
 		 String user_id = (String) session.getAttribute("user_id");
+		 System.out.println("값이 넘어오는지 확인하기 : " + request.getParameter("t_dealstatus"));
+		 if(request.getParameter("t_dealstatus") != null) {
+			 t_dealstatus = Integer.parseInt(request.getParameter("t_dealstatus"));
+		 } else t_dealstatus = 1;
 		 System.out.println("session 값 : "  + user_id);
 		 MypageDao my = MypageDao.getInstance();
 		 
@@ -36,7 +41,7 @@ public class MypageTravelerAction implements CommandProcess {
 			 int endRow = startRow + pageSize -1;
 			 int startNum = totCnt - startRow + 1;
 			 System.out.println(startRow); // 작성자가 쓴 글 조회
-			 List<Mypage> list =my.travelList(user_id,startRow,endRow);
+			 List<Mypage> list =my.travelList(user_id,startRow,endRow,t_dealstatus);
 			 
 			 
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);

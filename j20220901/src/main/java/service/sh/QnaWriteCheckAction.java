@@ -27,6 +27,7 @@ public class QnaWriteCheckAction implements CommandProcess {
 		
 		int b_num = Integer.parseInt(request.getParameter("b_num"));
 		
+		//아이디 받아오기
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
 		

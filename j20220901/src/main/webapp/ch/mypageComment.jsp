@@ -21,6 +21,23 @@
 		width: 100%;
 	}
 </style>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('#myComment_setup').click(function(){
+			$.ajax({
+				url : 'mypageCommentPro.do',
+				dataType : 'html',
+				success	 : function(data){
+							$('#change_body').html(data)
+							}
+			});
+		
+		});
+		
+	});
+
+</script>
 </head>
 <body>
 
@@ -75,7 +92,10 @@
 			</div>
 			<!-- 각 화면이 달라지는 부분 -->
 			<div class="content_section">
+				<button id = "myComment_setup">
 				<h2 class = "mypage_menu_h2">내 댓글관리</h2>
+				</button>
+				<div class = "change_body" id = "change_body">
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 						<table>
@@ -157,6 +177,7 @@
 					    font: bold 12px tahoma;
 						">[다음]</button>
 				</c:if>
+				</div>
 				</div>
 			</div>
 		</div>
