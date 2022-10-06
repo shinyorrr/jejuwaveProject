@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,7 +119,8 @@
 												<div class = "t_title">${board.t_title }</div>
 											</td>
 											<td class = "t_date">
-											${board.t_date}
+												<c:set var = "t_date" value="${board.t_date }" />
+												${fn:substring(t_date,0,11)}
 											</td>
 										</tr>
 										<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
@@ -147,10 +149,8 @@
 							</table>
 						</c:forEach> 
 					</c:if>
-			</div>
-		</div>
-				<div style="padding-left : 62%;">
-				<c:if test="${startPage > 1 }">
+				<div style="text-align: center; padding-top: 20px;">
+				<c:if test="${startPage > blockSize }">
 						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
@@ -184,6 +184,8 @@
 						">[다음]</button>
 				</c:if>
 				</div>
+			</div>
+		</div>
 	</div>
 </main>
 <footer class="py-5 bg-dark" style="top: 180%;">

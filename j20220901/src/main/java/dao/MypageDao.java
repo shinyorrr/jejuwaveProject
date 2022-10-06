@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,7 +131,7 @@ public class MypageDao {
 				mypage.setT_title		(rs.getString("t_title"));
 				mypage.setT_content		(rs.getString("t_content"));
 				mypage.setT_gubun		(rs.getString("t_gubun"));
-				mypage.setT_date		(rs.getDate("t_date"));
+				mypage.setT_date		(rs.getString("t_date"));
 				mypage.setT_person		(rs.getInt("t_person"));
 				mypage.setT_start		(rs.getDate("t_start"));
 				mypage.setT_end			(rs.getDate("t_end"));
@@ -494,7 +495,7 @@ public class MypageDao {
 				Mypage mypage = new Mypage();
 				mypage.setT_num(rs.getInt("t_num"));
 				mypage.setT_content(rs.getString("t_content"));
-				mypage.setT_date(rs.getDate("t_date"));
+				mypage.setT_date(rs.getString("t_date"));
 				list.add(mypage);
 				System.out.println("commentList list : " + list);
 			} while(rs.next());
