@@ -9,11 +9,16 @@
 <%
    String context = request.getContextPath();
 %>
-<c:import url="${context}/header.jsp"></c:import>
+<c:import url="../header.jsp"></c:import>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
-<link rel = "stylesheet" href ="<%=context%>/css/ch/mypageTraveler.css?after">
+<link rel = "stylesheet" href ="<%=context%>/css/ch/mypageBoard.css?after">
+<style type="text/css">
+	table {
+		width: 100%;
+	}
+</style>
 </head>
 <body>
 
@@ -53,7 +58,7 @@
 								<span class="mypage_name">내 커뮤니티글</span>
 							</a>
 						</li>
-						<li class="link_mypage_traveler">
+						<li class="link_mypage_board">
 							<a class="link index_link" href="<%=context%>/mypageBoard.do">
 								<span class="mypage_name">내 게시글</span>
 							</a>
@@ -72,7 +77,7 @@
 					<table>
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
-							<tr>
+							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
 								<td colspan="3">
 									<div class = "t_title">
 										${board.b_title}
@@ -89,8 +94,8 @@
 									</div>
 								</td>
 							</tr>
-							<tr>
-								<td colspan="4">
+							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
+								<td colspan="4" style = "height: 40px;">
 									<div class = "t_content">
 									${board.b_content }
 									</div>
@@ -98,12 +103,14 @@
 							</tr>
 							<tr>
 								<td>
-									<button  class = "button_update" onclick="location.href = 'Board.jsp'">수정</button>
-								</td>
-								<td>
+									<button  class = "button_update" onclick="location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
 									<button class = "button_delete">삭제</button>
 								</td>
-								<td></td><td>댓글수</td>
+								<td colspan="3">
+									<div class = "b_recnt">
+										<img style="width: 16px; height: 16px; margin: 0 5px;" src="<%=context%>/yn_images/comm_icon.png">${board.b_recnt}
+									</div>
+								</td>
 							</tr>
 							<c:set var="startNum" value="${startNum - 1 }" />
 						</c:forEach> 

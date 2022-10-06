@@ -27,7 +27,35 @@ public class Mypage {
 	private String c_content;
 	private Date c_date;
 	private String c_hash;
+	private int t_recnt;
+	private int b_recnt;
+	private String com_content;
+	private Date com_date;
 	
+	public String getCom_content() {
+		return com_content;
+	}
+	public void setCom_content(String com_content) {
+		this.com_content = com_content;
+	}
+	public Date getCom_date() {
+		return com_date;
+	}
+	public void setCom_date(Date com_date) {
+		this.com_date = com_date;
+	}
+	public int getB_recnt() {
+		return b_recnt;
+	}
+	public void setB_recnt(int b_recnt) {
+		this.b_recnt = b_recnt;
+	}
+	public int getT_recnt() {
+		return t_recnt;
+	}
+	public void setT_recnt(int t_recnt) {
+		this.t_recnt = t_recnt;
+	}
 	public int getC_img_num() {
 		return c_img_num;
 	}

@@ -9,6 +9,7 @@
 String context = request.getContextPath();
 %>
 <title>Insert title here</title>
+<!-- google font -->
 <link
 	href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap"
 	rel="stylesheet">
@@ -17,7 +18,7 @@ String context = request.getContextPath();
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet">
 <!-- main css -->
-	<link rel="stylesheet" id="chacss" href="css/header_main.css">
+<link rel="stylesheet" id="chacss" href="css/header_main.css">
 
 <!-- Bootstrap CSS -->
 <link
@@ -28,26 +29,12 @@ String context = request.getContextPath();
 
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="images/tangerine.png" />
-<!-- Bootstrap icons-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<!-- fontawesome -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <!-- Core theme JS-->
 <script src="js/index.js" defer="defer"></script>
-<script type="text/javascript">
-function chk() {
-	location.href='<%=context%>/commuList.do';
-	$('.cFXvdf').reomveClass('cFXvdf')
-}
-</script>
 </head>
 <body>
 	<header id="header" class="Headers_HeaderMainHeader burgkU">
@@ -74,7 +61,7 @@ function chk() {
 							</button>
 							<button width="" height="" font-style="" type="button"
 								class="Button__ButtonStyle-sc-1vcxcg6-1 jRRCxU">
-								<a href="<%=context%>/joinForm.do ">회원가입</a>
+								<a href="<%=context%>/joinForm.do">회원가입</a>
 							</button>
 						</div>
 					</c:if>
@@ -87,7 +74,7 @@ function chk() {
 										style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;">
 								</c:if>
 								<c:if test="${img != null }">
-									<img src="<%=context%>${img}"
+									<img src="<%=context%>/${img}"
 										style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;">
 								</c:if>
 								<img src="images/form_arrow_black_fill.svg">
@@ -102,7 +89,7 @@ function chk() {
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 											<c:if test="${img != null }">
-												<img src="<%=context %>/${img}"
+												<img src="<%=context %>${img}"
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 										</div>
@@ -138,6 +125,12 @@ function chk() {
 								style="width: 33px; height: 24px;">
 							<p>여행 질문하기</p>
 						</button>
+						<button onclick="location.href='<%=context%>/commuList.do'"
+							class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHlmB">
+							<img src="images/magnifier_color.svg" alt="이미지"
+								style="width: 33px; height: 24px;">
+							<p>여행 기록하기</p>
+						</button>
 					</div>
 				</div>
 			</div>
@@ -154,7 +147,7 @@ function chk() {
 				onClick="location.href='<%=context%>/qnaList.do'">Q&amp;A</button>
 			<button width="auto" font-size="16px" font-weight="400"
 				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdf"
-				onClick="chk()">여행 기록</button>
+				onClick="location.href='<%=context%>/commuList.do'">여행 기록</button>
 		</div>
 	</header>
 </body>

@@ -23,16 +23,13 @@
 .onerow{
 	display: flex;
 }
-.imgbox{
-	width : 120px;
-	padding-bottom : 10px;
-}
 .dealstatus{
 	font-family: 'Noto Sans KR';
     color: rgb(0, 206, 124);
     font-weight: 500;
     margin-right: 4px;
     padding-left : 20px;
+    text-align: right;
 }
 .t_titleTD{
 	font-size: 16px;
@@ -45,21 +42,27 @@
      padding-left : 20px;
 }
 .t_content{
-	width : 400px;
-    white-space: nowrap;
+	width : 470px;
     text-overflow: ellipsis;
     overflow: hidden;
     user-select: none;
     -webkit-user-drag: none;
-    padding-left : 20px;
     font-size: small;
+    white-space: normal;
+    line-height: 1.2;
+    height: 3.6em;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 .button_update{
 	user-select: none;
     -webkit-user-drag: none;
     color: rgb(106, 106, 106);
     float: left;
-    font-family: 'korean';
+    font-family: 'NotoSansKR';
     font-size: 14px;
     background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
@@ -69,25 +72,26 @@
 	user-select: none;
     -webkit-user-drag: none;
     color: rgb(106, 106, 106);
-    font-family: 'korean';
+    font-family: 'NotoSansKR';
     font-size: 14px;
     background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
 }
-table {
-	width: 100%;
-}
-.imgbox{
-	border-radius: 35%;
-}
 .t_title{
-	font-family: 'korean';
+	font-family: 'NotoSansKR';
+	font-size: smaller;
 }
 .button_updateform{
 	padding-right: 10px;
 	padding-left : 20px;
 }
-.t_date{
-	font-family: 'korean';
+.comment_date{
+	font-family: 'NotoSansKR';
     font-size: smaller;
+}
+.b_recnt{
+	font-family: 'NotoSansKR';
+    font-size: smaller;
+    text-align: right;
+    padding-right: 5px;
 }

@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
-   String context = request.getContextPath();
+	String context = request.getContextPath();
+	String userId = (String) session.getAttribute("user_id");
+	request.setAttribute("userId", userId);
 %>
 <c:import url="${context}/hs/headerLogin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">

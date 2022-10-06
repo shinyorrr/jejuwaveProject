@@ -35,8 +35,6 @@ public class QnaWriteProAction implements CommandProcess {
 			board.setB_content(request.getParameter("b_content"));
 			board.setB_theme(request.getParameter("b_theme"));
 			
-		    
-			
 			Qna_BoardDao bd = Qna_BoardDao.getInstance();
 			int result = bd.insert(board, hashString);
 			

@@ -14,7 +14,9 @@ public class IdCheckFormAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("IdCheckFormAction Start..");
 		String user_id = request.getParameter("user_id");
+		System.out.println("IdCheckFormAction user_id..->"+request.getParameter("user_id"));
 		String pageNum = request.getParameter("pageNum");
 		try {
 			MemberDao md = MemberDao.getInstance();
@@ -24,7 +26,7 @@ public class IdCheckFormAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "ry/idCheckForm.jsp";
+		return "idCheckForm.jsp";
 	}
 
 }

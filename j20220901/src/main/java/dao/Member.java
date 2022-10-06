@@ -1,7 +1,5 @@
 package dao;
 
-import java.util.Date;
-
 public class Member {
 	private String user_id;
 	private String user_pw;

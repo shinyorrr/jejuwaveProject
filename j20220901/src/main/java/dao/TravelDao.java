@@ -62,10 +62,11 @@ public class TravelDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from (select rownum r, c.* from (select a.*, nvl(b.cnt,0) as reply_cnt "
-				+ " from (select * from travel_board where t_Relevel= 0 ) a, (select t_ref, count(t_ref) as cnt "
-				+ " from travel_board  where t_relevel !=0 group by t_ref) b where a.t_ref = b.t_ref(+) "
-				+ " order by t_num desc) c) where r between ? and ?";
+		String sql =   "select *"
+						+ "  from (select rownum r, a.*, reply_cnt(a.t_ref) reply_cnt, fn_user_img(a.user_id) as user_img"
+						+ "          from (select * "
+						+ "                  from travel_board where t_Relevel = 0  order by t_ref desc) a)"
+						+ " where r between ? and ?";
 		
 		
 		System.out.println("TravelDao  traveList startRow-->"+startRow);
@@ -87,7 +88,7 @@ public class TravelDao {
 				travel.setT_title		(rs.getString	("t_title"));
 				travel.setT_content		(rs.getString	("t_content"));
 				travel.setT_gubun		(rs.getString	("t_gubun"));
-				travel.setT_date		(rs.getString		("t_date"));
+				travel.setT_date		(rs.getString	("t_date"));
 				travel.setT_person		(rs.getInt		("t_person"));
 				travel.setT_start		(rs.getString	("t_start"));
 				travel.setT_end			(rs.getString	("t_end"));
@@ -96,6 +97,7 @@ public class TravelDao {
 				travel.setT_relevel		(rs.getInt		("t_relevel"));
 				travel.setT_restep		(rs.getInt		("t_restep"));
 				travel.setReply_cnt		(rs.getInt		("reply_cnt"));
+				travel.setUser_img		(rs.getString	("user_img"));
 				
 				System.out.println("TravelDao  traveList t_title-->"+rs.getString	("t_title"));
 				
@@ -124,7 +126,8 @@ public class TravelDao {
 		System.out.println("=====> t_num ==" + t_num);
 		String sql 	 = "select t_num, user_id, t_img, t_title, t_content, t_gubun,"
 				     + " TO_CHAR(TO_DATE(t_date) , 'YYYY.MM.DD') AS t_date, t_person, t_start,"
-				     + " t_end, t_dealstatus, t_ref, t_relevel, t_restep from travel_board where t_num=?";
+				     + " t_end, t_dealstatus, t_ref, t_relevel, t_restep, fn_user_img(user_id) as user_img"
+				     + " from travel_board where t_num=?";
 		
 
 		Travel travel = new Travel();
@@ -150,6 +153,9 @@ public class TravelDao {
 				travel.setT_ref			(rs.getInt		("t_ref"));
 				travel.setT_relevel		(rs.getInt		("t_relevel"));
 				travel.setT_restep		(rs.getInt		("t_restep"));
+				travel.setUser_img		(rs.getString	("user_img"));
+
+				System.out.println("TravelDao  select user_img-->"+rs.getString	("user_img"));
 				System.out.println("TravelDao  select t_title-->"+rs.getString	("t_title"));
 				System.out.println("TravelDao  select t_content-->"+rs.getString	("t_content"));
 			}
@@ -167,7 +173,7 @@ public class TravelDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select t_num, user_id, t_content, t_date, t_ref, t_relevel, t_restep "
+		String sql = "select t_num, user_id, t_content, t_date, t_ref, t_relevel, t_restep, fn_user_img(user_id) as user_img"
 				  + " from travel_board where t_ref=? and t_relevel != 0 order by t_restep, t_relevel, t_date";
 		
 		System.out.println();
@@ -186,6 +192,7 @@ public class TravelDao {
 				travel.setT_ref			(rs.getInt		("t_ref"));
 				travel.setT_relevel		(rs.getInt		("t_relevel"));
 				travel.setT_restep		(rs.getInt		("t_restep"));
+				travel.setUser_img		(rs.getString	("user_img"));
 				
 				list.add(travel);
 			}

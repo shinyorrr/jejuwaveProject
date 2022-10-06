@@ -19,6 +19,27 @@
 		width: 100%;
 	}
 </style>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+	function deleteMsg(){
+		var t_num = $('#t_num').val();
+		console.log = (t_num)
+		var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
+		if(!ans) return false;
+		
+		$.ajax({
+				url 	: '${context}/MypageTraveldelete.do?t_num = ',
+				dataType: 'text',
+				data	: t_num,
+				success	: function(data){
+						location.reload();
+				},
+				error : function(date){
+					alert("댓글이 삭제되지 않았습니다.");
+				}
+			});
+		}
+</script>
 </head>
 <body>
 <main id = "content" style="background-color: rgb(248,248,248);">
@@ -76,19 +97,20 @@
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
-										<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
+										<tr id = "travelurl" style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
+											<input id = "t_num" type="text" value = "${board.t_num }" hidden="true">
 											<td rowspan="3" width = 50>
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.t_img }" width = "120px" padding-bottom = 10px>
 												</div>
 											</td>
 											<td class = "dealstatusTd" width = 90>
-												<div class = "dealstatus">
+												<div class = "dealstatus"  style="width: 100px;">
 														<c:if test="${board.t_dealstatus == 1 }">
 														모집완료	
 														</c:if>
 														<c:if test="${board.t_dealstatus == 0 }">
-														모집중	
+														<sqan style = "color : red">모집중</sqan>	
 														</c:if>
 												</div>
 											</td>
@@ -109,15 +131,15 @@
 										<tr>
 											<td colspan="2">
 												<div class = "button_updateform">
-													<button class = "button_update" onclick="location.href = 'Board.jsp'">수정</button>
+													<button class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'">수정</button>
 												</div>
 												<div>
-													<button class = "button_delete">삭제</button>
+													<button class = "button_delete" onclick="location.href = '<%=context%>/MypageTraveldelete.do?t_num=${board.t_num }'">삭제</button>
 												</div>
 											</td>
 											<td>
-												<div class = "comment number">
-												댓글수
+												<div class = "comment_cnt">
+													<img style="width: 16px; height: 16px; margin: 0 5px;" src="<%=context%>/yn_images/comm_icon.png">${board.t_recnt}
 												</div>
 											</td>
 										</tr>

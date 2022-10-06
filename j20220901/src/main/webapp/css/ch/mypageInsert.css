@@ -30,9 +30,10 @@
 	padding : 30px;
 }
 .input_user{
-	height: 70px;
+	height: 40px;
 	width: 100%;
 	border: 1px solid rgba(153,153,153,0.2);
+	font-family: 'NotoSansKR'
 }
 input:focus {
 	border-color: rgb(255,53,0);
@@ -53,6 +54,7 @@ input:focus {
 .submitMain{
 	display: flex;
 	justify-content: space-between;
+	margin-top: 30px;
 }
 .image_insert{
 	padding-left: 35%;
@@ -65,4 +67,10 @@ input:focus {
 }
 #target_img::after {
 	content: url("../../images/image-outline.svg");
+}
+#user_info{
+	height: 180px;
+}
+#user_email{
+	border: 1px solid rgba(153,153,153,0.2);
 }
