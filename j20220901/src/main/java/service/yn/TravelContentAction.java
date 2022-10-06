@@ -56,9 +56,10 @@ public class TravelContentAction implements CommandProcess {
 				int revStartNum = totRev - revStartRow + 1;
 				System.out.println("revPageNum -->"+revPageNum);
 				
+
 				// review 조회						1			4
 				List<Review> revlist = rd.revList(revStartRow,revEndRow,t_num);
-				//											11		4
+
 				int revPageCnt = (int)Math.ceil((double)totRev/revPageSize);
 				//								1				10			10
 				int revStartPage = (int)(revCurrentPage-1)/revBlockSize*revBlockSize + 1;

@@ -51,10 +51,10 @@ String context = request.getContextPath();
 					<th style="vertical-align: super;">
 					<!-- 채택완료/답변대기 -->
 						<c:if test="${board.b_success eq '채택완료' }">
-							<span style="color: red;">${board.b_success }</span>
+							<span >${board.b_success }</span>
 						</c:if> 
 						<c:if test="${board.b_success ne '채택완료' }">
-							<span>${board.b_success }</span>
+							<span style="color: #FF3500;">${board.b_success }</span>
 						</c:if></th>
 					<!-- 제목 -->
 					<th class=" title2">
