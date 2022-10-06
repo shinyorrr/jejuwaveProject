@@ -11,16 +11,30 @@
 <% 
 String context = request.getContextPath();
 %>
+
+
 <c:import url="${context}/header.jsp"></c:import>
 
 
+
+<!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">		
+<!-- bootStrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<!-- jQuery -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 <!-- 커뮤니티 무한스크롤 ajax-->
 <script type="text/javascript">
 var count = 2;
 $(window).scroll(function(){
-	if($(window).scrollTop() == $(document).height() - $(window).height()) {	
+	let scrollLocation = document.documentElement.scrollTop; //현재 스크롤 바 위치
+	let windowHeight = window.innerHeight;                   //화면으로 보이는 스크린 화면의 높이
+	let fullHeight = document.body.scrollHeight;             // 웹 문서 중 body의 스크롤 높이
+	//50 은 웹페이지 margin값
+	if(scrollLocation + windowHeight >= fullHeight + 50) {	/* ($(window).scrollTop() == $(document).height() - $(window).height()) */
 		$.ajax({ 
 			url: "<%=context%>/commuListScroll.do?pageNum="+count,
 			success: function(result){
@@ -31,19 +45,8 @@ $(window).scroll(function(){
 	}
 });	
 console.log(count);
-		
-</script>
 
-<!-- 삭제버튼 confirm -->
-<%-- <script type="text/javascript">
-function ConfirmDel() {
-	if (confirm("삭제 하시겠습니까?")) {
-		location.href="<%=context%>/commuDeleteForm.do?c_num=${commu.c_num}&pageNum=${currentPage}";
-	} else {
-		return false;
-	}
-}
-</script> --%>
+</script>
 </head>
 <body>
 
@@ -98,7 +101,6 @@ function ConfirmDel() {
 								</button>								
 								<div class="card-body d-flex">
 									<p class="card-text">${commu.c_content }</p>
-									
 								</div>
 								<div class="card-footer d-flex">
 									<p class="mt-2">#${commu.c_hash }</p>

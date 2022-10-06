@@ -8,6 +8,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Qna_Board;
 import dao.Qna_BoardDao;
@@ -23,29 +24,38 @@ public class QnaWriteCheckAction implements CommandProcess {
 			throws ServletException, IOException {
 
 		System.out.println("ContentAction Service start...");
-		// 1. num , pageNum
+		
 		int b_num = Integer.parseInt(request.getParameter("b_num"));
-		// ȸ���̶� �����ϰ� ���� !!!!  String user_id = request.getParameter("user_id");
-		String user_id = "aaaa";
+		
+		//아이디 받아오기
+		HttpSession session = request.getSession();
+		String user_id = (String) session.getAttribute("user_id");
 		
 		try {
 			// 2. BoardDao bd Instance
 			Qna_BoardDao bd = Qna_BoardDao.getInstance();
 			Qna_CommentDao cd = Qna_CommentDao.getInstance();
-
+			
+			//글 리스트
+			Qna_Board board = bd.select(b_num); 
+			//댓글 리스트
 			List<Qna_Comment> list = cd.commentList(b_num);
+			Qna_Comment comment = cd.select(b_num);
+			
 			
 			List<Integer> inum = new ArrayList<Integer>(Arrays.asList(1,2,3,4));
 
-
-			Qna_Board board = bd.select(b_num);   
-			Qna_Comment comment = cd.select(b_num);
+  
+			
 			
 
 			request.setAttribute("b_num", b_num);
-			request.setAttribute("board", board);
-
+			
+			//글리스트 ---> board
+			request.setAttribute("board", board);		
+			//댓글리스트 ---> list
 			request.setAttribute("list", list);
+			//로그인한 아이디 넘겨줌
 			request.setAttribute("user_id", user_id);
 			request.setAttribute("inum", inum);
 			

@@ -13,11 +13,10 @@ a{
 	color: inherit;
 }
 .mypage_set{
-	padding-top: 300px;
+	padding-top: 1100px;
     padding-bottom: 200px;
     position: absolute;
     left: 50%;
-    top: 50%;
     transform: translate(-50%,-40%);
 }
 .Mypage_Main{

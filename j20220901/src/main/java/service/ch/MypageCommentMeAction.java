@@ -1,4 +1,4 @@
-package service.ry;
+package service.ch;
 
 import java.io.IOException;
 
@@ -8,13 +8,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import service.CommandProcess;
 
-public class PwFindFormAction implements CommandProcess {
+public class MypageCommentMeAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("PwFindFormAction Start...");
-		return "ry/pwFindForm.jsp";
+		// TODO Auto-generated method stub
+		return "ch/mypageCommentPro.jsp";
 	}
 
 }

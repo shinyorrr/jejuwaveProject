@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.Member;
 import dao.MemberDao;
+import service.CommandProcess;
 
 public class IdDeleteFormAction implements CommandProcess {
 
@@ -18,8 +19,10 @@ public class IdDeleteFormAction implements CommandProcess {
 		System.out.println("IdDeleteFormAction Start..");
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
+		System.out.println("IdDeleteFormAction user_id->"+user_id);
 		try {
 			String user_pw = request.getParameter("user_pw");
+			System.out.println("IdDeleteFormAction user_pw -> "+user_pw);
 			String pageNum = request.getParameter("pageNum");
 			MemberDao md = MemberDao.getInstance();
 			Member member = md.select(user_id);
@@ -32,7 +35,7 @@ public class IdDeleteFormAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "idDeleteForm.jsp";
+		return "ry/idDeleteForm.jsp";
 	}
 
 }

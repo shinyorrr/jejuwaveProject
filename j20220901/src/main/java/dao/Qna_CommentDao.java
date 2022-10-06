@@ -58,8 +58,8 @@ public class Qna_CommentDao {
 				comment.setCom_content(rs.getString("com_content"));
 				comment.setCom_num(rs.getInt("com_num"));
 				comment.setCom_date(rs.getDate("com_date"));
-				System.out.println("commentList user_id->"+rs.getString("user_id"));
-				System.out.println("commentList com_content->"+rs.getString("com_content"));
+				comment.setCom_choose(rs.getString("com_choose"));
+
 				list.add(comment);
 			}	
 		} catch (Exception e) {
@@ -121,11 +121,11 @@ public class Qna_CommentDao {
 			 pstmt = conn.prepareStatement(sql);
 			 pstmt.setInt(1, comment.getB_num());
 			 pstmt.setInt(2, cnum);
-			 pstmt.setString(3, "aaaa"/*comment.getUser_id()*/);
+			 pstmt.setString(3, comment.getUser_id());
 			 pstmt.setString(4, comment.getCom_content());
 			 result = pstmt.executeUpdate();
 			 pstmt.close();
-			 System.out.println("Ŀ��Ʈ�ٿ� ����-->"+comment.getCom_content());
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		} finally {

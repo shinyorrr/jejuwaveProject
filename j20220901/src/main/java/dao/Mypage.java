@@ -9,7 +9,7 @@ public class Mypage {
 	private String t_title;
 	private String t_content;
 	private String t_gubun;
-	private Date t_date;
+	private String t_date;
 	private int t_person;
 	private Date t_start;
 	private Date t_end;
@@ -170,10 +170,10 @@ public class Mypage {
 	public void setT_gubun(String t_gubun) {
 		this.t_gubun = t_gubun;
 	}
-	public Date getT_date() {
+	public String getT_date() {
 		return t_date;
 	}
-	public void setT_date(Date t_date) {
+	public void setT_date(String t_date) {
 		this.t_date = t_date;
 	}
 	public int getT_person() {
