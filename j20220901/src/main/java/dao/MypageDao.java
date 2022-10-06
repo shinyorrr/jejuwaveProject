@@ -169,9 +169,11 @@ public class MypageDao {
 				Member member = new Member();
 				String dbpasswd = rs.getString("user_pw");
 				member.setUser_gubun(rs.getInt("user_gubun"));
+				
 				System.out.println("dbpasswd =>" + dbpasswd);
 				System.out.println("user_pw : " + user_pw);
 				System.out.println("db 탔음");
+				
 				if(dbpasswd.equals(user_pw)) result = 1;
 				else result = 0;
 			} else result = -1;
@@ -199,21 +201,21 @@ public class MypageDao {
 			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				md.setUser_info(rs.getString("user_info"));
+				md.setUser_info		(rs.getString("user_info"));
 				System.out.println(md.getUser_info());
-				md.setUser_birth(rs.getString("user_birth"));
-				md.setUser_tel(rs.getString("user_tel"));
-				md.setUser_email(rs.getString("user_email"));
-				md.setUser_img(rs.getString("user_img"));
-				md.setUser_gubun(rs.getInt("user_gubun"));
+				md.setUser_birth	(rs.getString("user_birth"));
+				md.setUser_tel		(rs.getString("user_tel"));
+				md.setUser_email	(rs.getString("user_email"));
+				md.setUser_img		(rs.getString("user_img"));
+				md.setUser_gubun	(rs.getInt("user_gubun"));
 				System.out.println(md.getUser_img());
 			}
 		} catch (SQLException e) {
 			System.out.println("MemberDao select문 오류 : " + e.getMessage());
 		} finally {
-			if(rs != null) try {rs.close();} catch (Exception e) {} 
-			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
-			if(conn != null) try {conn.close();} catch (Exception e) {} 
+			if(rs != null) 		try 	{rs.close();} 		catch (Exception e) {} 
+			if(pstmt != null)  	try 	{pstmt.close();} 	catch (Exception e) {} 
+			if(conn != null) 	try 	{conn.close();}		catch (Exception e) {} 
 		}
 		
 		return md;
@@ -320,55 +322,6 @@ public class MypageDao {
 		}
 		return max;
 	}
-	public List<Mypage> commentList(String user_id, int startRow, int endRow) throws SQLException {
-		List<Mypage> list = new ArrayList<Mypage>();
-		String sql = "select * from (\r\n"
-				+ "                select rownum rn, a.* from "
-				+ "                    (select t_num, t_content, t_date, b_num, b_content,b_date "
-				+ "                    from qna_board q, travel_board t "
-				+ "                    where q.user_id = t.user_id "
-				+ "                    and q.user_id = ? "
-				+ "                    and t.t_relevel != 0) a "
-				+ "                ) "
-				+ "WHERE rn BETWEEN ? and ?";
-		System.out.println("commentList sql : " + sql);
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_id);
-			System.out.println("commentList user_id => " + user_id);
-			pstmt.setInt(2, startRow);
-			System.out.println("commentList startRow => " + startRow);
-			pstmt.setInt(3, endRow);
-			System.out.println("commentList endRow => " + endRow);
-			rs = pstmt.executeQuery();
-			System.out.println("commentList : " + rs);
-			System.out.println("commentList rs.next () : " + rs.next());
-			
-			do{
-				Mypage mypage = new Mypage();
-				mypage.setB_num(rs.getInt("b_num"));
-				mypage.setT_num(rs.getInt("t_num"));
-				mypage.setT_content(rs.getString("t_content"));
-				mypage.setT_date(rs.getDate("t_date"));
-				mypage.setB_content(rs.getString("b_content"));
-				mypage.setB_date(rs.getDate("b_date"));
-				list.add(mypage);
-				System.out.println("commentList list : " + list);
-			} while(rs.next());
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}  finally {
-			if(rs != null) try {rs.close();} catch (Exception e) {} 
-			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
-			if(conn != null) try {conn.close();} catch (Exception e) {} 
-		}
-		
-		return list;
-	}
 	public int getTotalCntCommunity(String user_id) throws SQLException{
 		int max = 0;
 		Connection conn = null;
@@ -461,6 +414,123 @@ public class MypageDao {
 		
 		return result;
 		
+	}
+	public List<Mypage> commentList(String user_id, int startRow, int endRow) throws SQLException {
+		List<Mypage> list = new ArrayList<Mypage>();
+		String sql = "select *\r\n"
+				+ " from(\r\n"
+				+ "    select rownum r, a.*\r\n"
+				+ "    from (select *\r\n"
+				+ "          from qna_comment\r\n"
+				+ "          where user_id = ?\r\n"
+				+ "          order by com_date desc\r\n"
+				+ "          ) a )\r\n"
+				+ " where r BETWEEN ? and ?";
+		System.out.println("commentList sql : " + sql);
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			System.out.println("commentList user_id => " + user_id);
+			pstmt.setInt(2, startRow);
+			System.out.println("commentList startRow => " + startRow);
+			pstmt.setInt(3, endRow);
+			System.out.println("commentList endRow => " + endRow);
+			rs = pstmt.executeQuery();
+			System.out.println("commentList : " + rs);
+			System.out.println("commentList rs.next () : " + rs.next());
+			
+			do{
+				Mypage mypage = new Mypage();
+				mypage.setB_num(rs.getInt("b_num"));
+				mypage.setCom_content(rs.getString("com_content"));
+				mypage.setCom_date(rs.getDate("com_date"));
+				list.add(mypage);
+				System.out.println("commentList list : " + list);
+			} while(rs.next());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}  finally {
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
+		return list;
+	}
+	public List<Mypage> commentList2(String user_id, int startRow, int endRow) {
+		List<Mypage> list = new ArrayList<Mypage>();
+		String sql = "select *\r\n"
+				+ "from(\r\n"
+				+ "    select rownum r, a.*\r\n"
+				+ "    from (select *\r\n"
+				+ "          from travel_board\r\n"
+				+ "          where user_id = ?\r\n"
+				+ "          and t_relevel != 0\r\n"
+				+ "          order by t_date desc\r\n"
+				+ "          ) a )\r\n"
+				+ "where r BETWEEN ? and ?";
+		System.out.println("commentList sql : " + sql);
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
+			System.out.println("commentList user_id => " + user_id);
+			pstmt.setInt(2, startRow);
+			System.out.println("commentList startRow => " + startRow);
+			pstmt.setInt(3, endRow);
+			System.out.println("commentList endRow => " + endRow);
+			rs = pstmt.executeQuery();
+			System.out.println("commentList : " + rs);
+			System.out.println("commentList rs.next () : " + rs.next());
+			
+			do{
+				Mypage mypage = new Mypage();
+				mypage.setT_num(rs.getInt("t_num"));
+				mypage.setT_content(rs.getString("t_content"));
+				mypage.setT_date(rs.getDate("t_date"));
+				list.add(mypage);
+				System.out.println("commentList list : " + list);
+			} while(rs.next());
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}  finally {
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
+		return list;
+	}
+	public int deleteTraveler(int t_num) {
+		int result = 0 ;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete travel_board where t_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, t_num);
+			result = pstmt.executeUpdate();
+			
+			if(result != 0 ) System.out.println("성공");
+			else System.out.println("삭제실패");
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		
+		return result;
 	}
 	
 	

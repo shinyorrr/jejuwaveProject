@@ -7,7 +7,7 @@
 <%
 String context = request.getContextPath();
 %>
-<c:import url="header.jsp"></c:import>
+<c:import url="${context}/header.jsp"></c:import>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">
 
 
@@ -57,8 +57,9 @@ String context = request.getContextPath();
 				</div>
 			</div>
 			<div id="filter">
-				<button class="btn px-4" id="filterBtn"
-					style="margin-bottom: 3px; border-radius: 20px;">모집중인 글 보기</button>
+				<button class="btn px-4" id="filterBtn_BF" onclick="dealStatusFilter()"
+					style="margin-bottom: 3px; border-radius: 30px; padding:8px;
+							border: solid #4C4C4C 2px;	font-weight: bold;">모집중인 글 보기</button>
 			</div>
 		</div>
 	</div>
@@ -81,7 +82,7 @@ String context = request.getContextPath();
 									
 								<!-- Content 이미지-->
 								<div id="pic">
-									<img src="images/upload/${travel.t_img}" class="card-img-top" />
+									<img src="${travel.t_img}" class="card-img-top" />
 								</div> 
 								
 								<!-- Content details-->

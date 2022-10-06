@@ -29,7 +29,21 @@ public class Mypage {
 	private String c_hash;
 	private int t_recnt;
 	private int b_recnt;
+	private String com_content;
+	private Date com_date;
 	
+	public String getCom_content() {
+		return com_content;
+	}
+	public void setCom_content(String com_content) {
+		this.com_content = com_content;
+	}
+	public Date getCom_date() {
+		return com_date;
+	}
+	public void setCom_date(Date com_date) {
+		this.com_date = com_date;
+	}
 	public int getB_recnt() {
 		return b_recnt;
 	}

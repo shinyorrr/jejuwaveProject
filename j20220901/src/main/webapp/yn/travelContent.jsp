@@ -2,7 +2,6 @@
     pageEncoding="UTF-8" errorPage="dbError.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%
@@ -10,7 +9,10 @@ String context = request.getContextPath();
 String userId = (String) session.getAttribute("user_id");
 request.setAttribute("userId", userId);
 %>
-<c:import url="header.jsp"></c:import>
+
+<!-- header 영역 -->
+<c:import url="${context}/header.jsp"></c:import>
+=======
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">	
 
 <!-------------- body 영역 ------------> 	
@@ -23,7 +25,7 @@ request.setAttribute("userId", userId);
 			<article class="mb-5 pb-3">
 				<!-- 게시물 이미지 -->
 				<figure class="mb-4">
-					<img class="img-fluid rounded mb-4" src="images/upload/${travelContent.t_img}" style="width:100%; height:280px; object-fit:cover;">
+					<img class="img-fluid rounded mb-4" src="${travelContent.t_img}" style="width:100%; height:280px; object-fit:cover;">
 				</figure>
 				
 				<!-- 글제목 -->
@@ -67,12 +69,114 @@ request.setAttribute("userId", userId);
 							<img src="${travelContent.user_img}" width="32" height="32" 
 								 class="userIconColor-1 rounded-circle me-2  align-center border-2 border-secondary">
 							<span name="user_id" class="h5">${travelContent.user_id}</span>
-							<button type="button" class="btn center mt-2" id="trCommBtn">동행후기 보기</button>		
+							<!-- Button trigger modal -->
+							<button type="button" class="btn center mt-2" id="trCommBtn"
+								data-bs-toggle="modal" data-bs-target="#exampleModal">동행후기보기</button>
+							<!-- Modal -->
+							<div class="modal fade" id="exampleModal" tabindex="-1"
+								aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+									<div class="review">
+										<div class="modal-header">
+											<div>
+												<c:if test="${img == null }">
+													<img src="<%=context%>/images/vector_profile_default.svg"
+														style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
+												</c:if>
+												<c:if test="${img != null }">
+													<img src="<%=context %>/${img}"
+														style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
+												</c:if>
+											</div>
+											<div>
+												<div class="modal-title moti" id="exampleModalLabel">
+													<p>${travelContent.user_id}</p>
+												</div>
+												<div class="modal-hashtag moha">
+													<p>30대 · 남성 · 대한민국</p>
+												</div>
+											</div>
+											<div class="rating" data-rate="2" style="padding-left: 110px; padding-top: 48px;">											
+												<i class="fa fa-star"></i>												
+												<i class="fa fa-star"></i>												
+												<i class="fa fa-star"></i>											
+												<i class="fa fa-star"></i>
+												<i class="fa fa-star"></i>																
+											</div>
+											<p class="ratingScore" style="padding-top: 48px; padding-left: 15px; margin: 0px;">3.0</p>
+											<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-bottom: 30px; margin-right: 5px;"></button>
+										</div>
+										<div class="modal-body ">
+											<div class="modal-body-top">
+												<div class="modal-body-top-title">
+													<div class="modal-body-top-title-cotents">
+														<p>받은 동행 후기</p>
+													</div>
+													<div class="modal-body-top-title-counts">
+														<p>0</p>
+													</div>
+												</div>
+													<div class="modal-body-comment " style="overflow: auto;">
+														<div class="" style="background-color: yellow; height: 100px;">
+															<div>
+																<span>${review.user_id }</span> <span>revlist.r_date</span>
+															</div>
+															<div>
+																<p>${review.r_content}</p>
+															</div>
+															<div>
+																<div class="rating" data-rate="3">											
+																	<i class="fa fa-star"></i>												
+																	<i class="fa fa-star"></i>												
+																	<i class="fa fa-star"></i>											
+																	<i class="fa fa-star"></i>
+																	<i class="fa fa-star"></i>																
+																</div>
+															</div>
+														</div>
+														<div class="" style="background-color: red; height: 100px;"></div>
+														<div class="" style="background-color: green; height: 100px;"></div>
+														<div class="" style="background-color: yellow; height: 100px;"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer" style="justify-content: flex-start;">
+											<div></div>
+											<div class="modal-footer-comment" style="width: 100%;">
+												<div class="make_star"
+													style="display: flex; margin-bottom: 15px;">
+													<select name="" id="makeStar">
+														<option value="1">1</option>
+														<option value="2">2</option>
+														<option value="3">3</option>
+														<option value="4">4</option>
+														<option value="5">5</option>
+													</select>
+															<div class="rating" data-rate="2">											
+																<i class="fa fa-star"></i>												
+																<i class="fa fa-star"></i>												
+																<i class="fa fa-star"></i>											
+																<i class="fa fa-star"></i>
+																<i class="fa fa-star"></i>																
+															</div>
+													</div>
+													<input type="text" placeholder="동행후기를 한줄평으로 달아보세요!"
+																		onfocus="this.placeholder = ''"
+																		onblur="this.placeholder = '동행후기를 한줄평으로 달아보세요!'">
+													<button type="submit">등록</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- <button type="button" class="btn center mt-2" id="trCommBtn">동행후기 보기</button> -->		
 						</div>
 					</div>
 				</div>
 				<!-- 글 내용 -->
-				<section class="mb-5"><%-- ${travelContent.t_content} --%>
+				<section class="mb-5">
 					<p class="fs-6 mb-4" >${travelContent.t_content}</p>
 				</section>
 			</article>
@@ -169,6 +273,42 @@ request.setAttribute("userId", userId);
 
 
 <!-- Bootstrap core JS-->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- modal -->
+<script src="https://kit.fontawesome.com/1f609f562c.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/modal.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+$(function () {
+	
+
+var rating =$('.review .rating');
+
+rating.each(function () {
+	var targetScore = $(this).attr('data-rate');
+	var firstdigit = targetScore.split('.');
+	if(firstdigit.length > 0){
+		for(var i = 0; i<targetScore; i++){
+			$(this).find('.fa-star:nth-child(-n+' +targetScore + ')').eq(i).css({color:'#f05522'});
+	}
+		/* $(this).find('.fa-star:nth-child(-n+' +targetScore + ')').css({color:'#f05522'}); */
+	}
+	
+	});
+	var userScore = $('#makeStar');
+	userScore.change(function () {
+		var userScoreNum = $(this).val();
+		$('.make_star .fa-star').css({color:'#000'});
+		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').css({color:'#f05522'});
+	});
+	$('.make_star .fa-star').click(function () {
+		var targetNum = $(this).index() + 1;
+		$('.make_star .fa-star').css({color:'#000'});
+		$('.make_star .fa-star:nth-child(-n+' + targetNum + ')').css({color:'#f05522'});
+	});
+});
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script type="text/javascript">
@@ -190,7 +330,3 @@ function deleteReplyChk(t_num, t_ref) {
  }
 }
 </script>
-
-
-
-

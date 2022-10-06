@@ -42,13 +42,20 @@
      padding-left : 20px;
 }
 .t_content{
-	width : 580px;
-    white-space: nowrap;
+	width : 470px;
     text-overflow: ellipsis;
     overflow: hidden;
     user-select: none;
     -webkit-user-drag: none;
     font-size: small;
+    white-space: normal;
+    line-height: 1.2;
+    height: 3.6em;
+    text-align: left;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
 }
 .button_update{
 	user-select: none;
