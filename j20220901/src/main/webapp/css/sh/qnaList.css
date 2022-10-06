@@ -1,0 +1,27 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+
+
+.comment_button1{
+	border: 1px solid black;
+	border-radius : 40px;
+	width: 215px;
+	height: 45px;
+	font-size: 15px;
+	 font-weight: bold; 
+	font-family: 'Noto Sans KR', sans-serif;
+	
+}
+
+.comment_button2{
+	
+	background-color:#FF3500;
+	color : white;
+	border-radius : 40px;
+	width: 215px;
+	height: 45px;
+	font-size: 15px;
+	 font-weight: bold; 
+	font-family: 'Noto Sans KR', sans-serif;
+	
+}
