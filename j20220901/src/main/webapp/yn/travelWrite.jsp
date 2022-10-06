@@ -1,17 +1,70 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" errorPage="dbError.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<% 
-String context = request.getContextPath();
-%>
-<c:import url="${context}/header.jsp"></c:import>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>	
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<% String context = request.getContextPath();%>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">	
+
+<script type="text/javascript">
+function chkAll() {
+	console.log('chkAll 함수 시작');
+	if(frm.t_start.value == "" || frm.t_end.value == "") {
+		console.log(document.frm.t_start.value);
+		alert("여행 기간을 선택해 주세요!");
+		frm.t_start.focus();
+		return false;
+	} if(frm.t_content.value == "" || frm.t_title.value == "") {
+		alert("제목, 내용을 입력해 주세요!");
+		frm.t_title.focus();
+		return false;
+		
+	}
+	return true;
+}
+function readURL(input) {
+	console.log("버튼클릭함1");
+	if (input.files && input.files[0]) {
+	var reader = new FileReader();
+	reader.onload = function (e) {
+					$('#cover').attr('src', e.target.result);        //cover src로 붙여지고
+					$('#fileName').val(input.files[0].name);    //파일선택 form으로 파일명이 들어온다
+					}
+	reader.readAsDataURL(input.files[0]);
+	}
+}
+
+$("#myFileUp").change(function(){
+	readURL(this);
+	console.log("이미지 바뀜?");
+})
 	
-<form name="frm" 
-action="travelWritePro.do" method="post" enctype="multipart/form-data">
-<!------------------ body 영역 ------------> 	
+function ShowSliderValue(sVal){	
+	var obValueView = document.getElementById("slider_value_view");	
+	obValueView.innerHTML = sVal
+}
+
+function getStartDate()  {
+  const input_from = document.getElementById('input_from').value;
+  document.getElementById("input_to").setAttribute("min", input_from);
+}
+
+function getSysdate() {
+	var now_utc = Date.now()
+	var timeOff = new Date().getTimezoneOffset()*60000;
+	var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+	document.getElementById("input_from").setAttribute("min", today);
+}
+</script>	
+
+</head>
+<c:import url="${context}/header.jsp"></c:import>
+<form name="frm" action="travelWritePro.do" method="post" enctype="multipart/form-data">
+
+<!---------------------------- body 영역 --------------------------------> 	
 
 
 <!-- cateImg -->
@@ -33,7 +86,7 @@ action="travelWritePro.do" method="post" enctype="multipart/form-data">
 			<div class="border rounded p-5  mb-5 " style="background:white; 	border: #EAEAEA 1px;">
 
 
-			<!-- 테마선택 체크박스 -->
+				<!-- 테마선택 체크박스 -->
 				<div class=" form-check form-check-inline mt-0 mb-3">
 		  			<span class="fw-bold align-middle me-5">테마 선택</span>
 					<div class=" form-check form-check-inline my-0">

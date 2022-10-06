@@ -30,6 +30,7 @@ public class TravelWriteProAction implements CommandProcess {
 			Travel result = null;
 			System.out.println("getContextPath =======>" + request.getContextPath());
 			System.out.println("getRealPath =======>" + request.getSession().getServletContext().getRealPath("/"));
+			
 //			String saveFolder = "C:\\Jsp\\jspSrc\\jejuwave_1001\\src\\main\\webapp\\images\\upload\\";
 			String savePath = request.getServletContext().getRealPath("/images/upload");
 			System.out.println("savePath ==== > " + savePath);
