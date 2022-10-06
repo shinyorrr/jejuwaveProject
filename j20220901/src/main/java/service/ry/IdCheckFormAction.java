@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Member;
 import dao.MemberDao;
+import service.CommandProcess;
 
 public class IdCheckFormAction implements CommandProcess {
 
@@ -26,7 +27,7 @@ public class IdCheckFormAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "idCheckForm.jsp";
+		return "ry/idCheckForm.jsp";
 	}
 
 }

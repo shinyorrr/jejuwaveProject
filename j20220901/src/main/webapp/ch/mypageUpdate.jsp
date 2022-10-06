@@ -142,7 +142,7 @@ function disableOff(){
 			</div>
 			<!-- 각 화면이 달라지는 부분 -->
 			<div class="content_section">
-				<h2 class = "mypage_menu_h2">계정관리<span class="user_out"><button class="user_out_button" onclick = "location.href='user_out.jsp'">회원탈퇴</button></span></h2>
+				<h2 class = "mypage_menu_h2">계정관리<span class="user_out"><button class="user_out_button" onclick = "location.href='idDeleteForm.do'">회원탈퇴</button></span></h2>
 				<div class = "user_updateinfo_main">
 					<div class = "image_insert">
 						<c:if test="${member.user_img == null}">

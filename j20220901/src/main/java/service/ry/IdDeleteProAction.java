@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.MemberDao;
+import service.CommandProcess;
 
 public class IdDeleteProAction implements CommandProcess {
 
@@ -33,7 +34,7 @@ public class IdDeleteProAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "idDeletePro.jsp";
+		return "ry/idDeletePro.jsp";
 	}
 
 }
