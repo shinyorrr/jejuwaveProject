@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Qna_Board;
 import dao.Qna_BoardDao;
@@ -29,19 +30,12 @@ public class QnaListAction implements CommandProcess {
 			if (pageNum == null || pageNum.equals("")) {
 				pageNum = "1";
 			}
-			System.out.println("pageNum 출력");
-			System.out.println("QnaListAction pageNum->"+pageNum);
-			System.out.println("pageNum 출력완료");
-			
-		
+				
 			int currentPage = Integer.parseInt(pageNum); // 1 2
 			int pageSize = 10, blockSize = 10;
 			int startRow = (currentPage - 1) * pageSize + 1; // 1 11
 			int endRow = startRow + pageSize - 1; // 10 20
 			int startNum = totCnt - startRow + 1; // 38- 11 +1 28
-
-			System.out.println("ListAction startRow->" + startRow);
-			System.out.println("ListAction endRow->" + endRow);
 
 			List<Qna_Board> list = bd.getBoardList(startRow, endRow);
 
@@ -52,11 +46,8 @@ public class QnaListAction implements CommandProcess {
 			// 공갈 page 방지 11> 4
 			if (endPage > pageCnt)			endPage = pageCnt;
 
-			System.out.println("ListAction startPage->" + startPage);
-			System.out.println("ListAction endPage->" + endPage);
-			System.out.println("ListAction list.size()->" + list.size());
 
-			request.setAttribute("list", list);
+			request.setAttribute("list", list); //게시글 리스트 넘겨주기
 			request.setAttribute("totCnt", totCnt);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("currentPage", currentPage);

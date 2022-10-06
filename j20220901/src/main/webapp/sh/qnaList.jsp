@@ -41,16 +41,20 @@ String context = request.getContextPath();
 		<table class="mainTable">
 			<c:if test="${totCnt > 0 }">
 				<c:forEach var="board" items="${list}">
-					<th style="vertical-align: super;"><c:if
-							test="${board.b_success eq '채택완료' }">
+					<th style="vertical-align: super;">
+					<!-- 채택완료/답변대기 -->
+						<c:if test="${board.b_success eq '채택완료' }">
 							<span style="color: red;">${board.b_success }</span>
-						</c:if> <c:if test="${board.b_success ne '채택완료' }">
+						</c:if> 
+						<c:if test="${board.b_success ne '채택완료' }">
 							<span>${board.b_success }</span>
 						</c:if></th>
-					<th class=" title2"><a
-						href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_title}</a></th>
-					<th><a href='qnaWriteCheck.do?b_num=${board.b_num}'> <span
-							class="content1">${board.b_content }</span></a></th>
+					<!-- 제목 -->
+					<th class=" title2">
+						<a href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
+												   ${board.b_title}</a></th>
+					<th><a href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'> 
+							<span class="content1">${board.b_content }</span></a></th>
 					<tr class="last">
 						<td></td>
 						<td><img src="<%=context%>/sh_images/user_icon04.png"

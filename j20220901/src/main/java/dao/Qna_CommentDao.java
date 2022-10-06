@@ -58,8 +58,8 @@ public class Qna_CommentDao {
 				comment.setCom_content(rs.getString("com_content"));
 				comment.setCom_num(rs.getInt("com_num"));
 				comment.setCom_date(rs.getDate("com_date"));
-				System.out.println("commentList user_id->"+rs.getString("user_id"));
-				System.out.println("commentList com_content->"+rs.getString("com_content"));
+				comment.setCom_choose(rs.getString("com_choose"));
+
 				list.add(comment);
 			}	
 		} catch (Exception e) {
