@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.MemberDao;
+import service.CommandProcess;
 
 public class PwFindProAction implements CommandProcess {
 
@@ -34,7 +35,7 @@ public class PwFindProAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} 
-		return "pwFindPro.jsp";
+		return "ry/pwFindPro.jsp";
 	}
 
 }

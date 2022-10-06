@@ -14,6 +14,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dao.Member;
 import dao.MemberDao;
+import service.CommandProcess;
 
 public class JoinProAction implements CommandProcess {
 
@@ -88,7 +89,7 @@ public class JoinProAction implements CommandProcess {
 			System.out.println(e.getMessage());
 		}
 		
-		return "joinPro.jsp";
+		return "ry/joinPro.jsp";
 
 	}
 }
