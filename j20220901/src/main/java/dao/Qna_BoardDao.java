@@ -293,17 +293,24 @@ public class Qna_BoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql2 = "delete from qna_board where b_num=?";
 		String sql1 = "delete from qna_hash where b_num=?";
+		String sql2 = "delete from qna_comment where b_num=?";
+		String sql3 = "delete from qna_board where b_num=?";
+
 
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql1);
 			pstmt.setInt(1, b_num);
-			pstmt.executeUpdate();
-			
+			pstmt.executeUpdate();		
 			pstmt.close();
+			
 			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, b_num);
+			pstmt.executeUpdate();		
+			pstmt.close();
+			
+			pstmt = conn.prepareStatement(sql3);
 			pstmt.setInt(1, b_num);
 			result = pstmt.executeUpdate();
 
@@ -383,11 +390,75 @@ public class Qna_BoardDao {
 				pstmt.close();
 			if (conn != null)
 				conn.close();
-		}return result;
+		}return result;	
+	}
+	
+	//qnaList 답변을 기다리는 글만 보기
+	public List<Qna_Board> getBoardList2(int startRow , int endRow) throws SQLException {
+		List<Qna_Board> list = new ArrayList<Qna_Board>();
 		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
+		String sql = "select * from ( select rownum rn, a.* from (select A.b_num, A.user_id , A.b_title, A.b_content, A.b_success, A.b_date,"
+				+ "			b.l_hash1,b.l_hash2,b.l_hash3  from qna_board A, qna_hash B "
+				+ "			WHERE A.B_NUM = B.B_NUM order by A.b_date desc) a )\r\n"
+				+ "		 	where rn between ? and ? and b_success like 'N'";
 		
-		
+		System.out.println("Qna_BoardDao getBoardList sql->"+sql);
+		System.out.println("Qna_BoardDao getBoardList startRow->"+startRow);
+		System.out.println("Qna_BoardDao getBoardList endRow->"+endRow);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			
+			System.out.println(startRow);
+			System.out.println(endRow);
+			
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+
+				Qna_Board board = new Qna_Board();
+				board.setB_num(rs.getInt("b_num"));
+				System.out.println(rs.getInt("b_num"));
+				board.setUser_id(rs.getString("user_id"));
+				board.setB_title(rs.getString("b_title"));
+				board.setB_content(rs.getString("b_content"));
+
+				board.setL_hash1(rs.getString("l_hash1"));
+				System.out.println("Qna_BoardDao getBoardList l_hash1->"+rs.getString("l_hash1"));
+				board.setL_hash2(rs.getString("l_hash2"));
+				System.out.println("Qna_BoardDao getBoardList l_hash2->"+rs.getString("l_hash2"));
+				board.setL_hash3(rs.getString("l_hash3"));
+				System.out.println("Qna_BoardDao getBoardList l_hash3->"+rs.getString("l_hash3"));
+
+				if (rs.getString("b_success").equals("Y")) {
+					board.setB_success("채택완료");
+
+				} else {
+					board.setB_success("답변대기");
+				}
+				list.add(board);
+			}
+		} catch (Exception e) {
+			System.out.println("Qna_BoardDao getBoardList getMessage->"+e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
+		System.out.println("Qna_BoardDao getBoardList list.size()->"+list.size());
+
+		return list;
 	}
 	
 	
