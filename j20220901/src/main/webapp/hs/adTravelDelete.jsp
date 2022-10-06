@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-   String context = request.getContextPath();
+	String context = request.getContextPath();
+	String userId = (String) session.getAttribute("user_id");
+	request.setAttribute("userId", userId);
 %>
 <!DOCTYPE html>
 <html>
@@ -15,7 +17,7 @@
 	<input type="hidden" name="pageNum" value="${pageNum}">
 	<c:if test="${result > 0}">
 		<script type="text/javascript">
-			alert("삭제 완료!");
+			alert("동행자 찾기 삭제 완료!");
 			location.href="<%=context%>/adTravelForm.do?pageNum=${pageNum}";
 		</script>
 	</c:if>
