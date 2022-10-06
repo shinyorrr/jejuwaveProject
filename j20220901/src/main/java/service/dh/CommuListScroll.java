@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Commu;
 import dao.CommuDao;
+import dao.Member;
 import service.CommandProcess;
 
 public class CommuListScroll implements CommandProcess {
@@ -38,7 +39,11 @@ public class CommuListScroll implements CommandProcess {
 			if (endPage > pageCnt) {
 				endPage = pageCnt;
 			}
-			
+			//img list select dao 요청
+			List<Commu.CommuImg> imgList = cd.CommuListImg(startRow , endRow);
+			//userImage select dao 요청
+			List<Member> userImgList = cd.selectUserImgList(startRow , endRow);
+			//set commu list
 			request.setAttribute("list"        , list);
 			request.setAttribute("totCnt"      , totCnt);
 			request.setAttribute("pageNum"     , pageNum);
@@ -47,9 +52,14 @@ public class CommuListScroll implements CommandProcess {
 			request.setAttribute("blockSize"   , blockSize);
 			request.setAttribute("startPage"   , startPage);
 			request.setAttribute("endPage"     , endPage);
-			
+			System.out.println("list ->" + list);
+			//set commu imgList
+			request.setAttribute("imgList", imgList);
+			System.out.println("imgList" + imgList);
+			//set commu list user_img list
+			request.setAttribute("userImgList", userImgList);
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("CommuListScroll service try...err ->" + e.getMessage());
 		}
 		
 		return "dh/commuListScroll.jsp";

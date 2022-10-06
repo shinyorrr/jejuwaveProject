@@ -93,6 +93,37 @@ public class CommuDao {
 		
 		return list;
 	}
+	// 게시글 list rownum startRow, endRow 유저이미지 list get
+	public List<Member> selectUserImgList(int startRow , int endRow) throws SQLException {
+		List<Member> userImgList = new ArrayList<Member>();
+		String sql = "select crn.user_id, m.user_img "
+				+ " from (select * from ( select rownum rn , a.* from (select * from community order by c_num desc) a) where rn between ? and ?) crn , member m "
+				+ " where crn.user_id = m.user_id";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				Member member = new Member();
+				member.setUser_id(rs.getString(1));
+				member.setUser_img(rs.getString(2));
+				userImgList.add(member);
+			}
+		} catch (Exception e) {
+			System.out.println("selectUserImgList try...err ->" + e.getMessage());
+		} finally {
+			if (rs    != null) rs.close(); 
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 
+		}
+		return userImgList;
+	}
 	
 	// 게시글 list 대표이미지 list get
 	public List<Commu.CommuImg> CommuListImg(int startRow , int endRow) throws SQLException {
@@ -163,7 +194,7 @@ public class CommuDao {
 		return commu;
 	}
 	
-	// community_img select
+	// community_img select(content)
 	public List<Commu.CommuImg> selectImg(int c_num) throws SQLException {
 		List<Commu.CommuImg> imgList = new ArrayList<Commu.CommuImg>();
 		String sql = "select c.c_num , ci.c_img_num , ci.c_img_path "
@@ -195,6 +226,34 @@ public class CommuDao {
 			if (conn  != null) conn.close(); 
 		}
 		return imgList;
+	}
+	
+	// user_img select(content)
+	public Member selectUserImg(int c_num) throws SQLException {
+		Member member = new Member();
+		String sql = "select c_num, user_img\r\n"
+				+ "from community c , member m\r\n"
+				+ "where c.user_id = m.user_id\r\n"
+				+ "and c.c_num = ?";
+		Connection        conn  = null;
+		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, c_num);
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				member.setUser_img(rs.getString(2));
+			}
+		} catch (Exception e) {
+			System.out.println("content Action user img select dao try... err ->" + e.getMessage());
+		} finally {
+			if (rs    != null) rs.close(); 
+			if (pstmt != null) pstmt.close(); 
+			if (conn  != null) conn.close(); 
+		}
+		return member;
 	}
 	
 	// write - community , community_img insert
