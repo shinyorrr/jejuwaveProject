@@ -24,14 +24,15 @@ public class TravelUpdateProAction implements CommandProcess {
 			request.setCharacterEncoding("utf-8");
 			int result = 0;
 			
-			String saveFolder = "C:\\Jsp\\jspSrc\\jejuwave_1001\\src\\main\\webapp\\images\\upload\\";
+//			String saveFolder = "C:\\Jsp\\jspSrc\\jejuwave_1001\\src\\main\\webapp\\images\\upload\\";
+			String savePath = request.getServletContext().getRealPath("/images/upload");
 			String encType = "utf-8";
 			int maxSize = 5* 1024 *1024;
 			
 			TravelDao td = TravelDao.getInstance();
 			
 			try {
-				MultipartRequest multi = new MultipartRequest(request, saveFolder, maxSize, encType, new DefaultFileRenamePolicy());
+				MultipartRequest multi = new MultipartRequest(request, savePath, maxSize, encType, new DefaultFileRenamePolicy());
 				Enumeration file = multi.getFileNames();
 				String name = (String) file.nextElement();
 				

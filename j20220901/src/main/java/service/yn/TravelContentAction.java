@@ -53,6 +53,7 @@ public class TravelContentAction implements CommandProcess {
 				int revEndRow = revStartRow + revPageSize - 1;
 				int revStartNum = totRev - revStartRow + 1;
 				System.out.println("revPageNum -->"+revPageNum);
+				
 				List<Review> revlist = rd.revList(revStartRow,revEndRow);
 				int revPageCnt = (int)Math.ceil((double)totRev/revPageSize);
 				int revStartPage = (int)(revCurrentPage-1)/revBlockSize*revBlockSize + 1;
