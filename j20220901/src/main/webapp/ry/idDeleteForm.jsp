@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h2>탈퇴하려면 암호를 입력해주세요</h2>
-	<form action="<%=context %>/pwFindPro.do">
+	<form action="<%=context %>/idDeletePro.do">
 		<input type="hidden" name="pageNum" value="${pageNum }">
 		<input type="hidden" name="user_id" value="${user_id }">
 		암호 <input type="text" name="user_pw"><p>
