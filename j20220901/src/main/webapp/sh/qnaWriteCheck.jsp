@@ -78,25 +78,27 @@ String context = request.getContextPath();
 		<p>${board.b_content}</p>
 	</div>
 	<!-- 해시태그 -->
-	<div class="tag1">                                                                                      <!--  현지수정 -->
-		<div class="btn-group btn-group-sm" role="group" aria-label="..."       
-			style="margin-bottom: 6px;">
-			<!-- 태그 3개미만일때 # 제거 -->
-			<c:choose>
-				<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
-				<c:otherwise><span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
-				<c:otherwise><span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
-				<c:otherwise><span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-			</c:choose>
+		<div class="tag1">                                                                                      <!--  현지수정 -->
+			<div class="btn-group btn-group-sm" role="group" aria-label="..."       
+				style="margin-bottom: 6px;">
+				<!-- 태그 3개미만일때 # 제거 -->
+				<c:choose>
+					<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
+					<c:otherwise><span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
+					<c:otherwise><span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
+					<c:otherwise><span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+				</c:choose>
+			</div>
 		</div>
+		
 		<!-- 내가 쓴 글일 때만 수정, 삭제 -->
-		<c:if test="${user_id == board.user_id }">
+		<c:if test="${user_id eq board.user_id }">
 			<p class="button7">
 				${board.b_date} &nbsp;&nbsp;
 				<button class="button8" type="button"
@@ -133,43 +135,52 @@ String context = request.getContextPath();
 					</div>					
 					<div class="fw-bold" style="font-size: 17px; line-height: 1.1" >${comment.user_id }
 					
-						<!-- 댓글 삭제 -->
-						<c:if test="${user_id == comment.user_id }">
-							<span><a class="delete" href="<%=context %>/qnaCommentDelete.do?com_num=${comment.com_num}&b_num=${b_num}">
-							삭제<img src="<%=context %>/sh_images/trash" width="16" height="16" style="vertical-align: sub;" >
-							</a></span>
-						</c:if>
+					<!--내가 쓴 댓글일때 만 삭제 -->
+					<c:if test="${user_id eq comment.user_id }">
+						<span><a class="delete" href="<%=context %>/qnaCommentDelete.do?com_num=${comment.com_num}&b_num=${b_num}">
+						삭제<img src="<%=context %>/sh_images/trash" width="16" height="16" style="vertical-align: sub;" >
+						</a></span>
+					</c:if>
 				
 				 			
-				 <!-- 댓글내용 -->		
-					</div>
-					<div style="font-size: 12px; color:gray; margin-bottom : 10px">${comment.com_date}</div> 				
-					<div style="margin-left: 60px; margin-bottom: 25px; float: left; ">${comment.com_content }</div>
-					<!-- 답변 채택시 -->
-					<c:if test="${board.b_success ne '채택완료' }">
-						<div style="float: right; margin-right: 350px;">
-						<a href="<%=context %>/qnaChoose.do?com_num=${comment.com_num}&b_num=${b_num}">채택하기</a></div>
-					</c:if>
-					<c:if test="${board.b_success eq '채택완료' and comment.com_num eq choose}">
-						<div style="float: right; margin-right: 350px;">
-						<img src="<%=context %>/sh_images/bookmark.png" width="40" height="40"> </div>
-					</c:if>
-					<c:if test="${board.b_success eq '채택완료' and comment.com_num ne choose}">
-						<div style="float: right; margin-right: 350px;">
+					 <!-- 댓글내용 -->		
 						</div>
-					</c:if>
+						<div style="font-size: 12px; color:gray; margin-bottom : 10px">${comment.com_date}</div> 				
+						<div style="margin-left: 60px; margin-bottom: 25px; float: left; ">${comment.com_content }</div>
+						<!-- 내가 작성한 글만 답변채택 가능 -->
+						<c:if test="${user_id eq board.user_id }">
+							<!-- 답변대기->답변 채택하기 -->
+							<c:if test="${board.b_success ne '채택완료' }">
+								<div style="float: right; margin-right: 350px;">
+								<a href="<%=context %>/qnaChoose.do?com_num=${comment.com_num}&b_num=${b_num}">채택하기</a></div>
+							</c:if>
+							
+							<!-- 채택완료 -->
+							<c:if test="${board.b_success eq '채택완료'}">
+								<c:if test="${comment.com_choose eq 'Y' }">
+										<div style="float: right; margin-right: 350px;">
+										<img src="<%=context %>/sh_images/bookmark.png" width="40" height="40"> </div>		
+								</c:if>
+							
+							</c:if>
+						</c:if>
+
+	
+						
+						
 					<div style= "clear:both;"><hr width="1100px"></div>
+						
 			</div>				
 			</c:forEach>
 		</div>
 
 
 
-				</div>
+				
 			
 
 	
-
+	<c:out value="${com_num }"></c:out>
 	<div style="margin-top: 200px;"></div>
 	<%@ include file="footer.jsp"%>
 </body>

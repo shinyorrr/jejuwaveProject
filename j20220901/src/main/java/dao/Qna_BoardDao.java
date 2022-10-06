@@ -363,11 +363,18 @@ public class Qna_BoardDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = "update qna_board set b_success='Y' where b_num=?";
+		String sql2 = "update qna_comment set com_choose='Y' where b_num =? and com_num =?";
 		try {
 			conn=getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
-			result= pstmt.executeUpdate();
+			pstmt.executeUpdate();
+			pstmt.close();
+			
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, b_num);
+			pstmt.setInt(2, com_num);
+			result = pstmt.executeUpdate();
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
