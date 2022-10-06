@@ -138,7 +138,7 @@ function getCookie(cookieName) {
 		<div class = "login-form-box-join">아직 계정이 없으신가요? <a href="<%=context%>/joinForm.do">회원가입</a></div><p>
 		<div class = "login-form-box-idsearch">아이디를 모르시나요? <a href="<%=context%>/idFindForm.do">아이디찾기</a></div><p>
 		<div class = "login-form-box-pwsearch">비밀번호를 모르시나요? <a href="<%=context%>/pwFindForm.do">비밀번호찾기</a></div><p>
-	</div>
+	</div> 
 </div>
 <footer>
 </footer>
