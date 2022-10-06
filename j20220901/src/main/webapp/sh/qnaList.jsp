@@ -47,16 +47,17 @@ String context = request.getContextPath();
 						</c:if> <c:if test="${board.b_success ne '채택완료' }">
 							<span>${board.b_success }</span>
 						</c:if></th>
-					<th class=" title2"><a
-						href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_title}</a></th>
-					<th><a href='qnaWriteCheck.do?b_num=${board.b_num}'> <span
-							class="content1">${board.b_content }</span></a></th>
+					<td  class=" title2"><a
+						href='qnaWriteCheck.do?b_num=${board.b_num}'>${board.b_title}</a></td>
+					<td><a href='qnaWriteCheck.do?b_num=${board.b_num}'> <span
+							class="content1">${board.b_content }</span></a></td>
 					<tr class="last">
 						<td></td>
 						<td><img src="<%=context%>/sh_images/user_icon04.png"
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 							width="30" height="30">${board.user_id}</td>
-						<td><span class="hash">#${board.l_hash1}</span> &nbsp; &nbsp;
+						<td>&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;
+						<span class="hash">#${board.l_hash1}</span> &nbsp; &nbsp;
 							<span class="hash">#${board.l_hash2}</span> &nbsp; &nbsp; <span
 							class="hash">#${board.l_hash3}</span></td>
 					</tr>
