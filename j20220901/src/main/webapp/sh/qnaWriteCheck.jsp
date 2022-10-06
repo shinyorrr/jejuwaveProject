@@ -35,14 +35,14 @@ String context = request.getContextPath();
 </header>
 
 <body>
-
+	<!-- 글 제목 -->
 	<div class="title">
 		<img src="<%=context%>/sh_images/qnaicon1.png"
 			class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 			width="30" height="30">${board.b_title}
 	</div>
 
-
+	<!-- 아이디 -->
 	<div class="profile">
 		<div class="basic2_2">
 			<img src="<%=context%>/sh_images/user_icon04.png"
@@ -52,7 +52,7 @@ String context = request.getContextPath();
 		</div>
 		<p class="basic2_2">${board.user_id}</p>
 	</div>
-
+	<!-- 답변 채택완료/대기중 -->
 	<div class="gubun">
 		<div>
 			<br> <br> <span class="wait">상태</span> 
@@ -65,6 +65,7 @@ String context = request.getContextPath();
 			<c:if test="${board.b_success != 'Y' }">
 			 <span>${board.b_success }</span>
 			</c:if>
+			<!-- 테마 -->
 			</span> <span class="wait">테마</span>            
 			<span class="fw-bold me-2">${board.b_theme }</span>
 	
@@ -72,29 +73,39 @@ String context = request.getContextPath();
 		</div>
 	</div>
 
-
+	<!-- 글 내용 -->
 	<div class="main">
 		<p>${board.b_content}</p>
 	</div>
+	<!-- 해시태그 -->
 	<div class="tag1">                                                                                      <!--  현지수정 -->
 		<div class="btn-group btn-group-sm" role="group" aria-label="..."       
 			style="margin-bottom: 6px;">
-			
-			<span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp; 
-			<span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp; 
-			<span class="hash">#${board.l_hash3}</span>
-			
+			<!-- 태그 3개미만일때 # 제거 -->
+			<c:choose>
+				<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
+				<c:otherwise><span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
+				<c:otherwise><span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
+				<c:otherwise><span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+			</c:choose>
 		</div>
-
-		<p class="button7">
-			${board.b_date} &nbsp;&nbsp;
-			<button class="button8" type="button"
-				onclick="location.href='qnaUpdateForm.do?b_num=${board.b_num}'">수정</button>
-			&nbsp;&nbsp;|&nbsp;&nbsp;
-			<button class="button8" type="button"
-				onclick="location.href='qnaDelete.do?b_num=${board.b_num}'">삭제</button>
-		</p>
-
+		<!-- 내가 쓴 글일 때만 수정, 삭제 -->
+		<c:if test="${user_id == board.user_id }">
+			<p class="button7">
+				${board.b_date} &nbsp;&nbsp;
+				<button class="button8" type="button"
+					onclick="location.href='qnaUpdateForm.do?b_num=${board.b_num}'">수정</button>
+				&nbsp;&nbsp;|&nbsp;&nbsp;
+				<button class="button8" type="button"
+					onclick="location.href='qnaDelete.do?b_num=${board.b_num}'">삭제</button>
+			</p>
+		</c:if>
 	
 		<!-- 댓글 등록 -->
 		<div class="content" >
@@ -128,10 +139,26 @@ String context = request.getContextPath();
 							삭제<img src="<%=context %>/sh_images/trash" width="16" height="16" style="vertical-align: sub;" >
 							</a></span>
 						</c:if>
+				
+				 			
+				 <!-- 댓글내용 -->		
 					</div>
 					<div style="font-size: 12px; color:gray; margin-bottom : 10px">${comment.com_date}</div> 				
-					<div style="margin-left: 60px; margin-bottom: 25px;">${comment.com_content }</div>
-					<hr width="1100px">
+					<div style="margin-left: 60px; margin-bottom: 25px; float: left; ">${comment.com_content }</div>
+					<!-- 답변 채택시 -->
+					<c:if test="${board.b_success ne '채택완료' }">
+						<div style="float: right; margin-right: 350px;">
+						<a href="<%=context %>/qnaChoose.do?com_num=${comment.com_num}&b_num=${b_num}">채택하기</a></div>
+					</c:if>
+					<c:if test="${board.b_success eq '채택완료' and comment.com_num eq choose}">
+						<div style="float: right; margin-right: 350px;">
+						<img src="<%=context %>/sh_images/bookmark.png" width="40" height="40"> </div>
+					</c:if>
+					<c:if test="${board.b_success eq '채택완료' and comment.com_num ne choose}">
+						<div style="float: right; margin-right: 350px;">
+						</div>
+					</c:if>
+					<div style= "clear:both;"><hr width="1100px"></div>
 			</div>				
 			</c:forEach>
 		</div>
