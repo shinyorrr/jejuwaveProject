@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Commu;
 import dao.CommuDao;
+import dao.Member;
 import service.CommandProcess;
 
 public class CommuListAction implements CommandProcess {
@@ -41,7 +42,8 @@ public class CommuListAction implements CommandProcess {
 			
 			//img list select dao 요청
 			List<Commu.CommuImg> imgList = cd.CommuListImg(startRow , endRow);
-			
+			//userImage select dao 요청
+			List<Member> userImgList = cd.selectUserImgList(startRow , endRow);
 			//set commu list
 			request.setAttribute("list"        , list);
 			request.setAttribute("totCnt"      , totCnt);
@@ -55,7 +57,8 @@ public class CommuListAction implements CommandProcess {
 			//set commu imgList
 			request.setAttribute("imgList", imgList);
 			System.out.println("imgList" + imgList);
-			
+			//set commu list user_img list
+			request.setAttribute("userImgList", userImgList);
 		} catch (Exception e) {
 			System.out.println("commuListAction try ..." + e.getMessage());
 		}

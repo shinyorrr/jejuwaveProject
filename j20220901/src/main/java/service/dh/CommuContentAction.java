@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Commu;
 import dao.CommuDao;
+import dao.Member;
 import service.CommandProcess;
 
 public class CommuContentAction implements CommandProcess {
@@ -23,12 +24,19 @@ public class CommuContentAction implements CommandProcess {
 		
 		try {
 			CommuDao cd = CommuDao.getInstance();
+			// community table dao
 			Commu                commu   = cd.select(c_num);
+			// community_img table dao
 			List<Commu.CommuImg> imgList = cd.selectImg(c_num);
+			// member table dao(select user_image)
+			Member member = cd.selectUserImg(c_num);
+			
+			// setAttribute
 			request.setAttribute("c_num"  , c_num);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("commu"  , commu);
 			request.setAttribute("imgList", imgList);
+			request.setAttribute("member" , member);
 			System.out.println("imgList->" + imgList);
 		} catch (Exception e) {
 			System.out.println("select, set try" + e.getMessage());

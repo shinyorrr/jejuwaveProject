@@ -60,6 +60,13 @@
 		</div>
 		<br>	
 		
+		<!-- 해시태그 -->
+		<div class="mb-3" style="width: 1200px; margin-left: auto; margin-right: auto;">	 		
+  			<input type="text" name="hashString" value="#${board.l_hash1}#${board.l_hash2}#${board.l_hash3}"  class="form-control card-title"  placeholder="#을붙여 태그를 입력하세요(최대 3개)" 
+  					style="height: 60px; background-image: url('<%=context %>/sh_images/hashtag.png');">
+  			
+		</div>	
+		
 		<!-- 버튼 -->
 		<div class="button" style="display: flex; justify-content: center;">
 			<input type="reset" value="취소" class="btn btn-secondary" style="margin-right: 15px; width:590px; height: 55px;background-color: #dbdbdb; border-color: #dbdbdb;font-size: 14px;font-weight: bolder;">

@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import service.CommandProcess;
+
 public class JoinFormAction implements CommandProcess {
 
 	@Override
@@ -18,7 +20,7 @@ public class JoinFormAction implements CommandProcess {
 			// TODO: handle exception
 		}
 		
-		return "joinForm.jsp";
+		return "ry/joinForm.jsp";
 	}
 
 }

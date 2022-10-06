@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.Member;
 import dao.MemberDao;
+import service.CommandProcess;
 
 public class IdDeleteFormAction implements CommandProcess {
 
@@ -32,7 +33,7 @@ public class IdDeleteFormAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "idDeleteForm.jsp";
+		return "ry/idDeleteForm.jsp";
 	}
 
 }

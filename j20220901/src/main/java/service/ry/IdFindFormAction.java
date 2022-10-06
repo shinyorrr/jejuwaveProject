@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.Member;
 import dao.MemberDao;
+import service.CommandProcess;
 
 public class IdFindFormAction implements CommandProcess {
 
@@ -21,7 +22,7 @@ public class IdFindFormAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} 
-		return "idFindForm.jsp";
+		return "ry/idFindForm.jsp";
 	}
 
 }

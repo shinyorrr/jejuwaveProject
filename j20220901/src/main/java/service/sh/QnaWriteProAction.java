@@ -25,7 +25,12 @@ public class QnaWriteProAction implements CommandProcess {
 			String b_theme = request.getParameter("b_theme");
 			String hashString = request.getParameter("hashString");
 			System.out.println(hashString);
-			//board.setUser_id(request.getParameter("user_id"));
+			
+			//아이디 받아오기
+			HttpSession session = request.getSession();
+			String user_id = (String) session.getAttribute("user_id");
+			System.out.println("user_id받아오기-->" + user_id);
+			board.setUser_id(user_id);
 			board.setB_title(request.getParameter("b_title"));
 			board.setB_content(request.getParameter("b_content"));
 			board.setB_theme(request.getParameter("b_theme"));

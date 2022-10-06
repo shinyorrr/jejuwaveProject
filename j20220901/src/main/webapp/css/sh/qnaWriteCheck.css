@@ -14,11 +14,11 @@
 		font-weight: bold;
 	}
 	.profile {
-		margin-left: 400px;
+		margin-left: 300px;
 	}
 	.gubun {
-       border : 1px solid gray;
-	
+
+		margin-left: 350px;
 	}
 	.fw-bold {
 		color: #FF3500;
@@ -74,6 +74,7 @@
 		line-height: 1.1px;
 		
 	}
+
 
 	
 	
