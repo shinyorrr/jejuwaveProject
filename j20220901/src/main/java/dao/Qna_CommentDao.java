@@ -106,7 +106,7 @@ public class Qna_CommentDao {
 		int result = 0;
 		
 		String sql1 = "select nvl(max(com_num),0) from qna_comment where b_num=?";
-		String sql = "insert into qna_comment values(?,?,?,sysdate,?)";
+		String sql = "insert into qna_comment values(?,?,?,sysdate,?,?)";
 		
 		try {
 			conn = getConnection();
@@ -123,6 +123,7 @@ public class Qna_CommentDao {
 			 pstmt.setInt(2, cnum);
 			 pstmt.setString(3, comment.getUser_id());
 			 pstmt.setString(4, comment.getCom_content());
+			 pstmt.setString(5, "N");
 			 result = pstmt.executeUpdate();
 			 pstmt.close();
 
