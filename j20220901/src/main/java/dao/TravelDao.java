@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.Context;
@@ -378,4 +379,60 @@ public class TravelDao {
 		}
 		return result;
 	}
+	
+	// Main 검색기능
+	public List<Travel>search(HashMap<String, String>map){
+		
+		try {
+				Connection conn = null;
+				PreparedStatement pstmt = null;
+				ResultSet rs = null;
+				String where = "";
+				if (map.get("isSearch").equals("y")) {
+					// 검색
+					// where name like %홍길동%
+					// where subject like %날씨%
+					// where all like %날씨%
+					if (map.get("column").equals("all")) {
+						where = String.format("where subject like '%%%s%%' or content like '%%%s%% ",
+											  map.get("search"), map.get("search"));	
+					} else {
+						where = String.format("where %s like '%%%s%%'", map.get("column"), map.get("search"));
+					}
+					
+				}
+				String sql = String.format("select * from travel_board %s order by t_num desc", where);
+				conn = getConnection();
+				pstmt= conn.prepareStatement(sql);
+				rs = pstmt.executeQuery();
+				List<Travel> list = new ArrayList<Travel>();
+				
+				while (rs.next()) {
+					Travel travel = new Travel();
+					travel.setT_num			(rs.getInt		("t_num"));
+					travel.setUser_id		(rs.getString	("user_id"));
+					travel.setT_img			(rs.getString	("t_img"));
+					travel.setT_title		(rs.getString	("t_title"));
+					travel.setT_content		(rs.getString	("t_content"));
+					travel.setT_gubun		(rs.getString	("t_gubun"));
+					travel.setT_date		(rs.getString	("t_date"));
+					travel.setT_person		(rs.getInt		("t_person"));
+					travel.setT_start		(rs.getString	("t_start"));
+					travel.setT_end			(rs.getString	("t_end"));
+					travel.setT_dealstatus	(rs.getString	("t_dealstatus"));
+					travel.setT_ref			(rs.getInt		("t_ref"));
+					travel.setT_relevel		(rs.getInt		("t_relevel"));
+					travel.setT_restep		(rs.getInt		("t_restep"));
+					travel.setReply_cnt		(rs.getInt		("reply_cnt"));
+					travel.setUser_img		(rs.getString	("user_img"));
+					
+					list.add(travel);
+					return list;
+				}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		return null;
+	}
+
 }

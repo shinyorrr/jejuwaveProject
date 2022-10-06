@@ -48,9 +48,9 @@ String context = request.getContextPath();
 				<div class="Headers__HeaderTopInnerDiv-sc-1la7hl4-3 dnYUeR">
 					<div class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 						<span class="CommonIconSet QjNCN"></span>
-						<button></button>
-						<input placeholder="동행을 찾아보세요!" onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '동행을 찾아보세요!'" value="">
+						<button type="submit"></button>
+						<input type="text" placeholder="동행을 찾아보세요!" onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '동행을 찾아보세요!'" required />
 					</div>
 					<!-- 비 로그인 상태 -->
 					<c:if test="${user_id == null }">
