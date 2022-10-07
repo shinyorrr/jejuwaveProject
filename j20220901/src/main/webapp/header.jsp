@@ -48,9 +48,10 @@ String context = request.getContextPath();
 				<div class="Headers__HeaderTopInnerDiv-sc-1la7hl4-3 dnYUeR">
 					<div class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 						<span class="CommonIconSet QjNCN"></span>
-						<button></button>
-						<input placeholder="동행을 찾아보세요!" onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '동행을 찾아보세요!'" value="">
+						<button type="submit" onclick="searchTravel()"></button>
+						<input id = "searchTravelCont" type="text" placeholder="동행을 찾아보세요!"
+							onfocus="this.placeholder = ''"
+							onblur="this.placeholder = '동행을 찾아보세요!'" required />
 					</div>
 					<!-- 비 로그인 상태 -->
 					<c:if test="${user_id == null }">
@@ -115,19 +116,19 @@ String context = request.getContextPath();
 					<div class="Popups__HeaderWritePopupDiv cymdDn">
 						<button onClick="location.href='<%=context%>/travelWrite.do'"
 							class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHljB">
-							<img src="images/letter_color.svg" alt="이미지"
+							<img src="images/tw/letter_color.svg" alt="이미지"
 								style="width: 33px; height: 24px;">
 							<p>여행친구 찾기</p>
 						</button>
 						<button onclick="location.href='<%=context%>/qnaWriteForm.do'"
 							class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHlmB">
-							<img src="images/magnifier_color.svg" alt="이미지"
+							<img src="images/tw/magnifier_color.svg" alt="이미지"
 								style="width: 33px; height: 24px;">
 							<p>여행 질문하기</p>
 						</button>
-						<button onclick="location.href='<%=context%>/commuList.do'"
+						<button onclick="location.href='<%=context%>/commuWriteForm.do'"
 							class="Popups__HeaderWritePopupOptionButton-sc-1socb7k-1 cAHlmB">
-							<img src="images/magnifier_color.svg" alt="이미지"
+							<img src="images/tw/history.png" alt="이미지"
 								style="width: 33px; height: 24px;">
 							<p>여행 기록하기</p>
 						</button>
@@ -151,4 +152,25 @@ String context = request.getContextPath();
 		</div>
 	</header>
 </body>
+<script type="text/javascript">
+
+function searchTravel() {
+	
+	let searchTravelCont = $('#searchTravelCont').val()
+	alert(searchTravelCont);
+	
+	$.ajax({    type : 'post',           // 타입 (get, post, put 등등)   
+				url : './ajax',           // 요청할 서버url         
+			    dataType : 'text',       // 데이터 타입 (html, xml, json, text 등등)    
+				data : JSON.stringify({ "searchTravelCont" : searchTravelCont}),     // 보낼 데이터 (Object , String, Array)
+				success : function(result) { // 결과 성공 콜백함수        
+				console.log(result);    
+				},    
+				error : function(request, status, error) { // 결과 에러 콜백함수       
+				console.log(error)    
+				}})
+}
+
+
+</script>
 </html>
