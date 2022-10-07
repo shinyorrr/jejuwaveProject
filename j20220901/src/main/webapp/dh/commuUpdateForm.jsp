@@ -39,8 +39,6 @@
 		</section>
 		<!-- form 시작 -->
 		<div class="row m-5 justify-content-md-center">
-			
-				
 			<form action="commuUpdatePro.do?" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="user_id" value="${commu.user_id }">
 				<input type="hidden" name="c_num"   value="${commu.c_num }"> <!-- pk 수정하지 않는다. db무결성 문제가능성 -->
@@ -70,31 +68,37 @@
 							deleteFile($(this));
 						});
 					})
+						let count = 0;
 					function addFile() {
-						var str = "<div class='file-input'><input type='file' name='file' onchange='readURL(this);' style='display: none'><div class='btn btn-danger' id='inputBtn' onclick='onclick=document.all.file.click()'>파일선택</div><img id='preview' style='height: 300px; width: 300px;'/><a href='#this' name='file-delete'><button class='btn btn-danger' style='margin-left:5px;'>파일삭제</button></a></div>";
+						var str = "<div class='file-input'><input type='file' name='file' id='file"+count+"' onchange='readURL(this);' style='display: none'><label class='btn btn-danger' id='inputBtn' for='file"+count+"'>파일선택</label><img id='preview"+count+"' style='height: 300px; width: 300px;'/><a href='#this' name='file-delete'><button class='btn btn-danger' style='margin-left:5px;'>파일삭제</button></a></div>";
 						$("#file-list").append(str);
+						console.log(count);
 						$("a[name='file-delete']").on("click", function(e) {
 							e.preventDefault();
 							deleteFile($(this));
 						});
-					}
+						++count;
+					} 
 					function deleteFile(obj) {
 						obj.parent().remove();
 					}
 					
 					function readURL(input) {
+						  let preview = 'preview' + (count - 1);
 						  if (input.files && input.files[0]) {
-						    var reader = new FileReader();
-						    reader.onload = function(e) {
-						      document.getElementById('preview').src = e.target.result;
-						    };
-						    const div = document.getElementById('inputBtn')
-						    div.remove();
-						    reader.readAsDataURL(input.files[0]);
+						    	var reader = new FileReader();
+							    reader.onload = function(e) {
+							      console.log(count);
+							      console.log(preview);
+							      document.getElementById(preview).src = e.target.result;
+							    };
+							    /* const div = document.getElementById('inputBtn')
+							    div.remove(); */
+							    reader.readAsDataURL(input.files[0]);
 						  } else {
-						    document.getElementById('preview').src = "";
+						    document.getElementById(preview).src = "";
 						  }
-						}
+					}
 				</script>
 				<div class="form-group">
 					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="9" name="c_content"  placeholder="게시글 내용을 입력하세요">${commu.c_content }</textarea>
@@ -111,7 +115,6 @@
 					</div>
 				</div>
 			</form>
-			
 		</div>
 	</div>
 	<footer class="py-5 bg-dark" style="margin-top: 100px;">

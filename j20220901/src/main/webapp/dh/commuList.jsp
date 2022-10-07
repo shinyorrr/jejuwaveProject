@@ -80,13 +80,13 @@ console.log(count);
 				<c:forEach var="commu" items="${list }" varStatus="status">	
 					<div class="row m-5 justify-content-md-center">	
 						
-						<div class="col-md-auto">
+						<div class="col-md-auto" style="max-width: 680px;">
 							<div class="card shadow-sm">
 								<div class="card-header d-flex">
 									<img class="mt-1 mb-1 img-fluid rounded-circle" alt="회원이미지" src="${userImgList[status.index].user_img }" style="height: 30px; margin-right: 5px;">
 									<span class="mt-2">${commu.user_id }</span>
 									<!-- dropdown menu는 작성자만 수정 삭제 접근가능, else alert("작성자만 수정 삭제 가능합니다.") -->
-									<div class="dropdown ms-auto">
+									<%-- <div class="dropdown ms-auto">
 								  		<button class="btn btn-icon-only" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 								  			<span class="bi bi-three-dots-vertical"></span>
 								  		</button>
@@ -94,9 +94,9 @@ console.log(count);
 								    		<li><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}">수정</a></li>
 								   			<li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#deleteModal" >삭제</a></li><!-- href='javascript:void(0);confirm();' onclick="ConfirmDel(); -->
 								  		</ul>
-									</div>
+									</div> --%>
 								</div>
-								<button class="nav-link" data-remote="<%=context%>/commuContent.do?c_num=${commu.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
+								<button class="nav-link" data-remote="<%=context%>/commuContent.do?c_num=${commu.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-lg">
 			<!-- 게시글이미지 -->	<img class="rounded card-img-top" src="${imgList[status.index].c_img_path }">
 								</button>								
 								<div class="card-body d-flex">
@@ -109,8 +109,8 @@ console.log(count);
 							</div>
 						</div>
 						<!-- Modal page-->
-						<div class="col-md-auto modal bd-modal-xl fade" tabindex="-1" role="dialog" aria-labelledby="bd-modal-xl" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered modal-xl">
+						<div class="col-md-auto modal bd-modal-lg fade" tabindex="-1" role="dialog" aria-labelledby="bd-modal-lg" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-lg" >
 								<div class="modal-content">
 
 								</div>
@@ -139,7 +139,7 @@ console.log(count);
 						<!-- end modal -->
 						<!-- Call modalContent.jsp Script -->
 						<script>
-							$('.bd-modal-xl').on('show.bs.modal', function(e) {
+							$('.bd-modal-lg').on('show.bs.modal', function(e) {
 						
 								var button = $(e.relatedTarget);
 								var modal = $(this);
