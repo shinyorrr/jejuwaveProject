@@ -45,9 +45,11 @@ public class MypageTravelerAction implements CommandProcess {
 			 
 			 
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);
+		 System.out.println("");
 		 
 		 int startPage = (int)(currentPage-1)/blockSize*blockSize + 1; 
 		 int endPage = startPage + blockSize - 1;
+		 System.out.println("MypageTravelerAction endpage"+ endPage);
 		 
 		 if (endPage > pageCnt) endPage = pageCnt; 
 		 

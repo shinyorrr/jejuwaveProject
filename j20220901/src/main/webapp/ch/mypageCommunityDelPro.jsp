@@ -8,14 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${result != 0 }">
+	<c:if test="${result != 0}">
 		<script type="text/javascript">
-			location.href = "mypageBoard.do"
-		</script>	
+			location.href = "mypageCommunity.do";
+		</script>
 	</c:if>
-	<c:if test="${result == 1 }">
+	<c:if test="${result == 0}">
 		<script type="text/javascript">
-			alert("삭제실패했습니다");
+			alert("이미 삭제되었습니다.")
 			history.back();
 		</script>
 	</c:if>
