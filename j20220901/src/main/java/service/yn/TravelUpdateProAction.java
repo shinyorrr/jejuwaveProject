@@ -25,7 +25,7 @@ public class TravelUpdateProAction implements CommandProcess {
 			int result = 0;
 			
 //			String saveFolder = "C:\\Jsp\\jspSrc\\jejuwave_1001\\src\\main\\webapp\\images\\upload\\";
-			String savePath = request.getServletContext().getRealPath("/images/upload");
+			String savePath = request.getServletContext().getRealPath("/images/upload/");
 			String encType = "utf-8";
 			int maxSize = 5* 1024 *1024;
 			
@@ -54,7 +54,7 @@ public class TravelUpdateProAction implements CommandProcess {
 				if(fullFolder == null ) {
 					fullFolder = multi.getParameter("t_oriImg");
 				}
-				travel.setT_img			(fullFolder);
+				travel.setT_img			("images\\upload\\"+fullFolder);
 				travel.setT_title		(multi.getParameter("t_title"));
 				travel.setT_num			(Integer.parseInt(multi.getParameter("t_num")));
 				travel.setT_content		(multi.getParameter("t_content"));
