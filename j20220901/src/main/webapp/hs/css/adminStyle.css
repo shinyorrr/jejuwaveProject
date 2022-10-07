@@ -132,7 +132,7 @@ table {
 
 /* 검색창 */
 
-.form-select {
+#form-select {
 	float:left;
 	width: 100px;
 	margin-right: 10px;
