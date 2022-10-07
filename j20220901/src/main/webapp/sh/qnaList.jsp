@@ -41,8 +41,12 @@ String context = request.getContextPath();
 	<div style="margin-bottom: 400px; margin-top: 70px;" class="main">
 		<table class="mainTable">
 		
-			<!-- 채택기다리는 글 -->
-			<div style="margin-left: 1300px;" >
+			<!-- 채택기다리는 글만보기 -->
+			<div style="margin-left: 1200px;" >
+			<select class="select">
+				<option value="1"> 등록순</option>
+				<option value="2"> 댓글순</option>
+			</select>
 			<button onclick="location.href='<%=context %>/qnaList2.do'" class="comment_button1" >답변을 기다리는 질문만 보기</button>
 			</div>
 			
