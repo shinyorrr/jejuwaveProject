@@ -49,7 +49,7 @@
 		  		<c:forEach var="commu" items="${list}">
 			  	<tr>
 			  		<th scope="row" width="50">${startNum}</th>
-			  		<td width="600">${commu.c_content}</td>
+			  		<td width="600" id="content">${commu.c_content}</td>
 			  		<td width="100">${commu.c_hash}</td>
 			  		<td width="100">${commu.user_id}</td>
 			  		<td width="100">${commu.c_date}</td>
