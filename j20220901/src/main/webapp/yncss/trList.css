@@ -12,6 +12,19 @@
     font-weight : normal;
     font-style : normal;
 }
+.btn:active, .btn:focus,
+button:focus
+{ font-weight: bold !important; border: none !important; box-shadow: none !important; outline:none !important;}
+
+input:focus, textarea:focus{
+	outline: 2px solid #ff3500 !important;}
+
+#t_gubuns button {
+	border: none; outline: none !important
+}
+#input_to input:focus, #input_from input:focus {
+	outline: 2px solid #ff3500 !important;
+}
 
 @font-face{
     font-family : 'NotoSansKR-Medium';
@@ -51,24 +64,60 @@ body{
 	width: 100%;
 	height: 220px;
 	object-fit: cover;
+	
 }
 
 #pic {
 	width: 100%;
 	height: 220px;
 	overflow: hidden;
+	position: relative;
 }
 
 
-
+#pic:hover {
+	/* background-color: rgba(0, 0, 0, 0.2); */
+	border-radius:3px 3px 0 0;
+}
 
 #pic:hover img {
-	background-color: rgba(0, 0, 0, 0.2);
+	/* background-color: rgba(0, 0, 0, 0.2); */
 	transform: scale(1.1);
 	transition-duration: 0.5s;
-	border-radius:42px;
+	/* border-radius:41px 41px 0 0; */
 }
-/* .contentImgDate {
+#picOnGubun {
+	/* visibility: hidden; */
+	width: 19%;
+	margin: 10px;
+	font-size: 12px;
+	color: white;
+	position: absolute;
+	opacity: 1;
+	border-radius:20px;
+	padding: 5px 0px 5px 10px;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 1;
+}
+ #picOnDate {
+	/* visibility: hidden; */
+	display: none;
+}
+#pic:hover #picOnDate {
+	display: inline;
+	} 
+#pic:hover #picOnGubun {
+	width: 48%;
+} 
+
+
+
+
+
+
+
+
+/* #contentDate {
 	opacity: 1;
 	padding: 5px;
 	background-color: rgba(0, 0, 0, 0.5);
@@ -111,11 +160,9 @@ body{
 	
 }
 
-
 #filter {
 	float: right;
 }
-
 
 .fileRegiBtn label {
 	display: inline-block; 
@@ -143,6 +190,10 @@ body{
 	clip:rect(0,0,0,0); 
 	border: 0;
 }
+#searchFilterGubun {
+	font-weight: bold;
+}
+
 /************************************/
 /**********   View css   ************/
 /************************************/
@@ -199,34 +250,24 @@ body{
 /************************************/
 /**********   Write css   ************/
 /************************************/
-/*라벨은 원하는대로 커스텀하고*/
-
-.fileRegiBtn label {
-	display: inline-block; 
-	padding: .5em .75em; 
-	color: #ffffff; 
-	font-size: inherit; 
-	line-height: normal; 
-	vertical-align: middle; 
-	background-color: #ff3500; 
-	cursor: pointer; 
-	border: 1px solid #ebebeb; 
-	border-bottom-color: #e2e2e2; 
-	border-radius: .25em;
-}
 
 #fileName {
 	background-color: #e2e2e2;
 }
-/*파일선택시 선택된 파일명이 붙는것을 가려준다*/
 
-.fileRegiBtn input[type="file"]{
-	position: absolute; 
-	width: 1px; 
-	height: 1px; 
-	padding: 0; 
-	margin: -1px; 
-	overflow: hidden; 
-	clip:rect(0,0,0,0); 
-	border: 0;
+
+#image-upload-box {
+	background-color: #E6E6E6;
+  height: 260px;
+  border-radius: 4px;
+  overflow: hidden;
+  object-fit:cover;
+  display:flex;
 }
+#image-upload-box img {
+   width: 100%; 
+   object-fit:cover;
+   height: 260px; 	
+}
+
+
