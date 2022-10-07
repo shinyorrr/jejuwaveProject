@@ -66,10 +66,39 @@ $(function(){
 	var eMailForm = $('#eMailForm').val()
 	$('input[name=user_email2]').attr('value',eMailForm);
 })
+function passwordUpdate() {
+	var url = "<%=context%>/passwordUpdate.do";
+	window.open(url,"a1","width=500,height=200");
+}
 /* submit시 설정 */
 function disableOff(){
+	var user_pw1 = ${user_pw};
+	var user_pw2 = document.getElementById("oldPassword").value
+	// 변경할 비밀번호 비교
+	var user_pw3 = document.getElementById("newPassword1").value
+	var user_pw4 = document.getElementById("newPassword2").value
+	if(user_pw1 != user_pw2){
+		alert("현재 비밀번호가 틀립니다");
+		frm.oldPassword.focus();
+		frm.oldPassword.value("");
+		return false;
+	}
+	if(user_pw3 != user_pw4){
+		alert("변경한 비밀번호가 서로 다릅니다");
+		frm.newPassword2.focus();
+		frm.newPassword2.value("");
+		return false;
+	}
 	document.frm.user_email2.disabled = false;
 }
+/* 비밀번호 변경버튼 누르면 인풋화면 나옴 */
+function passwordUpdate(){
+	document.frm.oldPassword.hidden = false;
+	document.frm.newPassword1.hidden = false;
+	document.frm.newPassword2.hidden = false;
+}
+
+
 
 /* const email_change = (target) => {
 	if(target.options[target.selectedIndex].value == '1'){
@@ -152,7 +181,7 @@ function disableOff(){
 							<span><img id="target_img" src="<%=context%>/${member.user_img}" width = "200px"></span>
 						</c:if>
 					</div>
-					<form name = "frm" action="<%=context %>/mypageUpdatePro.do" method="post" enctype="multipart/form-data" onsubmit="disableOff()">
+					<form name = "frm" action="<%=context %>/mypageUpdatePro.do" method="post" enctype="multipart/form-data" onsubmit="return disableOff()">
 						<input type="file" id = "profile" name = "profile" style= "display:none;" onchange="readURL(this);">
 						<input type = "hidden" name ="target_url">
 						<h3 class = "mypage_menu_h3">소개글</h3>
@@ -180,11 +209,14 @@ function disableOff(){
 							  <option value="kakao.com"
 							  <c:if test = "${fn:split(member.user_email,'@')[1] eq 'kakao.com'}"> selected </c:if>>kakao.com</option>
 							</select>
-						<div class = "submitMain">
-							<input type="submit" id = "submit" value = "수정완료">
-							<button class="pw_search" onclick = "location.href='userPassword.jsp'">비밀번호찾기</button>
-						</div>
+							<input type="password" id = "oldPassword" name = "oldPassword" placeholder = "현재 비밀번호를 입력하세요" hidden="true"> 
+							<input type="password" id = "newPassword1" name = "newPassword1" placeholder="변경한 비밀번호를 입력하세요" hidden="true">
+							<input type="password" id = "newPassword2" name = "newPassword2" placeholder="변경할 비밀번호를 다시 입력하세요" hidden="true">
+							<div class = "submitMain">
+								<input type="submit" id = "submit" value = "수정완료">
+							</div>
 					</form>	
+									<button class="pw_search" onclick = "passwordUpdate()">비밀번호수정</button>
 				</div>
 			</div>
 		</div>

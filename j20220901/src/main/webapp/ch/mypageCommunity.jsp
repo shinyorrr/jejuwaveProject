@@ -30,6 +30,26 @@
 		width: 100%;
 	}
 </style>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.button_delete').click(function(){
+			var c_num 	= $('#c_num').val();
+			var ans 	= confirm("삭제하시겠습니까?");
+			if(!ans) return false;
+			
+			$.ajax({
+				url 	: "mypageCommunityDelete.do?c_num=" + c_num,
+				dataType: 'html',
+				success	: function(data){
+						var e = $(data).find('.communityForm');
+						$('.communityForm').html(e)
+				}
+			});
+		});
+	});
+
+</script>
 </head>
 <body>
 
@@ -131,9 +151,10 @@
 							<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
 								<%-- 		<tr style= " cursor: pointer" onclick="location.href='commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}';"> --%>
-								
+									
 										<tr>
 											<td rowspan="3" width = 50>
+												<input type="text" id = "c_num" value = "${board.c_num }" hidden="true">
 												 <button class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.c_img_path }" width = "120px" padding-bottom = 10px>
@@ -163,7 +184,7 @@
 													<button class = "button_update" onclick="location.href = '<%=context%>/commuUpdateForm.do?c_num=${board.c_num }'" >수정</button>
 												</div>
 												<div>
-													<button class = "button_delete">삭제</button>
+													<button class = "button_delete" >삭제</button>
 												</div>
 											</td>
 										</tr>
@@ -175,7 +196,7 @@
 						
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommunity.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -186,7 +207,7 @@
 						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommunity.do?pageNum=${i }'" 
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -197,7 +218,7 @@
 						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommunity.do=${startPage+1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
