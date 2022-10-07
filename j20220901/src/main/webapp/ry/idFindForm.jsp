@@ -9,20 +9,33 @@
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style type="text/css">
- 	caption {
-	font-size: 24px;
-	}
-.joinform{
-    box-shadow: 10px 10px 10px 10px rgba(89,89,89,0.39);
-    padding:70px 45px 45px 45px;
-    display : inline-block;
-}
-	pre {
-	font-size: 8pt;
-	font-color: #gray;
-}
+ 	 body {
+      min-height: 1000ps;
+
+      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
+      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
+    }
+
+    .input-form {
+      max-width: 280px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+    }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -31,7 +44,39 @@
 </head>
 <body>
 		<tbody>
-		<div class="joinform" style="margin-top:200px; margin-left: 30%; ">
+		 <div class="container">
+    <div class="input-form-backgroud row" style="margin-top: 300px;">
+      <div class="input-form col-md-4 mx-auto">
+        <h4 class="mb-3" style="text-align: center;">아이디 찾기</h4>
+        <form class="validation-form" action="<%=context %>/idFindPro.do" method="post" id="frm" name="frm">
+          <div class="row">
+            <div class="" ><!-- col-md-3 mb-3 -->
+              <label for="name" style="padding-left: 10px;">이름</label>
+              <input type="text" class="form-control" id="user_name"  name="user_name" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                이름을 입력해주세요.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+          <div class="">
+            <label for="email" style="padding-left: 10px;">이메일</label>
+            <input type="email" class="form-control" id="user_email" name="user_email" placeholder="you@example.com" required>
+            <div class="invalid-feedback">
+              이메일을 입력해주세요.
+            </div>
+          </div>
+		 </div>
+          <div class="col" style="margin-top: 10px; padding-left: 50px;">
+          <button class="btn btn-outline-warning" type="submit">아이디 찾기</button>
+          <button class="btn btn-outline-warning" type="reset">취소</button>
+          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">비밀번호찾기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+		<%-- <div class="joinform" style="margin-top:200px; margin-left: 30%; ">
 	<form  action="<%=context %>/idFindPro.do" method="post" id="frm" name="frm" onsubmit="return chk()">
 		<table>
 		<thead>
@@ -56,12 +101,12 @@
 			<input type="button" value="비밀번호찾기" onclick="location.href = '<%=context %>/pwFindForm.do'"></a>
 		</div>
 	</form>	
-		</div>
+		</div> --%>
 	</tbody>
-	<footer class="py-5 bg-dark" style="margin-top: 100px;">
+</body>
+	<footer class="py-5 bg-dark" style="margin-top: 300px;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your	Website 2022</p>
 		</div>
 	</footer>	
-</body>
 </html>

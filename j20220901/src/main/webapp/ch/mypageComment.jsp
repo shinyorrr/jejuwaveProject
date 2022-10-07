@@ -21,23 +21,52 @@
 		width: 100%;
 	}
 </style>
-<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript" src = "<%=context%>/js/jquery.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('#myComment_setup').click(function(){
-			$.ajax({
-				url : 'mypageCommentPro.do',
-				dataType : 'html',
-				success	 : function(data){
-							$('#change_body').html(data)
-							}
-			});
+$(function(){
+	$('#myComment_Travel').click(function(){
 		
+		$.ajax({
+			url 	 : 'mypageCommentTravel.do',
+			dataType : 'html',
+			success	 : function(data){
+						$('#change_body').html(data)
+						}
 		});
+	
+	});
+	
+});
+
+$(function(){
+	$('#myComment_qna').click(function(){
+		$.ajax({
+			url 	 : 'mypageComment.do',
+			dataType : 'html',
+			success	 : function(data){
+						var e = $(data).find('#change_body');
+						$('#change_body').html(e)
+						}
+		});
+	
+	});
+	
+});
+
+// 버튼 클릭시 색 변경
+$(function(){
+	$('.myComment_button').click(function(){
+		$('.myComment_button').css("background-color","rgb(233, 233, 233)");
+		$('.myComment_button').css("color","black");
+		$('.myComment_button').css("border","0");
+		$(this).css("background-color","white");
+		$(this).css("color","rgb(0, 206, 124)");
+		$(this).css("border","1px solid rgb(0, 206, 124)");
 		
 	});
-
+});
 </script>
+
 </head>
 <body>
 
@@ -79,7 +108,7 @@
 						</li>
 						<li class="link_mypage">
 							<a class="link index_link" href="<%=context%>/mypageBoard.do">
-								<span class="mypage_name">내 게시글</span>
+								<span class="mypage_name">내 Q&A글</span>
 							</a>
 						</li>
 						<li class="link_mypage_comment">
@@ -92,8 +121,12 @@
 			</div>
 			<!-- 각 화면이 달라지는 부분 -->
 			<div class="content_section">
-				<button id = "myComment_setup">
-				<h2 class = "mypage_menu_h2">내 댓글관리</h2>
+			
+				<button class = "myComment_button" id = "myComment_qna">
+					<h2 class = "mypage_CommentMain">Q&A 내 댓글관리</h2>
+				</button>
+				<button class = "myComment_button" id = "myComment_Travel">
+					<h2 class = "mypage_CommentMain">동행자게시판 내 코멘트</h2>
 				</button>
 				<div class = "change_body" id = "change_body">
 					<c:if test="${ totCnt > 0}">
@@ -111,7 +144,6 @@
 							<tr>
 								<td>
 									<div class = "button_updateform">
-									<button class = "button_update" onclick = "location.href = 'Board.jsp'">수정</button>
 									<button class = "button_delete">삭제</button>
 									</div>
 								</td>

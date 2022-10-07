@@ -10,7 +10,30 @@
 <c:import url="${context}/hs/headerLogin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-	
+<script type="text/javascript" src="<%=context%>/js/jquery.js"></script>
+<script type="text/javascript">
+	function searchCheck(){
+	    //검색
+	   
+	    if(frm.keyField.value == 0){
+	        alert("검색 키워드를 입력하세요.");
+	        frm.keyField.focus();
+	        return false;
+	    }
+	    if(frm.keyWord.value =="" && frm.keyField.value == "user_id"){
+	        alert("검색할 아이디를 입력하세요.");
+	        frm.keyWord.focus();
+	        return false;
+	    }
+	    if(frm.keyWord.value =="" && frm.keyField.value == "user_name"){
+	        alert("검색할 이름을 입력하세요.");
+	        frm.keyWord.focus();
+	        return false;
+	    }
+	    return true;
+	}
+</script>	
+
 	<!-- 네비게이션메뉴바 -->
 	<nav id="nav" class="nav">
 	<!-- 프로필 이미지 -->
@@ -36,6 +59,20 @@
 		<table class="table table-bordered">
 		<caption>회원명단</caption>
 		  <thead>
+		  	<tr>
+	  		<td colspan="7">
+	  			<form action="<%=context%>/adMemberSelect.do" name="frm" method="post" onsubmit="return searchCheck()">
+	  			<select name="keyField" id="form-select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+				  <option value="0">---선택---</option>
+				  <option value="user_id">아이디</option>
+				  <option value="user_name">이름</option>
+				</select>
+				<input type="text" name="keyWord" placeholder="회원정보를 입력해주세요" maxlength="50">
+				<input type="submit" value="검색">
+				<input type="reset" value="취소">
+	  			</form>
+	  		</td>
+		  	</tr>
 		    <tr>
 		      <th scope="col">아이디</th>
 		      <th scope="col">암호</th>
