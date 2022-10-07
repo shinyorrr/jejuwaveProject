@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,24 +22,26 @@
 </style>
 <script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
 <script type="text/javascript">
-	function deleteMsg(){
-		var t_num = $('#t_num').val();
+/* 	function deleteMsg(){
+		var t_num = "<c:out value = '${board.t_num}'/>";
+		var sendData = 't_num=' + t_num;
 		console.log = (t_num)
 		var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
 		if(!ans) return false;
 		
 		$.ajax({
-				url 	: '${context}/MypageTraveldelete.do?t_num = ',
-				dataType: 'text',
-				data	: t_num,
+				url 	: '${context}/MypageTraveldelete.do'
+				dateType: 'text',
+				data	: sendData,
 				success	: function(data){
-						location.reload();
+						location.reload(); 
 				},
 				error : function(date){
 					alert("댓글이 삭제되지 않았습니다.");
 				}
 			});
-		}
+		} */
+	
 </script>
 </head>
 <body>
@@ -93,7 +96,13 @@
 			</div>
 			<!-- 각 화면이 달라지는 부분 -->
 			<div class="content_section">
-				<h2 class = mypage_menu_h2>내 게시글</h2>
+				<h2 class = mypage_menu_h2>내 게시글
+				<span>
+					<button id = "change" onclick = "location.href = '<%=context%>/mypageTraveler.do?t_dealstatus=0'">
+					모집중인 글만 보기
+					</button>
+				</span>
+				</h2>
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
@@ -118,7 +127,8 @@
 												<div class = "t_title">${board.t_title }</div>
 											</td>
 											<td class = "t_date">
-											${board.t_date}
+												<c:set var = "t_date" value="${board.t_date }" />
+												${fn:substring(t_date,0,11)}
 											</td>
 										</tr>
 										<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
@@ -134,7 +144,8 @@
 													<button class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'">수정</button>
 												</div>
 												<div>
-													<button class = "button_delete" onclick="location.href = '<%=context%>/MypageTraveldelete.do?t_num=${board.t_num }'">삭제</button>
+												<button class = "button_delete" onclick="deleteMsg()">삭제</button>
+											<%-- 	<button class = "button_delete" onclick="location.href = '<%=context%>/MypageTraveldelete.do?t_num=${board.t_num }'">삭제</button> --%>
 												</div>
 											</td>
 											<td>
@@ -147,10 +158,8 @@
 							</table>
 						</c:forEach> 
 					</c:if>
-			</div>
-		</div>
-				<div style="padding-left : 62%;">
-				<c:if test="${startPage > 1 }">
+				<div style="text-align: center; padding-top: 20px;">
+				<c:if test="${startPage > blockSize }">
 						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
@@ -184,6 +193,8 @@
 						">[다음]</button>
 				</c:if>
 				</div>
+			</div>
+		</div>
 	</div>
 </main>
 <footer class="py-5 bg-dark" style="top: 180%;">

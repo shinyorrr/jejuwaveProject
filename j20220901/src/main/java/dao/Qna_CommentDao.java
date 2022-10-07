@@ -46,7 +46,7 @@ public class Qna_CommentDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from qna_comment where b_num=?";
+		String sql = "select q.*, fn_user_img(q.user_id) fn_user_img from qna_comment q where b_num=?";
 		try {
 			conn=getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -58,8 +58,9 @@ public class Qna_CommentDao {
 				comment.setCom_content(rs.getString("com_content"));
 				comment.setCom_num(rs.getInt("com_num"));
 				comment.setCom_date(rs.getDate("com_date"));
-				System.out.println("commentList user_id->"+rs.getString("user_id"));
-				System.out.println("commentList com_content->"+rs.getString("com_content"));
+				comment.setCom_choose(rs.getString("com_choose"));
+                comment.setFn_user_img(rs.getString("fn_user_img"));
+				
 				list.add(comment);
 			}	
 		} catch (Exception e) {

@@ -107,3 +107,9 @@ table {
     font-family: 'NotoSansKR';
     font-size: smaller;
 }
+#change{
+	float: right;
+    border: 1px solid azure;
+    background-color: coral;
+    color: blanchedalmond;
+}

@@ -13,7 +13,7 @@ import dao.Qna_BoardDao;
 import dao.Qna_Hash;
 import service.CommandProcess;
 
-public class QnaListAction implements CommandProcess {
+public class QnaList2Action implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
@@ -37,7 +37,7 @@ public class QnaListAction implements CommandProcess {
 			int endRow = startRow + pageSize - 1; // 10 20
 			int startNum = totCnt - startRow + 1; // 38- 11 +1 28
 
-			List<Qna_Board> list = bd.getBoardList(startRow, endRow);
+			List<Qna_Board> list = bd.getBoardList2(startRow, endRow);
 
 			int pageCnt = (int) Math.ceil((double) totCnt / pageSize); // 4
 			// 2-1 / 10 *10 +1 //2
@@ -56,12 +56,13 @@ public class QnaListAction implements CommandProcess {
 			request.setAttribute("pageCnt", pageCnt);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
+		
 
 		} catch (Exception e) {
 			System.out.println("Qna ListAction e.getMessage()->" + e.getMessage());
 		}
 
-		return "sh/qnaList.jsp";
+		return "sh/qnaList2.jsp";
 	}
 
 }

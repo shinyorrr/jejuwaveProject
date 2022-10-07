@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,7 +94,7 @@ public class MypageDao {
 	}
 	
 	
-	public List<Mypage> travelList(String user_id, int startRow, int endRow) throws SQLException {
+	public List<Mypage> travelList(String user_id, int startRow, int endRow, int t_dealstatus) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -107,6 +108,9 @@ public class MypageDao {
 				+ "           ) c) \r\n"
 				+ " where   r between ? and ?";
 		System.out.println("travelList sql ===> " + sql);
+		System.out.println("travelList t_dealstatus === > ");
+		// 버튼 클릭시 조건추가 (모집중인 글만 보기)
+		if(t_dealstatus == 0) { sql += "and t_dealstatus = ?"; }
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -117,7 +121,11 @@ public class MypageDao {
 			System.out.println("startRow == > " + startRow);
 			pstmt.setInt(3, endRow);
 			System.out.println("endRow == > " + endRow);
-			rs = pstmt.executeQuery();
+			// 버튼 클릭시 조건 추가
+			if(t_dealstatus == 0) {
+				pstmt.setInt(4,t_dealstatus);
+				rs = pstmt.executeQuery();
+			} else rs = pstmt.executeQuery();
 			System.out.println("travelList sql ===> " + sql);
 			System.out.println(rs);
 			System.out.println("MypageDao travelList rs.next()->"+rs.next());
@@ -130,7 +138,7 @@ public class MypageDao {
 				mypage.setT_title		(rs.getString("t_title"));
 				mypage.setT_content		(rs.getString("t_content"));
 				mypage.setT_gubun		(rs.getString("t_gubun"));
-				mypage.setT_date		(rs.getDate("t_date"));
+				mypage.setT_date		(rs.getString("t_date"));
 				mypage.setT_person		(rs.getInt("t_person"));
 				mypage.setT_start		(rs.getDate("t_start"));
 				mypage.setT_end			(rs.getDate("t_end"));
@@ -494,7 +502,7 @@ public class MypageDao {
 				Mypage mypage = new Mypage();
 				mypage.setT_num(rs.getInt("t_num"));
 				mypage.setT_content(rs.getString("t_content"));
-				mypage.setT_date(rs.getDate("t_date"));
+				mypage.setT_date(rs.getString("t_date"));
 				list.add(mypage);
 				System.out.println("commentList list : " + list);
 			} while(rs.next());

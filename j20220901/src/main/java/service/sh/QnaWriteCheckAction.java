@@ -27,6 +27,7 @@ public class QnaWriteCheckAction implements CommandProcess {
 		
 		int b_num = Integer.parseInt(request.getParameter("b_num"));
 		
+		//아이디 받아오기
 		HttpSession session = request.getSession();
 		String user_id = (String) session.getAttribute("user_id");
 		
@@ -57,7 +58,6 @@ public class QnaWriteCheckAction implements CommandProcess {
 			//로그인한 아이디 넘겨줌
 			request.setAttribute("user_id", user_id);
 			request.setAttribute("inum", inum);
-			
 
 			request.setAttribute("comment", comment);
 

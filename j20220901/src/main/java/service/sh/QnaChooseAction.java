@@ -23,7 +23,8 @@ public class QnaChooseAction implements CommandProcess {
 			int result = bd.choose(b_num, com_num);
 			request.setAttribute("result", result);
 			request.setAttribute("b_num", b_num);
-			request.setAttribute("com_num", com_num);
+			//request.setAttribute("com_num", com_num);
+
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

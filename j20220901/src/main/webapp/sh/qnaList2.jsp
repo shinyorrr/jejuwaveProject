@@ -43,7 +43,7 @@ String context = request.getContextPath();
 		
 			<!-- 채택기다리는 글 -->
 			<div style="margin-left: 1300px;" >
-			<button onclick="location.href='<%=context %>/qnaList2.do'" class="comment_button1" >답변을 기다리는 질문만 보기</button>
+			<button onclick="location.href='<%=context %>/qnaList.do'" class="comment_button2" >답변을 기다리는 질문만 보기</button>
 			</div>
 			
 			<c:if test="${totCnt > 0 }">
@@ -51,10 +51,10 @@ String context = request.getContextPath();
 					<th style="vertical-align: super;">
 					<!-- 채택완료/답변대기 -->
 						<c:if test="${board.b_success eq '채택완료' }">
-							<span >${board.b_success }</span>
+							<span style="color: red;">${board.b_success }</span>
 						</c:if> 
 						<c:if test="${board.b_success ne '채택완료' }">
-							<span style="color: #FF3500;">${board.b_success }</span>
+							<span>${board.b_success }</span>
 						</c:if></th>
 					<!-- 제목 -->
 					<th class=" title2">
@@ -102,17 +102,17 @@ String context = request.getContextPath();
 			<ul class="pagination">
 				<c:if test="${startPage > blockSize}">
 					<li class="page-item"><a class="page-link"
-						href='qnaList.do?pageNum=${startPage-blockSize}'
+						href='qnaList2.do?pageNum=${startPage-blockSize}'
 						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
 					</a></li>
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<li class="page-item"><a class="page-link"
-						href='qnaList.do?pageNum=${i}'>${i}</a></li>
+						href='qnaList2.do?pageNum=${i}'>${i}</a></li>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt}">
 					<li class="page-item"><a class="page-link"
-						href='qnaList.do?pageNum=${startPage+blockSize}'
+						href='qnaList2.do?pageNum=${startPage+blockSize}'
 						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>

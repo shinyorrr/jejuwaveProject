@@ -45,7 +45,7 @@ String context = request.getContextPath();
 	<!-- 아이디 -->
 	<div class="profile">
 		<div class="basic2_2">
-			<img src="<%=context%>/sh_images/user_icon04.png"
+			<img src="<%=context%>/${board.fn_user_img}"
 				class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 				width="20" height="20">
 			<div></div>
@@ -53,7 +53,7 @@ String context = request.getContextPath();
 		<p class="basic2_2">${board.user_id}</p>
 	</div>
 	<!-- 답변 채택완료/대기중 -->
-	<div style="border: 1px solid #D5D5D5; margin-right: 1300px;  padding:10px 5px 10px 5px;   " class="gubun">
+	<div  style="border: 1px solid #D5D5D5; margin-right: 1300px;  padding:10px 5px 10px 5px; width:250px;  "  class="gubun">
 		<div>
 		 <span class="wait">&nbsp; &nbsp;상태</span> 
 
@@ -78,25 +78,27 @@ String context = request.getContextPath();
 		<p>${board.b_content}</p>
 	</div>
 	<!-- 해시태그 -->
-	<div class="tag1">                                                                                      <!--  현지수정 -->
-		<div class="btn-group btn-group-sm" role="group" aria-label="..."       
-			style="margin-bottom: 6px;">
-			<!-- 태그 3개미만일때 # 제거 -->
-			<c:choose>
-				<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
-				<c:otherwise><span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
-				<c:otherwise><span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-			</c:choose>
-			<c:choose>
-				<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
-				<c:otherwise><span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-			</c:choose>
+		<div class="tag1">                                                                                      <!--  현지수정 -->
+			<div class="btn-group btn-group-sm" role="group" aria-label="..."       
+				style="margin-bottom: 6px;">
+				<!-- 태그 3개미만일때 # 제거 -->
+				<c:choose>
+					<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
+					<c:otherwise><span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
+					<c:otherwise><span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+				</c:choose>
+				<c:choose>
+					<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
+					<c:otherwise><span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+				</c:choose>
+			</div>
 		</div>
+		
 		<!-- 내가 쓴 글일 때만 수정, 삭제 -->
-		<c:if test="${user_id == board.user_id }">
+		<c:if test="${user_id eq board.user_id }">
 			<p class="button7">
 				${board.b_date} &nbsp;&nbsp;
 				<button class="button8" type="button"
@@ -128,48 +130,57 @@ String context = request.getContextPath();
 			<p>
 			<div style="margin-top: 25px;">
 					<div style="float: left;">
-						<img src="<%=context %>/sh_images/user_icon0${inum.count }.png" width="40" height="40"
+						<img src="<%=context%>/${comment.fn_user_img}" width="40" height="40"
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white">
 					</div>					
 					<div class="fw-bold" style="font-size: 17px; line-height: 1.1" >${comment.user_id }
 					
-						<!-- 댓글 삭제 -->
-						<c:if test="${user_id == comment.user_id }">
-							<span><a class="delete" href="<%=context %>/qnaCommentDelete.do?com_num=${comment.com_num}&b_num=${b_num}">
-							삭제<img src="<%=context %>/sh_images/trash" width="16" height="16" style="vertical-align: sub;" >
-							</a></span>
-						</c:if>
+					<!--내가 쓴 댓글일때 만 삭제 -->
+					<c:if test="${user_id eq comment.user_id }">
+						<span><a class="delete" href="<%=context %>/qnaCommentDelete.do?com_num=${comment.com_num}&b_num=${b_num}">
+						삭제<img src="<%=context %>/sh_images/trash" width="16" height="16" style="vertical-align: sub;" >
+						</a></span>
+					</c:if>
 				
 				 			
-				 <!-- 댓글내용 -->		
-					</div>
-					<div style="font-size: 12px; color:gray; margin-bottom : 10px">${comment.com_date}</div> 				
-					<div style="margin-left: 60px; margin-bottom: 25px; float: left; ">${comment.com_content }</div>
-					<!-- 답변 채택시 -->
-					<c:if test="${board.b_success ne '채택완료' }">
-						<div style="float: right; margin-right: 350px;">
-						<a href="<%=context %>/qnaChoose.do?com_num=${comment.com_num}&b_num=${b_num}">채택하기</a></div>
-					</c:if>
-					<c:if test="${board.b_success eq '채택완료' and comment.com_num eq choose}">
-						<div style="float: right; margin-right: 350px;">
-						<img src="<%=context %>/sh_images/bookmark.png" width="40" height="40"> </div>
-					</c:if>
-					<c:if test="${board.b_success eq '채택완료' and comment.com_num ne choose}">
-						<div style="float: right; margin-right: 350px;">
+					 <!-- 댓글내용 -->		
 						</div>
-					</c:if>
+						<div style="font-size: 12px; color:gray; margin-bottom : 10px">${comment.com_date}</div> 				
+						<div style="margin-left: 60px; margin-bottom: 25px; float: left; ">${comment.com_content }</div>
+						<!-- 내가 작성한 글만 답변채택 가능 -->
+						<c:if test="${user_id eq board.user_id }">
+							<!-- 답변대기->답변 채택하기 -->
+							<c:if test="${board.b_success ne '채택완료' }">
+								<div style="float: right; margin-right: 350px;">
+								<a href="<%=context %>/qnaChoose.do?com_num=${comment.com_num}&b_num=${b_num}">채택하기</a></div>
+							</c:if>
+							
+							<!-- 채택완료 -->
+							<c:if test="${board.b_success eq '채택완료'}">
+								<c:if test="${comment.com_choose eq 'Y' }">
+										<div style="float: right; margin-right: 350px;">
+										<img src="<%=context %>/sh_images/bookmark.png" width="40" height="40"> </div>		
+								</c:if>
+							
+							</c:if>
+						</c:if>
+
+	
+						
+						
 					<div style= "clear:both;"><hr width="1100px"></div>
+						
 			</div>				
 			</c:forEach>
 		</div>
 
 
 
-				</div>
+				
 			
 
 	
-
+	<c:out value="${com_num }"></c:out>
 	<div style="margin-top: 200px;"></div>
 	<%@ include file="footer.jsp"%>
 </body>
