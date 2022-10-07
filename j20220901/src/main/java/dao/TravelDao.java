@@ -607,7 +607,7 @@ public class TravelDao {
 				travel.setUser_id		(rs.getString	("user_id"));
 				travel.setT_img			(rs.getString	("t_img"));
 				travel.setT_title		(rs.getString	("t_title"));
-				travel.setT_content		(rs.getString	("t_content"));
+				travel.setT_content		(rs.getString	("t_content").replace("<br>","\r\n"));
 				travel.setT_gubun		(rs.getString	("t_gubun"));
 				travel.setT_date		(rs.getString	("t_date"));
 				travel.setT_person		(rs.getInt		("t_person"));
