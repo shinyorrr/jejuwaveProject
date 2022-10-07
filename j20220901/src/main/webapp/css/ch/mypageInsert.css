@@ -33,11 +33,6 @@
 	height: 40px;
 	width: 100%;
 	border: 1px solid rgba(153,153,153,0.2);
-	font-family: 'NotoSansKR'
-}
-input:focus {
-	border-color: rgb(255,53,0);
-	outline: lime;
 }
 .submit{
 	text-align: center;
@@ -65,12 +60,17 @@ input:focus {
 	border-radius: 70%;
 	overflow: hidden;
 }
-#target_img::after {
-	content: url("../../images/image-outline.svg");
-}
 #user_info{
 	height: 180px;
 }
 #user_email{
 	border: 1px solid rgba(153,153,153,0.2);
+}
+input:focus {
+	border-color: rgb(255,53,0);
+	outline: lime;
+}
+textarea:focus {
+	border-color: rgb(255,53,0);
+	outline: lime;
 }
