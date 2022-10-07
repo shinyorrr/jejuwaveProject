@@ -199,7 +199,7 @@ public class Qna_BoardDao {
 		    	  hash.add(3, null);
 		      }
 		      
-		      if(hash.size()==0) {
+		      if(hash.size()==1) {
 		    	  hash.add(1,null);
 		    	  hash.add(2,null);
 		    	  hash.add(3,null);
@@ -268,8 +268,26 @@ public class Qna_BoardDao {
 		String sql = "update qna_board set b_title=?,b_content=?, b_theme=? where b_num=?";
 		String sql2 = "update qna_hash set l_hash1=?, l_hash2=?, l_hash3=? where b_num=?";
 		//해시태그 받아서 쪼개기
-		String[] hash = hashString.split("#");
-		
+		String[] hasharray = hashString.split("#");
+		   //배열을 list로 변환. add해야하기 때문 (aslist만 하면 add함수 쓸수없음)
+	      List<String> hash = new ArrayList<String>(Arrays.asList(hasharray));
+	      
+	      //해시태그 3개 미만 입력했을때 빈칸 null로 채우기
+	      if(hash.size()==1) {
+	    	  hash.add(1,null);
+	    	  hash.add(2,null);
+	    	  hash.add(3,null);
+	      }
+	      if(hash.size()==2) {
+	    	  hash.add(2, null);
+	    	  hash.add(3, null);
+	    	  
+	      }
+	      if(hash.size()==3) {
+	    	  hash.add(3, null);
+	      }
+	      
+
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -282,9 +300,9 @@ public class Qna_BoardDao {
 			pstmt.close();
 			
 			pstmt = conn.prepareStatement(sql2);
-			pstmt.setString(1, hash[1]);
-			pstmt.setString(2, hash[2]);
-			pstmt.setString(3, hash[3]);
+			pstmt.setString(1, hash.get(1));
+			pstmt.setString(2, hash.get(2));
+			pstmt.setString(3, hash.get(3));
 			pstmt.setInt(4, board.getB_num());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

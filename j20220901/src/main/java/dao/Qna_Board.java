@@ -13,9 +13,15 @@ public class Qna_Board extends Qna_Hash {             //현지수정
 	private String b_success;
 	private String b_theme;
 	private String fn_user_img;
+	private int com_cnt;
 	
 	
-	
+	public int getCom_cnt() {
+		return com_cnt;
+	}
+	public void setCom_cnt(int com_cnt) {
+		this.com_cnt = com_cnt;
+	}
 	public String getFn_user_img() {
 		return fn_user_img;
 	}
