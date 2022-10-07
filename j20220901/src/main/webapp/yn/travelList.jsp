@@ -7,7 +7,7 @@
 <%
 String context = request.getContextPath();
 %>
-<c:import url="../header.jsp"></c:import>
+<%-- <c:import url="../header.jsp"></c:import> --%>
 <c:import url="${context}/header.jsp"></c:import>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">
 

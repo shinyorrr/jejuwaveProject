@@ -195,9 +195,16 @@ public class Qna_BoardDao {
 		    	  hash.add(3, null);
 		    	  
 		      }
-		      else if(hash.size()==3) {
+		      if(hash.size()==3) {
 		    	  hash.add(3, null);
 		      }
+		      
+		      if(hash.size()==0) {
+		    	  hash.add(1,null);
+		    	  hash.add(2,null);
+		    	  hash.add(3,null);
+		      }
+		      
 
 		      String sql1 = "select nvl(max(b_num),0) from qna_board";
 		      String sql = "insert into qna_board (b_num,user_id,b_date,b_title,b_content,b_success,b_theme) values(?,?,sysdate,?,?,?,?)";
