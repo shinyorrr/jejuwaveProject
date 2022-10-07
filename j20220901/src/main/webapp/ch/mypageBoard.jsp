@@ -19,6 +19,29 @@
 		width: 100%;
 	}
 </style>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.button_delete').click(function(){
+			var t_num = document.getElementById('b_num');
+			var ans = confirm("삭제를 하시겠습니까?");
+			if(!ans) return false;
+			
+			$.ajax({
+				url 	: 'mypageQnaDelete.do',
+				dataType: 'text',
+				success : function(data){
+					location.reload();
+				},
+				error 	: function(data){
+					alert("댓글이 삭제되지 않았습니다.")
+				}
+				
+			});
+		});
+	});
+
+</script>
 </head>
 <body>
 
@@ -79,6 +102,7 @@
 						<c:forEach var="board" items="${list }">
 							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
 								<td colspan="3">
+								<input type = "text" id = "b_num" value="${board.b_num }" hidden="true">
 									<div class = "t_title">
 										${board.b_title}
 									</div>
@@ -103,8 +127,8 @@
 							</tr>
 							<tr>
 								<td>
-									<button  class = "button_update" onclick="location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
-									<button class = "button_delete">삭제</button>
+									<button  class = "button_update" onclick = "location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
+									<button  class = "button_delete" onclick = "location.href = '<%=context%>/mypageQnaDelete.do?b_num=${board.b_num }'">삭제</button>
 								</td>
 								<td colspan="3">
 									<div class = "b_recnt">

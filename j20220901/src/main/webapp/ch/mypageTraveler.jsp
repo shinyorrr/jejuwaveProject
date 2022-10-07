@@ -20,7 +20,7 @@
 		width: 100%;
 	}
 </style>
-<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript" src = "v"></script>
 <script type="text/javascript">
 function deleteMsg(){
 		var t_num = document.getElementById('t_num').value;

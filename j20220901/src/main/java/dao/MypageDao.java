@@ -540,6 +540,27 @@ public class MypageDao {
 		
 		return result;
 	}
+	public int deleteboard(String b_num) {
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete qna_board where b_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b_num);
+			result = pstmt.executeUpdate();
+			
+			if(result != 0 ) System.out.println("deleteboard ---> 성공");
+			else System.out.println("deleteboard ---> 삭제실패");
+		} catch (Exception e) {
+			System.out.println("deleteboard error ---> " + e.getMessage());
+		}
+	
+		return result;
+	}
 	
 	
 }
