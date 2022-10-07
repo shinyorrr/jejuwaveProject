@@ -9,7 +9,7 @@ String context = request.getContextPath();
 %>
 
 
-<c:import url="${context}/sh/header.jsp"></c:import>
+<c:import url="${context}/header.jsp"></c:import>
 <meta charset="UTF-8">
 <title>게시글 수정</title>
 <link
