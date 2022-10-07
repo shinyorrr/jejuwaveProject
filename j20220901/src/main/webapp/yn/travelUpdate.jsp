@@ -99,7 +99,7 @@ String context = request.getContextPath();
 			</div>
 					
 			<div class="bg-light mb-4 p-0 rounded selectCover" style="height:220px;">
-				<img id="cover" src="yn_images/upload/${travelContent.t_img}" style="width:100%;height:220px; object-fit:cover; border-radius:4px;">
+				<img id="cover" src="${travelContent.t_img}" style="width:100%;height:220px; object-fit:cover; border-radius:4px;">
 			</div>
 					
 					
