@@ -42,7 +42,6 @@
 			      <th scope="col">아이디</th>
 			      <th scope="col">테마</th>
 			      <th scope="col">모집인원</th>
-				  <th scope="col">댓글수</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col">삭제</th>
 			    </tr>
@@ -74,7 +73,6 @@
 								${travel.t_person= ""}
 							</c:if>
 							</td>
-			  				<td width="100">0</td>
 			  				<td width="100">
 			  				<fmt:parseDate value="${travel.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
 			  				<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
