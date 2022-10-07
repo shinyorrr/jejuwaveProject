@@ -62,7 +62,7 @@
 		  	<tr>
 	  		<td colspan="7">
 	  			<form action="<%=context%>/adMemberSelect.do" name="frm" method="post" onsubmit="return searchCheck()">
-	  			<select name="keyField" class="form-select form-select-sm" aria-label=".form-select-sm example">
+	  			<select name="keyField" id="form-select" class="form-select form-select-sm" aria-label=".form-select-sm example">
 				  <option value="0">---선택---</option>
 				  <option value="user_id">아이디</option>
 				  <option value="user_name">이름</option>
