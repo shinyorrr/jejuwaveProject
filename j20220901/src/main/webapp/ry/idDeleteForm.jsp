@@ -9,25 +9,30 @@
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="${context }header.jsp"/>
 <style type="text/css">
  	caption {
 	font-size: 24px;
 	}
-.joinform{
+.form-box{
     box-shadow: 10px 10px 10px 10px rgba(89,89,89,0.39);
     padding:70px 45px 45px 45px;
     display : inline-block;
+    margin: auto;
+    width : 450px;
+    height: 500px;
+    display : inline-block;
+    text-align: center;
 }
 	pre {
 	font-size: 8pt;
 	font-color: #gray;
 }
 </style>
-<c:import url="${context }/header.jsp"/>
 </head>
 <body>
 <tbody>
-		<div class="joinform" style="margin-top:200px; margin-left: 30%; ">
+		<div class="form-box" style="margin-top:200px; margin-left: 35%; margin-bottom: 50px;">
 	<h2>탈퇴하려면 암호를 입력해주세요</h2><br>
 	<form action="<%=context %>/idDeletePro.do">
 		<input type="hidden" name="pageNum" value="${pageNum }">

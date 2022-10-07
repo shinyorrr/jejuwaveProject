@@ -51,7 +51,7 @@
 			  		<c:forEach var="qna" items="${list}">
 			  			<tr>
 			  				<th scope="row"  width="50">${startNum}</th>
-			  				<td width="500">
+			  				<td width="500" id="content">
 			  				<a href="adQnaComment.do?b_num=${qna.b_num}&pageNum=${currentPage}">${qna.b_title}</a>
 			  				</td>
 			  				<td width="100">${qna.user_id}</td>

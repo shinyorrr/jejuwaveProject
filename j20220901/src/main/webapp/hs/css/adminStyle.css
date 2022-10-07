@@ -121,3 +121,26 @@ table {
 .pagination li a{
 	color: black;
 }
+
+/* 회원커뮤니티, qna게시판 */
+#content {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 140px;
+}
+
+#content:hover {
+	overflow: visible;
+	white-space: inherit;
+	text-overflow: inherit;
+	max-width: none; 
+}
+
+/* 검색창 */
+
+#form-select {
+	float:left;
+	width: 100px;
+	margin-right: 10px;
+}
