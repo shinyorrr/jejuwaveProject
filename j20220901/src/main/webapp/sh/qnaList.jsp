@@ -64,7 +64,7 @@ String context = request.getContextPath();
 							<span class="content1">${board.b_content }</span></a></th>
 					<tr class="last">
 						<td></td>
-						<td><img src="<%=context%>/sh_images/user_icon04.png"
+						<td><img src="<%=context%>/${board.fn_user_img}"
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 							width="30" height="30">${board.user_id}</td>
 			<!-- 해시태그 -->

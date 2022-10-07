@@ -1,5 +1,5 @@
 @charset "UTF-8";
-                            /*    -----------------------------현지수정 ---------------------------------- */
+                           
 .mainTable {
 	width: 1200px;
  	margin: 0px auto;
@@ -11,7 +11,8 @@
 .last {
 	border-bottom: 1px solid #D5D5D5;
     text-align: left;
-   
+    font-weight: 400;
+ 
 }
 
 .hash {
@@ -23,7 +24,7 @@
 }
 
 .table, td{
-	padding: 30px 0px;
+	padding: 20px 0px;
 
 }
 .table, th{
@@ -31,11 +32,6 @@
 
 	vertical-align: super;
 }	
-
-	
-
-
-
 
 .content1{
 	padding-left: 30px;
@@ -57,5 +53,6 @@
   -webkit-box-orient: vertical;
 	
 }
+
 
 
