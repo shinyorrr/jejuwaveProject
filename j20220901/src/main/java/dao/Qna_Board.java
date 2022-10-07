@@ -12,8 +12,16 @@ public class Qna_Board extends Qna_Hash {             //현지수정
 	private String b_content;
 	private String b_success;
 	private String b_theme;
+	private String fn_user_img;
 	
 	
+	
+	public String getFn_user_img() {
+		return fn_user_img;
+	}
+	public void setFn_user_img(String fn_user_img) {
+		this.fn_user_img = fn_user_img;
+	}
 	public int getB_num() {
 		return b_num;
 	}
