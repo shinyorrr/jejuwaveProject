@@ -128,8 +128,8 @@
 							</tr>
 							<tr>
 								<td>
-									<button  class = "button_update" onclick = "location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
-									<button  class = "button_delete" onclick = "location.href = '<%=context%>/mypageQnaDelete.do?b_num=${board.b_num }'">삭제</button>
+									<button type="button" class = "button_update" onclick = "location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
+									<button type="button" class = "button_delete" onclick = "location.href = '<%=context%>/mypageQnaDelete.do?b_num=${board.b_num }'">삭제</button>
 								</td>
 								<td colspan="3">
 									<div class = "b_recnt">
@@ -141,7 +141,7 @@
 						</table>
 					</c:forEach> 
 				</c:if>
-				<input type = "submit" value="일괄삭제">
+				<input type = "submit" class = "allDel" value="일괄삭제">
 				</form>
 				</div>
 				

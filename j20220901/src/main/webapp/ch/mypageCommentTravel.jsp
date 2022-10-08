@@ -173,7 +173,7 @@ $(function(){
 								<tr>
 									<td>
 										<div class = "button_updateform">
-										<button class = "button_delete" onclick="location.href='mypageCommentTravelDelete.do?t_num=${board.t_num}';">삭제</button>
+										<button type="button" class = "button_delete" onclick="location.href='mypageCommentTravelDelete.do?t_num=${board.t_num}';">삭제</button>
 										</div>
 									</td>
 								</tr>
@@ -181,7 +181,7 @@ $(function(){
 								<c:set var="startNum" value="${startNum - 1 }" />
 							</c:forEach> 
 						</c:if>
-						<input type="submit" value="일괄삭제">
+						<input type="submit" class = "allDel" value="일괄삭제">
 				</form>	
 						
 						

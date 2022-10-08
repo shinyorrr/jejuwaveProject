@@ -104,3 +104,11 @@ table{
 	background-color: rgba(248,248,248.0.5);
 	border-bottom: 1px dashed rgba(204,204,204);
 }
+.allDel{
+	width: 76px;
+    height: 32px;
+    background-color: rgba(255,053,0,0.5);
+    border: 0;
+    color: white;
+    margin-top: 10px;
+}

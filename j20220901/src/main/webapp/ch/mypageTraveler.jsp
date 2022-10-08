@@ -102,7 +102,7 @@ function deleteMsg(){
 				
 				
 				<!-- 일괄삭제 기능 구현 -->
-				<form action="<%=context%>/mypageAlldelete.do" method="get">
+				<form action="<%=context%>/mypageAlldelete.do" method="post" >
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
@@ -132,8 +132,8 @@ function deleteMsg(){
 												${fn:substring(t_date,0,11)}
 											</td>
 										</tr>
-										<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
-											<td colspan="3" width = 2000>
+										<tr>
+											<td style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';" colspan="3" width = 2000>
 												<div class = "t_content">
 													${board.t_content}
 												</div>
@@ -142,10 +142,10 @@ function deleteMsg(){
 										<tr>
 											<td colspan="2">
 												<div class = "button_updateform">
-													<button class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'">수정</button>
+													<button type="button" class = "button_update" onclick="location.href = '<%=context%>/travelUpdate.do?t_num=${board.t_num }'">수정</button>
 												</div>
 												<div>
-												<button id = "button_delete" class = "button_delete" onclick="deleteMsg()">삭제</button>
+												<button type="button" id = "button_delete" class = "button_delete" onclick="deleteMsg()">삭제</button>
 											<%-- 	<button class = "button_delete" onclick="location.href = '<%=context%>/MypageTraveldelete.do?t_num=${board.t_num }'">삭제</button> --%>
 												</div>
 											</td>
@@ -159,7 +159,7 @@ function deleteMsg(){
 							</table>
 						</c:forEach> 
 					</c:if>
-					<input type="submit" value = "일괄삭제">
+					<input type="submit" class = "allDel" value = "일괄삭제">
 				</form>
 				
 					

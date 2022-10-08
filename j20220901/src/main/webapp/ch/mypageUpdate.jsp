@@ -233,7 +233,7 @@ function fn_submit(){
 								<input type="submit" id = "submit" value = "수정완료">
 							</div>
 					</form>	
-							<button class="pw_search" onclick = "passwordUpdate()">비밀번호수정</button>
+				<button class="pw_search" onclick = "passwordUpdate()">비밀번호수정</button>
 					<form action="<%=context %>/pwUpdate.do" name = "pw" method="post">
 						<input type="password" id = "oldPassword" name = "pass1" placeholder = "현재 비밀번호를 입력하세요"><br>
 						<input type="password" id = "newPassword1" name = "pass2" placeholder="변경한 비밀번호를 입력하세요">

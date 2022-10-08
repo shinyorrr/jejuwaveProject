@@ -148,7 +148,7 @@ $(function(){
 							<tr>
 								<td>
 									<div class = "button_updateform">
-									<button class = "button_delete" onclick="location.href='mypageCommentDelete.do?b_num=${board.b_num}&com_num=${board.com_num }';">삭제</button>
+									<button type="button" class = "button_delete" onclick="location.href='mypageCommentDelete.do?b_num=${board.b_num}&com_num=${board.com_num }';">삭제</button>
 									</div>
 								</td>
 							</tr>
