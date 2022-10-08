@@ -425,14 +425,14 @@ public class MypageDao {
 	}
 	public List<Mypage> commentList(String user_id, int startRow, int endRow) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
-		String sql = "select *\r\n"
-				+ " from(\r\n"
-				+ "    select rownum r, a.*\r\n"
-				+ "    from (select *\r\n"
-				+ "          from qna_comment\r\n"
-				+ "          where user_id = ?\r\n"
-				+ "          order by com_date desc\r\n"
-				+ "          ) a )\r\n"
+		String sql = "select * "
+				+ " from( "
+				+ "    select rownum r, a.* "
+				+ "    from (select * "
+				+ "          from qna_comment "
+				+ "          where user_id = ? "
+				+ "          order by com_date desc "
+				+ "          ) a ) "
 				+ " where r BETWEEN ? and ?";
 		System.out.println("commentList sql : " + sql);
 		Connection conn = null;
@@ -471,17 +471,17 @@ public class MypageDao {
 	}
 	public List<Mypage> commentList2(String user_id, int startRow, int endRow) {
 		List<Mypage> list = new ArrayList<Mypage>();
-		String sql = "select *\r\n"
-				+ "from(\r\n"
-				+ "    select rownum r, a.*\r\n"
-				+ "    from (select *\r\n"
-				+ "          from travel_board\r\n"
-				+ "          where user_id = ?\r\n"
-				+ "          and t_relevel != 0\r\n"
-				+ "          order by t_date desc\r\n"
-				+ "          ) a )\r\n"
+		String sql = "select * "
+				+ "from( "
+				+ "    select rownum r, a.* "
+				+ "    from (select "
+				+ "          from travel_board "
+				+ "          where user_id = ? "
+				+ "          and t_relevel != 0 "
+				+ "          order by t_date desc "
+				+ "          ) a ) "
 				+ "where r BETWEEN ? and ?";
-		System.out.println("commentList sql : " + sql);
+		System.out.println("commentList2 sql2 : " + sql);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
