@@ -1,6 +1,7 @@
 package service.tw;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,8 +21,23 @@ public class mainAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("mainAction Service start...");
+		request.setCharacterEncoding("utf-8");
 		Qna_BoardDao bd = Qna_BoardDao.getInstance();
 		TravelDao td = TravelDao.getInstance();
+		
+		// 검색 기능
+		/*
+		 * String column = request.getParameter("column"); String search =
+		 * request.getParameter("search"); String isSearch = "n";
+		 * 
+		 * if( column != null || search != null || !column.equals("")||
+		 * !search.equals("")) {isSearch = "y";} HashMap<String, String> map = new
+		 * HashMap<String, String>(); map.put("column", column); map.put("Search",
+		 * search); map.put("isSearch", isSearch); Travel travel = new Travel();
+		 * List<Travel> list = td.search(map);
+		 */
+		
+		
 		
 		// QnA 게시판
 		try {
@@ -88,6 +104,15 @@ public class mainAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		
+		
+		// 검색 기능 (동행자 게시판)
+		try {
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		
 		return "main.jsp";
 	}

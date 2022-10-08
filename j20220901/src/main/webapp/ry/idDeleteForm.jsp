@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html> 
 <head>
@@ -8,15 +9,48 @@
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<c:import url="${context }header.jsp"/>
+<style type="text/css">
+ 	caption {
+	font-size: 24px;
+	}
+.form-box{
+    box-shadow: 10px 10px 10px 10px rgba(89,89,89,0.39);
+    padding:70px 45px 45px 45px;
+    display : inline-block;
+    margin: auto;
+    width : 450px;
+    height: 500px;
+    display : inline-block;
+    text-align: center;
+}
+	pre {
+	font-size: 8pt;
+	font-color: #gray;
+}
+</style>
 </head>
 <body>
-	<h2>탈퇴하려면 암호를 입력해주세요</h2>
+<tbody>
+		<div class="form-box" style="margin-top:200px; margin-left: 35%; margin-bottom: 50px;">
+	<h2>탈퇴하려면 암호를 입력해주세요</h2><br>
 	<form action="<%=context %>/idDeletePro.do">
 		<input type="hidden" name="pageNum" value="${pageNum }">
 		<input type="hidden" name="user_id" value="${user_id }">
-		암호 <input type="text" name="user_pw"><p>
+		<div style="text-align: center;">
+		암호 <input type="password" name="user_pw" id="user_pw"><br><br>
+		</div>
+		<div style="text-align: center;">
 		<input type="submit" value="확인">
-		<input type="reset"  value="취소" onclick="window.close()">
+		<input type="reset"  value="취소" onclick="location.href='mypageUpdate.do'">
+		</div>
 	</form>
+	</div>
+</tbody>
+<footer class="py-5 bg-dark" style="margin-top: 100px;">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Your	Website 2022</p>
+		</div>
+	</footer>	
 </body>
 </html>

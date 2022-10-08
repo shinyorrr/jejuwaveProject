@@ -51,10 +51,10 @@ String context = request.getContextPath();
 					<th style="vertical-align: super;">
 					<!-- 채택완료/답변대기 -->
 						<c:if test="${board.b_success eq '채택완료' }">
-							<span style="color: red;">${board.b_success }</span>
+							<span >${board.b_success }</span>
 						</c:if> 
 						<c:if test="${board.b_success ne '채택완료' }">
-							<span>${board.b_success }</span>
+							<span style="color: #FF3500;">${board.b_success }</span>
 						</c:if></th>
 					<!-- 제목 -->
 					<th class=" title2">
@@ -64,7 +64,7 @@ String context = request.getContextPath();
 							<span class="content1">${board.b_content }</span></a></th>
 					<tr class="last">
 						<td></td>
-						<td><img src="<%=context%>/sh_images/user_icon04.png"
+						<td><img src="<%=context%>/${board.fn_user_img}"
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 							width="30" height="30">${board.user_id}</td>
 			<!-- 해시태그 -->

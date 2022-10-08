@@ -81,7 +81,7 @@
 		</div>
 		<div class="mybtn">
 			<input class="btn btn-primary" type="submit" value="수정완료">
-			<input class="btn btn-primary" type="reset" value="취소">
+			<input class="btn btn-primary" type="button" value="취소" onclick="location.href='<%=context%>/adMemList.do?pageNum=${pageNum}'">
 		</div>
 	  </form>
 	</article>

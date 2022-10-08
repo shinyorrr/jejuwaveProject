@@ -19,6 +19,26 @@
 		width: 100%;
 	}
 </style>
+<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript">
+	$(function(){
+		$('.button_delete').click(function(){
+			var b_num = document.getElementById('b_num');
+			var ans = confirm("삭제를 하시겠습니까?");
+			if(!ans) return false;
+			
+			$.ajax({
+				url 	: 'mypageQnaDelete.do?b_num=?'+b_num,
+				dataType: 'html',
+				success : function(data){
+					var e = $(data).find('.ajax');
+					$('.ajax').html(e)
+				},
+			});
+		});
+	});
+
+</script>
 </head>
 <body>
 
@@ -74,37 +94,40 @@
 			<!-- 각 화면이 달라지는 부분 -->
 			<div class="content_section">
 				<h2 class = "mypage_menu_h2">내 게시글</h2>
-					<table>
+					<div class = "ajax">
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
+						<table>
 							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
 								<td colspan="3">
+								<input type = "text" id = "b_num" value="${board.b_num }" hidden="true">
 									<div class = "t_title">
 										${board.b_title}
 									</div>
 								</td>
 								<td>
 									<div class = "dealstatus">
-									<c:if test="${board.b_success == 'Y'}">
+									<c:if test="${board.b_success eq 'Y'}">
 										답변완료
 									</c:if>
-									<c:if test="${board.b_success == 'N'}">
-										답변대기중
+									<c:if test="${board.b_success eq 'N'}">
+										<sqan style = "color : red">답변대기중</sqan>	
 									</c:if>
 									</div>
 								</td>
 							</tr>
 							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
-								<td colspan="4" style = "height: 40px;">
+								<td colspan="3" style = "height: 40px;">
 									<div class = "t_content">
 									${board.b_content }
 									</div>
 								</td>
+								<td style="font-size: small;float: right;padding: 5px;">${board.b_date }</td>
 							</tr>
 							<tr>
 								<td>
-									<button  class = "button_update" onclick="location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
-									<button class = "button_delete">삭제</button>
+									<button  class = "button_update" onclick = "location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
+									<button  class = "button_delete" onclick = "location.href = '<%=context%>/mypageQnaDelete.do?b_num=${board.b_num }'">삭제</button>
 								</td>
 								<td colspan="3">
 									<div class = "b_recnt">
@@ -112,13 +135,15 @@
 									</div>
 								</td>
 							</tr>
-							<c:set var="startNum" value="${startNum - 1 }" />
-						</c:forEach> 
-					</c:if>
-				</table>
+						<c:set var="startNum" value="${startNum - 1 }" />
+						</table>
+					</c:forEach> 
+				</c:if>
+				</div>
+				
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageBoard.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -129,7 +154,7 @@
 						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageBoard.do?pageNum=${i }'" 
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -140,7 +165,7 @@
 						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageBoard.do=${startPage+1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;

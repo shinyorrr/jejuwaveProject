@@ -6,22 +6,25 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.Mypage;
 import dao.MypageDao;
 import service.CommandProcess;
 
-public class MypageTravelDeleteAction implements CommandProcess {
+public class MypageQnaDeleteAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("MypageTravelDeleteAction 시작!!!");
-		int t_num = Integer.parseInt(request.getParameter("t_num"));
+		String b_num = request.getParameter("b_num");
 		
 		MypageDao mypageDao = MypageDao.getInstance();
 		
-		int result = mypageDao.deleteTraveler(t_num);
+		int result = mypageDao.deleteboard(b_num);
 		
-		return "ch/mypageTravelerDelte.jsp";
+		request.setAttribute("result", result);
+		
+		return "ch/mypageQnadelete.jsp";
+		
 		
 	}
 

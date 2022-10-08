@@ -15,7 +15,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR+Ligth:wght@300;900&display=swap" rel="stylesheet">
 <link rel = "stylesheet" href ="<%=context%>/css/ch/mypageSetup.css?after">
-<link rel = "stylesheet" href ="<%=context%>/css/ch/mypageComment.css?after">
+<link rel = "stylesheet" href ="<%=context%>/css/ch/mypageCommentTravel.css?after">
 <style type="text/css">
 	table {
 		width: 100%;
@@ -23,6 +23,7 @@
 </style>
 <script type="text/javascript" src = "<%=context%>/js/jquery.js"></script>
 <script type="text/javascript">
+
 $(function(){
 	$('#myComment_Travel').click(function(){
 		
@@ -54,6 +55,7 @@ $(function(){
 	
 });
 
+
 // 버튼 클릭시 색 변경
 $(function(){
 	$('.myComment_button').click(function(){
@@ -70,7 +72,6 @@ $(function(){
 
 </head>
 <body>
-
 <main id = "content" style="background-color: rgb(248,248,248);">
 	<div class = "mypage_set">
 		<div class="Mypage_Main">
@@ -130,55 +131,55 @@ $(function(){
 					<h2 class = "mypage_CommentMain">동행자게시판 내 코멘트</h2>
 				</button>
 				<div class = "change_body" id = "change_body">
-					<c:if test="${ totCnt > 0}">
-						<c:forEach var="board" items="${list }">
-						<table>
-						<c:if test="${board.com_content != null }">
-							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
-								<td colspan="3">
-									<div class = "c_content">
-									${board.com_content}								
-									</div>
-								</td>
-								<td class = "c_date">${board.com_date }</td>
-							</tr>
-							<tr>
-								<td>
-									<div class = "button_updateform">
-									<button class = "button_delete">삭제</button>
-									</div>
-								</td>
-							</tr>
+			<c:if test="${ totCnt > 0}">
+							<c:forEach var="board" items="${list2 }">
+							<table>
+							<c:if test="${board.com_content != null }">
+								<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
+									<td colspan="3">
+										<div class = "c_content">
+										${board.com_content}								
+										</div>
+									</td>
+									<td class = "c_date">${board.com_date }</td>
+								</tr>
+								<tr>
+									<td>
+										<div class = "button_updateform">
+										<button class = "button_update" onclick = "location.href = 'Board.jsp'">수정</button>
+										<button class = "button_delete">삭제</button>
+										</div>
+									</td>
+								</tr>
+							</c:if>
+							<c:if test="${board.t_content != null }">
+								<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}';">
+									<td colspan="3">
+										<div class = "c_content">
+										${board.t_content}								
+										</div>
+									</td>
+									<td class = "c_date">
+										<c:set var = "t_date" value="${board.t_date }" />
+										${fn:substring(t_date,0,11)}
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<div class = "button_updateform">
+										<button class = "button_delete">삭제</button>
+										</div>
+									</td>
+								</tr>
+							</c:if>
+							</table>
+								<c:set var="startNum" value="${startNum - 1 }" />
+							</c:forEach> 
 						</c:if>
-						<c:if test="${board.t_content != null }">
-							<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}';">
-								<td colspan="3">
-									<div class = "c_content">
-									${board.t_content}								
-									</div>
-								</td>
-								<td class = "c_date">
-									<c:set var = "t_date" value="${board.t_date }" />
-									${fn:substring(t_date,0,11)}
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class = "button_updateform">
-									<button class = "button_update" location.href = "Board.jsp">수정</button>
-									<button class = "button_delete">삭제</button>
-									</div>
-								</td>
-							</tr>
-						</c:if>
-						</table>
-							<c:set var="startNum" value="${startNum - 1 }" />
-						</c:forEach> 
-					</c:if>
-					
+						
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do?pageNum=${startPage-1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommentTravel.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -189,7 +190,7 @@ $(function(){
 						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do?pageNum=${i }'" 
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommentTravel.do?pageNum=${i }'" 
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -200,7 +201,7 @@ $(function(){
 						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do=${startPage+1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommentTravel.do=${startPage+1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -210,17 +211,11 @@ $(function(){
 					    font: bold 12px tahoma;
 						">[다음]</button>
 				</c:if>
-				</div>
+							</div>
 				</div>
 			</div>
 		</div>
 		</div>
 </main>
-<footer class="py-5 bg-dark" style="top: 180%;">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Your
-				Website 2022</p>
-		</div>
-</footer>
 </body>
 </html>

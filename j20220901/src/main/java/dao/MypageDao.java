@@ -41,7 +41,7 @@ public class MypageDao {
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "select count(*)from travel_board where user_id = ?";
+		String sql = "select count(*)from travel_board where user_id = ? and t_relevel = 0 ";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -301,20 +301,44 @@ public class MypageDao {
 		
 		return list;
 	}
-	public int getTotalCommentCnt(String user_id) throws SQLException {
+	public int getTotalQnaCommentCnt(String user_id) throws SQLException {
 		int max = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select (select count(*) from qna_comment where user_id = ?) + "
-				+ "       (select count(*) from travel_board where user_id = ? and t_restep != 0) "
-				+ " from dual";
-		System.out.println("getTotalCommentCnt sql : " + sql);
+		String sql = "select count(*) from qna_comment where user_id = ?";
+		System.out.println("getTotalQnaCommentCnt sql : " + sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
-			pstmt.setString(2, user_id);
+			rs = pstmt.executeQuery();
+			System.out.println("getTotalCommentCnt rs 실행되는지=> " + rs);
+			if(rs.next()) {
+				max = rs.getInt(1);
+				System.out.println("getTotalCommentCnt : 실행완료" + max);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}  finally {
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		return max;
+	}
+	public int getTotalTravelCommentCnt(String user_id) throws SQLException {
+		int max = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from travel_board where user_id = ? and t_restep != 0 ";
+
+		System.out.println("getTotalTravelCommentCnt sql : " + sql);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			System.out.println("getTotalCommentCnt rs 실행되는지=> " + rs);
 			if(rs.next()) {
@@ -368,6 +392,7 @@ public class MypageDao {
 				+ "            and c.user_id = ? "
 				+ "            ) a) "
 				+ "where rn between ? and ? ";
+		System.out.println(sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -539,6 +564,44 @@ public class MypageDao {
 		
 		
 		return result;
+	}
+	public int deleteboard(String b_num) {
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete qna_board where b_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b_num);
+			result = pstmt.executeUpdate();
+			
+			if(result != 0 ) System.out.println("deleteboard ---> 성공");
+			else System.out.println("deleteboard ---> 삭제실패");
+		} catch (Exception e) {
+			System.out.println("deleteboard error ---> " + e.getMessage());
+		}
+	
+		return result;
+	}
+	public int deleteCommunity(String c_num) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete community where c_num = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao deleteCommunity 오류" +  e.getMessage());
+		}
+		return result;
+		
 	}
 	
 	

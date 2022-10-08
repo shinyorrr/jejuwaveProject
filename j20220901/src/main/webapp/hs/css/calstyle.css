@@ -6,7 +6,9 @@
 }
 
 .calendar_header {
-    display: inline-block;
+    display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .ym-wrapper {
@@ -86,7 +88,20 @@
 
 .today {
     position: relative;
-    background-color: #FF3500;
+}
+
+.today::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #ff3500;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  content: '';
 }
 
 .selected{

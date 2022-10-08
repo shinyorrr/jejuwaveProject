@@ -19,8 +19,6 @@ public class MypageCommentAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		 // 세션값 받아오기
-	     List<Mypage> list1 = new ArrayList<Mypage>();
-	     List<Mypage> list2 = new ArrayList<Mypage>();
 	     List<Mypage> list = new ArrayList<Mypage>();
 		 HttpSession session = request.getSession();
 		 String user_id = (String) session.getAttribute("user_id");
@@ -28,7 +26,7 @@ public class MypageCommentAction implements CommandProcess {
 		 MypageDao my = MypageDao.getInstance();
 		 
 		 try {
-			 int totCnt = my.getTotalCommentCnt(user_id);
+			 int totCnt = my.getTotalQnaCommentCnt(user_id);
 			 String pageNum = request.getParameter("pageNum"); 
 			 if(pageNum==null || pageNum.equals("") || pageNum.equals("0")) {pageNum = "1";}
 			 int currentPage = Integer.parseInt(pageNum);
@@ -37,14 +35,7 @@ public class MypageCommentAction implements CommandProcess {
 			 int endRow = startRow + pageSize -1;
 			 int startNum = totCnt - startRow + 1;
 			 System.out.println(startRow); // 작성자가 쓴 글 조회
-			 list1 =my.commentList(user_id,startRow,endRow);
-			 list2 =my.commentList2(user_id,startRow,endRow);
-			 for(int i = 0 ; i < list1.size() ; i ++) {
-				 list.add(list1.get(i));
-			 }
-			 for(int i = 0 ; i < list2.size() ; i ++) {
-				 list.add(list2.get(i));
-			 }
+			 list =my.commentList(user_id,startRow,endRow);
 			 
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);
 		 

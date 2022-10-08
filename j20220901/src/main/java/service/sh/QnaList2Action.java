@@ -56,6 +56,7 @@ public class QnaList2Action implements CommandProcess {
 			request.setAttribute("pageCnt", pageCnt);
 			request.setAttribute("startPage", startPage);
 			request.setAttribute("endPage", endPage);
+		
 
 		} catch (Exception e) {
 			System.out.println("Qna ListAction e.getMessage()->" + e.getMessage());

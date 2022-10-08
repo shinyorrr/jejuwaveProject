@@ -58,7 +58,6 @@ public class QnaWriteCheckAction implements CommandProcess {
 			//로그인한 아이디 넘겨줌
 			request.setAttribute("user_id", user_id);
 			request.setAttribute("inum", inum);
-			
 
 			request.setAttribute("comment", comment);
 

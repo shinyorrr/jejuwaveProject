@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.naming.Context;
@@ -33,10 +34,65 @@ public class TravelDao {
 		return conn;
 	}
 	
+	public int getTotalCnt(Travel tvl) throws SQLException {
+		Connection conn = null;
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String addSql = "";
+		
+		/* 날짜조회 쿼리 추가 */
+		if(tvl.getT_start() != null && tvl.getT_start() != "") {
+			addSql += " and t_start >= '" + tvl.getT_start() + "'";
+		}
+		if(tvl.getT_end() != null && tvl.getT_end() != "") {
+			addSql += " and t_end <= '" + tvl.getT_end() + "'";
+		}
+		
+		/* 모집 진행중 쿼리 추가 */
+		if(tvl.getT_dealstatus() != null && tvl.getT_dealstatus() != "") {
+			addSql += " and t_dealstatus = '" + tvl.getT_dealstatus() + "'";
+		}
+		
+		/* 구분 쿼리 추가 */
+		//,'숙박','레저'
+		// and t_gubun in ('숙박','레저') >> in 또는
+		if(tvl.getT_gubun() != null && tvl.getT_gubun() != "") {
+			addSql += " and t_gubun in (" + tvl.getT_gubun().substring(1) + ")";
+		}
+		
+		/* 메인 검색 쿼리 추가 */
+		if(tvl.getT_title() != null && tvl.getT_title() != "") {
+			addSql += " and t_title like  '%" + tvl.getT_title() + "%'";
+		}
+		
+		String sql = "select count(*) from travel_board where t_relevel=0" + addSql;
+		int tot = 0;
+		
+		try {
+			conn = getConnection();
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			if(rs.next()) {
+				tot = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(conn != null)conn.close();
+			if(stmt != null)stmt.close();
+			if(rs != null)rs.close();
+		}
+		return tot;
+		
+	}
+	
 	public int getTotalCnt() throws SQLException {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
+		
+		
 		String sql = "select count(*) from travel_board where t_relevel=0";
 		int tot = 0;
 		
@@ -377,5 +433,163 @@ public class TravelDao {
 			if(rs != null) rs.close();
 		}
 		return result;
+	}
+	
+
+	public List<Travel> travelIng(int startRow, int endRow) throws SQLException {
+		List<Travel> list = new ArrayList<Travel>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql =   "select *"
+						+ "  from (select rownum r, a.*, reply_cnt(a.t_ref) reply_cnt, fn_user_img(a.user_id) as user_img"
+						+ "          from (select * "
+						+ "                  from travel_board where t_Relevel = 0 and t_dealstatus = 0 order by t_ref desc) a)"
+						+ " where r between ? and ?";
+		
+		
+		System.out.println("TravelDao  traveList startRow-->"+startRow);
+		System.out.println("TravelDao  traveList endRow-->"+endRow);
+		System.out.println("TravelDao  traveList sql-->"+sql);
+
+		
+		try {
+			conn  = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Travel travel = new Travel();
+				travel.setT_num			(rs.getInt		("t_num"));
+				travel.setUser_id		(rs.getString	("user_id"));
+				travel.setT_img			(rs.getString	("t_img"));
+				travel.setT_title		(rs.getString	("t_title"));
+				travel.setT_content		(rs.getString	("t_content"));
+				travel.setT_gubun		(rs.getString	("t_gubun"));
+				travel.setT_date		(rs.getString	("t_date"));
+				travel.setT_person		(rs.getInt		("t_person"));
+				travel.setT_start		(rs.getString	("t_start"));
+				travel.setT_end			(rs.getString	("t_end"));
+				travel.setT_dealstatus	(rs.getString	("t_dealstatus"));
+				travel.setT_ref			(rs.getInt		("t_ref"));
+				travel.setT_relevel		(rs.getInt		("t_relevel"));
+				travel.setT_restep		(rs.getInt		("t_restep"));
+				travel.setReply_cnt		(rs.getInt		("reply_cnt"));
+				travel.setUser_img		(rs.getString	("user_img"));
+				
+				System.out.println("TravelDao  traveList t_title-->"+rs.getString	("t_title"));
+				
+				
+				list.add(travel);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(conn  != null) conn.close();
+			if(pstmt != null) pstmt.close();
+			if(rs 	 != null) rs.close();
+		}
+		return list;
+	}
+
+																/* tvl.get */
+	public List<Travel> traveListSearch(int startRow, int endRow, Travel tvl) throws SQLException {
+		List<Travel> list = new ArrayList<Travel>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String addSql = "";
+		
+		/* 날짜조회 쿼리 추가 */
+		if(tvl.getT_start() != null && tvl.getT_start() != "") {
+			addSql += " and t_start >= '" + tvl.getT_start() + "'";
+		}
+		if(tvl.getT_end() != null && tvl.getT_end() != "") {
+			addSql += " and t_end <= '" + tvl.getT_end() + "'";
+		}
+		
+		/* 모집 진행중 쿼리 추가 */
+		if(tvl.getT_dealstatus() != null && tvl.getT_dealstatus() != "") {
+			addSql += " and t_dealstatus ='" + tvl.getT_dealstatus() + "'";
+		}
+		
+		/* 구분 쿼리 추가 */
+		//,'숙박','레저'
+		// and t_gubun in ('숙박','레저') >> in 또는
+		if(tvl.getT_gubun() != null && tvl.getT_gubun() != "") {
+			addSql += " and t_gubun in (" + tvl.getT_gubun().substring(1) + ")";
+		}
+		
+		/* 메인 검색 쿼리 추가 */
+		if(tvl.getT_title() != null && tvl.getT_title() != "") {
+			addSql += " and t_title like  '%" + tvl.getT_title() + "%'";
+		}
+		
+		
+		/* 기본 리스트 조회 */
+		String sql =   "select *"
+						+ "  from (select rownum r, a.*, reply_cnt(a.t_ref) as reply_cnt, fn_user_img(a.user_id) as user_img"
+						+ "          from (select * "
+						+ "                  from travel_board"
+						+ "				    where t_Relevel = 0 "
+						+ addSql
+						
+						+ " order by t_ref desc) a)"
+						+ " where r between ? and ?";
+		
+		
+		
+		
+
+		
+		System.out.println("TravelDao  traveList startRow-->"+startRow);
+		System.out.println("TravelDao  traveList endRow-->"+endRow);
+		System.out.println("TravelDao  traveList sql-->"+sql);
+
+		
+		try {
+			conn  = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Travel travel = new Travel();
+				travel.setT_num			(rs.getInt		("t_num"));
+				travel.setUser_id		(rs.getString	("user_id"));
+				travel.setT_img			(rs.getString	("t_img"));
+				travel.setT_title		(rs.getString	("t_title"));
+				travel.setT_content		(rs.getString	("t_content").replace("<br>","\r\n"));
+				travel.setT_gubun		(rs.getString	("t_gubun"));
+				travel.setT_date		(rs.getString	("t_date"));
+				travel.setT_person		(rs.getInt		("t_person"));
+				travel.setT_start		(rs.getString	("t_start"));
+				travel.setT_end			(rs.getString	("t_end"));
+				travel.setT_dealstatus	(rs.getString	("t_dealstatus"));
+				travel.setT_ref			(rs.getInt		("t_ref"));
+				travel.setT_relevel		(rs.getInt		("t_relevel"));
+				travel.setT_restep		(rs.getInt		("t_restep"));
+				travel.setReply_cnt		(rs.getInt		("reply_cnt"));
+				travel.setUser_img		(rs.getString	("user_img"));
+				
+				System.out.println("TravelDao  traveList t_title-->"+rs.getString	("t_title"));
+				
+				
+				list.add(travel);
+			}
+			
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(conn  != null) conn.close();
+			if(pstmt != null) pstmt.close();
+			if(rs 	 != null) rs.close();
+		}
+		return list;
 	}
 }

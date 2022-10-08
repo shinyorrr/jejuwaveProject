@@ -25,6 +25,9 @@ public class TravelUpdateAction implements CommandProcess {
 			TravelDao td = TravelDao.getInstance();
 			Travel travel = td.select(t_num);
 			System.out.println("TravelUpdateAction requestPro travel ==>  " + travel);
+			
+			
+			travel.setT_content(travel.getT_content().replace("<br>", "\r\n"));
 			request.setAttribute("travelContent", travel);
 			
 		} catch (Exception e) {

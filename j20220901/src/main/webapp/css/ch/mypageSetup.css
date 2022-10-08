@@ -102,5 +102,5 @@ body{
 table{
 	margin-top: 20px;
 	background-color: rgba(248,248,248.0.5);
-	border: 1px dashed rgba(204,204,204);
+	border-bottom: 1px dashed rgba(204,204,204);
 }
