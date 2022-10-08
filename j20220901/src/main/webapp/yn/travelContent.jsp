@@ -249,10 +249,10 @@ request.setAttribute("userId", userId);
 									<span class="me-5"></span>
 								</c:if>
 
-								<!-- 작성자 아이디 = 댓글 아이디 -->
+								<!-- 대댓글 user_img 크기 작게 -->
 								<c:choose>
-									<c:when test="${reply.user_id eq travelContent.user_id}">
-										<img src="${reply.user_img}" width="42" height="42"
+									<c:when test="${reply.t_relevel > 1}">
+										<img src="${reply.user_img}" width="34" height="34"
 											class=" bg-white userIconColor-1 rounded-circle me-2 mt-1 ">
 									</c:when>
 									<c:otherwise>
@@ -263,7 +263,15 @@ request.setAttribute("userId", userId);
 							</div>
 							<div style="font-size: 90%;" class="ms-3">
 								<div class="mb-2" style="display: flex;">
-									<div class="fw-bold me-4">${reply.user_id}</div>
+									<!-- 글 작성자 댓글 작성시 -->
+									<div class="fw-bold me-4">
+									${reply.user_id}
+									<c:if test="${reply.user_id eq travelContent.user_id}">
+										<span style="background: #ff3500; color:white; font-size: 8px; 
+												border-radius:10px; padding: 3px;">&nbsp작성자&nbsp	</span>
+									</c:if>
+									</div>
+									
 									<span style="color: #8C8C8C;">${reply.t_date} </span>
 									<button data-bs-toggle="collapse"
 										data-bs-target="#reply${reply.t_num}"
@@ -273,7 +281,7 @@ request.setAttribute("userId", userId);
 
 									<c:if test="${reply.user_id eq userId}">
 										<button
-											onclick="deleteReplyChk(${reply.t_num}, ${reply.t_ref})"
+											onclick="deleteReplyChk(${reply.t_num}, ${reply.t_ref}, ${reply.t_relevel})"
 											style="font-size: 85%; color: #8C8C8C;">&nbsp&nbsp&#183&nbsp&nbsp삭제</button>
 									</c:if>
 								</div>
@@ -367,10 +375,10 @@ function deleteChk() {
  }
 }
 
-function deleteReplyChk(t_num, t_ref) {
+function deleteReplyChk(t_num, t_ref, t_relevel) {
 	if (confirm("삭제 후에는 복구 할 수 없습니다!\n댓글을 삭제하시겠습니까?") == true){    //확인
 /*     document.removefrm.submit();*/
-	location.href = "travelDelete.do?t_num=" + t_num + "&t_ref=" + t_ref;
+	location.href = "travelDelete.do?t_num=" + t_num + "&t_ref=" + t_ref + "&t_relevel="  + t_relevel;
  }else{   //취소
      return false;
  }

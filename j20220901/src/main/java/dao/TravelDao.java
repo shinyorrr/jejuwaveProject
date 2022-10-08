@@ -35,6 +35,7 @@ public class TravelDao {
 	}
 	
 	public int getTotalCnt(Travel tvl) throws SQLException {
+		System.out.println("=====================TravelDao getTotalCnt Start=====================");
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -67,8 +68,10 @@ public class TravelDao {
 		}
 		
 		String sql = "select count(*) from travel_board where t_relevel=0" + addSql;
+		
 		int tot = 0;
 		
+		System.out.println("TravelDao  getTotalCnt sql-->" + sql);
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
@@ -76,6 +79,8 @@ public class TravelDao {
 			if(rs.next()) {
 				tot = rs.getInt(1);
 			}
+			System.out.println("TravelDao  getTotalCnt tot-->" + tot);
+			System.out.println("=====================TravelDao getTotalCnt End=====================");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -114,6 +119,7 @@ public class TravelDao {
 		
 	}
 	public List<Travel> traveList(int startRow, int endRow) throws SQLException {
+		System.out.println("=====================TravelDao traveList Start=====================");
 		List<Travel> list = new ArrayList<Travel>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -155,9 +161,6 @@ public class TravelDao {
 				travel.setReply_cnt		(rs.getInt		("reply_cnt"));
 				travel.setUser_img		(rs.getString	("user_img"));
 				
-				System.out.println("TravelDao  traveList t_title-->"+rs.getString	("t_title"));
-				
-				
 				list.add(travel);
 			}
 			
@@ -175,6 +178,7 @@ public class TravelDao {
 	
 	
 	public Travel select (int t_num) throws SQLException {
+		System.out.println("=====================TravelDao select Start=====================");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -215,6 +219,8 @@ public class TravelDao {
 				System.out.println("TravelDao  select t_title-->"+rs.getString	("t_title"));
 				System.out.println("TravelDao  select t_content-->"+rs.getString	("t_content"));
 			}
+			
+			System.out.println("=====================TravelDao select End=====================");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
@@ -371,6 +377,7 @@ public class TravelDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = "delete from travel_board where t_num=?";
+		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -406,6 +413,29 @@ public class TravelDao {
 		}
 		return result; 
 	}
+	
+	public int deleteReply(int t_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "update travel_board set t_content='삭제된 댓글입니다.' where t_num=?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, t_num);
+			
+			result  = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(conn != null)  conn.close();
+			if(pstmt != null) pstmt.close();
+		}
+		return result; 
+	}
+
 	
 	public int getMaxT_restep(int t_ref) throws SQLException {
 		Connection conn = null;
@@ -497,6 +527,7 @@ public class TravelDao {
 
 																/* tvl.get */
 	public List<Travel> traveListSearch(int startRow, int endRow, Travel tvl) throws SQLException {
+		System.out.println("=====================TravelDao traveListSearch Start=====================");
 		List<Travel> list = new ArrayList<Travel>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -541,11 +572,6 @@ public class TravelDao {
 						+ " order by t_ref desc) a)"
 						+ " where r between ? and ?";
 		
-		
-		
-		
-
-		
 		System.out.println("TravelDao  traveList startRow-->"+startRow);
 		System.out.println("TravelDao  traveList endRow-->"+endRow);
 		System.out.println("TravelDao  traveList sql-->"+sql);
@@ -567,8 +593,10 @@ public class TravelDao {
 				travel.setT_gubun		(rs.getString	("t_gubun"));
 				travel.setT_date		(rs.getString	("t_date"));
 				travel.setT_person		(rs.getInt		("t_person"));
-				travel.setT_start		(rs.getString	("t_start"));
-				travel.setT_end			(rs.getString	("t_end"));
+				//날짜 포맷 변경
+				travel.setT_start		(rs.getString	("t_start").substring(5));
+				travel.setT_end			(rs.getString	("t_end").substring(5));
+				
 				travel.setT_dealstatus	(rs.getString	("t_dealstatus"));
 				travel.setT_ref			(rs.getInt		("t_ref"));
 				travel.setT_relevel		(rs.getInt		("t_relevel"));
@@ -576,13 +604,10 @@ public class TravelDao {
 				travel.setReply_cnt		(rs.getInt		("reply_cnt"));
 				travel.setUser_img		(rs.getString	("user_img"));
 				
-				System.out.println("TravelDao  traveList t_title-->"+rs.getString	("t_title"));
-				
-				
 				list.add(travel);
 			}
 			
-			
+			System.out.println("=====================TravelDao traveListSearch End=====================");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
