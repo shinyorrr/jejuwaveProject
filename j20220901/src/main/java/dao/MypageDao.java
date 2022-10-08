@@ -450,14 +450,14 @@ public class MypageDao {
 	}
 	public List<Mypage> commentList(String user_id, int startRow, int endRow) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
-		String sql = "select *\r\n"
-				+ " from(\r\n"
-				+ "    select rownum r, a.*\r\n"
-				+ "    from (select *\r\n"
-				+ "          from qna_comment\r\n"
-				+ "          where user_id = ?\r\n"
-				+ "          order by com_date desc\r\n"
-				+ "          ) a )\r\n"
+		String sql = "select * "
+				+ " from( "
+				+ "    select rownum r, a.* "
+				+ "    from (select * "
+				+ "          from qna_comment "
+				+ "          where user_id = ? "
+				+ "          order by com_date desc "
+				+ "          ) a ) "
 				+ " where r BETWEEN ? and ?";
 		System.out.println("commentList sql : " + sql);
 		Connection conn = null;
@@ -479,6 +479,7 @@ public class MypageDao {
 			do{
 				Mypage mypage = new Mypage();
 				mypage.setB_num(rs.getInt("b_num"));
+				mypage.setCom_num(rs.getInt("com_num"));
 				mypage.setCom_content(rs.getString("com_content"));
 				mypage.setCom_date(rs.getDate("com_date"));
 				list.add(mypage);
@@ -496,17 +497,17 @@ public class MypageDao {
 	}
 	public List<Mypage> commentList2(String user_id, int startRow, int endRow) {
 		List<Mypage> list = new ArrayList<Mypage>();
-		String sql = "select *\r\n"
-				+ "from(\r\n"
-				+ "    select rownum r, a.*\r\n"
-				+ "    from (select *\r\n"
-				+ "          from travel_board\r\n"
-				+ "          where user_id = ?\r\n"
-				+ "          and t_relevel != 0\r\n"
-				+ "          order by t_date desc\r\n"
-				+ "          ) a )\r\n"
+		String sql = "select * "
+				+ "from( "
+				+ "    select rownum r, a.* "
+				+ "    from (select *"
+				+ "          from travel_board "
+				+ "          where user_id = ? "
+				+ "          and t_relevel != 0 "
+				+ "          order by t_date desc "
+				+ "          ) a ) "
 				+ "where r BETWEEN ? and ?";
-		System.out.println("commentList sql : " + sql);
+		System.out.println("commentList2 sql2 : " + sql);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -602,6 +603,60 @@ public class MypageDao {
 		}
 		return result;
 		
+	}
+	public int qnaComDelete(String b_num, String com_num) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete qna_comment where b_num = ? and com_num = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b_num);
+			System.out.println("MypageDao qnaComDelete b_num==> " + b_num);
+			pstmt.setString(2, com_num);
+			System.out.println("MypageDao qnaComDelete com_num==> " + com_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao qnaComDelete 오류" +  e.getMessage());
+		}
+		return result;
+	}
+	public int TravelComDelete(String t_num) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete travel_board where t_num = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao qnaComDelete 오류" +  e.getMessage());
+		}
+		return result;
+	}
+	public int pwUpdate(String user_pw, String user_id) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update member set user_pw = ? where user_id = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_pw);
+			pstmt.setString(2, user_id);
+			result = pstmt.executeUpdate();
+			if(result != 0) {
+				System.out.println("MypageDao pwUpdate ==> 성공");
+			}
+		} catch (Exception e) {
+			System.out.println("MypageDao pwUpdate 오류" + e.getMessage());
+		}
+		return result;
 	}
 	
 	

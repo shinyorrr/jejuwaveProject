@@ -29,10 +29,9 @@
 			
 			$.ajax({
 				url 	: 'mypageQnaDelete.do?b_num=?'+b_num,
-				dataType: 'html',
+				dataType: 'text',
 				success : function(data){
-					var e = $(data).find('.ajax');
-					$('.ajax').html(e)
+					location.reload();
 				},
 			});
 		});

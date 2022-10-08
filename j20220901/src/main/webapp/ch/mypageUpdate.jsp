@@ -66,38 +66,58 @@ $(function(){
 	var eMailForm = $('#eMailForm').val()
 	$('input[name=user_email2]').attr('value',eMailForm);
 })
-function passwordUpdate() {
-	var url = "<%=context%>/passwordUpdate.do";
-	window.open(url,"a1","width=500,height=200");
-}
+
 /* submit시 설정 */
 function disableOff(){
-	var user_pw1 = ${user_pw};
-	var user_pw2 = document.getElementById("oldPassword").value
-	// 변경할 비밀번호 비교
-	var user_pw3 = document.getElementById("newPassword1").value
-	var user_pw4 = document.getElementById("newPassword2").value
-	if(user_pw1 != user_pw2){
-		alert("현재 비밀번호가 틀립니다");
-		frm.oldPassword.focus();
-		frm.oldPassword.value("");
-		return false;
-	}
-	if(user_pw3 != user_pw4){
-		alert("변경한 비밀번호가 서로 다릅니다");
-		frm.newPassword2.focus();
-		frm.newPassword2.value("");
-		return false;
-	}
+
 	document.frm.user_email2.disabled = false;
 }
 /* 비밀번호 변경버튼 누르면 인풋화면 나옴 */
 function passwordUpdate(){
-	document.frm.oldPassword.hidden = false;
-	document.frm.newPassword1.hidden = false;
-	document.frm.newPassword2.hidden = false;
-}
+	if($('#oldPassword').css('display') == 'none'){
+		$('#oldPassword').show();
+		$('#newPassword1').show();
+		$('#newPassword2').show();
+		$('#newPassword3').show();
+	}else{
+		$('#oldPassword').hide();
+		$('#newPassword1').hide();
+		$('#newPassword2').hide();
+		$('#newPassword3').hide();
 
+	}
+}
+// 패스워드 유효성체크
+function fn_submit(){	
+	var f = document.pw;
+	var pw = ${user_pw};
+	if(f.pass1.value == ""){
+		alert("현 암호를 입력해주세요.");
+		f.pass1.focus();
+		return false;
+	}
+	if(f.pass2.value == ""){
+		alert("새로운 암호를 입력해주세요.");
+		f.pass2.focus();
+		return false;
+	}
+	if(f.pass3.value == ""){
+		alert("새 암호를 재입력해주세요.");
+		f.pass4.focus();
+		return false;
+	}
+	if(f.pass2.value != f.pass3.value){
+		alert("새로운 암호와 재설정이 일치하지 않습니다.");
+		f.pass3.focus();
+		return false;
+	}
+	if(f.pass1.value != pw){
+		alert("현재암호와 다릅니다.")
+		f.pass1.focus();
+		return false;
+	}
+	f.submit();
+}
 
 
 /* const email_change = (target) => {
@@ -209,14 +229,17 @@ function passwordUpdate(){
 							  <option value="kakao.com"
 							  <c:if test = "${fn:split(member.user_email,'@')[1] eq 'kakao.com'}"> selected </c:if>>kakao.com</option>
 							</select>
-							<input type="password" id = "oldPassword" name = "oldPassword" placeholder = "현재 비밀번호를 입력하세요" hidden="true"> 
-							<input type="password" id = "newPassword1" name = "newPassword1" placeholder="변경한 비밀번호를 입력하세요" hidden="true">
-							<input type="password" id = "newPassword2" name = "newPassword2" placeholder="변경할 비밀번호를 다시 입력하세요" hidden="true">
 							<div class = "submitMain">
 								<input type="submit" id = "submit" value = "수정완료">
 							</div>
 					</form>	
-									<button class="pw_search" onclick = "passwordUpdate()">비밀번호수정</button>
+							<button class="pw_search" onclick = "passwordUpdate()">비밀번호수정</button>
+					<form action="<%=context %>/pwUpdate.do" name = "pw" method="post">
+						<input type="password" id = "oldPassword" name = "pass1" placeholder = "현재 비밀번호를 입력하세요"><br>
+						<input type="password" id = "newPassword1" name = "pass2" placeholder="변경한 비밀번호를 입력하세요">
+						<input type="password" id = "newPassword2" name = "pass3" placeholder="변경할 비밀번호를 다시 입력하세요"><br>
+						<input type="submit" id = "newPassword3" value = "비밀번호 수정완료" onclick="fn_submit();return false;">
+					</form>
 				</div>
 			</div>
 		</div>

@@ -42,8 +42,7 @@
 				url 	: "mypageCommunityDelete.do?c_num=" + c_num,
 				dataType: 'html',
 				success	: function(data){
-						var e = $(data).find('.communityForm');
-						$('.communityForm').html(e)
+						location.reload();
 				}
 			});
 		});
