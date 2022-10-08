@@ -99,11 +99,16 @@ function deleteMsg(){
 					</button>
 				</span>
 				</h2>
+				
+				
+				<!-- 일괄삭제 기능 구현 -->
+				<form action="<%=context%>/mypageAlldelete.do" method="get">
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
-										<tr id = "travelurl" style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';">
+										<tr id = "travelurl" <%-- style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}&pageNum=${currentPage}';" --%>>
 											<td rowspan="3" width = 50>
+											<input type="checkbox" name =  "chk" value="${board.t_num }">
 											<input id = "t_num" type="text" value = "${board.t_num }" hidden = "true">
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.t_img }" width = "120px" padding-bottom = 10px>
@@ -154,6 +159,8 @@ function deleteMsg(){
 							</table>
 						</c:forEach> 
 					</c:if>
+					<input type="submit" value = "일괄삭제">
+				</form>
 				
 					
 				<div style="text-align: center; padding-top: 20px;">

@@ -146,6 +146,9 @@
 			<div class="content_section">
 				<h2 class = "mypage_menu_h2">내 커뮤니티</h2>
 					<div class = "communityForm">
+					
+						<!-- 일괄삭제 구현 -->					
+						<form action="<%=context%>/mypageAlldelete.do" method="post">
 						<c:if test="${ totCnt > 0}">
 							<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
@@ -154,6 +157,7 @@
 										<tr>
 											<td rowspan="3" width = 50>
 												<input type="text" id = "c_num" value = "${board.c_num }" hidden="true">
+												<input type="checkbox" name = "commuChk" value="${board.c_num }">
 												 <button class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.c_img_path }" width = "120px" padding-bottom = 10px>
@@ -191,6 +195,8 @@
 								</table>
 						</c:forEach> 
 					</c:if>
+					<input type="submit" value="일괄삭제">
+					</form>
 					</div>
 						
 				<div style="text-align: center; padding-top: 20px;">

@@ -542,7 +542,7 @@ public class MypageDao {
 		
 		return list;
 	}
-	public int deleteTraveler(int t_num) {
+	public int deleteTraveler(String t_num) {
 		int result = 0 ;
 		
 		Connection conn = null;
@@ -552,7 +552,7 @@ public class MypageDao {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, t_num);
+			pstmt.setString(1, t_num);
 			result = pstmt.executeUpdate();
 			
 			if(result != 0 ) System.out.println("성공");
@@ -560,6 +560,9 @@ public class MypageDao {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		
@@ -583,6 +586,9 @@ public class MypageDao {
 			else System.out.println("deleteboard ---> 삭제실패");
 		} catch (Exception e) {
 			System.out.println("deleteboard error ---> " + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 	
 		return result;
@@ -600,10 +606,16 @@ public class MypageDao {
 			
 		} catch (Exception e) {
 			System.out.println("MypageDao deleteCommunity 오류" +  e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
+		
 		return result;
 		
 	}
+	
+	
 	public int qnaComDelete(String b_num, String com_num) {
 		int result = 0;
 		Connection conn = null;
@@ -620,9 +632,14 @@ public class MypageDao {
 			
 		} catch (Exception e) {
 			System.out.println("MypageDao qnaComDelete 오류" +  e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		return result;
+		
 	}
+	
 	public int TravelComDelete(String t_num) {
 		int result = 0;
 		Connection conn = null;
@@ -636,9 +653,13 @@ public class MypageDao {
 			
 		} catch (Exception e) {
 			System.out.println("MypageDao qnaComDelete 오류" +  e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		return result;
 	}
+	
 	public int pwUpdate(String user_pw, String user_id) {
 		int result = 0;
 		Connection conn = null;
@@ -655,7 +676,117 @@ public class MypageDao {
 			}
 		} catch (Exception e) {
 			System.out.println("MypageDao pwUpdate 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
+		return result;
+	}
+	
+	public int trvAllDel(String[] chk_travel) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete travel_board where t_num=?";
+		System.out.println("MypageDao trvAllDel sql =>" + sql);
+		System.out.println("MypageDao chk_travel[i]");
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			for(int i= 0; i<chk_travel.length;i++) {
+				pstmt.setString(1, chk_travel[i]);
+				
+				// addBatch에 담기
+				pstmt.addBatch();
+				
+				// 파라미터 clear
+				pstmt.clearParameters();
+			}
+			
+			pstmt.executeBatch();
+			conn.commit();	
+			pstmt.clearBatch();
+			
+			result = 1;
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao trvAllDel 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
+		return result;
+	}
+	public int CommAllDel(String[] chk_commu) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete community where c_num=?";
+		System.out.println("MypageDao CommAllDel sql =>" + sql);
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			for(int i= 0; i<chk_commu.length;i++) {
+				pstmt.setString(1, chk_commu[i]);
+				
+				// addBatch에 담기
+				pstmt.addBatch();
+				
+				// 파라미터 clear
+				pstmt.clearParameters();
+			}
+			
+			pstmt.executeBatch();
+			conn.commit();	
+			pstmt.clearBatch();
+			
+			result = 1;
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao trvAllDel 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
+		return result;
+	}
+	public int QnaAllDel(String[] chk_qna) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete qna_board where b_num=?";
+		System.out.println("MypageDao chk_qna sql =>" + sql);
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			for(int i= 0; i<chk_qna.length;i++) {
+				pstmt.setString(1, chk_qna[i]);
+				
+				// addBatch에 담기
+				pstmt.addBatch();
+				
+				// 파라미터 clear
+				pstmt.clearParameters();
+			}
+			
+			pstmt.executeBatch();
+			conn.commit();	
+			pstmt.clearBatch();
+			
+			result = 1;
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao chk_qna 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
 		return result;
 	}
 	

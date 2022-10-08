@@ -15,7 +15,7 @@ public class MypageTravelDeleteAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("MypageTravelDeleteAction 시작!!!");
-		int t_num = Integer.parseInt(request.getParameter("t_num"));
+		String t_num = request.getParameter("t_num");
 		
 		MypageDao mypageDao = MypageDao.getInstance();
 		
