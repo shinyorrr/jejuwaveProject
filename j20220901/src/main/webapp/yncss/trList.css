@@ -14,16 +14,24 @@
 }
 .btn:active, .btn:focus,
 button:focus
-{ font-weight: bold !important; border: none !important; box-shadow: none !important; outline:none !important;}
+{ font-weight: bold !important; border: 2px; box-shadow: none !important; outline:none !important;}
 
 input:focus, textarea:focus{
-	outline: 2px solid #ff3500 !important;}
+	outline:none !important;
+	/* outline: 1px solid black !important; */
+	}
+input:focus, textarea:focus{
+	outline:none !important;
+	/* outline: 1px solid black !important; */
+	}
+	
 
 #t_gubuns button {
-	border: none; outline: none !important
+	border: none; outline: none; 
 }
 #input_to input:focus, #input_from input:focus {
-	outline: 2px solid #ff3500 !important;
+	outline:none ;
+	/* outline: 1px solid #ff3500 !important; */
 }
 
 @font-face{
@@ -160,9 +168,9 @@ body{
 	
 }
 
-#filter {
+/* #filter {
 	float: right;
-}
+} */
 
 .fileRegiBtn label {
 	display: inline-block; 
@@ -258,16 +266,18 @@ body{
 
 #image-upload-box {
 	background-color: #E6E6E6;
-  height: 260px;
+  height: 320px;
   border-radius: 4px;
   overflow: hidden;
   object-fit:cover;
   display:flex;
+  vertical-align:middle;
 }
 #image-upload-box img {
    width: 100%; 
    object-fit:cover;
-   height: 260px; 	
+   height: 320px;
+   
 }
 
 
