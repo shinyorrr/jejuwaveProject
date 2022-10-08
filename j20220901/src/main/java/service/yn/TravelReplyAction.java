@@ -39,7 +39,7 @@ public class TravelReplyAction implements CommandProcess {
 				System.out.println("t_num======>" + request.getParameter("t_num"));
 				travel.setUser_id		(user_id);
 				travel.setT_ref			(Integer.parseInt(request.getParameter("t_num")));
-				travel.setT_content		(request.getParameter("t_content"));
+				travel.setT_content		(request.getParameter("t_content").replace("\r\n","<br>"));
 				travel.setT_relevel		(Integer.parseInt(request.getParameter("t_relevel")));
 				
 				System.out.println("reply set 완료");

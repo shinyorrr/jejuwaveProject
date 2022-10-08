@@ -88,7 +88,7 @@ String context = request.getContextPath();
 				</div>
 			</div>
 					
-			<!-- 파일등록 -->
+			<%-- <!-- 파일등록 -->
 			<div class="form-group " style="margin: 8px 0 8px;">
 				<input  id="fileName" class="form-control mx-0" value="파일선택" disabled="disabled" style="width:85%; display: inline;">
 				<div class="fileRegiBtn" style="display:inline;">
@@ -100,24 +100,36 @@ String context = request.getContextPath();
 					
 			<div class="bg-light mb-4 p-0 rounded selectCover" style="height:220px;">
 				<img id="cover" src="${travelContent.t_img}" style="width:100%;height:220px; object-fit:cover; border-radius:4px;">
-			</div>
-					
+			</div> --%>
+			
+			<div  style="margin: 8px 0 8px;">
+				<label for="t_img" style="width:100%; height: 320px;object-fit:cover;">
+					<div id="image-upload-box" style="width:100%; "> <!-- 영역, 테두리 -->
+						<img src="${travelContent.t_img}">
+					</div>
+				</label>
+				<input type="hidden" name="t_oriImg" value="${travelContent.t_img}">
+				<input style="object-fit:cover; display:none;" type="file" id="t_img" 
+						 name="t_img" accept=".jpg, .png, .jpeg, .gif" multiple="false">
+			</div>	
 					
 
 
 				<div class="mb-2">
-					<input name="t_title" class="form-control form-control-lg" type="text" value="${travelContent.t_title}" aria-label=".form-control-lg example">
+					<input name="t_title" class="form-control form-control-lg" type="text" style="font-size: 14px;"
+							value="${travelContent.t_title}" aria-label=".form-control-lg example">
 				</div>
 				<div class="mb-3">
-					<textarea name="t_content" class="form-control form-control-lg col-sm-12" rows="10" >${travelContent.t_content}</textarea>
+					<textarea name="t_content" class="form-control form-control-lg col-sm-12" style="font-size: 14px;"
+							rows="10" >${travelContent.t_content}</textarea>
 				</div>
-				<div id="filter">
-					<button  onclick="cancle()" class="btn btn-light text-align-left p-3 me-0 mb-5"  style="width:420px; float:left;">
+				<div style="display: flex; width: 100%;">
+					<button type="reset" onClick="history.go(-1)"class="btn btn-light text-align-left p-3 me-0 mb-5"  
+							style="width:80%; float:left; background: #e2e2e2;">
 						취소</button>
-					<button type="submit" 
-					class="btn ms-3 p-3 me-0 mb-5" id="filterBtn" style="width:420px;float:right;">
+					<button type="submit" onclick="return chkAll()"
+					class="btn ms-3 p-3 me-0 mb-5" id="filterBtn" style="width:80%;float:right;">
 						완료</button>
-					
 				</div>  			
 			</div>
 
@@ -129,6 +141,42 @@ String context = request.getContextPath();
 
 <div style="margin-top: 200px;"></div>
 <%@ include file="../footer.jsp"%>
+
+<!-- my JS-->
+<script type="text/javascript">
+
+/* 여행기간, 제목, 내용 체크 함수 */
+function chkAll() {
+	console.log('chkAll 함수 시작');
+	if(frm.t_start.value == "" || frm.t_end.value == "") {
+		console.log(document.frm.t_start.value);
+		alert("여행 기간을 선택해 주세요!");
+		frm.t_start.focus();
+		return false;
+	} if(frm.t_content.value == "" || frm.t_title.value == "") {
+		alert("제목, 내용을 입력해 주세요!");
+		frm.t_title.focus();
+		return false;
+		
+	}
+	return true;
+}
+/* 이미지업로드 */
+var Imageinput = document.getElementById("t_img");
+Imageinput.addEventListener("change", updateImageDisplay);
+
+function updateImageDisplay() {
+  var image = Imageinput.files;
+
+  var imgContainer = document.getElementById("image-upload-box");
+  while (imgContainer.firstChild) { imgContainer.removeChild(imgContainer.firstChild); }
+  var displayImage = document.createElement("img");
+  
+  displayImage.src = window.URL.createObjectURL(image[0]);
+  imgContainer.append(displayImage);
+  displayImage.setAttribute("style","width: 100%; object-fit:cover; height: 320px;"); 
+}
+</script>
 <!-- Core theme JS-->
 <script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js"></script>

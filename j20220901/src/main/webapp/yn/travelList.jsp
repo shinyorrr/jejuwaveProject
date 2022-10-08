@@ -224,11 +224,11 @@ String context = request.getContextPath();
 				</c:forEach>
 			</c:if>
 
-			<c:if test="${totCnt == 0 }">
-				<tr><td colspan="7">데이터가 없네</td></tr>
-			</c:if>
 
 		</div>
+			<c:if test="${totCnt == 0 }">
+				<div style="text-align: center;"><img src="images/no-data.png" ></div>
+			</c:if>
 		<!-- paging section-->
 		<nav aria-label="Page navigation example"
 			class="d-flex justify-content-center">

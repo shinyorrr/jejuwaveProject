@@ -425,12 +425,12 @@ public class AdminDao {
 		return list;
 	}
 	
-	// 동행자 게시글 댓글 삭제
-	public int travelDelete(int t_num) {
+	// 동행자 게시글 삭제
+	public int travelDelete(int t_num) throws SQLException {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt= null;
-		String sql = "delete from travel_board where t_num=?";
+		String sql = "delete from travel_board where t_ref=?";
 		
 		try {
 			conn = getConnection();
@@ -441,9 +441,36 @@ public class AdminDao {
 			else result = 0;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		} finally {
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
 		}
 		return result;
 	}
+	
+	// 동행자 댓글 수정
+		public int travelReplyDelete(int t_num) throws SQLException {
+			int result = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = "update travel_board set t_content='관리자 의해 삭제된 댓글입니다.' where t_num=?";
+			
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, t_num);
+				result = pstmt.executeUpdate();
+				if(result > 0) result = 1;
+				else result = 0;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			} finally {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null)  conn.close();
+			}
+			return result;
+		}
+		
 	//회원 커뮤니티 게시글 삭제
 	public int commuDelete(int c_num) throws SQLException {
 		int result = 0;
