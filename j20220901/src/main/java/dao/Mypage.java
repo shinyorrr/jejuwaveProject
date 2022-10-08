@@ -31,7 +31,14 @@ public class Mypage {
 	private int b_recnt;
 	private String com_content;
 	private Date com_date;
+	private int com_num;
 	
+	public int getCom_num() {
+		return com_num;
+	}
+	public void setCom_num(int com_num) {
+		this.com_num = com_num;
+	}
 	public String getCom_content() {
 		return com_content;
 	}

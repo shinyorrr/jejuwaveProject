@@ -23,6 +23,20 @@
 </style>
 <script type="text/javascript" src = "<%=context%>/js/jquery.js"></script>
 <script type="text/javascript">
+function deleteMsg(){
+	var t_num = document.getElementById('t_num').value;
+
+	var ans = confirm("선택하신 글을 삭제하시겠습니까?");
+	if(!ans) return false;
+	
+	$.ajax({
+			url 	: 'mypageCommentTravelDelete.do?t_num='+t_num,
+			dataType: 'html',
+			success	: function(data){
+				location.reload();
+			}
+		});
+	}
 
 $(function(){
 	$('#myComment_Travel').click(function(){
@@ -68,6 +82,12 @@ $(function(){
 		
 	});
 });
+
+
+
+</script>
+<script type="text/javascript">
+
 </script>
 
 </head>
@@ -134,27 +154,9 @@ $(function(){
 			<c:if test="${ totCnt > 0}">
 							<c:forEach var="board" items="${list2 }">
 							<table>
-							<c:if test="${board.com_content != null }">
-								<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
-									<td colspan="3">
-										<div class = "c_content">
-										${board.com_content}								
-										</div>
-									</td>
-									<td class = "c_date">${board.com_date }</td>
-								</tr>
-								<tr>
-									<td>
-										<div class = "button_updateform">
-										<button class = "button_update" onclick = "location.href = 'Board.jsp'">수정</button>
-										<button class = "button_delete">삭제</button>
-										</div>
-									</td>
-								</tr>
-							</c:if>
-							<c:if test="${board.t_content != null }">
 								<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}';">
 									<td colspan="3">
+									<input type="text" value = "${board.t_num }" name = "t_num" id = "t_num" hidden="true">
 										<div class = "c_content">
 										${board.t_content}								
 										</div>
@@ -167,11 +169,10 @@ $(function(){
 								<tr>
 									<td>
 										<div class = "button_updateform">
-										<button class = "button_delete">삭제</button>
+										<button class = "button_delete" onclick="location.href='mypageCommentTravelDelete.do?t_num=${board.t_num}';">삭제</button>
 										</div>
 									</td>
 								</tr>
-							</c:if>
 							</table>
 								<c:set var="startNum" value="${startNum - 1 }" />
 							</c:forEach> 

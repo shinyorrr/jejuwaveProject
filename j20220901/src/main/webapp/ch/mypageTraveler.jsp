@@ -25,15 +25,14 @@
 function deleteMsg(){
 		var t_num = document.getElementById('t_num').value;
 
-		var ans = confirm("선택하신 댓글을 삭제하시겠습니까?");
+		var ans = confirm("선택하신 글을 삭제하시겠습니까?");
 		if(!ans) return false;
 		
 		$.ajax({
 				url 	: 'MypageTraveldelete.do?t_num='+t_num,
 				dataType: 'html',
 				success	: function(data){
-						var e = $(data).find('.travelForm');
-						$('.travelForm').html(e)
+					location.reload();
 				}
 			});
 		}
