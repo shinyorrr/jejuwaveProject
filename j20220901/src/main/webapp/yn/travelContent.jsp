@@ -12,7 +12,7 @@ request.setAttribute("userId", userId);
 
 <!-- header 영역 -->
 <c:import url="${context}/header.jsp"></c:import>
-=======
+
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">
 
 <!-------------- body 영역 ------------>
@@ -20,44 +20,43 @@ request.setAttribute("userId", userId);
 <!-- 게시물 -->
 <div class="container ">
 	<div class="row justify-content-center">
-		<div class="col-lg-9 justify-content-start">
+		<div class="col-lg-10 justify-content-start">
 			<!-- Post content-->
 			<article class="mb-5 pb-3">
 				<!-- 게시물 이미지 -->
-				<figure class="mb-4">
+				<figure>
 					<img class="img-fluid rounded mb-4" src="${travelContent.t_img}"
-						style="width: 100%; height: 280px; object-fit: cover;">
+						style="width: 100%; height: 330px; object-fit: cover;">
 				</figure>
-
+				<div style="height: 30px;"></div>
 				<!-- 글제목 -->
-				<header class="mb-3">
+				<header>
 					<p name="t_title" class="h4 fw-bold mb-2">${travelContent.t_title}</p>
 
 					<!--작성일 -->
-					<p id="dateViwer"
-						class="text-muted m-0 form-check-inline align-center">${travelContent.t_date}</span>
+					<p id="dateViwerDate"
+						class="m-0 form-check-inline align-center">${travelContent.t_date}</span>
 						<c:if test="${travelContent.user_id eq userId}">
-							<button
-								onclick="location.href='travelUpdate.do?t_num=${travelContent.t_num}'"
-								id="dateViwer" type="button" class="btn p-0  m-0 text-muted">&nbsp&nbsp&#183&nbsp&nbsp수정</button>
+							&nbsp&nbsp&nbsp&nbsp&nbsp
+							<button onclick="location.href='travelUpdate.do?t_num=${travelContent.t_num}'"
+								id="dateViwer" type="button" class="btn p-0  m-0 ">수정</button>
 
 							<!--  function ==> 헤더에 -->
+							&nbsp&nbsp&#183&nbsp&nbsp
 							<button onclick="deleteChk()" id="dateViwer" type="button"
-								class="btn p-0 text-muted">&nbsp&nbsp&#183&nbsp&nbsp삭제</button>
+								class="btn p-0">삭제</button>
 							<c:if test="${travelContent.t_dealstatus == 0}">
-								<button
-									onclick="location.href='travelStatus.do?t_num=${travelContent.t_num}'"
-									id="dateViwer" type="button" class="btn p-0 text-muted">&nbsp&nbsp&#183&nbsp&nbsp모집
-									완료</button>
+								&nbsp&nbsp&#183&nbsp&nbsp
+								<button onclick="location.href='travelStatus.do?t_num=${travelContent.t_num}'"
+									id="dateViwer" type="button" class="btn p-0 ">모집 완료</button>
 							</c:if>
 						</c:if>
 					</p>
 				</header>
 				<!-- 박스 -->
-				<div class=" form-group row my-5  ">
+				<div class=" form-group row my-5" >
 					<!-- 모집인원,기간 박스  -->
-					<div
-						class="card py-2 inline col-lg-9 justify-content-start floatLL ms-3">
+					<div class="card py-2 inline col-lg-9 justify-content-start floatLL ms-3" style="display:inline;">
 						<div class="card-body ">
 							<p class="mb-2">
 								<span id="keyColor" class="fw-bold me-2">${travelContent.t_gubun}</span><span
@@ -71,13 +70,13 @@ request.setAttribute("userId", userId);
 									<path
 										d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
 								</svg>
-								<span class="mt-1">${travelContent.t_start}&nbsp~&nbsp${travelContent.t_end}</span>
+								<span class="mt-1">&nbsp${travelContent.t_start}&nbsp~&nbsp${travelContent.t_end}</span>
 							</div>
 						</div>
 					</div>
 					<!-- 사이드 바 메뉴 동행 후기 보기-->
-					<div
-						class="panel panel-info border justify-content-end floatRR col-lg-2 ms-3 p-3 align-middle"
+					<div style="display:inline;"
+						class="panel panel-info border justify-content-end floatRR ms-3 p-3 align-middle"
 						id="userBox">
 						<div class="card-body mb-0 p-0">
 							<%-- 유저 이미지 --%>
@@ -204,15 +203,15 @@ request.setAttribute("userId", userId);
 								</div>
 							</div>
 							<c:if test="${totCnt == 0 }">
-								<h1>데이터가 없네</h1>
+								<h1>데이터가 없습니다</h1>
 							</c:if>
 							<!-- <button type="button" class="btn center mt-2" id="trCommBtn">동행후기 보기</button> -->
 						</div>
 					</div>
 				</div>
 				<!-- 글 내용 -->
-				<section class="mb-5">
-					<p class="fs-6 mb-4">${travelContent.t_content}</p>
+				<section style="margin:60px 0;">
+					<p class="fs-6 mb-4 p-4">${travelContent.t_content}</p>
 				</section>
 			</article>
 
@@ -239,10 +238,14 @@ request.setAttribute("userId", userId);
 					<!-- 구분 라인 -->
 
 					<!-- 댓글 영역 -->
-					<hr class="mt-4">
-					<c:forEach var="reply" items="${replyList}">
+					<div style="height: 15px;"></div>
+					<c:forEach var="reply" items="${replyList}" >
 
-						<div class="d-flex mb-4 pt-3">
+						<c:if test="${reply.t_relevel == 1}">
+						<div style="height: 20px;"></div>
+						</c:if>
+					
+						<div class="d-flex mb-3 pt-3">
 							<div class="flex-shrink-0 ms-5 align-middle">
 
 								<c:if test="${reply.t_relevel > 1}">
@@ -256,7 +259,7 @@ request.setAttribute("userId", userId);
 											class=" bg-white userIconColor-1 rounded-circle me-2 mt-1 ">
 									</c:when>
 									<c:otherwise>
-										<img src="${reply.user_img}" width="42" height="42"
+										<img src="${reply.user_img}" width="46" height="46"
 											class=" bg-white userIconColor-1 rounded-circle me-2 mt-1 ">
 									</c:otherwise>
 								</c:choose>
@@ -272,17 +275,16 @@ request.setAttribute("userId", userId);
 									</c:if>
 									</div>
 									
-									<span style="color: #8C8C8C;">${reply.t_date} </span>
+									<span style="color: #9A9A9A;">${reply.t_date} </span>
 									<button data-bs-toggle="collapse"
 										data-bs-target="#reply${reply.t_num}"
-										style="margin-left: 50px; font-size: 85%; color: #8C8C8C;">댓글
-										달기</button>
+										style="margin-left: 50px; font-weight:bold; font-size: 85%; color: #9A9A9A;">답글 달기</button>
 
 
 									<c:if test="${reply.user_id eq userId}">
 										<button
 											onclick="deleteReplyChk(${reply.t_num}, ${reply.t_ref}, ${reply.t_relevel})"
-											style="font-size: 85%; color: #8C8C8C;">&nbsp&nbsp&#183&nbsp&nbsp삭제</button>
+											style="font-size: 85%; font-weight:bold; color: #9A9A9A;">&nbsp&nbsp&#183&nbsp&nbsp삭제</button>
 									</c:if>
 								</div>
 								${reply.t_content}

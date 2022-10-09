@@ -24,38 +24,38 @@
 		style="background-image: url('images/travelerList_cate.jpg'); margin-top:148px;background-size: cover;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5" >
 		<div class="text-center text-white">
-			<h3 class="display-5 fw-bolder">동행자게시판</h3>
-			<p class="lead fw-normal text-white-50 mb-0">함께해요 제주</p>
+			<h3 id="cateTextM" class="display-5 fw-bolder">동행자 게시판</h3>
+			<p id="cateTextS"class="lead fw-normal text-white-40 mb-0">동행과 함께하는 제주</p>
 		</div>
 	</div>
 </header>
 <div class="container mt-5 mb-5">
 	<div class="row justify-content-center">
 		<div class="col-lg-8">
-			<div class="border rounded p-5  mb-5 " style="background:white; 	border: #EAEAEA 1px;">
+			<div class="border rounded p-5  mb-5 " style="background:white; 	border: #e9e9e9 1px;">
 
 				<!--------- 테마선택 체크박스 --------->
 				<div class=" form-check form-check-inline mt-0 mb-3">
 		  			<span class="fw-bold align-middle me-5">테마 선택</span>
 					<div class=" form-check form-check-inline my-0">
-						<input name="t_gubun" value="숙박" type="radio" class="form-check-input my-1" id="inlinCheckbox1" >
-						<label class="form-check-label ms-1 me-2 align-middle" for="inlineCheckbox1">숙박</label>
+						<input name="t_gubun" value="숙박" type="radio" class="form-check-input my-1">
+						<label class="form-check-label ms-1 me-2 align-middle" >숙박</label>
 					</div>
 					<div class=" form-check form-check-inline ">
-						<input name="t_gubun" value="레저" type="radio" class="form-check-input my-1" id="inlinCheckbox2">
-						<label class="form-check-label ms-1 me-2 align-middle" for="inlineCheckbox2">레저</label>
+						<input name="t_gubun" value="레저" type="radio" class="form-check-input my-1">
+						<label class="form-check-label ms-1 me-2 align-middle">레저</label>
 					</div>
 					<div class=" form-check form-check-inline">
-						<input name="t_gubun" value="맛집" type="radio" class="form-check-input my-1" id="inlinCheckbox3" checked>
-						<label class="form-check-label ms-1 me-2 align-middle" for="inlineCheckbox3" >맛집</label>
+						<input name="t_gubun" value="맛집" type="radio" class="form-check-input my-1" checked>
+						<label class="form-check-label ms-1 me-2 align-middle">맛집</label>
 					</div>
 					<div class=" form-check form-check-inline ">
-						<input name="t_gubun" value="카풀" type="radio" class="form-check-input my-1" id="inlinCheckbox4" >
-						<label class="form-check-label ms-1 	me-2 align-middle" for="inlineCheckbox4">카풀</label>
+						<input name="t_gubun" value="카풀" type="radio" class="form-check-input my-1" >
+						<label class="form-check-label ms-1 	me-2 align-middle" >카풀</label>
 					</div>
 					<div class=" form-check form-check-inline ">
-						<input name="t_gubun" value="기타" type="radio" class="form-check-input my-1" id="inlinCheckbox4" >
-						<label class="form-check-label ms-1 	me-2 align-middle" for="inlineCheckbox4">기타</label>
+						<input name="t_gubun" value="기타" type="radio" class="form-check-input my-1"  >
+						<label class="form-check-label ms-1 	me-2 align-middle">기타</label>
 					</div>
 				</div>
 				
@@ -64,7 +64,8 @@
 		  			<span class="fw-bold align-middle me-5">인원 선택</span>
 					<div class=" form-check form-check-inline my-0 mx-0 px-0">
 						<input name="t_person" type="range"  min="1" max="8" step="1"
-						oninput="document.getElementById('valueP').innerHTML=this.value;" value="1" class="form-range mx-0 px-0 size-small my-1" style="width:520px; height:15px;">
+								oninput="document.getElementById('valueP').innerHTML=this.value;" value="1" class="form-range mx-0 px-0 size-small my-1" 
+								style="width:520px; height:15px;">
 						<span class="ms-4" id="valueP">1</span><span>명</span>
 					</div>
 				</div>
@@ -94,15 +95,22 @@
 						 name="t_img" accept=".jpg, .png, .jpeg, .gif" multiple="false">
 			</div>
 		
-
-
+				<!-------- 여백 -------->
+				<div style="height: 15px;"></div>
+				
+				<!-------- 제목 -------->
 				<div class="mb-2">
 					<input name="t_title" class="form-control form-control-lg" type="text" 
-						   style="font-size: 14px;"  placeholder="제목을 입력하세요" aria-label=".form-control-lg example">
+						   style="font-size: 14px; font-weight: bold; color: #000000;" 
+						   placeholder="제목을 입력하세요" aria-label=".form-control-lg example">
 				</div>
+				<!-------- 여백 -------->
+				<div style="height: 10px;"></div>
+				
+				<!-------- 본문 -------->
 				<div class="mb-3">
 					<textarea name="t_content" class="form-control form-control-lg col-sm-12" 
-							  style="font-size: 14px;" rows="10" placeholder="내용을 입력하세요"></textarea>
+							  style="font-size: 14px; color: #000000;" rows="20" placeholder="내용을 입력하세요"></textarea>
 				</div>
 				
 				<div style="display: flex; width: 100%;">
