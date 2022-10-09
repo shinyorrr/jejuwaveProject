@@ -9,6 +9,9 @@ String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">
+<style type="text/css">
+
+</style>
 
 <!-------------------------------------------------->
 <!-------------------- body 영역 -------------------->
@@ -17,120 +20,115 @@ String context = request.getContextPath();
 <header class="py-5 mb-5"
 		style="background-image: url('images/travelerList_cate.jpg'); background-size: cover; margin-top:148px;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
-		<div class="text-center text-white">
-			<h3 class="display-5 fw-bolder">동행자 게시판</h3>
-			<p class="lead fw-normal text-white-40 mb-0">동행과 함께하는 제주</p>
+		<div  class="text-center">
+			<h3 id="cateTextM" class="display-5 fw-bolder">동행자 게시판</h3>
+			<p id="cateTextS"class="lead fw-normal text-white-40 mb-0">동행과 함께하는 제주</p>
 		</div>
 	</div>
 </header>
 <!-------------------------------------------------->													
 <!-------------------- 동행자 검색 -------------------->
-<div class="container text-left  px-4 px-lg-5 mt-5">
+<div class="container text-left  px-4 px-lg-5 mt-5" style="color: #000000;">
 	<form action="travelListForm.do">
 	
-		<div class="row mt-5 mb-3">
+		<div class="row mb-3" style="margin-top: 100px;">
 		 	<!-- 날짜 선택 -->
 			<div class="col-lg-6 col-sm-12 text-lg-start">
 				<div class=" form-inline">
-					<span class="fw-bold align-middle me-5">날짜 선택</span>
+					<span class="fw-bold align-middle me-4">날짜 선택</span>
 					<div class="  my-0 mx-0 px-0" style="display:inline;">
 						<input oninput="getStartDate()" name="t_start" type="date" class="me-0" id="input_from" 
-								placeholder="시작 날짜" style="width:38%; height:34px;"
+								placeholder="시작 날짜" style="width:39%; height:34px;"
 								<c:if test="${t_start ne null}">
 								value="${t_start}"
 								</c:if>
-								>
-						-
+								> &nbsp-&nbsp
 						<input name="t_end" type="date" class=" ms-0" id="input_to" 
-								placeholder="종료 날짜" style="width:38%;height:34px;"
-								<c:if test="${t_end ne null}">
-								value="${t_end}"
-								</c:if>>
+								placeholder="종료 날짜" style="width:39%;height:34px;"
+							<c:if test="${t_end ne null}">value="${t_end}"</c:if>>
 					</div>
 				</div>
 			</div>
-			<!--------- 테마선택 필터 --------->
+			<!---------------------------------->
+			<!----------- 테마선택 필터 ----------->
 			<div class="col-lg-6 col-sm-12 text-lg-end">
 				<div id="searchFilterGubun" class=" mb-4" style="color:#000000;" >
 				
 					<!-- 구분 전체 -->
 					<c:if test="${t_gubun1 eq null || t_gubun1 eq ''}">
-						 <button type="button" id="t_gubun1" value="전체" class="btn mx-1" onclick="gubunChk(1)" style="color:#000000" >전체</button>
+						 <button type="button" id="t_gubun1" value="전체" class="btn ms-3" onclick="gubunChk(1)" style="color:#000000" >전체</button>
 					</c:if>
 					<c:if test="${t_gubun1 eq 1}">
-						<button type="button" id="t_gubun1" value="전체" class="btn mx-1" onclick="gubunChk(1)" style="color:#ff3500" >전체</button>
+						<button type="button" id="t_gubun1" value="전체" class="btn ms-3" onclick="gubunChk(1)" style="color:#ff3500" >전체</button>
 					</c:if>
 						
 					<!-- 구분 숙박 -->
 					<c:if test="${t_gubun2 eq null || t_gubun2 eq ''}">
-						 <button type="button" id="t_gubun2" value="숙박" class="btn mx-1" onclick="gubunChk(2)" style="color:#000000">#숙박</button>
+						 <button type="button" id="t_gubun2" value="숙박" class="btn ms-3" onclick="gubunChk(2)" style="color:#000000">#숙박</button>
 					</c:if>
 					<c:if test="${t_gubun2 eq '숙박'}">
-						<button type="button" id="t_gubun2" value="숙박" class="btn mx-1" onclick="gubunChk(2)" style="color:#ff3500">#숙박</button>
+						<button type="button" id="t_gubun2" value="숙박" class="btn ms-3" onclick="gubunChk(2)" style="color:#ff3500">#숙박</button>
 					</c:if>	
 					
 					<!-- 구분 레저 -->
 					<c:if test="${t_gubun3 eq null || t_gubun3 eq ''}">
-						 <button type="button" id="t_gubun3" value="레저" class="btn mx-1" onclick="gubunChk(3)" style="color:#000000">#레저</button>
+						 <button type="button" id="t_gubun3" value="레저" class="btn ms-3" onclick="gubunChk(3)" style="color:#000000">#레저</button>
 					</c:if>
 					<c:if test="${t_gubun3 eq '레저'}">
-						<button type="button" id="t_gubun3" value="레저" class="btn mx-1" onclick="gubunChk(3)" style="color:#ff3500">#레저</button>
+						<button type="button" id="t_gubun3" value="레저" class="btn ms-3" onclick="gubunChk(3)" style="color:#ff3500">#레저</button>
 					</c:if>	
 		
 					<!-- 구분 맛집 -->
 					<c:if test="${t_gubun4 eq null || t_gubun4 eq ''}">
-						 <button type="button" id="t_gubun4" value="맛집" class="btn mx-1" onclick="gubunChk(4)" style="color:#000000">#맛집</button>
+						 <button type="button" id="t_gubun4" value="맛집" class="btn ms-3" onclick="gubunChk(4)" style="color:#000000">#맛집</button>
 					</c:if>
 					<c:if test="${t_gubun4 eq '맛집'}">
-						<button type="button" id="t_gubun4" value="맛집" class="btn mx-1" onclick="gubunChk(4)" style="color:#ff3500">#맛집</button>
+						<button type="button" id="t_gubun4" value="맛집" class="btn ms-3" onclick="gubunChk(4)" style="color:#ff3500">#맛집</button>
 					</c:if>	
 		            	
 		            <!-- 구분 카풀 -->
 					<c:if test="${t_gubun5 eq null || t_gubun5 eq ''}">
-						 <button type="button" id="t_gubun5" value="카풀" class="btn mx-1" onclick="gubunChk(5)" style="color:#000000">#카풀</button>
+						 <button type="button" id="t_gubun5" value="카풀" class="btn ms-3" onclick="gubunChk(5)" style="color:#000000">#카풀</button>
 					</c:if>
 					<c:if test="${t_gubun5 eq '카풀'}">
-						<button type="button" id="t_gubun5" value="카풀" class="btn mx-1" onclick="gubunChk(5)" style="color:#ff3500">#카풀</button>
+						<button type="button" id="t_gubun5" value="카풀" class="btn ms-3" onclick="gubunChk(5)" style="color:#ff3500">#카풀</button>
 					</c:if>	
 		            	
 		            <!-- 구분 기타 -->	
 					<c:if test="${t_gubun6 eq null || t_gubun6 eq ''}">
-						 <button type="button" id="t_gubun6" value="기타" class="btn mx-1" onclick="gubunChk(6)" style="color:#000000">#기타</button>
+						 <button type="button" id="t_gubun6" value="기타" class="btn me-4 ms-3" onclick="gubunChk(6)" style="color:#000000">#기타</button>
 					</c:if>
 					<c:if test="${t_gubun6 eq '기타'}">
-						<button type="button" id="t_gubun6" value="기타" class="btn mx-1" onclick="gubunChk(6)" style="color:#ff3500">#기타</button>
+						<button type="button" id="t_gubun6" value="기타" class="btn me-4 ms-3" onclick="gubunChk(6)" style="color:#ff3500">#기타</button>
 					</c:if>	
 		            	
 		            <c:choose>
-		            <c:when test="${gubun eq null || gubun eq ''}">
-		            	<input type="hidden" name="t_gubun" id="gubun">
-		            </c:when>
-		            <c:otherwise>
-		            	<input type="hidden" name="t_gubun" id="gubun" value="${gubun}">
-		            </c:otherwise>
+			            <c:when test="${gubun eq null || gubun eq ''}">
+			            	<input type="hidden" name="t_gubun" id="gubun">
+			            </c:when>
+			            <c:otherwise>
+			            	<input type="hidden" name="t_gubun" id="gubun" value="${gubun}">
+			            </c:otherwise>
 		            </c:choose>
-					<!-- 검색 버튼 -->
-					<div id="filter">
-						<button class="btn ms-3 px-3 me-0" id="filterBtn" style="width: 105px;">검색</button>
-					</div>
+					<!--------- 검색 버튼 --------->
+						<button class="btn " id="filterBtn" 
+						style="width: 15%; padding: 5px 20px; float:right; margin-right: 10px;">검&nbsp색</button>
 				</div>
 			</div>
-			
-			<!-- 모집중 조회 필터 -->
+			<!------------------------------>
+			<!-------- 모집중 조회 필터 -------->
 			<div class="col-lg-12 col-sm-12 text-lg-end" id="filter">
 				<c:if test="${t_dealstatus eq null || t_dealstatus eq ''}">
 				<!-- onclick="location.href='travelListForm.do?t_dealstatus=0'"-->
-					<button class="btn px-4" id="filterBtn_BF" onclick="chkDealValue()"
-						style="margin-bottom: 3px; border-radius: 30px; padding:8px;
-								border: solid #4C4C4C 2px;	font-weight: bold;">모집중인 글 보기</button>
+					<button class="btn px-4" id="filterBtn_BF" onclick="chkDealValue()">
+						모집중인 글 보기</button>
 					<input type="hidden" name = "t_dealstatus" id="filterInput">
 				</c:if>
 				
 				<c:if test="${t_dealstatus eq '0'}">
 					<!-- onclick="location.href='travelListForm.do'" -->
-					<button class="btn px-4" id="filterBtn_BF" 
-						style="margin-bottom: 3px; border-radius: 30px; padding:8px;
-								background: #ff3500; color:white;	font-weight: bold;">모집중인 글 보기</button>
+					<button class="btn px-4" id="filterBtn_AF">
+								모집중인 글 보기</button>
 				</c:if>
 			</div>
 		</div>
@@ -150,69 +148,54 @@ String context = request.getContextPath();
 					
 					
 						<div class="col mb-5">
-							<div class="card h-70" style=" cursor: pointer;" 
+							<div id="contentBox" class="card h-70" style=" cursor: pointer;" 
 								 onclick="location.href='travelContent.do?t_num=${travel.t_num}&pageNum=${currentPage}';">
 									
 									
 								<!--------- Content 이미지--------->
 								<div id="pic">
-								<div id="picOnGubun">
-									#${travel.t_gubun}&nbsp&nbsp<span id="picOnDate">${fn:replace(travel.t_start, '-', '/')}&nbsp-&nbsp${fn:replace(travel.t_end, '-', '/')}</span>
-								</div>
-									<img src="${travel.t_img}" class="card-img-top" />
+									<div id="picOnGubun">
+										#${travel.t_gubun}&nbsp&nbsp<span id="picOnDate">${fn:replace(travel.t_start, '-', '/')}&nbsp-&nbsp${fn:replace(travel.t_end, '-', '/')}</span>
+									</div>
+										<img src="${travel.t_img}" class="card-img-top" />
 								</div> 
 								
-								<!-- Content details-->
+								<!-------- Content details -------->
 								<div class="card-body p-4">
 									<div class="text-left">
-										<!-- Content text-->
+										<!------ Content 테마 구분 ------>
 										<p class="fw-bolder" id="title">
 										<c:choose>
 											<c:when test="${travel.t_dealstatus == 0}">
 												<b style="color: #ff3500; width: 64px;">모집중</b>&nbsp&nbsp
 											</c:when>
 											<c:otherwise>
-												<b style="color: #A6A6A6; width: 64px;">모집완료</b>&nbsp&nbsp
+												<b style="color: #9A9A9A; width: 64px;">모집완료</b>&nbsp&nbsp
 											</c:otherwise>
 										</c:choose>
 
 
 											<!-- 제목 짜르기 -->
 											<span>
-												<c:choose>
-													<c:when test="${fn:length(travel.t_title) > 12}">
-														<c:out value="${fn:substring(travel.t_title,0,11)}" />...
-													</c:when>
-													<c:otherwise>
-														<c:out value="${travel.t_title}" />
-													</c:otherwise>
-												</c:choose>
+												${travel.t_title}
 											</span>
 										</p>
 
-										<!-- 본문 짜르기 -->
+										<!-------- 본문 짜르기 ------>
 										<p id="content">
-											<c:choose>
-												<c:when test="${fn:length(travel.t_content) > 35}">
-													<c:out value="${fn:substring(travel.t_content,0,34)}" />...
-											</c:when>
-												<c:otherwise>
-													<c:out value="${travel.t_content}" />
-												</c:otherwise>
-											</c:choose>
+											${travel.t_content}
 										</p>
 
 										<p id="IdComment">
-											<img src='${travel.user_img}' width="20" height="20"
+											<img src='${travel.user_img}' width="28" height="28"
 												style="margin: 0 5px 2px 0;"
-												class="userIconColor-1 rounded-circle me-2  align-center ">
+												class="userIconColor-1 rounded-circle me-1  align-center ">
 											${travel.user_id}
 
-											<!-- 댓글개수 -->
-											<c:if test="" var="commCnt"></c:if>
-											<span id="comment"> <img
-												style="width: 16px; height: 16px; margin: 0 5px;"
-												src="images/comm_icon.png">${travel.reply_cnt}
+											<!-------- 댓글개수 -------->
+											<%-- <c:if test="" var="commCnt"></c:if> --%>
+											<span id="comment"> 
+												<img src="images/comm_icon.png">${travel.reply_cnt}
 											</span>
 										</p>
 									</div>
@@ -232,7 +215,7 @@ String context = request.getContextPath();
 		<!-- paging section-->
 		<nav aria-label="Page navigation example"
 			class="d-flex justify-content-center">
-			<ul class="pagination">
+			<ul class="pagination" id="pageNumColor">
 				<c:if test="${startPage > blockSize}">
 					<li class="page-item"><a class="page-link"
 						href='travelListForm.do?pageNum=${startPage-blockSize}'
