@@ -146,6 +146,9 @@
 			<div class="content_section">
 				<h2 class = "mypage_menu_h2">내 커뮤니티</h2>
 					<div class = "communityForm">
+					
+						<!-- 일괄삭제 구현 -->					
+						<form action="<%=context%>/mypageAlldelete.do" method="post">
 						<c:if test="${ totCnt > 0}">
 							<c:forEach var="board" items="${list }">
 								<table style = "border-bottom = 1px solid rgb(204,204,204)">
@@ -154,7 +157,8 @@
 										<tr>
 											<td rowspan="3" width = 50>
 												<input type="text" id = "c_num" value = "${board.c_num }" hidden="true">
-												 <button class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
+												<input type="checkbox" name = "commuChk" value="${board.c_num }">
+												 <button type="button" class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.c_img_path }" width = "120px" padding-bottom = 10px>
 												</div>
@@ -173,17 +177,19 @@
 										</tr>
 										<tr>
 											<td colspan="3" width = 2000>
+										 <button type="button" class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
 												<div class = "t_content">
 													${board.c_content}
 												</div>
+										</button>
 											</td>
 										<tr>
 											<td colspan="2">
 												<div class = "button_updateform">
-													<button class = "button_update" onclick="location.href = '<%=context%>/commuUpdateForm.do?c_num=${board.c_num }'" >수정</button>
+													<button type="button" class = "button_update" onclick="location.href = '<%=context%>/commuUpdateForm.do?c_num=${board.c_num }'" >수정</button>
 												</div>
 												<div>
-													<button class = "button_delete" >삭제</button>
+													<button type="button" class = "button_delete" >삭제</button>
 												</div>
 											</td>
 										</tr>
@@ -191,6 +197,8 @@
 								</table>
 						</c:forEach> 
 					</c:if>
+					<input type="submit" class = "allDel" value="일괄삭제">
+					</form>
 					</div>
 						
 				<div style="text-align: center; padding-top: 20px;">

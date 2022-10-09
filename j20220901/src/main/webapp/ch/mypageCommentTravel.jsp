@@ -151,11 +151,15 @@ $(function(){
 					<h2 class = "mypage_CommentMain">동행자게시판 내 코멘트</h2>
 				</button>
 				<div class = "change_body" id = "change_body">
+				
+				
+				<form action="<%=context%>/mypageAlldelete.do" method="post">
 			<c:if test="${ totCnt > 0}">
 							<c:forEach var="board" items="${list2 }">
 							<table>
-								<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}';">
+								<tr style= " cursor: pointer"<%--  onclick="location.href='travelContent.do?t_num=${board.t_num}';" --%>>
 									<td colspan="3">
+									<input type="checkbox" name = "chk_trvComment" value="${board.t_num }">
 									<input type="text" value = "${board.t_num }" name = "t_num" id = "t_num" hidden="true">
 										<div class = "c_content">
 										${board.t_content}								
@@ -169,7 +173,7 @@ $(function(){
 								<tr>
 									<td>
 										<div class = "button_updateform">
-										<button class = "button_delete" onclick="location.href='mypageCommentTravelDelete.do?t_num=${board.t_num}';">삭제</button>
+										<button type="button" class = "button_delete" onclick="location.href='mypageCommentTravelDelete.do?t_num=${board.t_num}';">삭제</button>
 										</div>
 									</td>
 								</tr>
@@ -177,6 +181,9 @@ $(function(){
 								<c:set var="startNum" value="${startNum - 1 }" />
 							</c:forEach> 
 						</c:if>
+						<input type="submit" class = "allDel" value="일괄삭제">
+				</form>	
+						
 						
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">

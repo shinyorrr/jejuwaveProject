@@ -94,11 +94,14 @@
 			<div class="content_section">
 				<h2 class = "mypage_menu_h2">내 게시글</h2>
 					<div class = "ajax">
+					
+					<form action="<%=context%>/mypageAlldelete.do" method="post">
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 						<table>
-							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
+							<tr>
 								<td colspan="3">
+								<input type = "checkbox" name = "chk_qna" value="${board.b_num }">
 								<input type = "text" id = "b_num" value="${board.b_num }" hidden="true">
 									<div class = "t_title">
 										${board.b_title}
@@ -125,8 +128,8 @@
 							</tr>
 							<tr>
 								<td>
-									<button  class = "button_update" onclick = "location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
-									<button  class = "button_delete" onclick = "location.href = '<%=context%>/mypageQnaDelete.do?b_num=${board.b_num }'">삭제</button>
+									<button type="button" class = "button_update" onclick = "location.href = 'qnaUpdateForm.do?b_num=${board.b_num}';">수정</button>
+									<button type="button" class = "button_delete" onclick = "location.href = '<%=context%>/mypageQnaDelete.do?b_num=${board.b_num }'">삭제</button>
 								</td>
 								<td colspan="3">
 									<div class = "b_recnt">
@@ -138,7 +141,10 @@
 						</table>
 					</c:forEach> 
 				</c:if>
+				<input type = "submit" class = "allDel" value="일괄삭제">
+				</form>
 				</div>
+				
 				
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">
