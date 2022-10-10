@@ -71,7 +71,7 @@ public class Qna_BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from ( select rownum rn, a.* from (select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success, A.b_date,b.l_hash1,b.l_hash2,b.l_hash3   from qna_board A, \r\n"
+		String sql = "select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from (select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success, A.b_date,b.l_hash1,b.l_hash2,b.l_hash3   from qna_board A, \r\n"
 				+ "		 	qna_hash B WHERE A.B_NUM = B.B_NUM order by A.b_date desc) a )\r\n"
 				+ "		 		 where rn between ? and ?";
 		
@@ -99,6 +99,7 @@ public class Qna_BoardDao {
 				board.setUser_id(rs.getString("user_id"));
 				board.setB_title(rs.getString("b_title"));
 				board.setB_content(rs.getString("b_content"));
+				board.setFn_user_img(rs.getString("fn_user_img"));
 
 				board.setL_hash1(rs.getString("l_hash1"));
 				System.out.println("Qna_BoardDao getBoardList l_hash1->"+rs.getString("l_hash1"));
@@ -134,7 +135,7 @@ public class Qna_BoardDao {
 		Connection conn = null;
 		Statement stmt = null;
 		ResultSet rs = null;
-		String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,A.b_theme,A.b_date,b.l_hash1,b.l_hash2,b.l_hash3 \r\n"
+		String sql = "select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success,A.b_theme,A.b_date,b.l_hash1, b.l_hash2,b.l_hash3,fn_user_img(a.user_id) fn_user_img \r\n"
 				+ "		 		from qna_board A, qna_hash B \r\n" + "		 		WHERE A.B_NUM = B.B_NUM \r\n"
 				+ "                and a.b_num =" + b_num;
 
@@ -153,6 +154,7 @@ public class Qna_BoardDao {
 				board.setL_hash2(rs.getString("l_hash2"));
 				board.setL_hash3(rs.getString("l_hash3"));
 				board.setB_theme(rs.getString("b_theme"));
+				board.setFn_user_img(rs.getString("fn_user_img"));
 
 				if (rs.getString("b_success").equals("Y")) {
 					board.setB_success("채택완료");
@@ -193,9 +195,16 @@ public class Qna_BoardDao {
 		    	  hash.add(3, null);
 		    	  
 		      }
-		      else if(hash.size()==3) {
+		      if(hash.size()==3) {
 		    	  hash.add(3, null);
 		      }
+		      
+		      if(hash.size()==1) {
+		    	  hash.add(1,null);
+		    	  hash.add(2,null);
+		    	  hash.add(3,null);
+		      }
+		      
 
 		      String sql1 = "select nvl(max(b_num),0) from qna_board";
 		      String sql = "insert into qna_board (b_num,user_id,b_date,b_title,b_content,b_success,b_theme) values(?,?,sysdate,?,?,?,?)";
@@ -259,8 +268,26 @@ public class Qna_BoardDao {
 		String sql = "update qna_board set b_title=?,b_content=?, b_theme=? where b_num=?";
 		String sql2 = "update qna_hash set l_hash1=?, l_hash2=?, l_hash3=? where b_num=?";
 		//해시태그 받아서 쪼개기
-		String[] hash = hashString.split("#");
-		
+		String[] hasharray = hashString.split("#");
+		   //배열을 list로 변환. add해야하기 때문 (aslist만 하면 add함수 쓸수없음)
+	      List<String> hash = new ArrayList<String>(Arrays.asList(hasharray));
+	      
+	      //해시태그 3개 미만 입력했을때 빈칸 null로 채우기
+	      if(hash.size()==1) {
+	    	  hash.add(1,null);
+	    	  hash.add(2,null);
+	    	  hash.add(3,null);
+	      }
+	      if(hash.size()==2) {
+	    	  hash.add(2, null);
+	    	  hash.add(3, null);
+	    	  
+	      }
+	      if(hash.size()==3) {
+	    	  hash.add(3, null);
+	      }
+	      
+
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -273,9 +300,9 @@ public class Qna_BoardDao {
 			pstmt.close();
 			
 			pstmt = conn.prepareStatement(sql2);
-			pstmt.setString(1, hash[1]);
-			pstmt.setString(2, hash[2]);
-			pstmt.setString(3, hash[3]);
+			pstmt.setString(1, hash.get(1));
+			pstmt.setString(2, hash.get(2));
+			pstmt.setString(3, hash.get(3));
 			pstmt.setInt(4, board.getB_num());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -401,7 +428,7 @@ public class Qna_BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from ( select rownum rn, a.* from (select A.b_num, A.user_id , A.b_title, A.b_content, A.b_success, A.b_date,"
+		String sql = "select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from (select A.b_num, A.user_id , A.b_title, A.b_content, A.b_success, A.b_date,"
 				+ "			b.l_hash1,b.l_hash2,b.l_hash3  from qna_board A, qna_hash B "
 				+ "			WHERE A.B_NUM = B.B_NUM order by A.b_date desc) a )\r\n"
 				+ "		 	where rn between ? and ? and b_success like 'N'";
@@ -430,6 +457,7 @@ public class Qna_BoardDao {
 				board.setUser_id(rs.getString("user_id"));
 				board.setB_title(rs.getString("b_title"));
 				board.setB_content(rs.getString("b_content"));
+				board.setFn_user_img(rs.getString("Fn_user_img"));
 
 				board.setL_hash1(rs.getString("l_hash1"));
 				System.out.println("Qna_BoardDao getBoardList l_hash1->"+rs.getString("l_hash1"));

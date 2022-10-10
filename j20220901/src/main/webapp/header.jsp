@@ -45,14 +45,26 @@ String context = request.getContextPath();
 						class="WebHeader_LogoImg hsELiP"
 						onClick="location.href='<%=context%>/main.do'">
 				</div>
+				
 				<div class="Headers__HeaderTopInnerDiv-sc-1la7hl4-3 dnYUeR">
-					<div class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
-						<span class="CommonIconSet QjNCN"></span>
-						<button type="submit" onclick="searchTravel()"></button>
-						<input id = "searchTravelCont" type="text" placeholder="동행을 찾아보세요!"
-							onfocus="this.placeholder = ''"
-							onblur="this.placeholder = '동행을 찾아보세요!'" required />
-					</div>
+				
+				<!-- 메인 search 동행자 검색 -->
+					<form action="travelListForm.do">
+						<div class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+							<span class="CommonIconSet QjNCN"></span>
+							<button  ></button>
+							<input name="t_title" 
+							<c:if test="${t_title ne null || t_title ne ''}">
+								value="${t_title}" 
+							</c:if>
+							id = "searchTravelCont" type="text" placeholder="동행을 찾아보세요!"
+								onfocus="this.placeholder = ''"
+								onblur="this.placeholder = '동행을 찾아보세요!'" required />
+						</div>
+					</form>
+					<!-- 메인 search 동행자 검색  끝-->
+					<!---------------------------->
+					
 					<!-- 비 로그인 상태 -->
 					<c:if test="${user_id == null }">
 						<div class="Button__ButtonWrapper-sc-1vcxcg6-0 oIYRa">
@@ -90,7 +102,7 @@ String context = request.getContextPath();
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 											<c:if test="${img != null }">
-												<img src="<%=context %>${img}"
+												<img src="<%=context %>/${img}"
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
 										</div>

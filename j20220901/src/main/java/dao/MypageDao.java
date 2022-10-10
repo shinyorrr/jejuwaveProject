@@ -41,7 +41,7 @@ public class MypageDao {
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "select count(*)from travel_board where user_id = ?";
+		String sql = "select count(*)from travel_board where user_id = ? and t_relevel = 0 ";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -301,20 +301,44 @@ public class MypageDao {
 		
 		return list;
 	}
-	public int getTotalCommentCnt(String user_id) throws SQLException {
+	public int getTotalQnaCommentCnt(String user_id) throws SQLException {
 		int max = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select (select count(*) from qna_comment where user_id = ?) + "
-				+ "       (select count(*) from travel_board where user_id = ? and t_restep != 0) "
-				+ " from dual";
-		System.out.println("getTotalCommentCnt sql : " + sql);
+		String sql = "select count(*) from qna_comment where user_id = ?";
+		System.out.println("getTotalQnaCommentCnt sql : " + sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
-			pstmt.setString(2, user_id);
+			rs = pstmt.executeQuery();
+			System.out.println("getTotalCommentCnt rs 실행되는지=> " + rs);
+			if(rs.next()) {
+				max = rs.getInt(1);
+				System.out.println("getTotalCommentCnt : 실행완료" + max);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}  finally {
+			if(rs != null) try {rs.close();} catch (Exception e) {} 
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		return max;
+	}
+	public int getTotalTravelCommentCnt(String user_id) throws SQLException {
+		int max = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from travel_board where user_id = ? and t_restep != 0 ";
+
+		System.out.println("getTotalTravelCommentCnt sql : " + sql);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_id);
 			rs = pstmt.executeQuery();
 			System.out.println("getTotalCommentCnt rs 실행되는지=> " + rs);
 			if(rs.next()) {
@@ -368,6 +392,7 @@ public class MypageDao {
 				+ "            and c.user_id = ? "
 				+ "            ) a) "
 				+ "where rn between ? and ? ";
+		System.out.println(sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -425,14 +450,14 @@ public class MypageDao {
 	}
 	public List<Mypage> commentList(String user_id, int startRow, int endRow) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
-		String sql = "select *\r\n"
-				+ " from(\r\n"
-				+ "    select rownum r, a.*\r\n"
-				+ "    from (select *\r\n"
-				+ "          from qna_comment\r\n"
-				+ "          where user_id = ?\r\n"
-				+ "          order by com_date desc\r\n"
-				+ "          ) a )\r\n"
+		String sql = "select * "
+				+ " from( "
+				+ "    select rownum r, a.* "
+				+ "    from (select * "
+				+ "          from qna_comment "
+				+ "          where user_id = ? "
+				+ "          order by com_date desc "
+				+ "          ) a ) "
 				+ " where r BETWEEN ? and ?";
 		System.out.println("commentList sql : " + sql);
 		Connection conn = null;
@@ -454,6 +479,7 @@ public class MypageDao {
 			do{
 				Mypage mypage = new Mypage();
 				mypage.setB_num(rs.getInt("b_num"));
+				mypage.setCom_num(rs.getInt("com_num"));
 				mypage.setCom_content(rs.getString("com_content"));
 				mypage.setCom_date(rs.getDate("com_date"));
 				list.add(mypage);
@@ -471,17 +497,17 @@ public class MypageDao {
 	}
 	public List<Mypage> commentList2(String user_id, int startRow, int endRow) {
 		List<Mypage> list = new ArrayList<Mypage>();
-		String sql = "select *\r\n"
-				+ "from(\r\n"
-				+ "    select rownum r, a.*\r\n"
-				+ "    from (select *\r\n"
-				+ "          from travel_board\r\n"
-				+ "          where user_id = ?\r\n"
-				+ "          and t_relevel != 0\r\n"
-				+ "          order by t_date desc\r\n"
-				+ "          ) a )\r\n"
+		String sql = "select * "
+				+ "from( "
+				+ "    select rownum r, a.* "
+				+ "    from (select *"
+				+ "          from travel_board "
+				+ "          where user_id = ? "
+				+ "          and t_relevel != 0 "
+				+ "          order by t_date desc "
+				+ "          ) a ) "
 				+ "where r BETWEEN ? and ?";
-		System.out.println("commentList sql : " + sql);
+		System.out.println("commentList2 sql2 : " + sql);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -516,7 +542,7 @@ public class MypageDao {
 		
 		return list;
 	}
-	public int deleteTraveler(int t_num) {
+	public int deleteTraveler(String t_num) {
 		int result = 0 ;
 		
 		Connection conn = null;
@@ -526,7 +552,7 @@ public class MypageDao {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, t_num);
+			pstmt.setString(1, t_num);
 			result = pstmt.executeUpdate();
 			
 			if(result != 0 ) System.out.println("성공");
@@ -534,9 +560,232 @@ public class MypageDao {
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
 		}
 		
 		
+		
+		return result;
+	}
+	public int deleteboard(String b_num) {
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete qna_board where b_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b_num);
+			result = pstmt.executeUpdate();
+			
+			if(result != 0 ) System.out.println("deleteboard ---> 성공");
+			else System.out.println("deleteboard ---> 삭제실패");
+		} catch (Exception e) {
+			System.out.println("deleteboard error ---> " + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+	
+		return result;
+	}
+	public int deleteCommunity(String c_num) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete community where c_num = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, c_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao deleteCommunity 오류" +  e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
+		return result;
+		
+	}
+	
+	
+	public int qnaComDelete(String b_num, String com_num) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete qna_comment where b_num = ? and com_num = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, b_num);
+			System.out.println("MypageDao qnaComDelete b_num==> " + b_num);
+			pstmt.setString(2, com_num);
+			System.out.println("MypageDao qnaComDelete com_num==> " + com_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao qnaComDelete 오류" +  e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		return result;
+		
+	}
+	
+	public int TravelComDelete(String t_num) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete travel_board where t_num = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, t_num);
+			result = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao qnaComDelete 오류" +  e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		return result;
+	}
+	
+	public int pwUpdate(String user_pw, String user_id) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update member set user_pw = ? where user_id = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user_pw);
+			pstmt.setString(2, user_id);
+			result = pstmt.executeUpdate();
+			if(result != 0) {
+				System.out.println("MypageDao pwUpdate ==> 성공");
+			}
+		} catch (Exception e) {
+			System.out.println("MypageDao pwUpdate 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		return result;
+	}
+	
+	public int trvAllDel(String[] chk_travel) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete travel_board where t_num=?";
+		System.out.println("MypageDao trvAllDel sql =>" + sql);
+		System.out.println("MypageDao chk_travel[i]");
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			for(int i= 0; i<chk_travel.length;i++) {
+				pstmt.setString(1, chk_travel[i]);
+				
+				// addBatch에 담기
+				pstmt.addBatch();
+				
+				// 파라미터 clear
+				pstmt.clearParameters();
+			}
+			
+			pstmt.executeBatch();
+			conn.commit();	
+			pstmt.clearBatch();
+			
+			result = 1;
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao trvAllDel 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
+		return result;
+	}
+	public int CommAllDel(String[] chk_commu) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete community where c_num=?";
+		System.out.println("MypageDao CommAllDel sql =>" + sql);
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			for(int i= 0; i<chk_commu.length;i++) {
+				pstmt.setString(1, chk_commu[i]);
+				
+				// addBatch에 담기
+				pstmt.addBatch();
+				
+				// 파라미터 clear
+				pstmt.clearParameters();
+			}
+			
+			pstmt.executeBatch();
+			conn.commit();	
+			pstmt.clearBatch();
+			
+			result = 1;
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao trvAllDel 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
+		return result;
+	}
+	public int QnaAllDel(String[] chk_qna) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete qna_board where b_num=?";
+		System.out.println("MypageDao chk_qna sql =>" + sql);
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			for(int i= 0; i<chk_qna.length;i++) {
+				pstmt.setString(1, chk_qna[i]);
+				
+				// addBatch에 담기
+				pstmt.addBatch();
+				
+				// 파라미터 clear
+				pstmt.clearParameters();
+			}
+			
+			pstmt.executeBatch();
+			conn.commit();	
+			pstmt.clearBatch();
+			
+			result = 1;
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao chk_qna 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
 		
 		return result;
 	}

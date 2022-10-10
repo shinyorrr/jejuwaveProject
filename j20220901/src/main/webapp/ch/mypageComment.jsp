@@ -21,23 +21,55 @@
 		width: 100%;
 	}
 </style>
-<script type="text/javascript" src = "https://code.jquery.com/jquery-3.6.1.js"></script>
+<script type="text/javascript" src = "<%=context%>/js/jquery.js"></script>
 <script type="text/javascript">
-	$(function(){
-		$('#myComment_setup').click(function(){
-			$.ajax({
-				url : 'mypageCommentPro.do',
-				dataType : 'html',
-				success	 : function(data){
-							$('#change_body').html(data)
-							}
-			});
+$(function(){
+	$('#myComment_Travel').click(function(){
 		
+		$.ajax({
+			url 	 : 'mypageCommentTravel.do',
+			dataType : 'html',
+			success	 : function(data){
+						var e = $(data).find('#change_body');
+						$('#change_body').html(e)
+						}
 		});
+	
+	});
+	
+});
+
+$(function(){
+	$('#myComment_qna').click(function(){
+		$.ajax({
+			url 	 : 'mypageComment.do',
+			dataType : 'html',
+			success	 : function(data){
+						var e = $(data).find('#change_body');
+						$('#change_body').html(e)
+						}
+		});
+	
+	});
+	
+});
+
+// 버튼 클릭시 색 변경
+$(function(){
+	$('.myComment_button').click(function(){
+		$('.myComment_button').css("background-color","rgb(233, 233, 233)");
+		$('.myComment_button').css("color","black");
+		$('.myComment_button').css("border","0");
+		$(this).css("background-color","white");
+		$(this).css("color","rgb(0, 206, 124)");
+		$(this).css("border","1px solid rgb(0, 206, 124)");
 		
 	});
+});
+
 
 </script>
+
 </head>
 <body>
 
@@ -79,7 +111,7 @@
 						</li>
 						<li class="link_mypage">
 							<a class="link index_link" href="<%=context%>/mypageBoard.do">
-								<span class="mypage_name">내 게시글</span>
+								<span class="mypage_name">내 Q&A글</span>
 							</a>
 						</li>
 						<li class="link_mypage_comment">
@@ -92,16 +124,21 @@
 			</div>
 			<!-- 각 화면이 달라지는 부분 -->
 			<div class="content_section">
-				<button id = "myComment_setup">
-				<h2 class = "mypage_menu_h2">내 댓글관리</h2>
+			
+				<button class = "myComment_button" id = "myComment_qna">
+					<h2 class = "mypage_CommentMain">Q&A 내 댓글관리</h2>
+				</button>
+				<button class = "myComment_button" id = "myComment_Travel">
+					<h2 class = "mypage_CommentMain">동행자게시판 내 코멘트</h2>
 				</button>
 				<div class = "change_body" id = "change_body">
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 						<table>
-						<c:if test="${board.com_content != null }">
 							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
 								<td colspan="3">
+								<input type="text" id = "b_num" name = "b_num" value="${board.b_num }" hidden="true">
+								<input type="text" id = "com_num" name = "com_num" value="${board.com_num }" hidden="true">
 									<div class = "c_content">
 									${board.com_content}								
 									</div>
@@ -111,33 +148,10 @@
 							<tr>
 								<td>
 									<div class = "button_updateform">
-									<button class = "button_update" onclick = "location.href = 'Board.jsp'">수정</button>
-									<button class = "button_delete">삭제</button>
+									<button type="button" class = "button_delete" onclick="location.href='mypageCommentDelete.do?b_num=${board.b_num}&com_num=${board.com_num }';">삭제</button>
 									</div>
 								</td>
 							</tr>
-						</c:if>
-						<c:if test="${board.t_content != null }">
-							<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}';">
-								<td colspan="3">
-									<div class = "c_content">
-									${board.t_content}								
-									</div>
-								</td>
-								<td class = "c_date">
-									<c:set var = "t_date" value="${board.t_date }" />
-									${fn:substring(t_date,0,11)}
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class = "button_updateform">
-									<button class = "button_update" location.href = "Board.jsp">수정</button>
-									<button class = "button_delete">삭제</button>
-									</div>
-								</td>
-							</tr>
-						</c:if>
 						</table>
 							<c:set var="startNum" value="${startNum - 1 }" />
 						</c:forEach> 
@@ -145,7 +159,7 @@
 					
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -156,7 +170,7 @@
 						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do?pageNum=${i }'" 
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -167,7 +181,7 @@
 						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do=${startPage+1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;

@@ -425,12 +425,12 @@ public class AdminDao {
 		return list;
 	}
 	
-	// 동행자 게시글 댓글 삭제
-	public int travelDelete(int t_num) {
+	// 동행자 게시글 삭제
+	public int travelDelete(int t_num) throws SQLException {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt= null;
-		String sql = "delete from travel_board where t_num=?";
+		String sql = "delete from travel_board where t_ref=?";
 		
 		try {
 			conn = getConnection();
@@ -441,9 +441,36 @@ public class AdminDao {
 			else result = 0;
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+		} finally {
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
 		}
 		return result;
 	}
+	
+	// 동행자 댓글 수정
+		public int travelReplyDelete(int t_num) throws SQLException {
+			int result = 0;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			String sql = "update travel_board set t_content='관리자 의해 삭제된 댓글입니다.' where t_num=?";
+			
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, t_num);
+				result = pstmt.executeUpdate();
+				if(result > 0) result = 1;
+				else result = 0;
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			} finally {
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null)  conn.close();
+			}
+			return result;
+		}
+		
 	//회원 커뮤니티 게시글 삭제
 	public int commuDelete(int c_num) throws SQLException {
 		int result = 0;
@@ -511,6 +538,50 @@ public class AdminDao {
 			if(conn!=null)  conn.close();
 		}
 		return result;
+	}
+	
+	public List<Member> memSelect(String keyField, String keyWord) throws SQLException {
+		List<Member> list = new ArrayList<Member>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from member";
+		
+		if(keyWord != null && !keyWord.equals("")) {
+			sql += " Where "+keyField.trim()+" Like '%"+keyWord.trim()+"%' order by user_id";		
+		} else {
+			sql += " order by user_id ";
+		}
+		System.out.println("Dao memSelect sql->"+sql);
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				Member m = new Member();
+				m.setUser_id(rs.getString("user_id"));
+				m.setUser_pw(rs.getString("user_pw"));
+				m.setUser_email(rs.getString("user_email"));
+				m.setUser_name(rs.getString("user_name"));
+				m.setUser_info(rs.getString("user_info"));
+				m.setUser_birth(rs.getString("user_birth"));
+				m.setUser_gender(rs.getString("user_gender"));
+				m.setUser_tel(rs.getString("user_tel"));
+				m.setUser_gubun(rs.getInt("user_gubun"));
+				m.setUser_img(rs.getString("user_img"));
+				list.add(m);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(rs!=null)	rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
+		}
+		return list;
 	}
 	
 }

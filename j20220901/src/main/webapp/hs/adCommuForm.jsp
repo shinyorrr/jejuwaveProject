@@ -6,7 +6,7 @@
 	String userId = (String) session.getAttribute("user_id");
 	request.setAttribute("userId", userId);
 %>
-<c:import url="${context}/hs/headerLogin.jsp"></c:import>
+<c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
@@ -49,7 +49,7 @@
 		  		<c:forEach var="commu" items="${list}">
 			  	<tr>
 			  		<th scope="row" width="50">${startNum}</th>
-			  		<td width="600">${commu.c_content}</td>
+			  		<td width="600" id="content">${commu.c_content}</td>
 			  		<td width="100">${commu.c_hash}</td>
 			  		<td width="100">${commu.user_id}</td>
 			  		<td width="100">${commu.c_date}</td>

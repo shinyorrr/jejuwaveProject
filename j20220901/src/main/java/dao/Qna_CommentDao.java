@@ -46,7 +46,7 @@ public class Qna_CommentDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from qna_comment where b_num=?";
+		String sql = "select q.*, fn_user_img(q.user_id) fn_user_img from qna_comment q where b_num=?";
 		try {
 			conn=getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -59,7 +59,8 @@ public class Qna_CommentDao {
 				comment.setCom_num(rs.getInt("com_num"));
 				comment.setCom_date(rs.getDate("com_date"));
 				comment.setCom_choose(rs.getString("com_choose"));
-
+                comment.setFn_user_img(rs.getString("fn_user_img"));
+				
 				list.add(comment);
 			}	
 		} catch (Exception e) {
@@ -106,10 +107,13 @@ public class Qna_CommentDao {
 		int result = 0;
 		
 		String sql1 = "select nvl(max(com_num),0) from qna_comment where b_num=?";
+		String sql2 = "select nvl(max(com_cnt),0) from qna_board where b_num=?";
 		String sql = "insert into qna_comment values(?,?,?,sysdate,?,?)";
+		String sql3 = "update qna_board set com_cnt=? where b_num=?";
 		
 		try {
 			conn = getConnection();
+			//댓글번호 달기: 기존댓글번호 최대값받아와서 +1 
 			pstmt = conn.prepareStatement(sql1);
 			pstmt.setInt(1, comment.getB_num());
 			rs = pstmt.executeQuery();
@@ -117,7 +121,22 @@ public class Qna_CommentDao {
 			int cnum =rs.getInt(1) +1 ;
 			rs.close();
 			pstmt.close();
+			//댓글갯수 : 기존댓글갯수 최대값받아와서 +1
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, comment.getB_num());
+			rs = pstmt.executeQuery();
+			rs.next();
+			int com_cnt =rs.getInt(1) +1 ;
+			rs.close();
+			pstmt.close();
+			//qna_board 테이블에 댓글갯수 업데이트
+			pstmt = conn.prepareStatement(sql3);
+			pstmt.setInt(1, comment.getB_num());
+			pstmt.setInt(2, com_cnt);
+			pstmt.executeUpdate();
+			pstmt.close();
 			
+			//qna_comment 테이블에 데이터 등록
 			 pstmt = conn.prepareStatement(sql);
 			 pstmt.setInt(1, comment.getB_num());
 			 pstmt.setInt(2, cnum);
@@ -126,6 +145,9 @@ public class Qna_CommentDao {
 			 pstmt.setString(5, "N");
 			 result = pstmt.executeUpdate();
 			 pstmt.close();
+			 
+			 
+			 
 
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -141,15 +163,33 @@ public class Qna_CommentDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
+		ResultSet rs = null;
 		String sql = "delete from qna_comment where b_num=? and com_num=?";
+		String sql1 = "select nvl(max(com_cnt),0) from qna_board where b_num=?";
+		String sql2 = "update qna_board set com_cnt=? where b_num=?";
 		
 		try {
 			conn=getConnection();
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			pstmt.setInt(2, com_num);
-			result=pstmt.executeUpdate();
+			pstmt.executeUpdate();
 			pstmt.close();
+			
+			pstmt=conn.prepareStatement(sql1);
+			pstmt.setInt(1, b_num);
+			rs=pstmt.executeQuery();
+			rs.next();
+			int com_cnt = rs.getInt(1)-1;
+			rs.close();
+			pstmt.close();
+			
+			pstmt= conn.prepareStatement(sql2);
+			pstmt.setInt(1, com_cnt);
+			pstmt.setInt(2, b_num);
+			result = pstmt.executeUpdate();
+			
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {

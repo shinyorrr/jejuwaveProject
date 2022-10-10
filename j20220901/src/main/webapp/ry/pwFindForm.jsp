@@ -14,7 +14,7 @@
  	caption {
 	font-size: 24px;
 	}
-.joinform{
+.form-box{
     box-shadow: 10px 10px 10px 10px rgba(89,89,89,0.39);
     padding:70px 45px 45px 45px;
     display : inline-block;
@@ -47,7 +47,7 @@
 <body>
 
 		<tbody>
-		<div class="joinform" style="margin-top:200px; margin-left: 30%;">
+		<div class="form-box" style="margin-top:300px; margin-left: 38%; margin-bottom: 100px;">
 	<form  action="<%=context %>/pwFindPro.do" method="post" id="frm" name="frm" onsubmit="return chk()">
 		<table>
 		<thead>

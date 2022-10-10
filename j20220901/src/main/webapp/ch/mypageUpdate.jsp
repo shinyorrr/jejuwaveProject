@@ -66,10 +66,59 @@ $(function(){
 	var eMailForm = $('#eMailForm').val()
 	$('input[name=user_email2]').attr('value',eMailForm);
 })
+
 /* submit시 설정 */
 function disableOff(){
+
 	document.frm.user_email2.disabled = false;
 }
+/* 비밀번호 변경버튼 누르면 인풋화면 나옴 */
+function passwordUpdate(){
+	if($('#oldPassword').css('display') == 'none'){
+		$('#oldPassword').show();
+		$('#newPassword1').show();
+		$('#newPassword2').show();
+		$('#newPassword3').show();
+	}else{
+		$('#oldPassword').hide();
+		$('#newPassword1').hide();
+		$('#newPassword2').hide();
+		$('#newPassword3').hide();
+
+	}
+}
+// 패스워드 유효성체크
+function fn_submit(){	
+	var f = document.pw;
+	var pw = ${user_pw};
+	if(f.pass1.value == ""){
+		alert("현 암호를 입력해주세요.");
+		f.pass1.focus();
+		return false;
+	}
+	if(f.pass2.value == ""){
+		alert("새로운 암호를 입력해주세요.");
+		f.pass2.focus();
+		return false;
+	}
+	if(f.pass3.value == ""){
+		alert("새 암호를 재입력해주세요.");
+		f.pass4.focus();
+		return false;
+	}
+	if(f.pass2.value != f.pass3.value){
+		alert("새로운 암호와 재설정이 일치하지 않습니다.");
+		f.pass3.focus();
+		return false;
+	}
+	if(f.pass1.value != pw){
+		alert("현재암호와 다릅니다.")
+		f.pass1.focus();
+		return false;
+	}
+	f.submit();
+}
+
 
 /* const email_change = (target) => {
 	if(target.options[target.selectedIndex].value == '1'){
@@ -152,7 +201,7 @@ function disableOff(){
 							<span><img id="target_img" src="<%=context%>/${member.user_img}" width = "200px"></span>
 						</c:if>
 					</div>
-					<form name = "frm" action="<%=context %>/mypageUpdatePro.do" method="post" enctype="multipart/form-data" onsubmit="disableOff()">
+					<form name = "frm" action="<%=context %>/mypageUpdatePro.do" method="post" enctype="multipart/form-data" onsubmit="return disableOff()">
 						<input type="file" id = "profile" name = "profile" style= "display:none;" onchange="readURL(this);">
 						<input type = "hidden" name ="target_url">
 						<h3 class = "mypage_menu_h3">소개글</h3>
@@ -180,11 +229,17 @@ function disableOff(){
 							  <option value="kakao.com"
 							  <c:if test = "${fn:split(member.user_email,'@')[1] eq 'kakao.com'}"> selected </c:if>>kakao.com</option>
 							</select>
-						<div class = "submitMain">
-							<input type="submit" id = "submit" value = "수정완료">
-							<button class="pw_search" onclick = "location.href='userPassword.jsp'">비밀번호찾기</button>
-						</div>
+							<div class = "submitMain">
+								<input type="submit" id = "submit" value = "수정완료">
+							</div>
 					</form>	
+				<button class="pw_search" onclick = "passwordUpdate()">비밀번호수정</button>
+					<form action="<%=context %>/pwUpdate.do" name = "pw" method="post">
+						<input type="password" id = "oldPassword" name = "pass1" placeholder = "현재 비밀번호를 입력하세요"><br>
+						<input type="password" id = "newPassword1" name = "pass2" placeholder="변경한 비밀번호를 입력하세요">
+						<input type="password" id = "newPassword2" name = "pass3" placeholder="변경할 비밀번호를 다시 입력하세요"><br>
+						<input type="submit" id = "newPassword3" value = "비밀번호 수정완료" onclick="fn_submit();return false;">
+					</form>
 				</div>
 			</div>
 		</div>

@@ -52,4 +52,26 @@
     user-select: none;
     -webkit-user-drag: none;
     padding-left : 20px;
+    font-size: small;
+}
+
+#myComment_Travel{
+	float: right;
+}
+.mypage_CommentMain{
+    width: 298px;
+    padding: 10px;
+    font-size: 20px;
+    font-family: 'NotoSansKR';
+    margin-bottom: 20px;
+    font-size: initial;
+}
+.myComment_button{
+	background-color: rgb(233, 233, 233);
+	height: 46px;
+}
+#myComment_qna{
+	background-color: white;
+	color : rgb(0, 206, 124);
+	border: 1px solid rgb(0, 206, 124);
 }

@@ -131,7 +131,7 @@ String context = request.getContextPath();
 											<!-- Content 이미지-->
 											<div id="pic">
 
-												<img src="<%=context %>${travel.t_img}"
+												<img src="<%=context %>/${travel.t_img}"
 													class="card-img-top" />
 
 											</div>

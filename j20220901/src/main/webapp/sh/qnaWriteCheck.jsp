@@ -34,7 +34,7 @@ String context = request.getContextPath();
 	</div>
 </header>
 
-<body>
+<body >
 	<!-- 글 제목 -->
 	<div class="title">
 		<img src="<%=context%>/sh_images/qnaicon1.png"
@@ -45,7 +45,7 @@ String context = request.getContextPath();
 	<!-- 아이디 -->
 	<div class="profile">
 		<div class="basic2_2">
-			<img src="<%=context%>/sh_images/user_icon04.png"
+			<img src="<%=context%>/${board.fn_user_img}"
 				class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 				width="20" height="20">
 			<div></div>
@@ -53,9 +53,9 @@ String context = request.getContextPath();
 		<p class="basic2_2">${board.user_id}</p>
 	</div>
 	<!-- 답변 채택완료/대기중 -->
-	<div class="gubun">
+	<div  style="border: 1px solid #D5D5D5; margin-right: 1300px;  padding:10px 5px 10px 5px; width:250px;  "  class="gubun">
 		<div>
-			<br> <br> <span class="wait">상태</span> 
+		 <span class="wait">&nbsp; &nbsp;상태</span> 
 
 		<span class="fw-bold me-2">
 		
@@ -130,7 +130,7 @@ String context = request.getContextPath();
 			<p>
 			<div style="margin-top: 25px;">
 					<div style="float: left;">
-						<img src="<%=context %>/sh_images/user_icon0${inum.count }.png" width="40" height="40"
+						<img src="<%=context%>/${comment.fn_user_img}" width="40" height="40"
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white">
 					</div>					
 					<div class="fw-bold" style="font-size: 17px; line-height: 1.1" >${comment.user_id }

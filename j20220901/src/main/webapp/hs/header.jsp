@@ -42,7 +42,7 @@
 		<div class="Headers__InnerSection bQvPOR">
 			<div class="Headers__HeaderTopWrapDiv kKJwFS">
 				<div class="Headers_HeaderTopInnerDiv cMXtHR">
-					<img src="<%=context%>/hs_images/brand_logo.png" alt="logo" class="WebHeader_LogoImg hsELiP" onClick="location.href='${context}index.jsp'">
+					<img src="<%=context%>/hs_images/brand_logo.png" alt="logo" class="WebHeader_LogoImg hsELiP" onClick="location.href='<%=context%>/main.do'">
 				</div>
 				<div class="Headers__HeaderTopInnerDiv-sc-1la7hl4-3 dnYUeR">
 					<div width="300px"

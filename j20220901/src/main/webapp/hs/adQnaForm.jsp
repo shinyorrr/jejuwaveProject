@@ -7,7 +7,7 @@
 	String userId = (String) session.getAttribute("user_id");
 	request.setAttribute("userId", userId);
 %>
-<c:import url="${context}/hs/headerLogin.jsp"></c:import>
+<c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
@@ -51,7 +51,7 @@
 			  		<c:forEach var="qna" items="${list}">
 			  			<tr>
 			  				<th scope="row"  width="50">${startNum}</th>
-			  				<td width="500">
+			  				<td width="500" id="content">
 			  				<a href="adQnaComment.do?b_num=${qna.b_num}&pageNum=${currentPage}">${qna.b_title}</a>
 			  				</td>
 			  				<td width="100">${qna.user_id}</td>

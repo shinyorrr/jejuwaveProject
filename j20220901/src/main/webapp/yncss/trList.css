@@ -1,28 +1,64 @@
 @charset "UTF-8";
 
-/************************************/
-/**********   List css   ************/
-/************************************/
-/* 폰트 등록 */
+/* 폰트 등록, 적용 */
 @font-face{
-    font-family : 'NotoSansKR-Regular';
-    /* src : url('../font/NotoSansKR-Regular.otf') format('otf');
-    src : url('../font/NotoSansKR-Regular.woff') format('woff'); */
+    font-family : NotoSansKR-Regular;
     src : url('../font/NotoSansKR-Regular.ttf') format('ttf');
     font-weight : normal;
     font-style : normal;
 }
-
 @font-face{
-    font-family : 'NotoSansKR-Medium';
+    font-family : NotoSansKR-Medium;
     src : url('../font/NotoSansKR-Medium.ttf') format('ttf'), url('../fonts/NotoSansKR-Medium.woff') format('woff');
     font-weight : normal;
     font-style : normal;
 }
 
 body{
-	font-family: 'NotoSansKR-Regular';
+	font-family: NotoSansKR-Medium !important;
 }
+* {
+  color: #000000
+}
+textarea{
+	resize: none !important;
+}
+#cateTextM, #cateTextS{
+	color: white !important;
+}
+#cateTextS{
+	color: white !important;
+	padding: 15px !important;
+	/* font-size: 18px !important; */
+}
+
+/************************************/
+/**********   List css   ************/
+/************************************/
+
+.btn:active, .btn:focus,
+button:focus
+{ font-weight: bold !important; border: 2px; box-shadow: none !important; outline:none !important;}
+
+input:focus, textarea:focus{
+	outline:none !important;
+	/* outline: 1px solid black !important; */
+	}
+input:focus, textarea:focus{
+	outline:none !important;
+	/* outline: 1px solid black !important; */
+	}
+	
+
+#t_gubuns button {
+	border: none; outline: none; 
+}
+#input_to input:focus, #input_from input:focus {
+	outline:none ;
+	/* outline: 1px solid #ff3500 !important; */
+}
+
+
 
 #title {
 	white-space: nowrap;
@@ -39,36 +75,79 @@ body{
 #comment {
 	font-size: 14px;
 	color: #9A9A9A;
+	font-weight: 500;
+	vertical-align:middle;
 	position: realtive;
 	float: right;
 }
 
 #comment img {
-	margin-right: 5px;
+	width: 14px; 
+	margin: 0 5px;
 }
 
 #pic img {
 	width: 100%;
-	height: 220px;
+	height: 260px;
 	object-fit: cover;
+	
 }
 
 #pic {
 	width: 100%;
-	height: 220px;
+	height: 260px;
 	overflow: hidden;
+	position: relative;
 }
 
+#contentBox {
+	border: 1px solid #e9e9e9;
+}
 
-
+#pic:hover {
+	/* background-color: rgba(0, 0, 0, 0.2); */
+	border-radius:3px 3px 0 0;
+}
 
 #pic:hover img {
-	background-color: rgba(0, 0, 0, 0.2);
+	/* background-color: rgba(0, 0, 0, 0.2); */
 	transform: scale(1.1);
 	transition-duration: 0.5s;
-	border-radius:42px;
+	/* border-radius:41px 41px 0 0; */
 }
-/* .contentImgDate {
+#picOnGubun {
+	/* visibility: hidden; */
+	width: 19%;
+	margin: 10px;
+	font-size: 12px;
+	color: white;
+	position: absolute;
+	opacity: 1;
+	border-radius:20px;
+	padding: 5px 0px 5px 10px;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 1;
+}
+ #picOnDate {
+	/* visibility: hidden; */
+	display: none;
+}
+#pic:hover #picOnDate {
+	display: inline;
+	color: white;
+	} 
+#pic:hover #picOnGubun {
+	width: 48%;
+} 
+
+
+
+
+
+
+
+
+/* #contentDate {
 	opacity: 1;
 	padding: 5px;
 	background-color: rgba(0, 0, 0, 0.5);
@@ -103,19 +182,33 @@ body{
 	background: #ff3500;
 	color: white;
 }
+
 #filterBtn_BF {
 	background: white;
-	border: 2px ;
-	border-color: #8C8C8C;
 	border-collapse: collapse;
-	
+	margin-bottom: 3px; 
+	border-radius: 30px; 
+	padding:8px;
+	border: solid #4C4C4C 2px;
+	font-weight: bold;
+	color: #000000;
+}
+#filterBtn_AF {
+	margin-bottom: 3px; 
+	border-radius: 30px; 
+	padding:8px;
+	background: #ff3500;
+	border: solid #ff3500 2px; 
+	color:white;	
+	font-weight: bold;
+}
+#pageNumColor {
+	color: #000000 !important;
 }
 
-
-#filter {
+/* #filter {
 	float: right;
-}
-
+} */
 
 .fileRegiBtn label {
 	display: inline-block; 
@@ -143,11 +236,26 @@ body{
 	clip:rect(0,0,0,0); 
 	border: 0;
 }
+#searchFilterGubun {
+	font-weight: bold;
+}
+#searchFilterGubun button {
+	padding: 1px;
+}
+
 /************************************/
 /**********   View css   ************/
 /************************************/
 #dateViwer {
 	font-size: 90%;
+	color: #9A9A9A;
+	font-weight: bold;
+	padding: 0px;
+	
+}
+#dateViwerDate {
+	font-size: 90%;
+	color: #9A9A9A;
 }
 #keyColor{
 	color:#ff3500;	
@@ -157,14 +265,15 @@ body{
 }
 #userBox{
 	border: 1px; 
-	border-color: #4A3E37 ;
+	border-color: #e9e9e9 ;
 	border-collapse:collapse;
 	border-radius: round;
+	width: 21%;
 }
 
 
 .fontColorGrey {
-	color:#8C8C8C;
+	color:#9A9A9A;
 }
 .fontSize-14{
 	font-size:14px;
@@ -181,7 +290,7 @@ body{
 }
 #trCommBtn {
 	height:34px;
-	width:131px;
+	width:100%;
 	background-color: #FF3500;
 	color: white;
 	font-size: 14px;
@@ -199,34 +308,26 @@ body{
 /************************************/
 /**********   Write css   ************/
 /************************************/
-/*라벨은 원하는대로 커스텀하고*/
-
-.fileRegiBtn label {
-	display: inline-block; 
-	padding: .5em .75em; 
-	color: #ffffff; 
-	font-size: inherit; 
-	line-height: normal; 
-	vertical-align: middle; 
-	background-color: #ff3500; 
-	cursor: pointer; 
-	border: 1px solid #ebebeb; 
-	border-bottom-color: #e2e2e2; 
-	border-radius: .25em;
-}
 
 #fileName {
 	background-color: #e2e2e2;
 }
-/*파일선택시 선택된 파일명이 붙는것을 가려준다*/
 
-.fileRegiBtn input[type="file"]{
-	position: absolute; 
-	width: 1px; 
-	height: 1px; 
-	padding: 0; 
-	margin: -1px; 
-	overflow: hidden; 
-	clip:rect(0,0,0,0); 
-	border: 0;
+
+#image-upload-box {
+	background-color: #E6E6E6;
+  height: 320px;
+  border-radius: 4px;
+  overflow: hidden;
+  object-fit:cover;
+  display:flex;
+  vertical-align:middle;
 }
+#image-upload-box img {
+   width: 100%; 
+   object-fit:cover;
+   height: 320px;
+   
+}
+
+

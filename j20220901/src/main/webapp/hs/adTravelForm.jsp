@@ -7,7 +7,7 @@
 	String userId = (String) session.getAttribute("user_id");
 	request.setAttribute("userId", userId);
 %>
-<c:import url="${context}/hs/headerLogin.jsp"></c:import>
+<c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 
@@ -42,7 +42,6 @@
 			      <th scope="col">아이디</th>
 			      <th scope="col">테마</th>
 			      <th scope="col">모집인원</th>
-				  <th scope="col">댓글수</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col">삭제</th>
 			    </tr>
@@ -74,12 +73,11 @@
 								${travel.t_person= ""}
 							</c:if>
 							</td>
-			  				<td width="100">0</td>
 			  				<td width="100">
 			  				<fmt:parseDate value="${travel.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
 			  				<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
 			  				</td>
-			  				<td width="100"><input type="submit" value="삭제" onclick="location.href='<%=context%>/adTravelDelete.do?t_num=${travel.t_num}&pageNum=${pageNum}'"></td>
+			  				<td width="100"><input type="submit" value="삭제" onclick="location.href='<%=context%>/adTravelDelete.do?t_num=${travel.t_num}&t_relevel=${travel.t_relevel}&pageNum=${pageNum}'"></td>
 			  			</tr>
 			  			<c:set var="startNum" value="${startNum - 1}"></c:set>
 			  		</c:forEach>

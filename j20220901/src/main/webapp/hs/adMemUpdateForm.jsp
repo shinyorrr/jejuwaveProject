@@ -6,7 +6,7 @@
 	String userId = (String) session.getAttribute("user_id");
 	request.setAttribute("userId", userId);
 %>
-<c:import url="${context}/hs/headerLogin.jsp"></c:import>
+<c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 	
@@ -81,7 +81,7 @@
 		</div>
 		<div class="mybtn">
 			<input class="btn btn-primary" type="submit" value="수정완료">
-			<input class="btn btn-primary" type="reset" value="취소">
+			<input class="btn btn-primary" type="button" value="취소" onclick="location.href='<%=context%>/adMemList.do?pageNum=${pageNum}'">
 		</div>
 	  </form>
 	</article>

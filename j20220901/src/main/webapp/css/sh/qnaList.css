@@ -21,7 +21,29 @@
 	width: 215px;
 	height: 45px;
 	font-size: 15px;
-	 font-weight: bold; 
+	font-weight: bold; 
 	font-family: 'Noto Sans KR', sans-serif;
 	
 }
+
+
+
+.select{
+ 	margin-right: 10px;
+	height: 44px;
+	width: 80px; 
+	font-size: 14px;
+	padding-left: 5px; 
+  	border-radius: 4px;
+  	border: none;
+  	color: gray;
+  	font-family: 'Noto Sans KR', sans-serif;
+}
+
+
+.main{
+	font-family: 'Noto Sans KR', sans-serif;
+	
+}
+	
+	
