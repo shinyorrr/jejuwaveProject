@@ -153,7 +153,7 @@ String context = request.getContextPath();
 	</header>
 </body>
 <script type="text/javascript">
-
+//조회조건 엔터시 바로 조회
 function searchTravel() {
 	
 	let searchTravelCont = $('#searchTravelCont').val()
