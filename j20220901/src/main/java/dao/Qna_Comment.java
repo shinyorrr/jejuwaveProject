@@ -9,8 +9,15 @@ public class Qna_Comment extends Qna_Board {
 		private String com_content;
 		private Date com_date;
 		private String com_choose;
+		private String fn_user_img;
 		
 		
+		public String getFn_user_img() {
+			return fn_user_img;
+		}
+		public void setFn_user_img(String fn_user_img) {
+			this.fn_user_img = fn_user_img;
+		}
 		public String getCom_choose() {
 			return com_choose;
 		}

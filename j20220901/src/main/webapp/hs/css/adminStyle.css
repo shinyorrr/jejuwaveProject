@@ -51,7 +51,7 @@
 #navmenu button {
 	width : 180px;
 	margin: auto;
-	background-color: #03A7B8;
+	background-color: #ff3500;
 	color : white;
 	border-style: none;
 	box-shadow: 2px 2px 5px rgb(0,0,0.12);
@@ -81,13 +81,13 @@
 #memform {
 	border: 1px solid #D5D5D5;
 	width : 500px;
-	height: 500px;
+	height: 700px;
 	padding: 20px;
 	line-height: 25px;
 }
 
 #memform .btn-primary {
-	background-color: #03A7B8;
+	background-color: #ff3500;
 	border-style : none;
 	color : #fff;
 	

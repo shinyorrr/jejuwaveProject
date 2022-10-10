@@ -30,7 +30,8 @@ $(function(){
 			url 	 : 'mypageCommentTravel.do',
 			dataType : 'html',
 			success	 : function(data){
-						$('#change_body').html(data)
+						var e = $(data).find('#change_body');
+						$('#change_body').html(e)
 						}
 		});
 	
@@ -65,6 +66,8 @@ $(function(){
 		
 	});
 });
+
+
 </script>
 
 </head>
@@ -132,9 +135,10 @@ $(function(){
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 						<table>
-						<c:if test="${board.com_content != null }">
 							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
 								<td colspan="3">
+								<input type="text" id = "b_num" name = "b_num" value="${board.b_num }" hidden="true">
+								<input type="text" id = "com_num" name = "com_num" value="${board.com_num }" hidden="true">
 									<div class = "c_content">
 									${board.com_content}								
 									</div>
@@ -144,32 +148,10 @@ $(function(){
 							<tr>
 								<td>
 									<div class = "button_updateform">
-									<button class = "button_delete">삭제</button>
+									<button type="button" class = "button_delete" onclick="location.href='mypageCommentDelete.do?b_num=${board.b_num}&com_num=${board.com_num }';">삭제</button>
 									</div>
 								</td>
 							</tr>
-						</c:if>
-						<c:if test="${board.t_content != null }">
-							<tr style= " cursor: pointer" onclick="location.href='travelContent.do?t_num=${board.t_num}';">
-								<td colspan="3">
-									<div class = "c_content">
-									${board.t_content}								
-									</div>
-								</td>
-								<td class = "c_date">
-									<c:set var = "t_date" value="${board.t_date }" />
-									${fn:substring(t_date,0,11)}
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<div class = "button_updateform">
-									<button class = "button_update" location.href = "Board.jsp">수정</button>
-									<button class = "button_delete">삭제</button>
-									</div>
-								</td>
-							</tr>
-						</c:if>
 						</table>
 							<c:set var="startNum" value="${startNum - 1 }" />
 						</c:forEach> 
@@ -177,7 +159,7 @@ $(function(){
 					
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${startPage-1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do?pageNum=${startPage-1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -188,7 +170,7 @@ $(function(){
 						">이전</button>
 				</c:if>
 				<c:forEach var="i" begin = "${startPage }" end = "${endPage }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do?pageNum=${i }'" 
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do?pageNum=${i }'" 
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;
@@ -199,7 +181,7 @@ $(function(){
 						">${i }</button>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt }">
-						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageTraveler.do=${startPage+1 }'"
+						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageComment.do=${startPage+1 }'"
 						style ="
 					    border: #eeee 2px solid;
 					    background-color: white;

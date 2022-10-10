@@ -34,6 +34,7 @@ public class LoginAction implements CommandProcess {
 				HttpSession session = request.getSession();
 				session.setAttribute("user_id", user_id);
 				session.setAttribute("img", img);
+				session.setAttribute("user_pw", user_pw);
 			}
 			
 			request.setAttribute("user_gubun", member.getUser_gubun());

@@ -5,24 +5,28 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import dao.MemberDao;
 import dao.MypageDao;
 import service.CommandProcess;
 
-public class MypageTravelDeleteAction implements CommandProcess {
+public class MypageCommunityDeleteAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("MypageTravelDeleteAction 시작!!!");
-		String t_num = request.getParameter("t_num");
+		
+		String c_num = request.getParameter("c_num");
+
 		
 		MypageDao mypageDao = MypageDao.getInstance();
 		
-		int result = mypageDao.deleteTraveler(t_num);
+		int result = mypageDao.deleteCommunity(c_num);
 		
-		return "ch/mypageTravelerDelte.jsp";
+		request.setAttribute("result", result);
 		
+		return "mypageCommunity.do";
 	}
 
 }

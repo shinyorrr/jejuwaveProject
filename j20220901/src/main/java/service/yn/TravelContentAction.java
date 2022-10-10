@@ -19,72 +19,88 @@ public class TravelContentAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 			
-				System.out.println("TravelContentAction Service Start");
+		System.out.println("=====================TravelContentAction Service Start=====================");
 			
-				int t_num = Integer.parseInt(request.getParameter("t_num"));
-				String pageNum = request.getParameter("pageNum");
-				
-					
-			try {
-				TravelDao td = TravelDao.getInstance();
-				Travel travel = td.select(t_num);
-				System.out.println("requestPro travel ==>  " + travel);
-				
-				List<Travel> replyList = td.replyList(travel.getT_ref());
-				request.setAttribute("pageNum", pageNum);
-				request.setAttribute("travelContent", travel);
-				request.setAttribute("replyList", replyList);
-				
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+		//화면에서 들어오는 입력 파라미터
+		int 	t_num 	= Integer.parseInt(request.getParameter("t_num"));
+		String 	pageNum = request.getParameter("pageNum");
+		
+		System.out.println("=====================TravelContentAction 입력파라미터=====================");
+		System.out.println("TravelListAction pageNum 		======> " + pageNum);            // 현재페이지   
+		System.out.println("TravelListAction t_num 			======> " + t_num);              // 동행자글번호   
+		System.out.println("====================================================================");	
+		try {
+			/**
+			 * 동행글 조회 시작
+			 */
+			TravelDao td = TravelDao.getInstance();
 			
-			// review Action
-			System.out.println("review Action Start...");
-			ReviewDao rd = ReviewDao.getinstance();
-			try {
-				int totRev = rd.getTotalRev();
-				
-				String revPageNum = request.getParameter("revPageNum");
-				
-				if (revPageNum == null || revPageNum.equals("")) {revPageNum = "1";}
-				
-				int revCurrentPage = Integer.parseInt(revPageNum); // 1
-				int revPageSize = 15, revBlockSize = 10;
-				int revStartRow = (revCurrentPage - 1) * revPageSize + 1; //  
-				int revEndRow = revStartRow + revPageSize - 1;
-				int revStartNum = totRev - revStartRow + 1;
-				System.out.println("revPageNum -->"+revPageNum);
-				
-
-				// review 조회						1			4
-				List<Review> revlist = rd.revList(revStartRow,revEndRow,t_num);
-
-				int revPageCnt = (int)Math.ceil((double)totRev/revPageSize);
-				//								1				10			10
-				int revStartPage = (int)(revCurrentPage-1)/revBlockSize*revBlockSize + 1;
-				//					1				10
-				int revendPage = revStartPage + revBlockSize - 1;
-				// 공갈 Page 방지
-				if (revendPage > revPageCnt) revendPage = revPageCnt;
-				
-				System.out.println("revlist -->"+revlist);
-				
-				request.setAttribute("revlist", revlist);
-				request.setAttribute("totRev", totRev);
-				request.setAttribute("revPageNum", revPageNum);
-				request.setAttribute("revCurrentPage", revCurrentPage);
-				request.setAttribute("revStartNum", revStartNum);
-				request.setAttribute("revBlockSize", revBlockSize);
-				request.setAttribute("revPageCnt", revPageCnt);
-				request.setAttribute("revStartPage", revStartPage);
-				request.setAttribute("revendPage", revendPage);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			}
+			//동행자 글 조회
+			Travel travel = td.select(t_num);
 			
+			//댓글 목록 조회
+			List<Travel> replyList = td.replyList(travel.getT_ref());
 			
+			System.out.println("=====================TravelContentAction 출력값=====================");
+			System.out.println("TravelContentAction 출력값[travel]  			=> "	+ travel);
+			System.out.println("TravelContentAction 출력값[replyList]  		=> "	+ replyList);
+			System.out.println("================================================================");
 			
-			return "yn/travelContent.jsp";
+			/***************
+			 * 출력값 셋팅   *
+			 ***************/
+			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("travelContent", travel);
+			request.setAttribute("replyList", replyList);
+			System.out.println("=====================TravelContentAction Service End=====================");
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	
+		// review Action
+		System.out.println("review Action Start...");
+		ReviewDao rd = ReviewDao.getinstance();
+		try {
+			int totRev = rd.getTotalRev();
+			
+			String revPageNum = request.getParameter("revPageNum");
+			
+			if (revPageNum == null || revPageNum.equals("")) {revPageNum = "1";}
+			
+			int revCurrentPage = Integer.parseInt(revPageNum); // 1
+			int revPageSize = 15, revBlockSize = 10;
+			int revStartRow = (revCurrentPage - 1) * revPageSize + 1; //  
+			int revEndRow = revStartRow + revPageSize - 1;
+			int revStartNum = totRev - revStartRow + 1;
+			System.out.println("revPageNum -->"+revPageNum);
+			
+	
+			// review 조회						1			4
+			List<Review> revlist = rd.revList(revStartRow,revEndRow,t_num);
+	
+			int revPageCnt = (int)Math.ceil((double)totRev/revPageSize);
+			//								1				10			10
+			int revStartPage = (int)(revCurrentPage-1)/revBlockSize*revBlockSize + 1;
+			//					1				10
+			int revendPage = revStartPage + revBlockSize - 1;
+			// 공갈 Page 방지
+			if (revendPage > revPageCnt) revendPage = revPageCnt;
+			
+			System.out.println("revlist -->"+revlist);
+			
+			request.setAttribute("revlist", revlist);
+			request.setAttribute("totRev", totRev);
+			request.setAttribute("revPageNum", revPageNum);
+			request.setAttribute("revCurrentPage", revCurrentPage);
+			request.setAttribute("revStartNum", revStartNum);
+			request.setAttribute("revBlockSize", revBlockSize);
+			request.setAttribute("revPageCnt", revPageCnt);
+			request.setAttribute("revStartPage", revStartPage);
+			request.setAttribute("revendPage", revendPage);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	
+		return "yn/travelContent.jsp";
 	}
 }

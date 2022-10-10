@@ -9,20 +9,24 @@ import javax.servlet.http.HttpServletResponse;
 import dao.MypageDao;
 import service.CommandProcess;
 
-public class MypageTravelDeleteAction implements CommandProcess {
+public class MypageCommentTravelDeleteAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("MypageTravelDeleteAction 시작!!!");
 		String t_num = request.getParameter("t_num");
+		System.out.println("t_num->"+t_num);
 		
-		MypageDao mypageDao = MypageDao.getInstance();
+		try {
+			MypageDao mypageDao = MypageDao.getInstance();
+			int result = mypageDao.TravelComDelete(t_num);
+			
+			request.setAttribute("result", result);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		
-		int result = mypageDao.deleteTraveler(t_num);
-		
-		return "ch/mypageTravelerDelte.jsp";
-		
+		return "ch/mypageCommentTravelDel.jsp";
 	}
 
 }
