@@ -355,37 +355,42 @@ public class AdminDao {
 	}
 	
 	// QnA 게시판 댓글 조회
-	public List<Qna_Comment> qnaComList(int b_num) throws SQLException {
-		List<Qna_Comment> list = new ArrayList<Qna_Comment>();
-		Connection conn = null;
-		String sql = "select * from qna_comment where b_num = ?";
-		System.out.println("Dao qnaComList sql->"+sql);
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, b_num);
-			rs = pstmt.executeQuery();
-			if(rs.next()) {
-				Qna_Comment qc = new Qna_Comment();
-				qc.setB_num(rs.getInt("b_num"));
-				qc.setCom_num(rs.getInt("com_num"));
-				qc.setUser_id(rs.getString("user_id"));
-				qc.setCom_date(rs.getDate("com_date"));
-				qc.setCom_content(rs.getString("com_content"));
-				list.add(qc);
+		public List<Qna_Comment> qnaComList(int b_num) throws SQLException {
+			List<Qna_Comment> list = new ArrayList<Qna_Comment>();
+			Connection conn = null;
+			String sql = "select * from qna_comment\r\n"
+					+ "where b_num = ? \r\n"
+					+ "order by com_num desc";
+			System.out.println("Dao qnaComList sql->"+sql);
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setInt(1, b_num);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					Qna_Comment qc = new Qna_Comment();
+					qc.setB_num(rs.getInt("b_num"));
+					System.out.println("b_num->"+b_num);
+		            qc.setCom_num(rs.getInt("com_num"));
+		            qc.setUser_id(rs.getString("user_id"));
+		            qc.setCom_date(rs.getDate("com_date"));
+		            qc.setCom_content(rs.getString("com_content"));
+		            qc.setCom_choose(rs.getString("com_choose"));
+		            System.out.println("qc->"+qc);
+					list.add(qc);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			} finally {
+				if(rs!=null) 	rs.close();
+				if(pstmt!=null) pstmt.close();
+				if(conn!=null)  conn.close();
 			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		} finally {
-			if(rs!=null) 	rs.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			return list;
 		}
-		return list;
-	}
 	
 	//회원 커뮤니티
 	
