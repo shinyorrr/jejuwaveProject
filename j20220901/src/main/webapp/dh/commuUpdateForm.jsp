@@ -23,6 +23,89 @@
 <!-- fontAwesomeIcon CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<style type="text/css">
+	#file-list {
+		border: 1px solid #ced4da;
+		min-height: 410px;
+		border-radius: 0.25rem;
+	}
+	.file-input {
+		display:inline-block;
+		position:relative;
+		width:300px;height:328px;
+		margin:40px;
+		border-radius:0.25rem;
+		z-index:1
+	}
+	.preview {
+		width:100%;
+		height:304px;
+		z-index:none;
+		border: 0px;
+		border-radius: 0.25rem;
+	}
+	input[type=file]::file-selector-button {
+		position: absolute;
+		left:0px;
+		bottom:0px;
+		z-index:999;
+		border-color:transparent;
+		padding: 6px 25px;
+ 		background-color:#FF3500;
+ 		border-radius: 4px;
+		color: white;
+		cursor: pointer;
+	}
+	
+	.addFile {
+		height: 40px;
+		padding: 6px 25px;
+ 		background-color:#FF3500;
+ 		border-radius: 4px;
+		color: white;
+		cursor: pointer;
+	}
+	a:hover {
+	color: white;
+	}
+	.delFile {
+		height:40px;
+		background-color:#707070;
+ 		border-radius: 4px;
+		color: white;
+		cursor: pointer;
+		position: absolute;
+		right:0px;
+		bottom:0px;
+		padding: 7px 25px 6px 25px;
+		z-index:999;
+	}
+	.file-add {
+		margin-top: 10px;
+	}
+	.btn-submit {
+		background-color: #FF3500;
+		color: white;
+	}
+	.btn-submit:hover {
+		color: white;
+	}
+	.btn-reset {
+		background-color:#5c636a;
+		color: white;
+	}
+	.btn-reset:hover {
+		color: white;
+	}
+</style>
+<script type="text/javascript">
+	function fileListChk() {
+		if ($('#file-list').is(':empty') || $('#file-list:empty').length || !$.trim( $('#file-list').html() ).length) {
+			alert('적어도 한개 이상의 사진파일을 첨부해주세요');
+			return false;
+		}
+	}
+</script>
 </head>
 <body>
 	
@@ -39,82 +122,77 @@
 		</section>
 		<!-- form 시작 -->
 		<div class="row m-5 justify-content-md-center">
-			<form action="commuUpdatePro.do?" method="post" enctype="multipart/form-data">
+			<form action="commuUpdatePro.do?" method="post" enctype="multipart/form-data" onsubmit="return fileListChk();">
 				<input type="hidden" name="user_id" value="${commu.user_id }">
-				<input type="hidden" name="c_num"   value="${commu.c_num }"> <!-- pk 수정하지 않는다. db무결성 문제가능성 -->
-				<input type="hidden" name="pageNum" value="${pageNum }">
+				<input type="hidden" name="c_num" value="${c_num}">
+				
 				<c:forEach items="${imgList }" var="img">
 					<input type="hidden" name="b_c_img_num" value="${img.c_img_num }">
 				</c:forEach>
-				
-				<div class="form-group file-group" id="file-list">
-					<div class="file-add">
-						<div class="btn btn-danger" onclick="addFile()">파일추가<a href="#this" onclick="addFile()"></a></div>
-					</div>	
-					<c:forEach items="${imgList}" var="img">
-						<div class="file-input" style="display:inline-block;position:relative;width:300px;height:280px;margin:40px;border:1px solid #00f;border-radius:0.25rem;	z-index:1">
-							<img src="<%=context %>/${img.c_img_path}" style="height: 300px; width: 300px;">
-							<a href='#this' name='file-delete' style="position: absolute; right:0px;bottom:0px;z-index:999;"><button class="btn btn-danger">파일삭제</button></a>
-							<input type="hidden" name="c_img_num " value="${img.c_img_num }">
+				<div class="form-group file-group" id="file-list">
+					<c:forEach items="${imgList }" var="img">
+						<div class='file-input'>
+							<input type="hidden" name="c_img_num" value="${img.c_img_num }">
+							<img src="<%=context %>/${img.c_img_path}" class='preview' />
+							<a href='#this' name='file-delete' class='delFile'>파일 삭제</a>
 						</div>
 					</c:forEach>
-
+				
 				</div>
-				<!-- 이미지 미리보기 script -->
-				<script type="text/javascript">
-					$(document).ready(function() {
-						$("a[name='file-delete']").on("click", function(e) {
-							e.preventDefault();
-							deleteFile($(this));
-						});
-					})
-						let count = 0;
-					function addFile() {
-						var str = "<div class='file-input'><input type='file' name='file' id='file"+count+"' onchange='readURL(this);' style='display: none'><label class='btn btn-danger' id='inputBtn' for='file"+count+"'>파일선택</label><img id='preview"+count+"' style='height: 300px; width: 300px;'/><a href='#this' name='file-delete'><button class='btn btn-danger' style='margin-left:5px;'>파일삭제</button></a></div>";
-						$("#file-list").append(str);
-						console.log(count);
-						$("a[name='file-delete']").on("click", function(e) {
-							e.preventDefault();
-							deleteFile($(this));
-						});
-						++count;
-					} 
-					function deleteFile(obj) {
-						obj.parent().remove();
-					}
-					
-					function readURL(input) {
-						  let preview = 'preview' + (count - 1);
-						  if (input.files && input.files[0]) {
-						    	var reader = new FileReader();
-							    reader.onload = function(e) {
-							      console.log(count);
-							      console.log(preview);
-							      document.getElementById(preview).src = e.target.result;
-							    };
-							    /* const div = document.getElementById('inputBtn')
-							    div.remove(); */
-							    reader.readAsDataURL(input.files[0]);
-						  } else {
-						    document.getElementById(preview).src = "";
-						  }
-					}
-				</script>
-				<div class="form-group">
-					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="9" name="c_content"  placeholder="게시글 내용을 입력하세요">${commu.c_content }</textarea>
+				<div class="file-add">
+					<a href="#this" onclick="addFile()" class='addFile'>파일추가</a>
 				</div>
 				<div class="form-group">
-					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="1" name="c_hash"     placeholder="태그를 입력하세요. 입력 예시 : #제주도#음식#카페">${commu.c_hash }</textarea>
+					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="9" name="c_content"  placeholder="게시글 내용을 입력하세요" required>${commu.c_content }</textarea>
+				</div>
+				<div class="form-group">
+					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="1" name="c_hash"     placeholder="태그를 입력하세요. 입력 예시 : #제주도#음식#카페" required>${commu.c_hash }</textarea>
 				</div>
 				<div class="mt-5 row">
 					<div class="col-md-6">
-						<button type="reset" class="btn btn-secondary btn-block" style="width: 100%; height: 50px;">취소</button>
+						<button type="reset" class="btn btn-reset btn-block" style="width: 100%; height: 50px;">취소</button>
 					</div>
 					<div class="col-md-6">
-						<button type="submit" class="btn btn-success btn-block" style="width: 100%;  height: 50px;">수정</button>
+						<button type="submit" class="btn btn-submit btn-block" style="width: 100%;  height: 50px;">확인</button>
 					</div>
 				</div>
 			</form>
+			<!-- 이미지 미리보기 script -->
+			<script type="text/javascript">
+					var count = 0;
+					$(document).ready(function() {
+					$("a[name='file-delete']").on("click", function(e) {
+						e.preventDefault();
+						deleteFile($(this));
+					});
+				})
+				
+				function addFile() {
+					count++;
+					var str = "<div class='file-input'><input id='inputFile' type='file' name='file' onchange='readURL(this);'><img id='preview"+ count +"' class='preview' /><a href='#this' name='file-delete' class='delFile'>파일 삭제</a></div>";
+					$("#file-list").append(str);
+					$("a[name='file-delete']").on("click", function(e) {
+						e.preventDefault();
+						deleteFile($(this));
+					});
+				}
+				
+				function deleteFile(obj) {
+					obj.parent().remove();
+				}
+			
+				function readURL(input) {
+					  if (input.files && input.files[0]) {
+					    var reader = new FileReader();
+					    reader.onload = function(e) {
+					      document.getElementById('preview'+count).src = e.target.result;
+					    };
+					    reader.readAsDataURL(input.files[0]);
+					  } else {
+					    document.getElementById('preview'+count).src = "";
+					  }
+				}
+			</script>
 		</div>
 	</div>
 	<footer class="py-5 bg-dark" style="margin-top: 100px;">
