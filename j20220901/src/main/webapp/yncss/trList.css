@@ -16,10 +16,11 @@
 
 body{
 	font-family: NotoSansKR-Medium !important;
+	/* color: #000000; */
 }
-* {
-  color: #000000
-}
+/*  * {
+  color: #000000;
+}  */
 textarea{
 	resize: none !important;
 }
