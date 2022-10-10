@@ -33,9 +33,9 @@
 	<main role="main" class="container">
 
       <section class="jumbotron text-center">
-        <div class="container">
+        <div class="container mt-5">
           <h1 class="jumbotron-heading">검색결과</h1>
-          <p class="lead text-muted">'${searchWord }' 가 포함된 게시글</p>
+          <p class="lead text-muted">'${searchWord }' (이)가 포함된 게시글</p>
           
         </div>
       </section>
@@ -66,7 +66,11 @@
 	                  <p class="card-text">${commu.c_content }</p>
 	                  <div class="d-flex justify-content-between align-items-center">
 	                    <div class="hash-group">
-	                      ${commu.c_hash }
+	                      <c:forEach var="hashs" items="${hashList[status.index]}">
+								<c:forEach var="hash" items="${hashs }">
+									<a href="<%=context %>/commuSearchList.do?searchWord=${hash}">#${hash} &nbsp;</a>
+								</c:forEach>
+						  </c:forEach>
 	                    </div>
 	                    <small class="text-muted">${commu.c_date }</small>
 	                  </div>

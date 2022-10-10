@@ -1,6 +1,7 @@
 package service.dh;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -68,6 +69,18 @@ public class CommuSearchListAction implements CommandProcess {
 			request.setAttribute("userImgList", userImgList);
 			//set search word
 			request.setAttribute("searchWord", searchWord);
+			//hash tag split
+			List<String[]> hashList = new ArrayList<String[]>();
+			for (Commu commu : list) {
+				String hashTags = commu.getC_hash();
+				System.out.println("hashTags->" + hashTags);
+				String[] hashTagArray = hashTags.trim().split("\\s+");
+				System.out.println("hashTagArray[0] ->" + hashTagArray[0]);
+				System.out.println("hashTagArray->" + hashTagArray);
+				hashList.add(hashTagArray);
+			}
+			request.setAttribute("hashList", hashList);
+			System.out.println("hashList->" + hashList);
 		} catch (Exception e) {
 			System.out.println("searchListAction try ..." + e.getMessage());
 		}
