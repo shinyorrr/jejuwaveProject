@@ -11,7 +11,7 @@ String context = request.getContextPath();
 %>
 </head>
 <body>
-<c:if test="${resultUpdateCommu > 0}">
+<c:if test="${resultUpdateCommu > 0 }">
 		<script type="text/javascript">
 			alert("게시글 수정 완료");
 			location.href="<%=context%>/commuList.do?pageNum=${pageNum }";
@@ -23,11 +23,11 @@ String context = request.getContextPath();
 			location.href="<%=context%>/commuList.do?pageNum=${pageNum };
 		</script>
 	</c:if>
-	<%-- <c:if test="${resultUpdateCommu == 0 }">
+	<c:if test="${resultInsertImg == 0 }">
 		<script type="text/javascript">
-			alert("조건에 맞는 사진을 첨부해주세요")
+			alert("조건에 맞는 사진파일을 첨부해주세요")
 			location.href="<%=context%>/commuList.do?pageNum=${pageNum }
 		</script>
-	</c:if> --%>
+	</c:if>
 </body>
 </html>
