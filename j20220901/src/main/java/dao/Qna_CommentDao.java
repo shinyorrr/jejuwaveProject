@@ -131,8 +131,8 @@ public class Qna_CommentDao {
 			pstmt.close();
 			//qna_board 테이블에 댓글갯수 업데이트
 			pstmt = conn.prepareStatement(sql3);
-			pstmt.setInt(1, comment.getB_num());
-			pstmt.setInt(2, com_cnt);
+			pstmt.setInt(1, com_cnt);
+			pstmt.setInt(2, comment.getB_num());
 			pstmt.executeUpdate();
 			pstmt.close();
 			
@@ -150,7 +150,7 @@ public class Qna_CommentDao {
 			 
 
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("qna_comment insert error--> "+e.getMessage());
 		} finally {
 			if(conn!=null)conn.close();
 			if(pstmt!=null)pstmt.close();
