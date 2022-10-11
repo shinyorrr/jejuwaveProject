@@ -147,7 +147,6 @@
 		
 			<c:if test="${totCnt > 0}">
 				<c:forEach var="travel" items="${travelList}">
-					<c:if test="${travel.t_relevel == 0}">
 						<div class="col mb-5">
 							<div id="contentBox" class="card h-70" style="cursor: pointer;" 
 								 onclick="location.href='travelContent.do?t_num=${travel.t_num}&pageNum=${currentPage}';">
@@ -197,8 +196,7 @@
 								</div>
 							</div>
 						</div>
-					</c:if>
-					<c:set var="startNum" value="${startNum -1}" />
+					<%-- <c:set var="startNum" value="${startNum -1}" /> --%>
 				</c:forEach>
 			</c:if>
 
