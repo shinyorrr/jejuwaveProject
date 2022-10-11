@@ -359,8 +359,9 @@ public class Qna_BoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select *" + "from (select rownum rn, a.*"
-				+ "from (select * from qna_board order by b_num desc) a)" + "where rn between ? and ?";
+		String sql = "select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from (select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success, A.b_date,b.l_hash1,b.l_hash2,b.l_hash3   from qna_board A, \r\n"
+				+ "		 	qna_hash B WHERE A.B_NUM = B.B_NUM order by A.b_date desc) a )\r\n"
+				+ "		 		 where rn between ? and ?";
 
 		System.out.println("mainbdlist startRow ->" + startRow);
 		System.out.println("mainbdlist endRow ->" + endRow);
@@ -377,6 +378,7 @@ public class Qna_BoardDao {
 				board.setB_title(rs.getString("b_title"));
 				board.setB_content(rs.getString("b_content"));
 				board.setB_date(rs.getDate("b_date"));
+				board.setFn_user_img(rs.getString("fn_user_img"));
 				list.add(board);
 			}
 		} catch (Exception e) {
