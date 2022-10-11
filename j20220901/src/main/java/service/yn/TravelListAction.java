@@ -61,7 +61,7 @@ public class TravelListAction implements CommandProcess {
 				pageNum ="1";
 			}
 			int currentPage	= Integer.parseInt(pageNum);			//현재페이지
-			int pageSize 	= 8, blockSize = 10;					// pageSize : 한페이지에 보여줄 갯수, blockSize : 페이징 버튼 갯수
+			int pageSize 	= 12, blockSize = 10;					// pageSize : 한페이지에 보여줄 갯수, blockSize : 페이징 버튼 갯수
 			int startRow 	= (currentPage - 1) * pageSize + 1;  	// 1     10	시작 인덱스
 			int endRow   	= startRow + pageSize - 1;           	// 11    20 끝 인덱스
 			int startNum 	= totCnt - startRow + 1; 			  	//			시작 번호?

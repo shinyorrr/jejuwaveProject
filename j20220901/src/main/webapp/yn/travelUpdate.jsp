@@ -17,7 +17,7 @@ String context = request.getContextPath();
 
 <!------------ body 영역 ------------> 
 <body  style="color: #000000;">	
-<form action="travelUpdatePro.do" method="post" enctype="multipart/form-data">
+<form name="frm" action="travelUpdatePro.do" method="post" enctype="multipart/form-data">
 <input type="hidden" name="t_num" value="${travelContent.t_num}">
 
 <!-------- Header 카테고리 -------->
@@ -160,12 +160,17 @@ String context = request.getContextPath();
 /* 여행기간, 제목, 내용 체크 함수 */
 function chkAll() {
 	console.log('chkAll 함수 시작');
+	console.log(frm.t_start.value);
+	console.log(frm.t_end.value);
+	console.log(frm.t_content.value);
+	console.log(frm.t_title.value);
 	if(frm.t_start.value == "" || frm.t_end.value == "") {
 		console.log(document.frm.t_start.value);
 		alert("여행 기간을 선택해 주세요!");
 		frm.t_start.focus();
 		return false;
-	} if(frm.t_content.value == "" || frm.t_title.value == "") {
+	}
+	if(frm.t_content.value == "" || frm.t_title.value == "") {
 		alert("제목, 내용을 입력해 주세요!");
 		frm.t_title.focus();
 		return false;

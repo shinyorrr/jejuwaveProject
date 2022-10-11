@@ -24,6 +24,7 @@ public class TravelDeleteAction implements CommandProcess {
 		
 		System.out.println("TravelDeleteAction requestPro t_num = " + t_num);
 		System.out.println("TravelDeleteAction requestPro t_ref = " + t_ref);
+		System.out.println("TravelDeleteAction requestPro t_relevel = " + t_relevel);
 		try {
 			TravelDao td = TravelDao.getInstance();
 			int result = 0;
@@ -42,6 +43,7 @@ public class TravelDeleteAction implements CommandProcess {
 			request.setAttribute("result", result);
 			request.setAttribute("t_num", t_num);
 			request.setAttribute("t_ref", t_ref);
+			request.setAttribute("t_relevel", t_relevel);
 			
 			System.out.println("=====================TravelDeleteAction Service End=====================");
 		} catch (Exception e) {

@@ -283,7 +283,7 @@ request.setAttribute("userId", userId);
 										<img src="${reply.user_img}" width="34" height="34"
 											class=" bg-white userIconColor-1 rounded-circle me-2 mt-1 ">
 									</c:when>
-									<!------ 기본댓글 user_img 크기 ------>
+									<%-- 기본댓글 user_img 크기 --%>
 									<c:otherwise>
 										<img src="${reply.user_img}" width="46" height="46"
 											class=" bg-white userIconColor-1 rounded-circle me-2 mt-1 ">
@@ -398,7 +398,7 @@ $(function () {
 function deleteChk() {
 	if (confirm("삭제 후에는 복구 할 수 없습니다!\n게시글을 삭제하시겠습니까?") == true){    //확인
 /*     document.removefrm.submit();*/
-	location.href = "travelDelete.do?t_num=${travelContent.t_num}&t_ref=${travelContent.t_ref}";
+	location.href = "travelDelete.do?t_num=${travelContent.t_num}&t_ref=${travelContent.t_ref}&t_relevel=${travelContent.t_relevel}";
  }else{   //취소
      return false;
  }
