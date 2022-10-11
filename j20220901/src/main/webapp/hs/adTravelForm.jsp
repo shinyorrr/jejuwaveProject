@@ -51,7 +51,7 @@
 			  		<c:forEach var="travel" items="${list}">
 			  			<tr>
 			  				<th scope="row" width="50">${startNum}</th>
-			  				<td class="left" width="250">
+			  				<td class="left" width="250" id="content">
 							<c:if test="${travel.t_relevel == 0}">
 								${travel.t_title}
 								<c:if test="${travel.reply_cnt != 0 }">
@@ -84,7 +84,7 @@
 			  	</c:if>
 		  	<c:if test="${totCnt == 0}">
 		  		<tr>
-		  			<td colspan="7">데이터가 없네</td>
+		  			<td colspan="7">동행자 찾기 게시글이 없습니다.</td>
 		  		</tr>
 		  	</c:if>
 			  </tbody>
@@ -95,21 +95,21 @@
 		<nav class="pagenav" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${startPage > blockSize}">
-				<li class="page-item"><a class="page-link" href="<%=context%>/adTravelForm.do?pageNum=${startPage-blocksize}">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adTravelForm.do?pageNum=${startPage-blocksize}">이전</a></li>
 			</c:if>
 		    
 		    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<li class="page-item"><a class="page-link" href="<%=context%>/adTravelForm.do?pageNum=${i}">[${i}]</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adTravelForm.do?pageNum=${i}">${i}</a></li>
 			</c:forEach>
 		    
 		    <c:if test="${endPage < pageCnt}">
-				 <li class="page-item"><a class="page-link" href="<%=context%>/adTravelForm.do?pageNum=${startPage+blockSize }">Next</a></li>
+				 <li class="page-item"><a class="page-link" href="<%=context%>/adTravelForm.do?pageNum=${startPage+blockSize }">다음</a></li>
 			</c:if>
 		  </ul>
 		 </nav>
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>
-<c:import url="${context}/footer.jsp"></c:import>
+<c:import url="${context}/hs/footer.jsp"></c:import>
 </body>
 </html>

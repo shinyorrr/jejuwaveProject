@@ -12,9 +12,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script type="text/javascript" src="<%=context%>/js/jquery.js"></script>
 <script type="text/javascript">
+	
+	// 회원 검색
 	function searchCheck(){
-	    //검색
-	   
+	    
 	    if(frm.keyField.value == 0){
 	        alert("검색 키워드를 입력하세요.");
 	        frm.keyField.focus();
@@ -58,35 +59,35 @@
 	<div class="tablelist" style="overflow-x:auto;">
 		<table class="table table-bordered">
 		<caption>회원명단</caption>
-		  <thead>
+		<thead>
 		    <tr>
-		  		<td colspan="7">
-		  			<form action="<%=context%>/adMemberSelect.do" name="frm" method="post" onsubmit="return searchCheck()">
-		  			<select name="keyField" id="form-select" class="form-select form-select-sm" aria-label=".form-select-sm example">
-					  <option value="0">---선택---</option>
-					  <option value="user_id" <c:if test="${keyField eq 'user_id'}">selected</c:if>>아이디</option>
-					  <option value="user_name" <c:if test="${keyField eq 'user_name'}">selected</c:if>>이름</option>
-					</select>
-					<input type="text" name="keyWord" placeholder="회원정보를 입력해주세요" maxlength="50"  <c:if test="${keyWord ne null}"> value="${keyWord}" </c:if>>
-					<input type="submit" value="검색">
-					<input type="button" value="이전" onclick="location.href='<%=context%>/adMemList.do'">
-		  			</form>
-		  		</td>
-		  	</tr>
+	  		 <td colspan="7">
+	  			<form action="<%=context%>/adMemberSelect.do" name="frm" method="post" onsubmit="return searchCheck()">
+	  			<select name="keyField" id="form-select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+				  <option value="0">---선택---</option>
+				  <option value="user_id" <c:if test="${keyField eq 'user_id'}">selected</c:if>>아이디</option>
+				  <option value="user_name" <c:if test="${keyField eq 'user_name'}">selected</c:if>>이름</option>
+				</select>
+				<input type="text" name="keyWord" placeholder="회원정보를 입력해주세요" maxlength="50"  <c:if test="${keyWord ne null}"> value="${keyWord}" </c:if>>
+				<input type="submit" value="검색">
+				<input type="button" value="이전" onclick="location.href='<%=context%>/adMemList.do'">
+	  			</form>
+	  		 </td>
+		    </tr>
 		    <tr>
-		      <th scope="col">아이디</th>
-		      <th scope="col">암호</th>
-		      <th scope="col">이름</th>
-		      <th scope="col">게시글수</th>
-		      <th scope="col">댓글수</th>
-		      <th scope="col">회원구분</th>
-		      <th scope="col">정보수정</th>
+		       <th scope="col">아이디</th>
+		       <th scope="col">암호</th>
+		       <th scope="col">이름</th>
+		       <th scope="col">게시글수</th>
+		       <th scope="col">댓글수</th>
+		       <th scope="col">회원구분</th>
+		       <th scope="col">정보수정</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 	  		<c:forEach var="member" items="${list}">
 		  	<tr>
-		  		<td>${member.user_id}</td>
+				<td>${member.user_id}</td>
 		  		<td>${member.user_pw}</td>
 		  		<td>${member.user_name}</td>
 		  		<td>${member.board_count}</td>
@@ -97,10 +98,10 @@
 	  		</c:forEach>
 		  </tbody>
 		</table>
-	  </div>
+	 </div>
 	 </article>
 		
 <div style="margin-top: 100px, margin-left: 198px;"></div>
-<c:import url="${context}/footer.jsp"></c:import>
+<c:import url="${context}/hs/footer.jsp"></c:import>
 </body>
 </html>

@@ -1,5 +1,6 @@
 package service.ch;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Enumeration;
@@ -30,6 +31,11 @@ public class MypageProAction implements CommandProcess {
 	      
 	      String savePath = request.getServletContext().getRealPath("/fileSave");
 	      System.out.println("savePath ==== > " + savePath);
+	      File fileSaveDir = new File(savePath);
+			if (!fileSaveDir.exists()) { //저장경로에 해당 폴더가 없으면 만들기
+				fileSaveDir.mkdirs();
+			}
+	      
 	      
 	      String serverSaveFilename = "";
 	      

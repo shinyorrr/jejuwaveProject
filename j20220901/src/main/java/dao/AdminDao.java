@@ -26,9 +26,9 @@ public class AdminDao {
 	private Connection getConnection() {
 		Connection conn = null;
 		try {
-			Context ctx = new InitialContext();
-			DataSource ds = (DataSource) ctx.lookup("java:comp/env/jdbc/OracleDB");
-			conn = ds.getConnection();
+			Context     ctx = new InitialContext();
+			DataSource   ds = (DataSource) ctx.lookup("java:comp/env/jdbc/OracleDB");
+					   conn = ds.getConnection();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -39,21 +39,21 @@ public class AdminDao {
 	public int getTotalCnt() throws SQLException {
 		int tot = 0;
 		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql = "select count(*) from member";
+		Statement  stmt = null;
+		ResultSet    rs = null;
+		String sql 		= "select count(*) from member";
 		
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			rs   = stmt.executeQuery(sql);
 			if(rs.next()) tot = rs.getInt(1);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null) 	rs.close();
-			if(stmt!=null)  stmt.close();
-			if(conn!=null)  conn.close();
+			if(rs   != null)    rs.close();
+			if(stmt != null)  stmt.close();
+			if(conn != null)  conn.close();
 		}
 		return tot;
 		
@@ -63,66 +63,92 @@ public class AdminDao {
 	public int getTravelCnt() throws SQLException {
 		int tot = 0;
 		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql = "select count(*) from travel_board";
+		Statement  stmt = null;
+		ResultSet    rs = null;
+		String sql 		= "select count(*) from travel_board";
 		
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
+			rs   = stmt.executeQuery(sql);
 			if(rs.next()) tot = rs.getInt(1);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null) 	rs.close();
-			if(stmt!=null)  stmt.close();
-			if(conn!=null)  conn.close();
+			if(rs   != null)    rs.close();
+			if(stmt != null)  stmt.close();
+			if(conn != null)  conn.close();
 		}
 		return tot;
 	}
 	
+	// Qna 게시글 수
 	public int getQnabrdCnt() throws SQLException {
 		int tot = 0;
 		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql = "select count(*) from qna_board";
+		Statement  stmt = null;
+		ResultSet  	 rs = null;
+		String      sql = "select count(*) from qna_board";
 		
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs =stmt.executeQuery(sql);
+			rs   = stmt.executeQuery(sql);
 			if(rs.next()) tot = rs.getInt(1);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if( rs!= null) 	 rs.close();
-			if( stmt!=null ) stmt.close();
-			if( conn!=null ) conn.close();
+			if(rs   != null)    rs.close();
+			if(stmt != null)  stmt.close();
+			if(conn != null)  conn.close();
 		}
 		return tot;
 	}
 	
+	// qna 게시글에 따른 댓글 수
+	public int getQnaComCnt(int b_num) throws SQLException {
+		int tot = 0;
+		Connection 		   conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet 		     rs = null;
+		String				sql = "select count(*) from qna_comment where b_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) tot = rs.getInt(1);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if( rs   != null) 	  rs.close();
+			if( pstmt!= null ) pstmt.close();
+			if( conn != null )  conn.close();
+		}
+		return tot;
+	}
+	
+	// 회원 커뮤니티글 수
 	public int getCommuCnt() throws SQLException {
 		int tot = 0;
 		Connection conn = null;
-		Statement stmt = null;
-		ResultSet rs = null;
-		String sql = "select count(*) from community";
+		Statement  stmt = null;
+		ResultSet    rs = null;
+		String      sql = "select count(*) from community";
 		System.out.println("Dao getQnaCnt sql->"+sql);
 		
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-			rs =stmt.executeQuery(sql);
+			rs   = stmt.executeQuery(sql);
 			if(rs.next()) tot = rs.getInt(1);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if( rs!= null) 	 rs.close();
-			if( stmt!=null ) stmt.close();
-			if( conn!=null ) conn.close();
+			if(rs   != null)    rs.close();
+			if(stmt != null)  stmt.close();
+			if(conn != null)  conn.close();
 		}
 		return tot;
 	}
@@ -130,21 +156,21 @@ public class AdminDao {
 	// 회원 리스트
 	public List<Member> memList(int startRow, int endRow) throws SQLException {
 		List<Member> list = new ArrayList<Member>();
-		Connection conn = null;
+		Connection   	   conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet 		     rs = null;
 		String sql = "select * "
 				+ " 	from  ( select rownum rn, a.*, board_count(a.user_id) board_count , comment_count(a.user_id) comment_count from (select * from member order by user_gubun) a)"
 				+ " where rn between ? and ?";
 		System.out.println("Dao memList sql->"+sql);
 
 		try {
-			conn = getConnection();
+			conn  = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);;
 			System.out.println("startRow->"+startRow);
-			System.out.println("endRow->"+endRow);
+			System.out.println("endRow  ->"+endRow);
 			rs = pstmt.executeQuery();
 				while(rs.next()) {
 					Member m = new Member();
@@ -160,15 +186,14 @@ public class AdminDao {
 					m.setUser_img(rs.getString("user_img"));
 					m.setBoard_count(rs.getInt("board_count"));
 					m.setComment_count(rs.getInt("comment_count"));
-					list.add(m);
-					
+					list.add(m);	
 				}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null) 	rs.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( rs   != null) 	  rs.close();
+			if( pstmt!= null ) pstmt.close();
+			if( conn != null )  conn.close();
 		}
 		return list;
 	}
@@ -176,16 +201,15 @@ public class AdminDao {
 	// 회원 아이디에 따른 정보
 	public Member select(String user_id) throws SQLException {
 		Member m = new Member();
-		Connection conn = null;
-		String sql = "select * from member where user_id=?";
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
+		ResultSet 			 rs = null;
+		String sql = "select * from member where user_id=?";
 		try {
-			conn = getConnection();
+			conn  = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
-			rs = pstmt.executeQuery();
+			rs    = pstmt.executeQuery();
 			if(rs.next()) {
 				m.setUser_id(rs.getString("user_id"));
 				m.setUser_pw(rs.getString("user_pw"));
@@ -201,9 +225,9 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null) 	rs.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( rs   != null) 	  rs.close();
+			if( pstmt!= null ) pstmt.close();
+			if( conn != null )  conn.close();
 		}
 		return m;
 	}
@@ -211,15 +235,15 @@ public class AdminDao {
 	//회원리스트
 	public List<Member> list() throws SQLException {
 		List<Member> list = new ArrayList<Member>();
-		Connection conn = null;
-		String sql = "select * from member";
+		Connection  	   conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet			 rs = null;
+		String sql = "select * from member";
 		
 		try {
-			conn = getConnection();
+			conn  = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			rs	  = pstmt.executeQuery();
 			if(rs.next()) {
 				do {
 					Member m = new Member();
@@ -239,22 +263,22 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null) 	rs.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( rs   != null) 	  rs.close();
+			if( pstmt!= null ) pstmt.close();
+			if( conn != null )  conn.close();
 		}
 		return list;
 	}
 	
-	//회원정보수정
+	//회원 정보 수정
 	public int update(Member member) throws SQLException {
 		int result = 0;
-		Connection conn = null;
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "update member set user_gubun=? where user_id=?";
-		System.out.println("Dao update sql->"+sql);
+		
 		try {
-			conn = getConnection();
+			conn  = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, member.getUser_gubun());
 			pstmt.setString(2, member.getUser_id());
@@ -262,30 +286,28 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if(pstmt!= null) pstmt.close();
+			if(conn != null)  conn.close();
 		}
 		return result;
 	}
 	
-	//동행자 찾기
+	//동행자 찾기 조회
 	public List<Travel> travelList(int startRow, int endRow) throws SQLException {
 		List<Travel> list = new ArrayList<Travel>();
-		Connection conn = null;
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet 			 rs = null;
 		String sql = "select * "
 					+ "		from (select rownum rn, a.*, reply_cnt(a.t_ref) reply_cnt from (select * from travel_board order by t_ref desc, t_restep) a) "
 					+ "where rn between ? and ?";
 		System.out.println("Dao travelList sql->"+sql);
 		try {
-			conn = getConnection();
+			conn  = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			System.out.println("travelList startRow->"+startRow);
-			System.out.println("travelList endRow->"+endRow);
-			rs = pstmt.executeQuery();
+			rs 	  = pstmt.executeQuery();
 			while(rs.next()) {
 				Travel t = new Travel();
 				t.setT_num(rs.getInt("t_num"));
@@ -308,32 +330,30 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null) 	rs.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( rs   != null) 	  rs.close();
+			if( pstmt!= null ) pstmt.close();
+			if( conn != null )  conn.close();
 		}
 		return list;
 	}
 	
 	
-	// QnA 게시판
+	// QnA 게시판 조회
 	public List<Qna_Board> qnaList(int startRow, int endRow) throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
-		Connection conn = null;
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet		 	 rs = null;
 		String sql = "select * "
 				+ "		from (select rownum rn, a.* from (select * from qna_board order by b_date desc) a) "
 				+ "where rn between ? and ?";
 		
 		try {
-			conn = getConnection();
+			conn  = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			System.out.println("startRow->"+startRow);
-			System.out.println("endRow->"+endRow);
-			rs = pstmt.executeQuery();
+			rs 	  = pstmt.executeQuery();
 			while(rs.next()) {
 				Qna_Board qb = new Qna_Board();
 				qb.setB_num(rs.getInt("b_num"));
@@ -347,70 +367,68 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null) 	rs.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( rs   != null) 	  rs.close();
+			if( pstmt!= null ) pstmt.close();
+			if( conn != null )  conn.close();
 		}
 		return list;
 	}
 	
 	// QnA 게시판 댓글 조회
-		public List<Qna_Comment> qnaComList(int b_num) throws SQLException {
-			List<Qna_Comment> list = new ArrayList<Qna_Comment>();
-			Connection conn = null;
-			String sql = "select * from qna_comment\r\n"
-					+ "where b_num = ? \r\n"
-					+ "order by com_num desc";
-			System.out.println("Dao qnaComList sql->"+sql);
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-			
-			try {
-				conn = getConnection();
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, b_num);
-				rs = pstmt.executeQuery();
-				while(rs.next()) {
-					Qna_Comment qc = new Qna_Comment();
-					qc.setB_num(rs.getInt("b_num"));
-					System.out.println("b_num->"+b_num);
-		            qc.setCom_num(rs.getInt("com_num"));
-		            qc.setUser_id(rs.getString("user_id"));
-		            qc.setCom_date(rs.getDate("com_date"));
-		            qc.setCom_content(rs.getString("com_content"));
-		            qc.setCom_choose(rs.getString("com_choose"));
-		            System.out.println("qc->"+qc);
-					list.add(qc);
-				}
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			} finally {
-				if(rs!=null) 	rs.close();
-				if(pstmt!=null) pstmt.close();
-				if(conn!=null)  conn.close();
+	public List<Qna_Comment> qnaComList(int b_num) throws SQLException {
+		List<Qna_Comment> list = new ArrayList<Qna_Comment>();
+		Connection 		   conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet 			 rs = null;
+		String sql = "select * from qna_comment\r\n"
+				   + "where b_num = ? \r\n"
+				   + "order by com_num desc";
+		
+		try {
+			conn  = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, b_num);
+			rs 	  = pstmt.executeQuery();
+			while(rs.next()) {
+				Qna_Comment qc = new Qna_Comment();
+				qc.setB_num(rs.getInt("b_num"));
+				System.out.println("b_num->"+b_num);
+	            qc.setCom_num(rs.getInt("com_num"));
+	            qc.setUser_id(rs.getString("user_id"));
+	            qc.setCom_date(rs.getDate("com_date"));
+	            qc.setCom_content(rs.getString("com_content"));
+	            qc.setCom_choose(rs.getString("com_choose"));
+	            System.out.println("qc->"+qc);
+				list.add(qc);
 			}
-			return list;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if( rs   != null) 	  rs.close();
+			if( pstmt!= null ) pstmt.close();
+			if( conn != null )  conn.close();
 		}
+		return list;
+	}
 	
 	//회원 커뮤니티
-	
 	public List<Commu> commuList(int startRow, int endRow) throws SQLException {
 		List<Commu> list = new ArrayList<Commu>();
-		Connection conn = null;
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet			 rs = null;
 		String sql = "select * "
 				+ "		from (select rownum rn, a.* from (select * from community order by c_date desc) a) "
 				+ " where rn between ? and ?";
-		System.out.println("commuList() sql->"+sql);
+		
 		try {
-			conn = getConnection();
+			conn  = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
 			System.out.println("startRow->"+startRow);
 			System.out.println("endRow->"+endRow);
-			rs = pstmt.executeQuery();
+			rs 	  = pstmt.executeQuery();
 			while(rs.next()) {
 				Commu com = new Commu();
 				com.setC_num(rs.getInt("c_num"));
@@ -423,9 +441,9 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null) 	rs.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( rs   != null) 	  rs.close();
+			if( pstmt!= null ) pstmt.close();
+			if( conn != null )  conn.close();
 		}
 		return list;
 	}
@@ -433,13 +451,13 @@ public class AdminDao {
 	// 동행자 게시글 삭제
 	public int travelDelete(int t_num) throws SQLException {
 		int result = 0;
-		Connection conn = null;
-		PreparedStatement pstmt= null;
+		Connection 		   conn = null;
+		PreparedStatement pstmt = null;
 		String sql = "delete from travel_board where t_ref=?";
 		
 		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+			conn   = getConnection();
+			pstmt  = conn.prepareStatement(sql);
 			pstmt.setInt(1, t_num);
 			result = pstmt.executeUpdate();
 			if(result > 0) result = 1;
@@ -447,45 +465,45 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( pstmt!= null) pstmt.close();
+			if( conn != null)  conn.close();
 		}
 		return result;
 	}
 	
 	// 동행자 댓글 수정
-		public int travelReplyDelete(int t_num) throws SQLException {
-			int result = 0;
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			String sql = "update travel_board set t_content='관리자 의해 삭제된 댓글입니다.' where t_num=?";
-			
-			try {
-				conn = getConnection();
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setInt(1, t_num);
-				result = pstmt.executeUpdate();
-				if(result > 0) result = 1;
-				else result = 0;
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-			} finally {
-				if(pstmt!=null) pstmt.close();
-				if(conn!=null)  conn.close();
-			}
-			return result;
+	public int travelReplyDelete(int t_num) throws SQLException {
+		int result = 0;
+		Connection 		   conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "update travel_board set t_content='관리자 의해 삭제된 댓글입니다.' where t_num=?";
+		
+		try {
+			conn   = getConnection();
+			pstmt  = conn.prepareStatement(sql);
+			pstmt.setInt(1, t_num);
+			result = pstmt.executeUpdate();
+			if(result > 0) result = 1;
+			else result = 0;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if( pstmt!= null) pstmt.close();
+			if( conn != null)  conn.close();
 		}
+		return result;
+	}
 		
 	//회원 커뮤니티 게시글 삭제
 	public int commuDelete(int c_num) throws SQLException {
 		int result = 0;
-		Connection conn = null;
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "delete from community where c_num=?";
 		
 		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+			conn   = getConnection();
+			pstmt  = conn.prepareStatement(sql);
 			pstmt.setInt(1, c_num);
 			result = pstmt.executeUpdate();
 			if(result > 0) result = 1;
@@ -493,8 +511,8 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( pstmt!= null) pstmt.close();
+			if( conn != null)  conn.close();
 		}
 		return result;
 	}
@@ -502,13 +520,13 @@ public class AdminDao {
 	// Qna 게시글 삭제
 	public int qnaDelete(int b_num) throws SQLException {
 		int result = 0;
-		Connection conn = null;
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "delete from qna_board where b_num=?";
 		
 		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+			conn   = getConnection();
+			pstmt  = conn.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			result = pstmt.executeUpdate();
 			if(result > 0) result = 1;
@@ -516,21 +534,22 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( pstmt!= null) pstmt.close();
+			if( conn != null)  conn.close();
 		}
 		return result;
 	}
 	
+	// qna 댓글 삭제
 	public int qnaComDelete(int b_num, int com_num) throws SQLException {
 		int result = 0;
-		Connection conn = null;
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
 		String sql = "delete from qna_comment where b_num=? and com_num=?";
 		
 		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
+			conn   = getConnection();
+			pstmt  = conn.prepareStatement(sql);
 			pstmt.setInt(1, b_num);
 			pstmt.setInt(2, com_num);
 			result = pstmt.executeUpdate();
@@ -539,20 +558,22 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( pstmt!= null) pstmt.close();
+			if( conn != null)  conn.close();
 		}
 		return result;
 	}
 	
+	// 회원 정보 검색
 	public List<Member> memSelect(String keyField, String keyWord) throws SQLException {
 		List<Member> list = new ArrayList<Member>();
-		Connection conn = null;
+		Connection 		   conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+		ResultSet 			 rs = null;
 		
 		String sql = "select * from member";
 		
+		// 검색 공백 제거
 		if(keyWord != null && !keyWord.equals("")) {
 			sql += " Where "+keyField.trim()+" Like '%"+keyWord.trim()+"%' order by user_id";		
 		} else {
@@ -561,9 +582,9 @@ public class AdminDao {
 		System.out.println("Dao memSelect sql->"+sql);
 		
 		try {
-			conn = getConnection();
+			conn  = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			rs    = pstmt.executeQuery();
 			
 			while(rs.next()) {
 				Member m = new Member();
@@ -582,9 +603,9 @@ public class AdminDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if(rs!=null)	rs.close();
-			if(pstmt!=null) pstmt.close();
-			if(conn!=null)  conn.close();
+			if( rs   != null)	 rs.close();
+			if( pstmt!= null) pstmt.close();
+			if( conn != null)  conn.close();
 		}
 		return list;
 	}

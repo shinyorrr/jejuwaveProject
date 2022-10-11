@@ -94,6 +94,7 @@
 						
 							});
 						</script>
+	<!-- 사이드바 구현 -->
 	<div class = "mypage_set">
 		<div class="Mypage_Main">
 			<div class="Menu_section">
@@ -199,8 +200,15 @@
 					</c:if>
 					<input type="submit" class = "allDel" value="일괄삭제">
 					</form>
+					<form action="mypageCommunity.do">
+						<input type ="text"  class="search_input"	name="search" placeholder="제목 + 해시태그">
+						<input type ="submit" 	value="검색">
+					</form>
 					</div>
 						
+						
+				<!-- 페이지 버튼 구현 -->
+				
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">
 						<button class = "page_nation" type = "button" onclick="location.href='<%=context%>/mypageCommunity.do?pageNum=${startPage-1 }'"

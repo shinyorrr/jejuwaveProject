@@ -35,11 +35,13 @@
 	  <input type="hidden" name="b_num" value="${b_num}">
 	  <input type="hidden" name="pageNum" value="${pageNum}">
 	  
-	  	<c:forEach var="qc" items="${list}">
-	  	<input type="hidden" name="com_num" value="${qc.com_num }">
-	  	<input type="hidden" name="user_id" value="${qc.user_id}">
-	  	<input type="hidden" name="com_date" value="${qc.com_date}">
-	  	<input type="hidden" name="com_content" value="${qc.com_content}">
+		  <c:if test="${comtot > 0}">
+		  	<c:forEach var="qc" items="${list}">
+		  	<input type="hidden" name="com_num" value="${qc.com_num }">
+		  	<input type="hidden" name="user_id" value="${qc.user_id}">
+		  	<input type="hidden" name="com_date" value="${qc.com_date}">
+		  	<input type="hidden" name="com_content" value="${qc.com_content}">
+		  	
 			<div class="input-group mb-3">
 			  아이디 : ${qc.user_id}
 			</div>
@@ -54,11 +56,21 @@
 				<input class="btn btn-primary" type="submit" value="댓글삭제">
 				<input class="btn btn-primary" type="button" value="이전" onclick="location.href='<%=context%>/adQnaForm.do?pageNum=${currentPage}'">
 			</div>
-	  </c:forEach>
+		  	</c:forEach>
+		  </c:if>
+		  
+		  <c:if test="${comtot == 0}">
+	  		<div class="input-group mb-3">
+				  댓글이 없습니다.
+			</div>
+			<div class="mybtn">
+				<input class="btn btn-primary" type="button" value="이전" onclick="location.href='<%=context%>/adQnaForm.do?pageNum=${currentPage}'">
+			</div>
+		  </c:if>
 	  </form>
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>
-<c:import url="${context}/footer.jsp"></c:import>
+<c:import url="${context}/hs/footer.jsp"></c:import>
 </body>
 </html>

@@ -151,7 +151,7 @@ function deleteMsg(){
 											</td>
 											<td>
 												<div class = "comment_cnt">
-													<img style="width: 16px; height: 16px; margin: 0 5px;" src="<%=context%>/yn_images/comm_icon.png">${board.t_recnt}
+													<img style="width: 16px; height: 16px; margin: 0 5px;" src="<%=context%>/images/comm_icon.png">${board.t_recnt}
 												</div>
 											</td>
 										</tr>
@@ -160,6 +160,12 @@ function deleteMsg(){
 						</c:forEach> 
 					</c:if>
 					<input type="submit" class = "allDel" value = "일괄삭제">
+				</form>
+				
+				<!-- 게시글 검색기능 추가 -->
+				<form action="mypageTraveler.do">
+					<input type ="text"  class="search_input"	name="search" placeholder="제목 + 내용">
+					<input type ="submit" 	value="검색">
 				</form>
 				
 					

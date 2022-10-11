@@ -40,6 +40,7 @@
 	  	<input type="hidden" name="user_tel" value="${member.user_tel}">
 	  	<input type="hidden" name="user_info" value="${member.user_info}">
 		<input type="hidden" name="pageNum" value="${pageNum}">
+		
 	  	<div class="input-group mb-3">
 		  아이디 : ${member.user_id}
 		</div>
@@ -87,6 +88,6 @@
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>
-<c:import url="${context}/footer.jsp"></c:import>
+<c:import url="${context}/hs/footer.jsp"></c:import>
 </body>
 </html>

@@ -33,86 +33,91 @@ String context = request.getContextPath();
 	</div>
 </header>
 
-<script type="text/javascript">
 
-function sorting(sort) {
-	alert(sort);
-	location.href='<%=context %>/qnaList.do?sort='+ sort;
-	
-}
-
-
-
-</script>
 
 
 <body>
 
+<main role="main" class="container">
 	<div style="margin-bottom: 400px; margin-top: 70px;" class="main">
 		<table class="mainTable">
-		
-			<!-- 채택기다리는 글만보기 -->
-			<div style="margin-left: 1200px;" >
 
-			<select class="select" name="sort" onchange="sorting(this.value);">
-				<option value="0">정렬</option>
-				<option value="1">등록순</option>
-				<option value="2">댓글순</option>			
-			</select>
-			 <button onclick="location.href='<%=context %>/qnaList2.do?sort=${sort }'" class="comment_button1" >답변을 기다리는 질문만 보기</button>  
-			
+			<!-- 채택기다리는 글만보기 -->
+			<div style="margin-left: 1200px;">
+				<select class="select">
+					<option value="1">등록순</option>
+					<option value="2">댓글순</option>
+				</select>
+				<button onclick="location.href='<%=context%>/qnaList.do'"
+					class="comment_button1">답변을 기다리는 질문만 보기</button>
 			</div>
 			
+			<!-- 검색결과 기능 -->
+
+			<section class="jumbotron text-center">
+			<input type="hidden" name="searchWord" value="${searchWord}">
+				<div class="container mt-5">
+					<h1 class="jumbotron-heading">검색결과</h1>
+					<p class="lead text-muted">${searchWord}(이)가 포함된 게시글</p>
+   
+				</div>
+			</section>
+
+
+
 			<!-- 검색어 기능 -->
-			<div class="row m-5 justify-content-md-center">	
-				<div class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
-					<form action="<%=context %>/qnaSearchList.do">
-						<div width="300px" class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
-							<span class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
+			<div class="row m-5 justify-content-md-center">
+				<div
+					class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+					<form action="<%=context%>/qnaSearchList.do">
+						<div width="300px"
+							class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+							<span
+								class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
 							<button></button>
 							<input type="text" name="searchWord" placeholder="검색어를 입력하세요">
 						</div>
 					</form>
 				</div>
-			</div>	 
-			
-			
+			</div>
+
+
 			<c:if test="${totCnt > 0 }">
 				<c:forEach var="board" items="${list}">
 					<th style="vertical-align: super;">
-					<!-- 채택완료/답변대기 -->
-						<c:if test="${board.b_success eq '채택완료' }">
-							<span >${board.b_success }</span>
-						</c:if> 
-						<c:if test="${board.b_success ne '채택완료' }">
+						<!-- 채택완료/답변대기 --> <c:if test="${board.b_success eq '채택완료' }">
+							<span>${board.b_success }</span>
+						</c:if> <c:if test="${board.b_success ne '채택완료' }">
 							<span style="color: #FF3500;">${board.b_success }</span>
-						</c:if></th>
+						</c:if>
+					</th>
 					<!-- 제목 -->
-					<th class=" title2">
-						<a href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
-												   ${board.b_title}</a></th>
-					<th><a href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'> 
-							<span class="content1">${board.b_content }</span></a></th>
+					<th class=" title2"><a
+						href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
+							${board.b_title}</a></th>
+					<th><a
+						href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
+							<span class="content1">${board.b_content }</span>
+					</a></th>
 					<tr class="last">
 						<td></td>
 						<td><img src="<%=context%>/${board.fn_user_img}"
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 							width="30" height="30">${board.user_id}</td>
-			<!-- 해시태그 -->
-					<td>
-						<c:choose>
-							<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
-							<c:otherwise><span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
-							<c:otherwise><span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-						</c:choose>
-						<c:choose>
-							<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
-							<c:otherwise><span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-						</c:choose>
-					</td>
+						<!-- 해시태그 -->
+						<td><c:choose>
+								<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
+								<c:otherwise>
+									<span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+							</c:choose> <c:choose>
+								<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
+								<c:otherwise>
+									<span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+							</c:choose> <c:choose>
+								<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
+								<c:otherwise>
+									<span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+							</c:choose></td>
 					</tr>
 					<c:set var="startNum" value="${startNum -1 }"></c:set>
 				</c:forEach>
@@ -123,12 +128,12 @@ function sorting(sort) {
 				</tr>
 
 			</c:if>
-			
+
 		</table>
-		
- 	<!-- paging section-->
- 		<br>	<br>
-		<nav  aria-label="Page navigation example"
+
+<%-- 		<!-- paging section-->
+		<br> <br>
+		<nav aria-label="Page navigation example"
 			class="d-flex justify-content-center">
 			<ul class="pagination">
 				<c:if test="${startPage > blockSize}">
@@ -143,17 +148,17 @@ function sorting(sort) {
 				</c:forEach>
 				<c:if test="${endPage < pageCnt}">
 					<li class="page-item"><a class="page-link"
-						href='qnaList.do?pageNum=${startPage+blockSize}'
-						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+						href='qnaList.do?pageNum=${startPage+blockSize}' aria-label="Next">
+							<span aria-hidden="true">&raquo;</span>
 					</a></li>
 				</c:if>
 			</ul>
 		</nav>
-	
+ --%>
 
 	</div>
 
-
+</main>
 
 	<c:import url="${context}/footer.jsp"></c:import>
 </body>

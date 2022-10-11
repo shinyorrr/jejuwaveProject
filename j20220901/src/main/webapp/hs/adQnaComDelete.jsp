@@ -18,7 +18,7 @@
 	<c:if test="${result > 0}">
 		<script type="text/javascript">
 			alert("Qna 댓글 삭제 완료!");
-			location.href="<%=context%>/adQnaForm.do?pageNum=${pageNum}";
+			location.href="<%=context%>/adQnaComment.do?b_num=${b_num}&pageNum=${pageNum}";
 		</script>
 	</c:if>
 	<c:if test="${result == 0 }">

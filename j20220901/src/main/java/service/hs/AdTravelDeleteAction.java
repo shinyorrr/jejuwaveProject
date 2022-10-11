@@ -15,9 +15,9 @@ public class AdTravelDeleteAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("AdTravelDeleteAction service start...");
-		int t_num = Integer.parseInt(request.getParameter("t_num"));
+		int t_num     = Integer.parseInt(request.getParameter("t_num"));
 		int t_relevel = Integer.parseInt(request.getParameter("t_relevel"));
-		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		int pageNum   = Integer.parseInt(request.getParameter("pageNum"));
 		
 		try {
 			AdminDao ad = AdminDao.getInstance();

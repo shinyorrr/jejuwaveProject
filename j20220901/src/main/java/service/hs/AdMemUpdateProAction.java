@@ -28,8 +28,7 @@ public class AdMemUpdateProAction implements CommandProcess {
 			
 			
 			AdminDao ad = AdminDao.getInstance();
-			result = ad.update(member);
-			System.out.println("AdMemUpdateProAction result->"+result);
+			result 		= ad.update(member);
 			request.setAttribute("result", result);
 			request.setAttribute("user_id", member.getUser_id());
 			request.setAttribute("pageNum", pageNum);

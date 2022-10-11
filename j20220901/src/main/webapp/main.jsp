@@ -134,7 +134,7 @@ String context = request.getContextPath();
 													#${travel.t_gubun}&nbsp&nbsp<span id="picOnDate">${fn:replace(travel.t_start, '-', '/')}&nbsp-&nbsp${fn:replace(travel.t_end,
 														'-', '/')}</span>
 												</div>
-												<img src="${travel.t_img}" class="card-img-top" />
+												<img src="<%=context%>/${travel.t_img}" class="card-img-top" />
 											</div>
 
 
@@ -161,7 +161,7 @@ String context = request.getContextPath();
 													<p id="content">${travel.t_content}</p>
 
 													<p id="IdComment">
-														<img src='${travel.user_img}' width="28" height="28"
+														<img src='<%=context%>/${travel.user_img}' width="28" height="28"
 															style="margin: 0 5px 2px 0;"
 															class="userIconColor-1 rounded-circle me-1  align-center ">
 														${travel.user_id}
@@ -225,7 +225,7 @@ String context = request.getContextPath();
 							</p>
 							<p id="IdComment">
 								<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
-									src="images/tangerine.png">${board.user_id}
+									src="<%=context%>/${board.fn_user_img}">${board.user_id}
 							</p>
 						</div>
 					</c:forEach>
