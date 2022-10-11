@@ -118,7 +118,7 @@ request.setAttribute("userId", userId);
 														class="fa fa-star"></i>
 												</div>
 												<p class="ratingScore"
-													style="padding-top: 48px; padding-left: 15px; margin: 0px;">3.0</p>
+													style="padding-top: 48px; padding-left: 15px; margin: 0px;">${reiew.user_avg}</p>
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"
 													style="margin-bottom: 30px; margin-right: 5px;"></button>
@@ -345,7 +345,7 @@ rating.each(function () {
 	var firstdigit = targetScore.split('.');
 	if(firstdigit.length > 0){
 		for(var i = 0; i<targetScore; i++){
-			$(this).find('.fa-star:nth-child(-n+' +targetScore + ')').eq(i).css({color:'#f05522'});
+			$(this).find('.fa-star:nth-child(-n+' +targetScore + ')').eq(i).attr('style','color: #f05522 !important');
 	}
 		/* $(this).find('.fa-star:nth-child(-n+' +targetScore + ')').css({color:'#f05522'}); */
 	}
@@ -355,12 +355,12 @@ rating.each(function () {
 	userScore.change(function () {
 		var userScoreNum = $(this).val();
 		$('.make_star .fa-star').css({color:'#000'});
-		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').css({color:'#f05522'});
+		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').attr('style','color: #f05522 !important');
 	});
 	$('.make_star .fa-star').click(function () {
 		var targetNum = $(this).index() + 1;
 		$('.make_star .fa-star').css({color:'#000'});
-		$('.make_star .fa-star:nth-child(-n+' + targetNum + ')').css({color:'#f05522'});
+		$('.make_star .fa-star:nth-child(-n+' + targetNum + ')').attr('style','color: #f05522 !important');
 	});
 });
 </script>

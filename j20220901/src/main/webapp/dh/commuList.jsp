@@ -14,6 +14,7 @@ String context = request.getContextPath();
 
 
 <c:import url="${context}/header.jsp"></c:import>
+<link rel="stylesheet" id="chacss" href="css/header_history.css">
 
 
 

@@ -9,6 +9,7 @@ String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">
+<link rel="stylesheet" id="chacss" href="css/header_content.css">
 <style type="text/css">
 
 </style>
