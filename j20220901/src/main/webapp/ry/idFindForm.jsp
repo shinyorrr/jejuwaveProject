@@ -13,14 +13,15 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style type="text/css">
  	 body {
-      min-height: 1000ps;
-
+ 	 overflow : visible;
+ 	  background-size: contain;
+	  background-repeat : no repeat;
       background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
       background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-    }
+      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); 
+    } 
 
     .input-form {
       max-width: 280px;
@@ -34,7 +35,7 @@
       border-radius: 10px;
       -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
     }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -42,9 +43,8 @@
 </script>
 <c:import url="${context }/header.jsp"></c:import>
 </head>
-<body>
-		<tbody>
-		 <div class="container">
+<body style="overflow: visible; height: 300px;">
+		 <div class="container1" style="padding: auto;">
     <div class="input-form-backgroud row" style="margin-top: 300px;">
       <div class="input-form col-md-4 mx-auto">
         <h4 class="mb-3" style="text-align: center;">아이디 찾기</h4>
@@ -67,7 +67,7 @@
             </div>
           </div>
 		 </div>
-          <div class="col" style="margin-top: 10px; padding-left: 50px;">
+          <div class="col" style="margin-top: 10px; text-align: center;">
           <button class="btn btn-outline-warning" type="submit">아이디 찾기</button>
           <button class="btn btn-outline-warning" type="reset">취소</button>
           <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">비밀번호찾기</button>
@@ -102,11 +102,11 @@
 		</div>
 	</form>	
 		</div> --%>
-	</tbody>
-</body>
-	<footer class="py-5 bg-dark" style="margin-top: 300px;">
+		<div style="margin-top: 15%;"></div>
+	<footer class="py-5 bg-dark" style="bottom: 0;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your	Website 2022</p>
 		</div>
-	</footer>	
+	</footer>
+</body>
 </html>

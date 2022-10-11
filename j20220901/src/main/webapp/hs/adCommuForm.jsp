@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	String context = request.getContextPath();
 	String userId = (String) session.getAttribute("user_id");
@@ -52,7 +53,9 @@
 			  		<td width="600" id="content">${commu.c_content}</td>
 			  		<td width="100">${commu.c_hash}</td>
 			  		<td width="100">${commu.user_id}</td>
-			  		<td width="100">${commu.c_date}</td>
+			  		<td width="100">
+			  			<fmt:formatDate value="${commu.c_date}" pattern="yy-MM-dd"/>
+			  		</td>
 			  		<td width="100"><input type="button" value="삭제" onclick="location.href='<%=context%>/adCommuDelete.do?c_num=${commu.c_num}&pageNum=${pageNum}'"></td>
 			  	</tr>
 			  	<c:set var="startNum" value="${startNum-1}"></c:set>
