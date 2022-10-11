@@ -16,12 +16,12 @@ public class AdQnaDeleteAction implements CommandProcess {
 			throws ServletException, IOException {
 		System.out.println("AdQnaDeleteAction service start...");
 		
-		int b_num = Integer.parseInt(request.getParameter("b_num"));
+		int 	 b_num = Integer.parseInt(request.getParameter("b_num"));
 		String pageNum = request.getParameter("pageNum");
 		
 		try {
 			AdminDao ad = AdminDao.getInstance();
-			int result = ad.qnaDelete(b_num);
+			int  result = ad.qnaDelete(b_num);
 			
 			request.setAttribute("result", result);
 			request.setAttribute("b_num", b_num);
