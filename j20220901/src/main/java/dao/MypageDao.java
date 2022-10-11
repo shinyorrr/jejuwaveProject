@@ -138,7 +138,6 @@ public class MypageDao {
 			} else rs = pstmt.executeQuery();
 			
 			System.out.println("travelList sql ===> " + sql);
-			System.out.println(rs);
 			System.out.println("MypageDao travelList rs.next()->"+rs.next());
 			do {
 				Mypage mypage = new Mypage();

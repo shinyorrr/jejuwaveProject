@@ -162,7 +162,7 @@ $(function(){
 					<input type="submit" class = "allDel" value="일괄삭제">
 				</form>	
 				<form action="mypageComment.do">
-						<input type ="text" 	name="search" placeholder="댓글내용" style="margin-left: 189px;">
+						<input type ="text"  class="search_input"	name="search" placeholder="댓글내용">
 						<input type ="submit" 	value="검색">
 				</form>
 					

@@ -201,7 +201,7 @@
 					<input type="submit" class = "allDel" value="일괄삭제">
 					</form>
 					<form action="mypageCommunity.do">
-						<input type ="text" 	name="search" placeholder="제목 + 해시태그" style="margin-left: 189px;">
+						<input type ="text"  class="search_input"	name="search" placeholder="제목 + 해시태그">
 						<input type ="submit" 	value="검색">
 					</form>
 					</div>
