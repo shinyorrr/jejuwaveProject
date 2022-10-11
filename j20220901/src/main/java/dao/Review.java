@@ -11,8 +11,15 @@ public class Review {
 	private int t_num;
 	private int r_ref;
 	private int r_restep;
+	private int user_avg;
 	
 	
+	public int getUser_avg() {
+		return user_avg;
+	}
+	public void setUser_avg(int user_avg) {
+		this.user_avg = user_avg;
+	}
 	public int getR_ref() {
 		return r_ref;
 	}

@@ -107,12 +107,12 @@ request.setAttribute("userId", userId);
 										<div class="review">
 											<div class="modal-header">
 												<div>
-													<c:if test="${img == null }">
+													<c:if test="${travelContent.user_img == null }">
 														<img src="<%=context%>/images/vector_profile_default.svg"
 															style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 													</c:if>
-													<c:if test="${img != null }">
-														<img src="<%=context %>/${img}"
+													<c:if test="${travelContent.user_img != null }">
+														<img src="<%=context %>/${travelContent.user_img}"
 															style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 													</c:if>
 												</div>
@@ -120,18 +120,13 @@ request.setAttribute("userId", userId);
 													<div class="modal-title moti" id="exampleModalLabel">
 														<p>${travelContent.user_id}</p>
 													</div>
-													<div class="modal-hashtag moha">
-														<p>30대 · 남성 · 대한민국</p>
-													</div>
 												</div>
-												<div class="rating" data-rate="2"
-													style="padding-left: 110px; padding-top: 48px;">
+												<div class="rating" data-rate="${avgReview}"
+													style="padding-left: 130px; padding-top: 48px;">
 													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 														class="fa fa-star"></i>
-												</div>
-												<p class="ratingScore"
-													style="padding-top: 48px; padding-left: 15px; margin: 0px;">3.0</p>
+												</div>											
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"
 													style="margin-bottom: 30px; margin-right: 5px;"></button>
@@ -144,7 +139,7 @@ request.setAttribute("userId", userId);
 															<p>받은 동행 후기</p>
 														</div>
 														<div class="modal-body-top-title-counts">
-															<p>0</p>
+															<p>${totalRev}</p>
 														</div>
 													</div>
 
@@ -152,12 +147,12 @@ request.setAttribute("userId", userId);
 														<c:if test="${totRev > 0}">
 															<c:forEach var="review" items="${revlist}">
 																<div class=""
-																	style="background: yellow !important; height: 100px; margin: 15px;">
+																	style=" height: 100px; margin: 5px;">
 																	<div>
-																		<span>${review.user_id }</span> <span>${review.r_date}</span>
+																		<span>${review.user_id }</span> <span class="modal-date">${review.r_date}</span>
 																	</div>
 																	<div>
-																		<p>
+																		<p style="margin: 5px;">
 																			<c:choose>
 																				<c:when test="${fn:length(review.r_content) >33 }">
 																					<c:out
@@ -170,13 +165,14 @@ request.setAttribute("userId", userId);
 																		</p>
 																	</div>
 																	<div>
-																		<div class="rating" data-rate="${review.r_avg}">
+																		<div class="rating" data-rate="${review.r_avg}" style="padding-top: 15px;">
 																			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
 																			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
 																			<i class="fa fa-star"></i>
 																		</div>
 																	</div>
 																</div>
+																<hr style="border:2px dashed;">
 															</c:forEach>
 														</c:if>
 													</div>
@@ -346,7 +342,7 @@ request.setAttribute("userId", userId);
 <!-- Bootstrap core JS-->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- modal -->
+<!---------------------modal ------------------------->
 <script src="https://kit.fontawesome.com/1f609f562c.js"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/modal.css">
@@ -354,34 +350,30 @@ request.setAttribute("userId", userId);
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 $(function () {
+	var rating = $('.review .rating');
 	
-
-var rating =$('.review .rating');
-
-rating.each(function () {
-	var targetScore = $(this).attr('data-rate');
-	var firstdigit = targetScore.split('.');
-	if(firstdigit.length > 0){
-		for(var i = 0; i<targetScore; i++){
-			$(this).find('.fa-star:nth-child(-n+' +targetScore + ')').eq(i).css({color:'#f05522'});
-	}
-		/* $(this).find('.fa-star:nth-child(-n+' +targetScore + ')').css({color:'#f05522'}); */
-	}
-	
+	rating.each(function () {
+		var targetScore = $(this).attr('data-rate');
+		$(this).find('.fa-star:nth-child(-n+'+ targetScore + ')').attr('style','color: #f05522 !important');
 	});
+	
 	var userScore = $('#r_avg');
 	userScore.change(function () {
 		var userScoreNum = $(this).val();
 		$('.make_star .fa-star').css({color:'#000'});
-		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').css({color:'#f05522'});
+		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').attr('style','color: #f05522 !important');
 	});
-	$('.make_star .fa-star').click(function () {
+	
+	/* .attr('style','color: #f05522 !important'); */
+	$('.make_star svg').click(function () {
 		var targetNum = $(this).index() + 1;
-		$('.make_star .fa-star').css({color:'#000'});
-		$('.make_star .fa-star:nth-child(-n+' + targetNum + ')').css({color:'#f05522'});
+		$('.make_star svg').css({color:'#000'});
+		$('.make_star svg:nth-child(-n+' + targetNum + ')').css({color: '#F05522'});
 	});
 });
 
+</script>
+<script type="text/javascript">
 <!-- Core theme JS-->
 <script type="text/javascript">
 function deleteChk() {

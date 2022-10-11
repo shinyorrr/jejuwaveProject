@@ -34,6 +34,37 @@ String context = request.getContextPath();
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
 <!-- Core theme JS-->
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+
+<!-- 카테고리 스타일 변경 -->
+<script type="text/javascript">
+var loc = location.href;
+$(function () {
+	
+ if (loc.includes("main")){
+	 document.getElementById('btn1').setAttribute('class', 'leGRAZ');
+	 document.getElementById('btn2').setAttribute('class', 'cFXvdv');
+	 document.getElementById('btn3').setAttribute('class', 'cFXvdc');
+	 document.getElementById('btn4').setAttribute('class', 'cFXvdf');
+	}else if(loc.includes("travel")){
+		 document.getElementById('btn1').setAttribute('class', 'cFXvdv');
+		 document.getElementById('btn2').setAttribute('class', 'leGRAZ');
+		 document.getElementById('btn3').setAttribute('class', 'cFXvdc');
+		 document.getElementById('btn4').setAttribute('class', 'cFXvdf');
+	}else if(loc.includes("qna")){
+		 document.getElementById('btn1').setAttribute('class', 'cFXvdc');
+		 document.getElementById('btn2').setAttribute('class', 'cFXvdv');
+		 document.getElementById('btn3').setAttribute('class', 'leGRAZ');
+		 document.getElementById('btn4').setAttribute('class', 'cFXvdf');
+	}else if(loc.includes("comm")){
+		 document.getElementById('btn1').setAttribute('class', 'cFXvdf');
+		 document.getElementById('btn2').setAttribute('class', 'cFXvdv');
+		 document.getElementById('btn3').setAttribute('class', 'cFXvdc');
+		 document.getElementById('btn4').setAttribute('class', 'leGRAZ');
+	}
+});
+
+</script>
 <script src="js/index.js" defer="defer"></script>
 </head>
 <body>
@@ -150,39 +181,18 @@ String context = request.getContextPath();
 		</div>
 		<div class="Headers__HeaderContentWrapper iEbwCp">
 			<button width="auto" font-size="16px" font-weight="bold"
-				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 leGRAZ"
+				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 leGRAZ" id="btn1"
 				onClick="location.href='<%=context%>/main.do'">홈</button>
 			<button width="auto" font-size="16px" font-weight="400"
-				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdv"
+				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdv" id="btn2"
 				onClick="location.href='<%=context%>/travelListForm.do'">동행</button>
 			<button width="auto" font-size="16px" font-weight="400"
-				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdc"
+				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdc" id="btn3"
 				onClick="location.href='<%=context%>/qnaList.do?sort=1'">Q&amp;A</button>
 			<button width="auto" font-size="16px" font-weight="400"
-				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdf"
+				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdf" id="btn4"
 				onClick="location.href='<%=context%>/commuList.do'">여행 기록</button>
 		</div>
 	</header>
 </body>
-<script type="text/javascript">
-
-function searchTravel() {
-	
-	let searchTravelCont = $('#searchTravelCont').val()
-	alert(searchTravelCont);
-	
-	$.ajax({    type : 'post',           // 타입 (get, post, put 등등)   
-				url : './ajax',           // 요청할 서버url         
-			    dataType : 'text',       // 데이터 타입 (html, xml, json, text 등등)    
-				data : JSON.stringify({ "searchTravelCont" : searchTravelCont}),     // 보낼 데이터 (Object , String, Array)
-				success : function(result) { // 결과 성공 콜백함수        
-				console.log(result);    
-				},    
-				error : function(request, status, error) { // 결과 에러 콜백함수       
-				console.log(error)    
-				}})
-}
-
-
-</script>
 </html>

@@ -69,7 +69,7 @@ a :hover {
 	align-items: center;
 	-webkit-box-pack: center;
 	justify-content: center;
-	width: 100%;
+	width: 55%;
 	height: fit-content;
 }
 
@@ -259,16 +259,6 @@ button {
 	color: rgb(37, 37, 37);
 }
 
-.iEbwCp {
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	justify-content: center;
-	width: 100%;
-	height: fit-content;
-}
-
 .leGRAZ {
 	position: relative;
 	display: flex;
@@ -342,7 +332,7 @@ button {
 	position: absolute;
 	width: 180px;
 	background: rgb(255, 255, 255);
-	height: 170px;
+	height: 230px;
 	top: 60px;
 	margin-top: 10px;
 	right: 0px;
