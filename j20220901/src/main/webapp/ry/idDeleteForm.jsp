@@ -9,7 +9,7 @@
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="${context }header.jsp"/>
+<c:import url="${context }/header.jsp"/>
 <style type="text/css">
  	caption {
 	font-size: 24px;
