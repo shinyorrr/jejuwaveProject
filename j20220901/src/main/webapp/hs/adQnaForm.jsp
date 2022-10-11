@@ -58,7 +58,7 @@
 			  				<td width="100">${qna.b_theme}</td>
 			  				<td width="100">${qna.b_success}</td>
 			  				<td width="100">
-			  				<fmt:formatDate value="${qna.b_date}" pattern="yy/MM/dd"/>
+			  					<fmt:formatDate value="${qna.b_date}" pattern="yy-MM-dd"/>
 			  				</td>
 			  				<td width="100"><input type="submit" value="삭제" onclick="location.href='<%=context%>/adQnaDelete.do?b_num=${qna.b_num}&pageNum=${pageNum}'"></td>
 			  			</tr>
