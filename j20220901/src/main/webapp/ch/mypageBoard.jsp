@@ -143,6 +143,10 @@
 				</c:if>
 				<input type = "submit" class = "allDel" value="일괄삭제">
 				</form>
+				<form action="mypageBoard.do">
+						<input type ="text" 	name="search" placeholder="제목 + 내용" style="margin-left: 189px;">
+						<input type ="submit" 	value="검색">
+				</form>
 				</div>
 				
 				

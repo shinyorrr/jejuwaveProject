@@ -161,7 +161,7 @@ $(function(){
 									<td colspan="3">
 									<input type="checkbox" name = "chk_trvComment" value="${board.t_num }">
 									<input type="text" value = "${board.t_num }" name = "t_num" id = "t_num" hidden="true">
-										<div class = "c_content">
+										<div class = "c_content" onclick="location.href='travelContent.do?t_num=${board.t_ref }';">
 										${board.t_content}								
 										</div>
 									</td>
@@ -183,6 +183,10 @@ $(function(){
 						</c:if>
 						<input type="submit" class = "allDel" value="일괄삭제">
 				</form>	
+				<form action="mypageCommentTravel.do">
+						<input type ="text" 	name="search" placeholder="댓글내용" style="margin-left: 189px;">
+						<input type ="submit" 	value="검색">
+				</form>
 						
 						
 				<div style="text-align: center; padding-top: 20px;">

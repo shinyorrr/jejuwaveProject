@@ -32,6 +32,12 @@
 			location.href="mypageCommentTravel.do";
 		</script>
 	</c:if>
+	<c:if test="${result==5 }">
+		<script type="text/javascript">
+			alert("모두삭제성공");
+			location.href="mypageComment.do";
+		</script>
+	</c:if>
 	<c:if test="${result==0 }">
 		<script type="text/javascript">
 			alert("모두삭제실패");

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.naming.Context;
@@ -262,7 +263,7 @@ public class MypageDao {
 		
 		return img;
 	}
-	public List<Mypage> boardList(String user_id, int startRow, int endRow) throws SQLException {
+	public List<Mypage> boardList(String user_id, int startRow, int endRow, String search) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -275,6 +276,12 @@ public class MypageDao {
 				+ "        ) c)  \r\n"
 				+ "where r between ? and ?";
 		System.out.println("boardList sql : " + sql);
+		
+		// 검색창 조건
+		if(search != "fail") {
+			sql += " and b_title like '%"+search+"%' or b_content like '%"+search+"%'";
+			System.out.println("boardList search sql ==> " + sql);
+		}
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -463,7 +470,7 @@ public class MypageDao {
 		return result;
 		
 	}
-	public List<Mypage> commentList(String user_id, int startRow, int endRow) throws SQLException {
+	public List<Mypage> commentList(String user_id, int startRow, int endRow, String search) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
 		String sql = "select * "
 				+ " from( "
@@ -478,6 +485,10 @@ public class MypageDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		if(search != "fail") {
+			sql += "and com_content like'%"+search+"%'";
+		}
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -510,7 +521,7 @@ public class MypageDao {
 		
 		return list;
 	}
-	public List<Mypage> commentList2(String user_id, int startRow, int endRow) {
+	public List<Mypage> commentList2(String user_id, int startRow, int endRow, String search) {
 		List<Mypage> list = new ArrayList<Mypage>();
 		String sql = "select * "
 				+ "from( "
@@ -526,6 +537,10 @@ public class MypageDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
+		
+		if(search != "fail") {
+			sql+="and t_content like '%"+search+"%'";
+		}
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -541,6 +556,7 @@ public class MypageDao {
 			
 			do{
 				Mypage mypage = new Mypage();
+				mypage.setT_ref(rs.getInt("t_ref"));
 				mypage.setT_num(rs.getInt("t_num"));
 				mypage.setT_content(rs.getString("t_content"));
 				mypage.setT_date(rs.getString("t_date"));
@@ -781,6 +797,52 @@ public class MypageDao {
 			pstmt = conn.prepareStatement(sql);
 			for(int i= 0; i<chk_qna.length;i++) {
 				pstmt.setString(1, chk_qna[i]);
+				
+				// addBatch에 담기
+				pstmt.addBatch();
+				
+				// 파라미터 clear
+				pstmt.clearParameters();
+			}
+			
+			pstmt.executeBatch();
+			conn.commit();	
+			pstmt.clearBatch();
+			
+			result = 1;
+			
+		} catch (Exception e) {
+			System.out.println("MypageDao chk_qna 오류" + e.getMessage());
+		} finally {
+			if(pstmt != null)  try {pstmt.close();} catch (Exception e) {} 
+			if(conn != null) try {conn.close();} catch (Exception e) {} 
+		}
+		
+		return result;
+	}
+	public int ComAllDel(String[] com_result) {
+		int result = 0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		String sql = "delete qna_comment where b_num=? and com_num = ?";
+		System.out.println("MypageDao chk_qna sql =>" + sql);
+//		String chk_com1 = Arrays.toString(chk_com);
+//		System.out.println("ComAllDel chk_com1 ==> " + chk_com1); String []
+//		com_result = chk_com1.split(",");
+//		System.out.println("MypageDao ComAllDel com_result ==> " + com_result);
+		
+//		System.out.println("ComAllDel chk_com.length => " + chk_com.length);
+		
+		System.out.println("MypageDao ComAllDel ==== com_result[0] : "+com_result[0]);
+		System.out.println("MypageDao ComAllDel ==== com_result[1] : "+com_result[1]);
+		System.out.println("MypageDao ComAllDel ==== com_result[2] : "+com_result[2]);
+		System.out.println("MypageDao ComAllDel ==== com_result[3] : "+com_result[3]);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			for(int i= 0; i<com_result.length;i+=2) {
+				pstmt.setString(1, com_result[i]);
+				pstmt.setString(2, com_result[i+1]);
 				
 				// addBatch에 담기
 				pstmt.addBatch();
