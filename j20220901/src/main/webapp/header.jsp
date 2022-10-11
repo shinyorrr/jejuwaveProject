@@ -157,7 +157,7 @@ String context = request.getContextPath();
 				onClick="location.href='<%=context%>/travelListForm.do'">동행</button>
 			<button width="auto" font-size="16px" font-weight="400"
 				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdc"
-				onClick="location.href='<%=context%>/qnaList.do'">Q&amp;A</button>
+				onClick="location.href='<%=context%>/qnaList.do?sort=1'">Q&amp;A</button>
 			<button width="auto" font-size="16px" font-weight="400"
 				class="ButtonWithToggle__ButtonWrapper-sc-12hyxzf-0 cFXvdf"
 				onClick="location.href='<%=context%>/commuList.do'">여행 기록</button>
