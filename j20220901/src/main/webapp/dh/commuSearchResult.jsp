@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
-<title>검색결과</title>
+<title>JEJU WAVE</title>
 <%
    String context = request.getContextPath();
 %>
+<!-- header import -->
 <c:import url="${context}/header.jsp"></c:import>
-
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">		
 <!-- bootStrap Icons -->
@@ -22,27 +22,24 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
-	<section class=" container-fluid py-5 text-center bg-img" style="height:300px; margin-top:148px; background-image: url('dh_images/bgimg.jpg');">
+	<section class="container-fluid py-5 text-center bg-img" style="height:300px; margin-top:148px; background-image: url('dh_images/bgimg.jpg');">
 			<div class="mt-5 row">
 				<div class="col">
-					<p class="mt-2 text-white">자유롭게 당신의 일상을 공유하세요</p>
 					<p class="text-white" style="font-size: 60px; font-weight: bold;">커뮤니티</p>
+					<p class="mt-2 text-white">자유롭게 당신의 일상을 공유하세요</p>
 				</div>
 			</div>	
 	</section>
 	<main role="main" class="container">
-
       <section class="jumbotron text-center">
         <div class="container mt-5">
           <h1 class="jumbotron-heading">검색결과</h1>
           <p class="lead text-muted">'${searchWord }' (이)가 포함된 게시글</p>
-          
         </div>
       </section>
+        <!-- 검색box -->
 		<div class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 					<form action="<%=context %>/commuSearchList.do">
-						<!-- <button type="submit" class="searchLabel">검색</button>
-						<input id="searchBox" type="text" placeholder="검색어를 입력하세요" name="searchWord"> -->
 						<div width="300px" class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 							<span class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
 							<button></button>
@@ -50,7 +47,7 @@
 						</div>
 					</form>
 				</div>
-		
+	  <!-- 검색결과 list -->
       <div class="album py-5 bg-light">
         <div class="container">
           <div class="row">
@@ -120,14 +117,36 @@
 				</c:forEach>
 			</c:if>
 			<c:if test="${totCnt == 0 }">
-				<h1>데이터가 없네</h1>
+				<div style="text-align: center;"><img src="images/no-data.png" ></div>
 			</c:if>
-            
+			<!-- list end -->
+				<!-- page nav --> -->
+				<nav aria-label="Page navigation example"
+					class="d-flex justify-content-center">
+					<ul class="pagination" id="pageNumColor">
+						<c:if test="${startPage > blockSize}">
+							<li class="page-item"><a class="page-link"
+								href='<%=context%>/commuSearchList.do?searchWord=${searchWord }&pageNum=${startPage-blockSize}'
+								aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+							</a></li>
+						</c:if>
+						<c:forEach var="i" begin="${startPage }" end="${endPage }">
+							<li class="page-item"><a class="page-link"
+								href='<%=context%>/commuSearchList.do?searchWord=${searchWord }&pageNum=${i}'>${i}</a></li>
+						</c:forEach>
+						<c:if test="${endPage < pageCnt}">
+							<li class="page-item"><a class="page-link"
+								href='<%=context%>/commuSearchList.do?searchWord=${searchWord }&pageNum=${startPage+blockSize}'
+								aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+							</a></li>
+						</c:if>
+					</ul>
+			    </nav>
 		    </div>
           </div>
         </div>
-      
     </main>
+    <!-- footer -->
     <footer class="py-5 bg-dark" style="margin-top: 100px;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your

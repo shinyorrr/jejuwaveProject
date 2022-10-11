@@ -13,7 +13,6 @@ String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">
-</head>
 
 <!----------- body 영역 ---------->
 <body style="color: #000000;">

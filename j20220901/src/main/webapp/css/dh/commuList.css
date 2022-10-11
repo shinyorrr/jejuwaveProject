@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+	.searchLabel {
+		border-color:transparent;
+		padding: 6px 25px;
+ 		background-color:#FF3500;
+ 		border-radius: 4px;
+		color: white;
+		cursor: pointer;
+	}
+	#searchBox {
+		height: 36px;
+		padding: 5px;
+	}

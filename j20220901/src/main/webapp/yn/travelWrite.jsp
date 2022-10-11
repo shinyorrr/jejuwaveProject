@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">	
 
 <c:import url="${context}/header.jsp"></c:import>
+<link rel="stylesheet" id="chacss" href="css/header_content.css">
 </head>
 
 <!---------------------------- body 영역 --------------------------------> 	

@@ -31,31 +31,35 @@ public class CommuWriteProAction implements CommandProcess {
 			throws ServletException, IOException {
 		try {
 			request.setCharacterEncoding("utf-8");
+			//get parameter
 			String pageNum = request.getParameter("pageNum");
 			String user_id = request.getParameter("user_id");
+			//get dao instance
 			CommuDao cd = CommuDao.getInstance();
-			
 			// insert dao에 보낼 community_img table setting(form value 받기)
 			System.out.println("img upload start...");
-			List<Commu.CommuImg> commuImgList = new ArrayList<Commu.CommuImg>();
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmssZ");
-			String currentDate = simpleDateFormat.format(new Date());
+			List<Commu.CommuImg> commuImgList = new ArrayList<Commu.CommuImg>(); //이미지 담을 List
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmssZ"); 
+			String currentDate = simpleDateFormat.format(new Date()); // 이미지 파일 이름에 추가할 시간정보
+			//part 인터페이스를 사용해 mulipart형식으로 보내진 데이터들 받기
 			Collection<Part> parts = request.getParts(); // 모든 part들을 가져옴
 			String realPath = request.getServletContext().getRealPath("dh/imgFileSave");
 			File fileSaveDir = new File(realPath);
-			if (!fileSaveDir.exists()) {
+			if (!fileSaveDir.exists()) { //저장경로에 해당 폴더가 없으면 만들기
 				fileSaveDir.mkdirs();
 			}
+			//파일 저장 및 이미지배열을 List에 담기
 			for (Part p : parts) {
 				System.out.println(p.getName());
 				if (p.getHeader("Content-Disposition").contains("filename=")) {
 					if(p.getSize() > 0) {
 						String fileName = p.getSubmittedFileName();
-						String filePath = realPath + File.separator + currentDate + fileName;
-						String filePathV = "dh/imgFileSave/" + File.separator + currentDate + fileName;
+						String filePath = realPath + File.separator + currentDate + fileName; //서버 저장경로
+						String filePathV = "dh/imgFileSave/" + File.separator + currentDate + fileName; //db에 입력할 경로
 						System.out.println("filePath->" + filePath);
 						System.out.println("filePathV->" + filePathV);
 						p.write(filePath);
+						//List에 이미지 담기
 						Commu.CommuImg commuImg = new CommuImg();
 						commuImg.setC_img_path(filePathV);
 						commuImgList.add(commuImg);

@@ -86,6 +86,12 @@ public class TravelContentAction implements CommandProcess {
 			// 공갈 Page 방지
 			if (revendPage > revPageCnt) revendPage = revPageCnt;
 			
+			// 평균 값 조회
+			int avgReview = rd.select(t_num);
+			
+			// 받은 후기 갯수 
+			int totalRev = rd.totalRev(t_num);
+						
 			System.out.println("revlist -->"+revlist);
 			
 			request.setAttribute("revlist", revlist);
@@ -97,6 +103,9 @@ public class TravelContentAction implements CommandProcess {
 			request.setAttribute("revPageCnt", revPageCnt);
 			request.setAttribute("revStartPage", revStartPage);
 			request.setAttribute("revendPage", revendPage);
+			request.setAttribute("avgReview", avgReview);
+			request.setAttribute("totalRev", totalRev);
+			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

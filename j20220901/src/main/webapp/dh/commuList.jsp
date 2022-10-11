@@ -7,17 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
-<title>Insert title here</title>
+<title>JEJU WAVE</title>
 <% 
 String context = request.getContextPath();
 %>
-
-
+<!-- header import -->
 <c:import url="${context}/header.jsp"></c:import>
-
-
-
-<!-- CSS only -->
+<!-- bottSTrap CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">		
 <!-- bootStrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
@@ -25,24 +21,11 @@ String context = request.getContextPath();
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <!-- jQuery -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<style type="text/css">
-	.searchLabel {
-		border-color:transparent;
-		padding: 6px 25px;
- 		background-color:#FF3500;
- 		border-radius: 4px;
-		color: white;
-		cursor: pointer;
-	}
-	#searchBox {
-		height: 36px;
-		padding: 5px;
-	}
-</style>
-
+<!-- this page css -->
+<link rel="stylesheet" href="<%= context %>/css/dh/commuList.css">
 
 <!-- 커뮤니티 무한스크롤 ajax-->
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 var count = 2;
 $(window).scroll(function(){
 	let scrollLocation = document.documentElement.scrollTop; //현재 스크롤 바 위치
@@ -61,8 +44,10 @@ $(window).scroll(function(){
 });	
 console.log(count);
 
-</script>
+</script> --%>
 
+
+<!-- session chk functions -->
 <script type="text/javascript">
 	function chkSessionUpdate() {
 		var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
@@ -97,25 +82,22 @@ console.log(count);
 </script>
 </head>
 <body>
-
 <!-- main start -->	
 	<main style="margin-top: 148px;">
 		<!-- main 상단 고정이미지 -->
 		<section class=" container-fluid py-5 text-center bg-img" style="height:300px; background-image: url('dh_images/bgimg.jpg');">
 			<div class="mt-5 row">
 				<div class="col">
-					<p class="mt-2 text-white">자유롭게 당신의 일상을 공유하세요</p>
 					<p class="text-white" style="font-size: 60px; font-weight: bold;">커뮤니티</p>
+					<p class="mt-2 text-white">자유롭게 당신의 일상을 공유하세요</p>
 				</div>
 			</div>	
 		</section>
-		<!-- 검색창 -->
 		<section class="container">
+			<!-- 검색창 -->
 			<div class="row m-5 justify-content-md-center">	
 				<div class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 					<form action="<%=context %>/commuSearchList.do">
-						<!-- <button type="submit" class="searchLabel">검색</button>
-						<input id="searchBox" type="text" placeholder="검색어를 입력하세요" name="searchWord"> -->
 						<div width="300px" class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 							<span class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
 							<button></button>
@@ -151,7 +133,7 @@ console.log(count);
 								</div>
 							</div>
 						</div>
-						<!-- Modal page-->
+						<!-- Modal page (게시글 리스트 클릭시 팝업될 게시글 상세내용 modal 틀-->
 						<div class="col-md-auto modal bd-modal-lg fade" tabindex="-1" role="dialog" aria-labelledby="bd-modal-lg" aria-hidden="true">
 							<div class="modal-dialog modal-dialog-centered modal-lg" >
 								<div class="modal-content">
@@ -159,7 +141,7 @@ console.log(count);
 								</div>
 							</div>
 					    </div>
-					    <!-- deleteModal -->
+					    <!-- deleteModal 삭제메시지 팝업-->
 						<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						  <div class="modal-dialog" role="document">
 						    <div class="modal-content">
@@ -180,7 +162,7 @@ console.log(count);
 						  </div>
 						</div>
 						<!-- end modal -->
-						<!-- Call modalContent.jsp Script -->
+						<!-- Call modalContent.jsp Script 게시글 상세내용 팝업을 위한 script-->
 						<script>
 							$('.bd-modal-lg').on('show.bs.modal', function(e) {
 						
@@ -195,15 +177,34 @@ console.log(count);
 				</c:forEach>
 			</c:if>
 			<c:if test="${totCnt == 0 }">
-				<h1>데이터가 없네</h1>
+				<div style="text-align: center;"><img src="images/no-data.png" ></div>
 			</c:if>
-			<!-- end list -->
-			<div id="scroll"></div>
+<!-- end list -->
+			<!-- page 이동 nav -->
+			<nav aria-label="Page navigation example"
+			class="d-flex justify-content-center">
+			<ul class="pagination" id="pageNumColor">
+				<c:if test="${startPage > blockSize}">
+					<li class="page-item"><a class="page-link"
+						href='<%=context%>/commuList.do?pageNum=${startPage-blockSize}'
+						aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+					</a></li>
+				</c:if>
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<li class="page-item"><a class="page-link"
+						href='<%=context%>/commuList.do?pageNum=${i}'>${i}</a></li>
+				</c:forEach>
+				<c:if test="${endPage < pageCnt}">
+					<li class="page-item"><a class="page-link"
+						href='<%=context%>/commuList.do?pageNum=${startPage+blockSize}'
+						aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+					</a></li>
+				</c:if>
+			</ul>
+		</nav>
 		</section>
 	</main>
-	
-	
-	
+	<!-- footer -->
 	<footer class="py-5 bg-dark" style="margin-top: 100px;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your

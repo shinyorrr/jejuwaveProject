@@ -23,12 +23,15 @@ public class CommuUpdateFormAction implements CommandProcess {
 		 * 
 		 * }
 		 */
+		//session check는 jsp페이지에서 javascript 함수로 확인함
 		int c_num = Integer.parseInt(request.getParameter("c_num"));
 		String pageNum = request.getParameter("pageNum");
 		try {
 			CommuDao cd = CommuDao.getInstance();
 			Commu commu = cd.select(c_num);
+			//수정 전 이미지 List select dao 요청
 			List<Commu.CommuImg> imgList = cd.selectImg(c_num);
+			//setAttribute
 			request.setAttribute("c_num"  , c_num);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("commu"  , commu);
