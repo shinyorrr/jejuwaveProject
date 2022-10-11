@@ -129,7 +129,7 @@ $(function(){
 					<h2 class = "mypage_CommentMain">Q&A 내 댓글관리</h2>
 				</button>
 				<button class = "myComment_button" id = "myComment_Travel">
-					<h2 class = "mypage_CommentMain">동행자게시판 내 코멘트</h2>
+					<h2 class = "mypage_CommentMain">동행자게시판 내 댓글관리</h2>
 				</button>
 				<div class = "change_body" id = "change_body">
 		 		<form action="<%=context%>/mypageAlldelete.do" method="get">

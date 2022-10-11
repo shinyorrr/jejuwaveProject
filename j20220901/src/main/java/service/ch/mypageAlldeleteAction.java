@@ -46,17 +46,18 @@ public class mypageAlldeleteAction implements CommandProcess {
 			result = mypageDao.trvAllDel(chk_trvComment);
 			if(result == 1) result = 4;
 		}  else if(chk_com != null) {
+			
+			// checkbox에서 받은 두개의 값을 자르기 위한 작업
 			String chk_com1 = Arrays.toString(chk_com);
 			System.out.println("mypageAlldeleteAction chk_com1 ==> " + chk_com1); 
-			String newchk = chk_com1.replace(" ", "");
-			String newchk1 = newchk.replace("[", "");
-			String newchk2 = newchk1.replace("]", "");
-			System.out.println("mypageAlldeleteAction newchk ==> " + newchk2); 
-			String [] com_result = newchk2.split(",");
+			String newchk = chk_com1.replace(" ", "")
+							.replace("[", "")
+							.replace("]", "");
+			System.out.println("mypageAlldeleteAction newchk ==> " + newchk); 
+			String [] com_result = newchk.split(",");
 			
 			System.out.println("mypageAlldeleteAction com_result ==> " + com_result);
 			System.out.println("mypageAlldeleteAction com_result 길이 ==> " + com_result.length);
-			System.out.println("mypageAlldeleteAction com_result[2] ==> " + com_result[2]); 
 			
 			MypageDao mypageDao = MypageDao.getInstance();
 			result = mypageDao.ComAllDel(com_result);
