@@ -17,13 +17,12 @@ public class AdCommuDeleteAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("AdCommuDeleteAction service start...");
-		int c_num = Integer.parseInt(request.getParameter("c_num"));
-		System.out.println("AdCommuDeleteAction c_num->"+c_num);
+		int 	 c_num = Integer.parseInt(request.getParameter("c_num"));
 		String pageNum = request.getParameter("pageNum");
 		
 		try {
 			AdminDao ad = AdminDao.getInstance();
-			int result = ad.commuDelete(c_num);
+			int result  = ad.commuDelete(c_num);
 			
 			request.setAttribute("c_num", c_num);
 			request.setAttribute("result", result);

@@ -47,25 +47,25 @@
 			  </thead>
 			  <tbody>
 			    <c:if test="${totCnt > 0}">
-		  		<c:forEach var="commu" items="${list}">
-			  	<tr>
-			  		<th scope="row" width="50">${startNum}</th>
-			  		<td width="600" id="content">${commu.c_content}</td>
-			  		<td width="100">${commu.c_hash}</td>
-			  		<td width="100">${commu.user_id}</td>
-			  		<td width="100">
-			  			<fmt:formatDate value="${commu.c_date}" pattern="yy-MM-dd"/>
-			  		</td>
-			  		<td width="100"><input type="button" value="삭제" onclick="location.href='<%=context%>/adCommuDelete.do?c_num=${commu.c_num}&pageNum=${pageNum}'"></td>
-			  	</tr>
-			  	<c:set var="startNum" value="${startNum-1}"></c:set>
-		  		</c:forEach>
-		  	</c:if>
-		  	<c:if test="${totCnt == 0}">
+			  		<c:forEach var="commu" items="${list}">
+				  	<tr>
+				  		<th scope="row" width="50">${startNum}</th>
+				  		<td width="600" id="content">${commu.c_content}</td>
+				  		<td width="100">${commu.c_hash}</td>
+				  		<td width="100">${commu.user_id}</td>
+				  		<td width="100">
+				  			<fmt:formatDate value="${commu.c_date}" pattern="yy-MM-dd"/>
+				  		</td>
+				  		<td width="100"><input type="button" value="삭제" onclick="location.href='<%=context%>/adCommuDelete.do?c_num=${commu.c_num}&pageNum=${pageNum}'"></td>
+				  	</tr>
+				  	<c:set var="startNum" value="${startNum-1}"></c:set>
+			  		</c:forEach>
+		  		</c:if>
+		  	  <c:if test="${totCnt == 0}">
 		  		<tr>
 		  			<td colspan="7">데이터가 없네</td>
 		  		</tr>
-		  	</c:if>
+		  	  </c:if>
 		  </tbody>
 		</table>
 	  </div>
@@ -85,8 +85,7 @@
 				 <li class="page-item"><a class="page-link" href="<%=context%>/adCommuForm.do?pageNum=${startPage+blockSize }">Next</a></li>
 			</c:if>
 		  </ul>
-		 </nav>	
-		
+		 </nav>
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>

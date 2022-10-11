@@ -12,8 +12,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script type="text/javascript" src="<%=context%>/js/jquery.js"></script>
 <script type="text/javascript">
+
+	// 회원 검색
 	function searchCheck(){
-	    //검색
 	   
 	    if(frm.keyField.value == 0){
 	        alert("검색 키워드를 입력하세요.");
@@ -60,18 +61,18 @@
 		<caption>회원명단</caption>
 		  <thead>
 		  	<tr>
-	  		<td colspan="7">
-	  			<form action="<%=context%>/adMemberSelect.do" name="frm" method="post" onsubmit="return searchCheck()">
-	  			<select name="keyField" id="form-select" class="form-select form-select-sm" aria-label=".form-select-sm example">
-				  <option value="0">---선택---</option>
-				  <option value="user_id">아이디</option>
-				  <option value="user_name">이름</option>
-				</select>
-				<input type="text" name="keyWord" placeholder="회원정보를 입력해주세요" maxlength="50">
-				<input type="submit" value="검색">
-				<input type="reset" value="취소">
-	  			</form>
-	  		</td>
+		  		<td colspan="7">
+		  			<form action="<%=context%>/adMemberSelect.do" name="frm" method="post" onsubmit="return searchCheck()">
+		  			<select name="keyField" id="form-select" class="form-select form-select-sm" aria-label=".form-select-sm example">
+					  <option value="0">---선택---</option>
+					  <option value="user_id">아이디</option>
+					  <option value="user_name">이름</option>
+					</select>
+					<input type="text" name="keyWord" placeholder="회원정보를 입력해주세요" maxlength="50">
+					<input type="submit" value="검색">
+					<input type="reset" value="취소">
+		  			</form>
+		  		</td>
 		  	</tr>
 		    <tr>
 		      <th scope="col">아이디</th>
@@ -99,7 +100,7 @@
 		  	</c:if>
 		  	<c:if test="${totCnt == 0}">
 		  		<tr>
-		  			<td colspan="7">데이터가 없네</td>
+		  			<td colspan="7">회원이 없습니다.</td>
 		  		</tr>
 		  	</c:if>
 		  </tbody>
@@ -110,15 +111,15 @@
 		<nav class="pagenav" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${startPage > blockSize}">
-				<li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${startPage-blocksize}">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${startPage-blocksize}">이전</a></li>
 			</c:if>
 		    
 		    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${i}">[${i}]</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${i}">${i}</a></li>
 			</c:forEach>
 		    
 		    <c:if test="${endPage < pageCnt}">
-				 <li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${startPage+blockSize }">Next</a></li>
+				 <li class="page-item"><a class="page-link" href="<%=context%>/adMemList.do?pageNum=${startPage+blockSize }">다음</a></li>
 			</c:if>
 		  </ul>
 		 </nav>	
@@ -126,6 +127,6 @@
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>
-<c:import url="${context}/footer.jsp"></c:import>
+<c:import url="${context}/hs/footer.jsp"></c:import>
 </body>
 </html>

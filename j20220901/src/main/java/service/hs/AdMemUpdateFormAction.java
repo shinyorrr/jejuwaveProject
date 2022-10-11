@@ -21,7 +21,7 @@ public class AdMemUpdateFormAction implements CommandProcess {
 		String pageNum = request.getParameter("pageNum");
 		
 		try {
-			AdminDao ad = AdminDao.getInstance();
+			AdminDao   ad = AdminDao.getInstance();
 			Member member = ad.select(user_id);
 			
 			request.setAttribute("user_id", user_id);
