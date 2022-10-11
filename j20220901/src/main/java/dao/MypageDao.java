@@ -94,7 +94,7 @@ public class MypageDao {
 	}
 	
 	
-	public List<Mypage> travelList(String user_id, int startRow, int endRow, int t_dealstatus) throws SQLException {
+	public List<Mypage> travelList(String user_id, int startRow, int endRow, int t_dealstatus, String search) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -111,6 +111,7 @@ public class MypageDao {
 		System.out.println("travelList t_dealstatus === > ");
 		// 버튼 클릭시 조건추가 (모집중인 글만 보기)
 		if(t_dealstatus == 0) { sql += "and t_dealstatus = ?"; }
+		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -126,6 +127,15 @@ public class MypageDao {
 				pstmt.setInt(4,t_dealstatus);
 				rs = pstmt.executeQuery();
 			} else rs = pstmt.executeQuery();
+			
+			// 검색창에 값을 입력했을경우
+			if(search != "fail") {
+				sql += " and t_title like '%"+search+"%' or t_content like '%"+search+"%'";
+				System.out.println("travelList search sql == " + sql);
+				System.out.println("MypageDao travelList search = " + search);
+				rs = pstmt.executeQuery();
+			} else rs = pstmt.executeQuery();
+			
 			System.out.println("travelList sql ===> " + sql);
 			System.out.println(rs);
 			System.out.println("MypageDao travelList rs.next()->"+rs.next());
@@ -378,7 +388,7 @@ public class MypageDao {
 		
 		return max;
 	}
-	public List<Mypage> communityList(String user_id, int startRow, int endRow) throws SQLException {
+	public List<Mypage> communityList(String user_id, int startRow, int endRow, String search) throws SQLException {
 		List<Mypage> list = new ArrayList<Mypage>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -392,7 +402,12 @@ public class MypageDao {
 				+ "            and c.user_id = ? "
 				+ "            ) a) "
 				+ "where rn between ? and ? ";
-		System.out.println(sql);
+		System.out.println("communityList sql =>" + sql);
+		
+		if(search != "fail") {
+			sql += "and c_content like '%"+search+"%' or c_hash like '%"+search+"%'";
+			System.out.println("communityList search sql => " + sql);
+		}
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -789,6 +804,7 @@ public class MypageDao {
 		
 		return result;
 	}
+
+	}
 	
-	
-}
+

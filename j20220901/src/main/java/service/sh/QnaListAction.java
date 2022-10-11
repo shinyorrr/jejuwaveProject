@@ -1,6 +1,7 @@
 package service.sh;
 
 import java.io.IOException;
+
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -22,11 +23,13 @@ public class QnaListAction implements CommandProcess {
 		System.out.println("QnAListAction Service start...");
 
 		Qna_BoardDao bd = Qna_BoardDao.getInstance();
-
+		
 		try {
 			int totCnt = bd.getTotalCnt(); 
-
 			String pageNum = request.getParameter("pageNum");
+			int sort = Integer.parseInt(request.getParameter("sort"));  //정렬 번호 받기 1. 등록순 2. 댓글갯수순
+		
+		
 			if (pageNum == null || pageNum.equals("")) {
 				pageNum = "1";
 			}
@@ -37,7 +40,7 @@ public class QnaListAction implements CommandProcess {
 			int endRow = startRow + pageSize - 1; // 10 20
 			int startNum = totCnt - startRow + 1; // 38- 11 +1 28
 
-			List<Qna_Board> list = bd.getBoardList(startRow, endRow);
+			List<Qna_Board> list = bd.getBoardList(startRow, endRow, sort);
 
 			int pageCnt = (int) Math.ceil((double) totCnt / pageSize); // 4
 			// 2-1 / 10 *10 +1 //2
@@ -48,6 +51,7 @@ public class QnaListAction implements CommandProcess {
 
 
 			request.setAttribute("list", list); //게시글 리스트 넘겨주기
+			request.setAttribute("sort", sort); //정렬방식 넘겨주기
 			request.setAttribute("totCnt", totCnt);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("currentPage", currentPage);

@@ -133,7 +133,7 @@
 								</td>
 								<td colspan="3">
 									<div class = "b_recnt">
-										<img style="width: 16px; height: 16px; margin: 0 5px;" src="<%=context%>/yn_images/comm_icon.png">${board.b_recnt}
+										<img style="width: 16px; height: 16px; margin: 0 5px;" src="<%=context%>/images/comm_icon.png">${board.b_recnt}
 									</div>
 								</td>
 							</tr>

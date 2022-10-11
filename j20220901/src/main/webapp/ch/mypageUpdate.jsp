@@ -87,7 +87,7 @@ function passwordUpdate(){
 
 	}
 }
-// 패스워드 유효성체크
+/* 현재 패스워드와 일치한지, 공백인지 유효성검사 */
 function fn_submit(){	
 	var f = document.pw;
 	var pw = ${user_pw};

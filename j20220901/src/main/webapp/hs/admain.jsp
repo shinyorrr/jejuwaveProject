@@ -10,9 +10,7 @@
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link rel="stylesheet" href="<%=context%>/hs/css/calstyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-<!-- header -->
-<link rel="stylesheet" href="css/header_main.css">
-<script src="js/index2.js" defer="defer"></script>
+
 	<!-- 네비게이션메뉴바 -->
 	<nav id="nav" class="nav">
 	<!-- 프로필 이미지 -->
@@ -74,6 +72,6 @@
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>
-<c:import url="${context}/footer.jsp"></c:import>
+<c:import url="${context}/hs/footer.jsp"></c:import>
 </body>
 </html>

@@ -9,7 +9,7 @@ String context = request.getContextPath();
 %>
 
 
-<c:import url="${context}/sh/header.jsp"></c:import>
+<c:import url="${context}/header.jsp"></c:import>
 <meta charset="UTF-8">
 <title>게시글 수정</title>
 <link
@@ -34,6 +34,15 @@ String context = request.getContextPath();
 </header>
 
 
+<script type="text/javascript">
+/* select 에서 선택한 방식으로 정렬 */
+function sorting(sort) {
+	alert(sort);
+	location.href='<%=context %>/qnaList2.do?sort='+ sort;
+	
+}
+
+</script>
 
 
 <body>
@@ -41,9 +50,15 @@ String context = request.getContextPath();
 	<div style="margin-bottom: 400px; margin-top: 70px;" class="main">
 		<table class="mainTable">
 		
-			<!-- 채택기다리는 글 -->
-			<div style="margin-left: 1300px;" >
-			<button onclick="location.href='<%=context %>/qnaList.do'" class="comment_button2" >답변을 기다리는 질문만 보기</button>
+			<!-- 채택기다리는 글만보기 -->
+			<div style="margin-left: 1200px;" >
+
+			<select class="select" name="sort" onchange="sorting(this.value);">
+				<option value="0">정렬</option>
+				<option value="1">등록순</option>
+				<option value="2">댓글순</option>			
+			</select>
+			<button onclick="location.href='<%=context %>/qnaList.do?sort=1'" class="comment_button2" >답변을 기다리는 질문만 보기</button>
 			</div>
 			
 			<c:if test="${totCnt > 0 }">

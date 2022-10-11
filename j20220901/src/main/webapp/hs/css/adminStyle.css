@@ -23,7 +23,7 @@
 	margin-top : 100px;
 	margin-left: 250px;
 	width:1300px;
-	height:800px;
+	height:100%;
 }
 
 /* 이미지 */
@@ -81,7 +81,7 @@
 #memform {
 	border: 1px solid #D5D5D5;
 	width : 500px;
-	height: 700px;
+	height: 100%;
 	padding: 20px;
 	line-height: 25px;
 }

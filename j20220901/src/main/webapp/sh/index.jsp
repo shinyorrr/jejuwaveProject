@@ -11,7 +11,7 @@
 </head>
 <body>
 <script type="text/javascript">
-    location.href="<%=context %>/qnaList.do"; 
+    location.href="<%=context %>/qnaList.do?sort=1"; 
 </script>
 </body>
 </html>

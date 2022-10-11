@@ -17,10 +17,12 @@ public class AdMemberSelectAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("AdMemberSelectAction service start...");
+		
 		request.setCharacterEncoding("utf-8"); 
 		response.setContentType("text/html;charset=utf-8");
+		
 		String keyField = request.getParameter("keyField");
-		String keyWord = request.getParameter("keyWord");
+		String keyWord  = request.getParameter("keyWord");
 		System.out.println("keyField->"+keyField);
 		System.out.println("keyWord->"+keyWord);
 		
