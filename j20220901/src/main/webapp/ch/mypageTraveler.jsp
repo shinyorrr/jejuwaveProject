@@ -164,7 +164,7 @@ function deleteMsg(){
 				
 				<!-- 게시글 검색기능 추가 -->
 				<form action="mypageTraveler.do">
-					<input type ="text" 	name="search" placeholder="제목 + 내용" style="margin-left: 189px;">
+					<input type ="text"  class="search_input"	name="search" placeholder="제목 + 내용">
 					<input type ="submit" 	value="검색">
 				</form>
 				
