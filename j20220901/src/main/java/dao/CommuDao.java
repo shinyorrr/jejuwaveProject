@@ -93,7 +93,7 @@ public class CommuDao {
 		
 		return list;
 	}
-	// 게시글 list rownum startRow, endRow 유저이미지 list get
+	// 게시글 list 의 유저이미지 list select
 	public List<Member> selectUserImgList(int startRow , int endRow) throws SQLException {
 		List<Member> userImgList = new ArrayList<Member>();
 		String sql = "select crn.user_id, m.user_img "
@@ -144,7 +144,6 @@ public class CommuDao {
 		ResultSet         rs    = null;
 		
 		try {
-			
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
@@ -258,8 +257,8 @@ public class CommuDao {
 	
 	// write - community , community_img insert
 	public int[] insert(Commu commu , List<Commu.CommuImg> commuImgList) throws SQLException {
-		int[] results = new int[2];
-		String sql = "insert into community values(? , ? , ? , sysdate , ? )";
+		int[] results = new int[2]; //community insert 결과와 community_img insert 결과를 담을 배열
+		String sql  = "insert into community values(? , ? , ? , sysdate , ? )";
 		String sql1 = "select nvl(max(c_num) , 0) from community";
 		String sql2 = "insert into community_img values(? , seq_COM_IMG.nextval , ?)";
 		Connection        conn  = null;
@@ -306,8 +305,9 @@ public class CommuDao {
 				imgResults.add(imgResult);
 				pstmt.close();
 			}
-			imgResultSum = imgResults.stream().mapToInt(Integer::intValue).sum();
+			imgResultSum = imgResults.stream().mapToInt(Integer::intValue).sum(); //img insert result 합계
 			System.out.println("imgResultSum->" + imgResultSum);
+			//results배열에 결과값 담기
 			results[0] = commuResult;
 			results[1] = imgResultSum;
 
@@ -321,7 +321,7 @@ public class CommuDao {
 		return results;
 	}
 	
-	// (수정용)deleteImages
+	// (게시글수정용)deleteImages
 	public int deleteImg(List<Integer> targetNums) throws SQLException {
 		System.out.println("deleteImg dao start..");
 		int resultDeleteImg = 0;
@@ -347,7 +347,7 @@ public class CommuDao {
 		return resultDeleteImg;
 	}
 	
-	// (수정용)Community_img insert
+	// (게시글수정용)Community_img insert
 	public int insertImg(List<Commu.CommuImg> commuImgList) throws SQLException {
 		int resultInsertImg = 0;
 		String sql = "insert into community_img values(? , seq_COM_IMG.nextval , ?)";
@@ -380,7 +380,7 @@ public class CommuDao {
 	}
 	
 	
-	// (수정용)Community table update(이미지제외)
+	// (게시글수정용)Community table update(이미지제외)
 	public int update(Commu commu) throws SQLException {
 		System.out.println("Community table update start...");
 		int resultUpdateCommu = 0;
@@ -490,7 +490,7 @@ public class CommuDao {
 			
 			return list;
 		}
-		// search list rownum startRow, endRow 유저이미지 list get
+		// search list  유저이미지 list get
 		public List<Member> searchUserImgList(String searchWord, int startRow , int endRow) throws SQLException {
 			List<Member> userImgList = new ArrayList<Member>();
 			String sql = "select crn.user_id, m.user_img "

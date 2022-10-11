@@ -6,89 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
-<title>Insert title here</title>
+<title>JEJU WAVE</title>
 <%
    String context = request.getContextPath();
 %>
+<!-- header import -->
 <c:import url="${context}/header.jsp"></c:import>
-
+<!-- jQuery CDN -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<style type="text/css">
-	#file-list {
-		border: 1px solid #ced4da;
-		min-height: 410px;
-		border-radius: 0.25rem;
-	}
-	.file-input {
-		display:inline-block;
-		position:relative;
-		width:300px;height:328px;
-		margin:40px;
-		border-radius:0.25rem;
-		z-index:1
-	}
-	.preview {
-		width:100%;
-		height:304px;
-		z-index:none;
-		border: 0px;
-		border-radius: 0.25rem;
-	}
-	input[type=file]::file-selector-button {
-		position: absolute;
-		left:0px;
-		bottom:0px;
-		z-index:999;
-		border-color:transparent;
-		padding: 6px 25px;
- 		background-color:#FF3500;
- 		border-radius: 4px;
-		color: white;
-		cursor: pointer;
-	}
-	
-	.addFile {
-		height: 40px;
-		padding: 6px 25px;
- 		background-color:#FF3500;
- 		border-radius: 4px;
-		color: white;
-		cursor: pointer;
-	}
-	a:hover {
-	color: white;
-	}
-	.delFile {
-		height:40px;
-		background-color:#707070;
- 		border-radius: 4px;
-		color: white;
-		cursor: pointer;
-		position: absolute;
-		right:0px;
-		bottom:0px;
-		padding: 7px 25px 6px 25px;
-		z-index:999;
-	}
-	.file-add {
-		margin-top: 10px;
-	}
-	.btn-submit {
-		background-color: #FF3500;
-		color: white;
-	}
-	.btn-submit:hover {
-		color: white;
-	}
-	.btn-reset {
-		background-color:#5c636a;
-		color: white;
-	}
-	.btn-reset:hover {
-		color: white;
-	}
-	
-</style>
+<!-- this page css -->
+<link rel="stylesheet" href="<%= context %>/css/dh/commuWriteForm.css">
 <!-- 사진파일 없는 경우 chk script -->
 <script type="text/javascript">
 	function fileListChk() {
@@ -98,18 +25,15 @@
 		}
 	}
 </script>
-
 </head>
 <body>
-
-	
-<!-- main start -->
+	<!-- main start -->
 	<div style="margin-top: 148px;">
 		<section class=" container-fluid py-5 text-center bg-img" style="height:300px; background-image: url('dh_images/bgimg.jpg');">
 			<div class="mt-5 row">
 				<div class="col">
-					<p class="mt-2 text-white">자유롭게 당신의 일상을 공유하세요</p>
 					<p class="text-white" style="font-size: 60px; font-weight: bold;">커뮤니티</p>
+					<p class="mt-2 text-white">자유롭게 당신의 일상을 공유하세요</p>
 				</div>
 			</div>	
 		</section>
@@ -140,44 +64,47 @@
 				</div>
 			</form>
 			
-			<!-- 사진파일 미리보기 script -->
+			<!-- 이미지 미리보기 및 파일추가 script -->
 			<script type="text/javascript">
-					var count = 0;
-					$(document).ready(function() {
+				var count = 0;  //이미지 미리보기할 파일 고유 번호 초기화 (preview+count)
+				$(document).ready(function() {
 					$("a[name='file-delete']").on("click", function(e) {
 						e.preventDefault();
 						deleteFile($(this));
 					});
 				})
-				
+				//파일 추가시 input, 미리보기img, 삭제버튼 태그 미리보기 영역(#file-list)에 추가
 				function addFile() {
 					count++;
-					var str = "<div class='file-input'><input id='inputFile' type='file' name='file' onchange='readURL(this);'><img id='preview"+ count +"' class='preview' /><a href='#this' name='file-delete' class='delFile'>파일 삭제</a></div>";
+					var str = "<div class='file-input'><input id='inputFile"+count+"' type='file' name='file' onchange='readURL(this);'><img id='preview"+ count +"' class='preview' /><a href='#this' name='file-delete' class='delFile'>파일 삭제</a></div>";
 					$("#file-list").append(str);
 					$("a[name='file-delete']").on("click", function(e) {
 						e.preventDefault();
 						deleteFile($(this));
 					});
 				}
-				
+				//삭제 function
 				function deleteFile(obj) {
 					obj.parent().remove();
 				}
-			
+				//input 에 파일이 들어오면 파일 이미지 받아오는 function
 				function readURL(input) {
+					  var id = $(input).attr('id');
+					  var num = id.substring(9);
 					  if (input.files && input.files[0]) {
 					    var reader = new FileReader();
 					    reader.onload = function(e) {
-					      document.getElementById('preview'+count).src = e.target.result;
+					      document.getElementById('preview'+num).src = e.target.result;
 					    };
 					    reader.readAsDataURL(input.files[0]);
 					  } else {
-					    document.getElementById('preview'+count).src = "";
+					    document.getElementById('preview'+num).src = "";
 					  }
 				}
 			</script>
 		</div>
 	</div>
+	<!-- footer -->
 	<footer class="py-5 bg-dark" style="margin-top: 100px;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
