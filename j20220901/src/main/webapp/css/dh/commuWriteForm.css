@@ -64,6 +64,7 @@
 		color: white;
 	}
 	.btn-submit:hover {
+		background-color: #FF3500;
 		color: white;
 	}
 	.btn-reset {
@@ -71,5 +72,6 @@
 		color: white;
 	}
 	.btn-reset:hover {
+		background-color:#5c636a;
 		color: white;
 	}
