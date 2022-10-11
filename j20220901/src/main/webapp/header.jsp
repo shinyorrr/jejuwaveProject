@@ -153,6 +153,7 @@ $(function () {
 						</div>
 					</c:if>
 				</div>
+				<c:if test="${user_id != null}">
 				<div class="Button_dropdown oIYRb">
 					<button width="100px" height="40px" font-style="" type="button"
 						class="ButtonStyle kRVxKH">글쓰기</button>
@@ -177,6 +178,7 @@ $(function () {
 						</button>
 					</div>
 				</div>
+				</c:if>
 			</div>
 		</div>
 		<div class="Headers__HeaderContentWrapper iEbwCp">
