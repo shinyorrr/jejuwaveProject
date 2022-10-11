@@ -5,22 +5,22 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>JejuWave 동행찾기</title>
 <meta charset="UTF-8">
 <% String context = request.getContextPath();%>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">	
 
-
-
-</head>
 <c:import url="${context}/header.jsp"></c:import>
-<form name="frm" action="travelWritePro.do" method="post" enctype="multipart/form-data">
+<link rel="stylesheet" id="chacss" href="css/header_content.css">
+</head>
 
 <!---------------------------- body 영역 --------------------------------> 	
+<body style="color: #000000;">
+<form name="frm" action="travelWritePro.do" method="post" enctype="multipart/form-data">
 
 
 <!-- cateImg -->
-<div class="mb-6" >
-<header class=" py-5 mb-5" 
+<header class=" py-5" 
 		style="background-image: url('images/travelerList_cate.jpg'); margin-top:148px;background-size: cover;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5" >
 		<div class="text-center text-white">
@@ -29,6 +29,8 @@
 		</div>
 	</div>
 </header>
+<!-------- 여백 -------->
+<div style="height: 30px;"></div>
 <div class="container mt-5 mb-5">
 	<div class="row justify-content-center">
 		<div class="col-lg-8">
@@ -126,12 +128,15 @@
 			</div>
 
 		</div>
-	</div>	
 </form>
 
-
+<!-------- 여백 -------->
 <div style="margin-top: 200px;"></div>
+
+<!-------- footer -------->
 <%@ include file="../footer.jsp"%>
+</body>
+
 
 <script type="text/javascript">
 function chkAll() {
@@ -190,3 +195,4 @@ function getSysdate() {
 <script	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="yncss/bootstrap.min.js"></script>
 <script type="text/javascript" src="yncss/trWrite.js"></script>
+</html>

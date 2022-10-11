@@ -4,20 +4,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html>
+<head>
+<title>JejuWave 동행찾기</title>
 <%
 String context = request.getContextPath();
 %>
 <c:import url="${context}/header.jsp"></c:import>
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">
-<link rel="stylesheet" id="chacss" href="css/header_content.css">
-<style type="text/css">
 
-</style>
+<!----------- body 영역 ---------->
+<body style="color: #000000;">
 
-<!-------------------------------------------------->
-<!-------------------- body 영역 -------------------->
-
-<!-- Header-->
+<!-------- Header 카테고리 -------->
 <header class="py-5 mb-5"
 		style="background-image: url('images/travelerList_cate.jpg'); background-size: cover; margin-top:148px;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
@@ -238,11 +238,13 @@ String context = request.getContextPath();
 	</div>
 </section>
 
-<!--------- footer 영역 --------->
-<div style="margin-top: 200px;"></div>
-<%-- <%@ include file="footer.jsp"%> --%>
-<c:import url="${context}/footer.jsp"></c:import>
 
+<!-------- 여백 -------->
+<div style="margin-top: 200px;"></div>
+
+<!-------- footer -------->
+<c:import url="${context}/footer.jsp"></c:import>
+</body>
 <!--------- JS --------->
 <script  type="text/javascript">
 function getStartDate()  {
@@ -329,3 +331,4 @@ function gubunChk(i) {
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="yncss/popper.min.js"></script>
 <script src="yncss/bootstrap.min.js"></script>
+</html>

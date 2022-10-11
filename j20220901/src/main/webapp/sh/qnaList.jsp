@@ -18,7 +18,6 @@ String context = request.getContextPath();
 <link rel="stylesheet" href="<%=context%>/css/sh/qnamain.css">
 <link rel="stylesheet" href="<%=context%>/css/sh/qnaUpdate.css">
 <link rel="stylesheet" href="<%=context%>/css/sh/qnaList.css">
-<link rel="stylesheet" id="chacss" href="css/header_list.css">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
 

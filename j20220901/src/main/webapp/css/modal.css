@@ -60,3 +60,6 @@
 	color: #FF3500 !important;
 	font-size: 14px;
 }
+.modal-date {
+	float: right;
+}

@@ -5,8 +5,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Paths;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,49 +32,40 @@ public class CommuWriteProAction implements CommandProcess {
 		try {
 			request.setCharacterEncoding("utf-8");
 			String pageNum = request.getParameter("pageNum");
-			 // 세션값 받아오기
-			// HttpSession session = request.getSession();
-			 //String user_id = (String) session.getAttribute("user_id");
-			String user_id = "andew"; //임시 아이디
+			String user_id = request.getParameter("user_id");
 			CommuDao cd = CommuDao.getInstance();
 			
 			// insert dao에 보낼 community_img table setting(form value 받기)
 			System.out.println("img upload start...");
 			List<Commu.CommuImg> commuImgList = new ArrayList<Commu.CommuImg>();
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmssZ");
+			String currentDate = simpleDateFormat.format(new Date());
 			Collection<Part> parts = request.getParts(); // 모든 part들을 가져옴
-			System.out.println("request.getParts ->" + parts);
-			for (Part file : parts) {
-				System.out.println("for start...");
-				if(!file.getName().equals("file")) continue; // name이 file인 경우에만 실행
-				// 사용자가 업로드한 파일 이름 알아오기
-				String originName = file.getSubmittedFileName();
-				//
-				
-				// 사용자가 업로드한 파일에 input stream 연결
-				InputStream fis = file.getInputStream();
-				// 저장할 경로
-				String realPath = request.getServletContext().getRealPath("dh/imgFileSave");
-				// 파일 경로
-				String filePath = realPath + File.separator + originName;
-				System.out.println("파일경로 filePath ->" + filePath);
-				// 파일 저장
-				FileOutputStream fos = new FileOutputStream(filePath);
-				// table에 저장될 file path
-				String imgPath = "dh/imgFileSave\\" + originName;
-				byte[] buf = new byte[1024];
-				int size = 0;
-				while ((size = fis.read(buf)) != -1) {
-					fos.write(buf, 0, size);
-				}
-				// commuImgList에 파일경로 setting
-				Commu.CommuImg commuImg = new CommuImg();
-				commuImg.setC_img_path(imgPath);
-				commuImgList.add(commuImg);
-				
-				fis.close();
-				fos.close();
-				
+			String realPath = request.getServletContext().getRealPath("dh/imgFileSave");
+			File fileSaveDir = new File(realPath);
+			if (!fileSaveDir.exists()) {
+				fileSaveDir.mkdirs();
 			}
+			for (Part p : parts) {
+				System.out.println(p.getName());
+				if (p.getHeader("Content-Disposition").contains("filename=")) {
+					if(p.getSize() > 0) {
+						String fileName = p.getSubmittedFileName();
+						String filePath = realPath + File.separator + currentDate + fileName;
+						String filePathV = "dh/imgFileSave/" + File.separator + currentDate + fileName;
+						System.out.println("filePath->" + filePath);
+						System.out.println("filePathV->" + filePathV);
+						p.write(filePath);
+						Commu.CommuImg commuImg = new CommuImg();
+						commuImg.setC_img_path(filePathV);
+						commuImgList.add(commuImg);
+					}
+				}
+			}
+			// table에 저장될 file path
+			//String imgPathBefore = "dh/imgFileSave\\" + originName;
+			//String imgPath = imgPathBefore.replace('\\', '/');
+			
 			System.out.println("after setting commuImgList ->" + commuImgList);
 			// insert dao에 보낼 community table setting(form value데이터 받기)
 			Commu commu = new Commu();

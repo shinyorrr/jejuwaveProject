@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.Commu;
 import dao.CommuDao;
@@ -16,6 +17,12 @@ public class CommuUpdateFormAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		/*
+		 * HttpSession session = request.getSession(); String user_id = (String)
+		 * session.getAttribute("user_id"); if (user_id == null) {
+		 * 
+		 * }
+		 */
 		int c_num = Integer.parseInt(request.getParameter("c_num"));
 		String pageNum = request.getParameter("pageNum");
 		try {

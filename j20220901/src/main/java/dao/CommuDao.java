@@ -424,4 +424,144 @@ public class CommuDao {
 		}
 		return result;
 	}
+	
+	////search commu
+	
+	// search list count
+		public int searchTotalCnt(String searchWord) throws SQLException {
+			int totCnt = 0;
+			String sql = "select count(*) from community where (user_id || c_num || c_content || c_hash) like '%'||?||'%'";
+			System.out.println("cnt sql->" + sql);
+			System.out.println("cnt start searchWord->" + searchWord);
+			Connection         conn  = null;
+			PreparedStatement  pstmt = null;
+			ResultSet          rs    = null;
+			try {
+				conn  = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, searchWord);
+				System.out.println("cnt searchWord - >" + searchWord);
+				rs   = pstmt.executeQuery();
+				if (rs.next()) {
+					totCnt = rs.getInt(1);
+					System.out.println("totCnt -> " + totCnt);
+				}
+			} catch (Exception e) {
+				System.out.println("searchTotalCnt e" + e.getMessage());
+			} finally {
+				if (rs    != null) rs.close(); 
+				if (pstmt != null) pstmt.close(); 
+				if (conn  != null) conn.close(); 
+			}
+			return totCnt;
+		}
+		// search list get
+		public List<Commu> CommuSearchList(String searchWord, int startRow , int endRow) throws SQLException {
+			List<Commu> list = new ArrayList<Commu>();
+			String sql = "select * from ( select rownum rn , a.* from (select * from community where (user_id || c_num || c_content || c_hash) like '%'||?||'%' order by c_num desc) a) where rn between ? and ?";
+			Connection        conn  = null;
+			PreparedStatement pstmt = null;
+			ResultSet         rs    = null;
+			
+			try {
+				//community select(c_img 제외)
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, searchWord);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					Commu commu = new Commu();
+					commu.setC_num(rs.getInt("c_num"));
+					commu.setUser_id(rs.getString("user_id"));
+					commu.setC_content(rs.getString("c_content"));
+					commu.setC_date(rs.getDate("c_date"));
+					commu.setC_hash(rs.getString("c_hash"));
+					list.add(commu);
+				}
+			} catch (Exception e) {
+				System.out.println("commuSearchList select try...err" + e.getMessage());
+			} finally {
+				if (rs    != null) rs.close(); 
+				if (pstmt != null) pstmt.close(); 
+				if (conn  != null) conn.close(); 
+			}
+			
+			return list;
+		}
+		// search list rownum startRow, endRow 유저이미지 list get
+		public List<Member> searchUserImgList(String searchWord, int startRow , int endRow) throws SQLException {
+			List<Member> userImgList = new ArrayList<Member>();
+			String sql = "select crn.user_id, m.user_img "
+					+ " from (select * from ( select rownum rn , a.* from (select * from community where (user_id || c_num || c_content || c_hash) like '%'||?||'%' order by c_num desc) a) where rn between ? and ?) crn , member m "
+					+ " where crn.user_id = m.user_id";
+			Connection        conn  = null;
+			PreparedStatement pstmt = null;
+			ResultSet         rs    = null;
+			
+			try {
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, searchWord);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					Member member = new Member();
+					member.setUser_id(rs.getString(1));
+					member.setUser_img(rs.getString(2));
+					userImgList.add(member);
+				}
+			} catch (Exception e) {
+				System.out.println("selectUserImgList try...err ->" + e.getMessage());
+			} finally {
+				if (rs    != null) rs.close(); 
+				if (pstmt != null) pstmt.close(); 
+				if (conn  != null) conn.close(); 
+			}
+			return userImgList;
+		}
+		
+		// 게시글 list 대표이미지 list get
+		public List<Commu.CommuImg> searchListImg(String searchWord, int startRow , int endRow) throws SQLException {
+			List<Commu.CommuImg> imgList = new ArrayList<Commu.CommuImg>();
+			String sql = "select * "
+					+ "from ( "
+					+ "        select rownum rn , a.* "
+					+ "        from ("
+					+ "                select ci.c_num, min(ci.c_img_path) keep (DENSE_RANK last order by ci.c_num) as f_c_img_path "
+					+ "                from community c, community_img ci "
+					+ "                where c.c_num = ci.c_num and (c.user_id || c.c_num || c.c_content || c.c_hash) like '%'||?||'%' group by ci.c_num "
+					+ "                order by ci.c_num desc "
+					+ "             ) a "
+					+ "     ) "
+					+ "where rn between ? and ?";
+			Connection        conn  = null;
+			PreparedStatement pstmt = null;
+			ResultSet         rs    = null;
+			
+			try {
+				
+				conn = getConnection();
+				pstmt = conn.prepareStatement(sql);
+				pstmt.setString(1, searchWord);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+				rs = pstmt.executeQuery();
+				while (rs.next()) {
+					Commu.CommuImg commuImg = new Commu.CommuImg();
+					commuImg.setC_img_path(rs.getString("f_c_img_path"));
+					imgList.add(commuImg);
+				}
+			} catch (Exception e) {
+				System.out.println("searchListImg select try...err" + e.getMessage());
+			} finally {
+				if (rs    != null) rs.close(); 
+				if (pstmt != null) pstmt.close(); 
+				if (conn  != null) conn.close(); 
+			}
+			return imgList;
+		}
+	
 }

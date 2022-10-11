@@ -4,20 +4,28 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<!DOCTYPE html>
+<html>
+<head>
+<title>JejuWave 동행찾기</title>
 <%
 String context = request.getContextPath();
 String userId = (String) session.getAttribute("user_id");
 request.setAttribute("userId", userId);
 %>
-
 <!-- header 영역 -->
 <c:import url="${context}/header.jsp"></c:import>
-
 <link rel="stylesheet" href="yncss/trList.css" type="text/css">
 
-<!-------------- body 영역 ------------>
+</head>
+
+
+<!------------ body 영역 ------------> 
+<body style="color: #000000;">
+
+
 <div style="margin-top: 178px;"></div>
-<!-- 게시물 -->
+<!------- 게시물 -------->
 <div class="container ">
 	<div class="row justify-content-center">
 		<div class="col-lg-10 justify-content-start">
@@ -63,6 +71,7 @@ request.setAttribute("userId", userId);
 									class="ms-3 fontColorGrey">모집 인원</span>
 								${travelContent.t_person}명
 							</p>
+							<!------ 모집 기간 ------>
 							<div>
 								<svg xmlns="http://www.w3.org/2000/svg" width="17" height="17"
 									fill="currentColor" class="bi bi-calendar-check-fill"
@@ -74,19 +83,23 @@ request.setAttribute("userId", userId);
 							</div>
 						</div>
 					</div>
-					<!-- 사이드 바 메뉴 동행 후기 보기-->
+					<!------ 사이드 바 메뉴 동행 후기 보기------>
 					<div style="display:inline;"
 						class="panel panel-info border justify-content-end floatRR ms-3 p-3 align-middle"
 						id="userBox">
 						<div class="card-body mb-0 p-0">
-							<%-- 유저 이미지 --%>
+							<!------ 유저 이미지 ------>
 							<img src="${travelContent.user_img}" width="32" height="32"
 								class="userIconColor-1 rounded-circle me-2  align-center border-2 border-secondary">
 							<span name="user_id" class="h5">${travelContent.user_id}</span>
-							<!-- 후기버튼 -->
+							<!------ 후기버튼 ------>
 							<button type="button" class="btn center mt-2" id="trCommBtn"
 								data-bs-toggle="modal" data-bs-target="#exampleModal">동행후기보기</button>
-							<!-- 후기 modal창 -->
+								
+								
+							<!-- ************************************************************* -->
+							<!-- ************************************************************* -->
+							<!------ 후기 modal창 ------>
 							<div class="modal fade" id="exampleModal" tabindex="-1"
 								aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
@@ -94,12 +107,12 @@ request.setAttribute("userId", userId);
 										<div class="review">
 											<div class="modal-header">
 												<div>
-													<c:if test="${img == null }">
+													<c:if test="${travelContent.user_img == null }">
 														<img src="<%=context%>/images/vector_profile_default.svg"
 															style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 													</c:if>
-													<c:if test="${img != null }">
-														<img src="<%=context %>/${img}"
+													<c:if test="${travelContent.user_img != null }">
+														<img src="<%=context %>/${travelContent.user_img}"
 															style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 													</c:if>
 												</div>
@@ -107,18 +120,13 @@ request.setAttribute("userId", userId);
 													<div class="modal-title moti" id="exampleModalLabel">
 														<p>${travelContent.user_id}</p>
 													</div>
-													<div class="modal-hashtag moha">
-														<p>30대 · 남성 · 대한민국</p>
-													</div>
 												</div>
-												<div class="rating" data-rate="2"
-													style="padding-left: 110px; padding-top: 48px;">
+												<div class="rating" data-rate="${avgReview}"
+													style="padding-left: 130px; padding-top: 48px;">
 													<i class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 														class="fa fa-star"></i> <i class="fa fa-star"></i> <i
 														class="fa fa-star"></i>
-												</div>
-												<p class="ratingScore"
-													style="padding-top: 48px; padding-left: 15px; margin: 0px;">${reiew.user_avg}</p>
+												</div>											
 												<button type="button" class="btn-close"
 													data-bs-dismiss="modal" aria-label="Close"
 													style="margin-bottom: 30px; margin-right: 5px;"></button>
@@ -131,7 +139,7 @@ request.setAttribute("userId", userId);
 															<p>받은 동행 후기</p>
 														</div>
 														<div class="modal-body-top-title-counts">
-															<p>0</p>
+															<p>${totalRev}</p>
 														</div>
 													</div>
 
@@ -139,12 +147,12 @@ request.setAttribute("userId", userId);
 														<c:if test="${totRev > 0}">
 															<c:forEach var="review" items="${revlist}">
 																<div class=""
-																	style="background-color: yellow; height: 100px; margin: 15px;">
+																	style=" height: 100px; margin: 5px;">
 																	<div>
-																		<span>${review.user_id }</span> <span>${review.r_date}</span>
+																		<span>${review.user_id }</span> <span class="modal-date">${review.r_date}</span>
 																	</div>
 																	<div>
-																		<p>
+																		<p style="margin: 5px;">
 																			<c:choose>
 																				<c:when test="${fn:length(review.r_content) >33 }">
 																					<c:out
@@ -157,13 +165,14 @@ request.setAttribute("userId", userId);
 																		</p>
 																	</div>
 																	<div>
-																		<div class="rating" data-rate="${review.r_avg}">
+																		<div class="rating" data-rate="${review.r_avg}" style="padding-top: 15px;">
 																			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
 																			<i class="fa fa-star"></i> <i class="fa fa-star"></i>
 																			<i class="fa fa-star"></i>
 																		</div>
 																	</div>
 																</div>
+																<hr style="border:2px dashed;">
 															</c:forEach>
 														</c:if>
 													</div>
@@ -209,6 +218,9 @@ request.setAttribute("userId", userId);
 						</div>
 					</div>
 				</div>
+				<!-- ************************ 모달창 끝 **************************** -->
+				<!-- ************************************************************* -->
+							
 				<!-- 글 내용 -->
 				<section style="margin:60px 0;">
 					<p class="fs-6 mb-4 p-4">${travelContent.t_content}</p>
@@ -221,6 +233,7 @@ request.setAttribute("userId", userId);
 
 					<!-- 댓글 박스 -->
 					<form action="travelReply.do" class="mb-6" method="post">
+					
 						<!-- 히든처리 : t_num, t_relevel -->
 						<input name="t_num" type="hidden" value="${travelContent.t_num}">
 						<input name="t_relevel" type="hidden" value="1">
@@ -235,7 +248,6 @@ request.setAttribute("userId", userId);
 								aria-describedby="basic-addon1"></textarea>
 						</div>
 					</form>
-					<!-- 구분 라인 -->
 
 					<!-- 댓글 영역 -->
 					<div style="height: 15px;"></div>
@@ -264,6 +276,7 @@ request.setAttribute("userId", userId);
 									</c:otherwise>
 								</c:choose>
 							</div>
+							
 							<div style="font-size: 90%;" class="ms-3">
 								<div class="mb-2" style="display: flex;">
 									<!-- 글 작성자 댓글 작성시 -->
@@ -324,11 +337,12 @@ request.setAttribute("userId", userId);
 <div style="margin-top: 200px;"></div>
 <%@ include file="../footer.jsp"%>
 
+</body>
 
 <!-- Bootstrap core JS-->
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<!-- modal -->
+<!---------------------modal ------------------------->
 <script src="https://kit.fontawesome.com/1f609f562c.js"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" href="css/modal.css">
@@ -336,36 +350,30 @@ request.setAttribute("userId", userId);
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 $(function () {
+	var rating = $('.review .rating');
 	
-
-var rating =$('.review .rating');
-
-rating.each(function () {
-	var targetScore = $(this).attr('data-rate');
-	var firstdigit = targetScore.split('.');
-	if(firstdigit.length > 0){
-		for(var i = 0; i<targetScore; i++){
-			$(this).find('.fa-star:nth-child(-n+' +targetScore + ')').eq(i).attr('style','color: #f05522 !important');
-	}
-		/* $(this).find('.fa-star:nth-child(-n+' +targetScore + ')').css({color:'#f05522'}); */
-	}
-	
+	rating.each(function () {
+		var targetScore = $(this).attr('data-rate');
+		$(this).find('.fa-star:nth-child(-n+'+ targetScore + ')').attr('style','color: #f05522 !important');
 	});
+	
 	var userScore = $('#r_avg');
 	userScore.change(function () {
 		var userScoreNum = $(this).val();
 		$('.make_star .fa-star').css({color:'#000'});
 		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').attr('style','color: #f05522 !important');
 	});
-	$('.make_star .fa-star').click(function () {
+	
+	/* .attr('style','color: #f05522 !important'); */
+	$('.make_star svg').click(function () {
 		var targetNum = $(this).index() + 1;
-		$('.make_star .fa-star').css({color:'#000'});
-		$('.make_star .fa-star:nth-child(-n+' + targetNum + ')').attr('style','color: #f05522 !important');
+		$('.make_star svg').css({color:'#000'});
+		$('.make_star svg:nth-child(-n+' + targetNum + ')').css({color: '#F05522'});
 	});
 });
+
 </script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
 <!-- Core theme JS-->
 <script type="text/javascript">
 function deleteChk() {
@@ -386,3 +394,4 @@ function deleteReplyChk(t_num, t_ref, t_relevel) {
  }
 }
 </script>
+</html>

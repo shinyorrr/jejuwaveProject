@@ -54,6 +54,34 @@ public class ReviewDao {
 		return tot;	
 	}
 	
+	public int totalRev(int t_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int totRe = 0;
+		String sql = "select count(t_num) from review where t_num=?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, t_num);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				totRe = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(rs != null) rs.close();
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		}
+		System.out.println("totRe -->"+ totRe);
+		return totRe;
+	}
+	
+	
+	
 	public List<Review> revList(int revStartRow, int revEndRow, int t_num) throws SQLException{
 		List<Review> list = new ArrayList<Review>();
 		Connection conn = null;
@@ -127,17 +155,15 @@ public class ReviewDao {
 	
 		return result;
 	}
-	
+
 	public int select(int t_num) throws SQLException {
 		System.out.println("ReviewDao select Strart.....");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int avgReview = 0;
-		System.out.println("t_num -->"+t_num);
 		String sql = "select ROUND(sum (r_avg)/count(*), 0) as user_avg From review where t_num=?";
 		
-		Review review = new Review();
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -145,7 +171,7 @@ public class ReviewDao {
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-			review.setUser_avg(rs.getInt("user_avg"));
+			avgReview = rs.getInt("user_avg");
 			
 			System.out.println("reviewDao select user_avg -->"+rs.getInt("user_avg"));
 			}
@@ -156,6 +182,7 @@ public class ReviewDao {
 			if(pstmt != null) pstmt.close();
 			if(conn != null) conn.close();
 		}
+		System.out.println("avgReview --->"+avgReview);
 		return avgReview;
 	}
 }
