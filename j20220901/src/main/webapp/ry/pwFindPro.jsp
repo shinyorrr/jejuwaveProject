@@ -9,20 +9,34 @@
 %>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style type="text/css">
- 	caption {
-	font-size: 24px;
-	}
-.joinform{
-    box-shadow: 10px 10px 10px 10px rgba(89,89,89,0.39);
-    padding:70px 45px 45px 45px;
-    display : inline-block;
-}
-	pre {
-	font-size: 8pt;
-	font-color: #gray;
-}
+ 	 body {
+ 	 overflow : visible;
+ 	  background-size: contain;
+	  background-repeat : no repeat;
+      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
+      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); 
+    } 
+
+    .input-form {
+      max-width: 280px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -31,8 +45,45 @@
 <c:import url="${context }/header.jsp"></c:import>
 </head>
 <body>
-
-		<tbody>
+	<c:if test="${pw != null}">
+	<div class="container1" style="padding: auto;">
+    <div class="input-form-backgroud row" style="margin-top: 300px;">
+      <div class="input-form col-md-6 mx-auto">
+        <h4 class="mb-3" style="text-align: center;">비밀번호 찾기</h4>
+	        <form class="validation-form">
+	          <div class="row">
+	            <div class="" >
+	           	 <label for="name" style="padding-left: 45%"></label>
+	              <input type="text" style=" text-align:center; border: none; background: transparent;" value="${pw }" class="form-control">
+	            </div>
+	          </div>
+	          <div class="col" style="margin-top: 10px; text-align: center;">
+	          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">아이디찾기</button>
+	          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">뒤로가기</button>
+	          </div>
+	        </form>
+      </div>
+    </div>
+  </div>
+</c:if>
+<c:if test="${pw == null}">
+	<div class="container1" style="padding: auto;">
+    <div class="input-form-backgroud row" style="margin-top: 300px;">
+      <div class="input-form col-md-4 mx-auto">
+      <br>
+        <h4 class="mb-3" style="text-align: center;">비밀번호 찾기 실패</h4>
+        <form class="validation-form">
+          <div class="col" style="margin-top: 10px; text-align: center;">
+          <br>
+          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">아이디찾기</button>
+          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">뒤로가기</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</c:if>
+		<%-- <tbody>
 		<div class="joinform" style="margin-top:200px; margin-left: 30%;">
 	<form  action="<%=context %>/pwFindPro.do" method="post" id="frm" name="frm">
 		<table>
@@ -55,8 +106,9 @@
 		</div>
 	</form>	
 		</div>
-	</tbody>
-	<footer class="py-5 bg-dark" style="margin-top: 100px;">
+	</tbody> --%>
+	<div style="margin-top: 25%;"></div>
+	<footer class="py-5 bg-dark" style="bottom: 0;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your	Website 2022</p>
 		</div>

@@ -23,6 +23,11 @@ public class MypageCommentTravelAction implements CommandProcess {
 		 HttpSession session = request.getSession();
 		 String user_id = (String) session.getAttribute("user_id");
 		 System.out.println("session 값 : "  + user_id);
+		 
+		 // 검색창 값 받아오기
+		 String search = request.getParameter("search");
+		 if(search == null) search = "fail";
+		 
 		 MypageDao my = MypageDao.getInstance();
 		 
 		 try {
@@ -35,7 +40,7 @@ public class MypageCommentTravelAction implements CommandProcess {
 			 int endRow = startRow + pageSize -1;
 			 int startNum = totCnt - startRow + 1;
 			 System.out.println(startRow); // 작성자가 쓴 글 조회
-			 list2 =my.commentList2(user_id,startRow,endRow);
+			 list2 =my.commentList2(user_id,startRow,endRow,search);
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);
 		 
 		 int startPage = (int)(currentPage-1)/blockSize*blockSize + 1; 

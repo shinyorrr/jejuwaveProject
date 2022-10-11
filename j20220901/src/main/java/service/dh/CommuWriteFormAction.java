@@ -16,8 +16,10 @@ public class CommuWriteFormAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		System.out.println("CommuWriteFormAction start...");
+		//get session
 		HttpSession session = request.getSession();
 		String sessionUser_id = (String) session.getAttribute("user_id");
+		//session check
 		if (sessionUser_id == null || sessionUser_id.equals("")) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("ch/loginForm.jsp");
 			dispatcher.forward(request, response);

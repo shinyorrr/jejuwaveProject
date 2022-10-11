@@ -18,18 +18,26 @@ public class MypageTravelerAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		System.out.println("mypageBoardAction Service start.....");
+		System.out.println("MypageTravelerAction Service start.....");
 		
 		 // 세션값 받아오기
 		 int t_dealstatus = 0;
 		 HttpSession session = request.getSession();
 		 String user_id = (String) session.getAttribute("user_id");
+		 System.out.println("session 값 : "  + user_id);
+		 
+		 // 모집여부 확인
 		 System.out.println("값이 넘어오는지 확인하기 : " + request.getParameter("t_dealstatus"));
 		 if(request.getParameter("t_dealstatus") != null) {
 			 t_dealstatus = Integer.parseInt(request.getParameter("t_dealstatus"));
 		 } else t_dealstatus = 1;
-		 System.out.println("session 값 : "  + user_id);
+
+		 // 검색창 구현
+		 String search = request.getParameter("search");
+		 System.out.println("MypageTravelerAction search 값은 ====> " + search);
+		 if(request.getParameter("search") == null) search = "fail";
 		 MypageDao my = MypageDao.getInstance();
+		 
 		 
 		 try {
 			 int totCnt = my.getTotalCnt(user_id);
@@ -41,7 +49,7 @@ public class MypageTravelerAction implements CommandProcess {
 			 int endRow = startRow + pageSize -1;
 			 int startNum = totCnt - startRow + 1;
 			 System.out.println(startRow); // 작성자가 쓴 글 조회
-			 List<Mypage> list =my.travelList(user_id,startRow,endRow,t_dealstatus);
+			 List<Mypage> list =my.travelList(user_id,startRow,endRow,t_dealstatus,search);
 			 
 			 
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);

@@ -132,14 +132,17 @@ $(function(){
 					<h2 class = "mypage_CommentMain">동행자게시판 내 코멘트</h2>
 				</button>
 				<div class = "change_body" id = "change_body">
+		 		<form action="<%=context%>/mypageAlldelete.do" method="get">
+				<%-- <form action="<%=context%>/ch/Calendar.jsp" method="get"> --%>
 					<c:if test="${ totCnt > 0}">
 						<c:forEach var="board" items="${list }">
 						<table>
-							<tr style= " cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
+							<tr>
 								<td colspan="3">
 								<input type="text" id = "b_num" name = "b_num" value="${board.b_num }" hidden="true">
 								<input type="text" id = "com_num" name = "com_num" value="${board.com_num }" hidden="true">
-									<div class = "c_content">
+								<input type="checkbox" name="chk_com" value="${board.b_num },${board.com_num}">
+									<div class = "c_content" >
 									${board.com_content}								
 									</div>
 								</td>
@@ -156,6 +159,12 @@ $(function(){
 							<c:set var="startNum" value="${startNum - 1 }" />
 						</c:forEach> 
 					</c:if>
+					<input type="submit" class = "allDel" value="일괄삭제">
+				</form>	
+				<form action="mypageComment.do">
+						<input type ="text" 	name="search" placeholder="댓글내용" style="margin-left: 189px;">
+						<input type ="submit" 	value="검색">
+				</form>
 					
 				<div style="text-align: center; padding-top: 20px;">
 				<c:if test="${startPage > blockSize }">

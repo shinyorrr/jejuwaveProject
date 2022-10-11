@@ -22,7 +22,7 @@ String context = request.getContextPath();
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap"
 	rel="stylesheet">
-<link rel="stylesheet" href="css/TrList.css">
+<link rel="stylesheet" href="yncss/trList.css">
 <link rel="stylesheet" href="css/header_main.css">
 <!-- Bootstrap CSS -->
 <link
@@ -130,10 +130,11 @@ String context = request.getContextPath();
 
 											<!-- Content 이미지-->
 											<div id="pic">
-
-												<img src="<%=context %>/${travel.t_img}"
-													class="card-img-top" />
-
+												<div id="picOnGubun">
+													#${travel.t_gubun}&nbsp&nbsp<span id="picOnDate">${fn:replace(travel.t_start, '-', '/')}&nbsp-&nbsp${fn:replace(travel.t_end,
+														'-', '/')}</span>
+												</div>
+												<img src="<%=context%>/${travel.t_img}" class="card-img-top" />
 											</div>
 
 
@@ -153,54 +154,38 @@ String context = request.getContextPath();
 
 
 														<!-- 제목 짜르기 -->
-														<span> <c:choose>
-																<c:when test="${fn:length(travel.t_title) > 12}">
-																	<c:out value="${fn:substring(travel.t_title,0,11)}" />...
-												</c:when>
-																<c:otherwise>
-																	<c:out value="${travel.t_title}" />
-																</c:otherwise>
-															</c:choose>
-														</span>
+														<span> ${travel.t_title} </span>
 													</p>
 
 													<!-- 본문 짜르기 -->
-
-													<p id="content">
-														<c:choose>
-															<c:when test="${fn:length(travel.t_content) > 35}">
-																<c:out value="${fn:substring(travel.t_content,0,34)}" />...
-												</c:when>
-															<c:otherwise>
-																<c:out value="${travel.t_content}" />
-															</c:otherwise>
-														</c:choose>
-													</p>
+													<p id="content">${travel.t_content}</p>
 
 													<p id="IdComment">
-														<img src="yn_images/user_icon01.png" width="20"
-															height="20" style="margin: 0 5px 6px 0;"
-															class="userIconColor-1 rounded-circle me-2  align-center ">
+														<img src='<%=context%>/${travel.user_img}' width="28" height="28"
+															style="margin: 0 5px 2px 0;"
+															class="userIconColor-1 rounded-circle me-1  align-center ">
 														${travel.user_id}
 
 														<!-- 댓글개수 -->
-
-														<c:if test="" var="commCnt"></c:if>
-														<span id="comment"> <img
-															style="width: 16px; height: 16px; margin: 0 5px;"
-															src="yn_images/comm_icon.png">${travel.reply_cnt}
+														<span id="comment"> <img src="images/comm_icon.png">${travel.reply_cnt}
 														</span>
 													</p>
 												</div>
 											</div>
 										</div>
 									</div>
-
 								</c:if>
 								<c:set var="startNum" value="${startNum -1}" />
 							</c:forEach>
 						</c:if>
+
+
 					</div>
+					<c:if test="${totCnt == 0 }">
+						<div style="text-align: center;">
+							<img src="images/no-data.png">
+						</div>
+					</c:if>
 					<!-- paging section-->
 
 				</div>
@@ -216,15 +201,16 @@ String context = request.getContextPath();
 						<div class="content_first">
 							<!-- Content text-->
 							<p class="" id="">
-								<b style="color: #ff3500;"><a href='qnaWriteCheck.do?b_num=${board.b_num}' style="color: #ff3500;">
-								<c:choose>
-									<c:when test="${fn:length(board.b_title) > 40}">
-										<c:out value="${fn:substring(board.b_title,0,39)}" />...
+								<b style="color: #ff3500;"><a
+									href='qnaWriteCheck.do?b_num=${board.b_num}'
+									style="color: #ff3500;"> <c:choose>
+											<c:when test="${fn:length(board.b_title) > 40}">
+												<c:out value="${fn:substring(board.b_title,0,39)}" />...
 									</c:when>
-									<c:otherwise>
-										<c:out value="${board.b_title}"/>
-									</c:otherwise>
-								</c:choose>
+											<c:otherwise>
+												<c:out value="${board.b_title}" />
+											</c:otherwise>
+										</c:choose>
 								</a></b>
 							</p>
 							<p>
@@ -239,7 +225,7 @@ String context = request.getContextPath();
 							</p>
 							<p id="IdComment">
 								<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
-									src="images/tangerine.png">${board.user_id}
+									src="<%=context%>/${board.fn_user_img}">${board.user_id}
 							</p>
 						</div>
 					</c:forEach>
@@ -257,7 +243,8 @@ String context = request.getContextPath();
 					</div>
 					<div class="week" id="weather_result"
 						style="display: flex; justify-content: space-between; width: 90%; min-height: 255px; align-items: center; padding-right: 10px;">
-						<span style="position: relative; padding: 10px 0px 200px 60px; font-weight: bolder;">주간
+						<span
+							style="position: relative; padding: 10px 0px 200px 60px; font-weight: bolder;">주간
 							날씨</span>
 					</div>
 				</div>

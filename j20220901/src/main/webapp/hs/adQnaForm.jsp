@@ -58,7 +58,7 @@
 			  				<td width="100">${qna.b_theme}</td>
 			  				<td width="100">${qna.b_success}</td>
 			  				<td width="100">
-			  				<fmt:formatDate value="${qna.b_date}" pattern="yy/MM/dd"/>
+			  					<fmt:formatDate value="${qna.b_date}" pattern="yy-MM-dd"/>
 			  				</td>
 			  				<td width="100"><input type="submit" value="삭제" onclick="location.href='<%=context%>/adQnaDelete.do?b_num=${qna.b_num}&pageNum=${pageNum}'"></td>
 			  			</tr>
@@ -67,7 +67,7 @@
 			  	</c:if>
 		  	<c:if test="${totCnt == 0}">
 		  		<tr>
-		  			<td colspan="7">데이터가 없네</td>
+		  			<td colspan="7">qna 게시글이 없습니다.</td>
 		  		</tr>
 		  	</c:if>
 			  </tbody>
@@ -93,6 +93,6 @@
 	</article>
 	
 <div style="margin-top: 100px, margin-left: 198px;"></div>
-<c:import url="${context}/footer.jsp"></c:import>
+<c:import url="${context}/hs/footer.jsp"></c:import>
 </body>
 </html>

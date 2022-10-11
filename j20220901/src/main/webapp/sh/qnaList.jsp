@@ -33,7 +33,17 @@ String context = request.getContextPath();
 	</div>
 </header>
 
+<script type="text/javascript">
 
+function sorting(sort) {
+	alert(sort);
+	location.href='<%=context %>/qnaList.do?sort='+ sort;
+	
+}
+
+
+
+</script>
 
 
 <body>
@@ -43,11 +53,14 @@ String context = request.getContextPath();
 		
 			<!-- 채택기다리는 글만보기 -->
 			<div style="margin-left: 1200px;" >
-			<select class="select">
-				<option value="1"> 등록순</option>
-				<option value="2"> 댓글순</option>
+
+			<select class="select" name="sort" onchange="sorting(this.value);">
+				<option value="0">정렬</option>
+				<option value="1">등록순</option>
+				<option value="2">댓글순</option>			
 			</select>
-			<button onclick="location.href='<%=context %>/qnaList2.do'" class="comment_button1" >답변을 기다리는 질문만 보기</button>
+			 <button onclick="location.href='<%=context %>/qnaList2.do?sort=${sort }'" class="comment_button1" >답변을 기다리는 질문만 보기</button>  
+			
 			</div>
 			
 			<!-- 검색어 기능 -->

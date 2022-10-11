@@ -68,10 +68,7 @@ a :hover {
 	-webkit-box-align: center;
 	align-items: center;
 	height: 100%;
-}
-
-.dnYUeR>:nth-child(n) {
-	margin-right: 23px;
+	margin-left: 265px;
 }
 
 .hsELiP {
@@ -82,11 +79,9 @@ a :hover {
 
 .iEbwCp {
 	display: flex;
-	-webkit-box-align: center;
 	align-items: center;
-	-webkit-box-pack: center;
 	justify-content: center;
-	width: 100%;
+	width: 55%;
 	height: fit-content;
 }
 
@@ -98,6 +93,7 @@ a :hover {
 	justify-content: center;
 	-webkit-box-align: center;
 	align-items: center;
+	margin-right: 15px;
 }
 
 .beOSqn span:first-child {
@@ -117,10 +113,7 @@ a :hover {
 	width: 19.75px;
 	height: 19.75px;
 	background-position: 0px 0px;
-}
-
-.jZNHYY {
-	display: inline-block;
+		display: inline-block;
 	background: url("../images/common_icons.png") no-repeat;
 }
 
@@ -135,15 +128,12 @@ a :hover {
 	text-indent: 3px;
 }
 
-.dnYUeR>:nth-child(n) {
-	margin-right: 23px;
-}
-
 .eVZkjB {
 	color: rgb(154, 154, 154);
 	background-color: rgb(255, 255, 255);
 	width: auto;
 	height: auto;
+	padding-right: 10px;
 	border-radius: 4px;
 	cursor: pointer;
 	transition: all 0.1s ease-out 0s;
@@ -153,8 +143,12 @@ a :hover {
 	color: rgb(154, 154, 154);
 }
 
+.oIYRc {
+	margin-left: 35px;
+}
+
 .oIYRb {
-	margin-top: 16px;
+	margin-top: 15px;
 }
 
 .oIYRb a {
@@ -242,7 +236,7 @@ button {
 	position: absolute;
 	width: 180px;
 	background: rgb(255, 255, 255);
-	height: 170px;
+	height: 230px;
 	top: 60px;
 	margin-top: 10px;
 	right: 0px;
@@ -275,31 +269,6 @@ button {
 	color: rgb(37, 37, 37);
 }
 
-.iEbwCp {
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	justify-content: center;
-	width: 100%;
-	height: fit-content;
-}
-
-.leGRAZ {
-	position: relative;
-	display: flex;
-	-webkit-box-align: center;
-	align-items: center;
-	-webkit-box-pack: center;
-	justify-content: center;
-	width: auto;
-	height: fit-content;
-	border: 0px solid rgb(106, 106, 106);
-	padding: 22px 14px;
-	color: rgb(106, 106, 106);
-	font-weight: 400;
-	font-size: 16px;
-}
 
 .cFXvdv {
 	position: relative;
@@ -317,6 +286,22 @@ button {
 	padding: 22px 14px 19px;
 	color: rgb(37, 37, 37);
 	font-weight: bold;
+	font-size: 16px;
+}
+
+.leGRAZ {
+	position: relative;
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+	-webkit-box-pack: center;
+	justify-content: center;
+	width: auto;
+	height: fit-content;
+	border: 0px solid rgb(106, 106, 106);
+	padding: 22px 14px;
+	color: rgb(106, 106, 106);
+	font-weight: 400;
 	font-size: 16px;
 }
 
@@ -357,9 +342,10 @@ button {
 	position: absolute;
 	width: 180px;
 	background: rgb(255, 255, 255);
-	height: 170px;
+	height: 230px;
 	top: 60px;
-	margin-top: 10px;
+	left: 1420px;
+	margin-top: 15px;
 	right: 0px;
 	border-radius: 6px;
 	filter: drop-shadow(rgba(0, 0, 0, 0.16) 0px 0px 3px);
@@ -381,9 +367,7 @@ button {
 }
 
 .main_img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
+	background-size: cover;
 }
 
 .main_page {

@@ -23,6 +23,11 @@ public class MypageCommunityAction implements CommandProcess {
 		System.out.println("MypageCommunityAction session 값 : " + user_id);
 		MypageDao my = MypageDao.getInstance();
 		
+		// 검색 값 받아오기
+		String search = request.getParameter("search");
+		if(search == null) search = "fail";
+		
+		
 		try {
 			int totCnt = my.getTotalCntCommunity(user_id);
 			String pageNum = request.getParameter("pageNum");
@@ -39,7 +44,7 @@ public class MypageCommunityAction implements CommandProcess {
 			System.out.println("MypageCommunityAction => " + startPage );
 			int endPage = startPage + blockSize - 1;
 			// 작성자가 쓴 글 조회
-			List<Mypage> list = my.communityList(user_id,startRow,endRow);
+			List<Mypage> list = my.communityList(user_id,startRow,endRow,search);
 			
 			if (endPage > pageCnt) endPage = pageCnt; 
 			

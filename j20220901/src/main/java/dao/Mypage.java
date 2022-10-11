@@ -32,7 +32,14 @@ public class Mypage {
 	private String com_content;
 	private Date com_date;
 	private int com_num;
+	private int t_ref;
 	
+	public int getT_ref() {
+		return t_ref;
+	}
+	public void setT_ref(int t_ref) {
+		this.t_ref = t_ref;
+	}
 	public int getCom_num() {
 		return com_num;
 	}
