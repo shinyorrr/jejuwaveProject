@@ -324,7 +324,7 @@
 
 								<!---------- 대댓글 ---------->
 								<div id="reply${reply.t_num}" class="collapse input-group my-3">
-									<form action="travelReply.do" method="post">
+									<form action="travelReply.do" method="post" name = "reply" ><!-- > -->
 										<input name="t_num" type="hidden" value="${travelContent.t_num}"> 
 										<input name="t_relevel" type="hidden" value="2">
 										<input name="t_restep" type="hidden" value="${reply.t_restep}">
@@ -440,14 +440,17 @@ function deleteReplyChk(t_num, t_ref, t_relevel) {
 /*********** 댓글 유효성 체크 함수 ***********/
 function userReplyChk() {
 	var userId = '${userId}';
+	var t = document.reply;
 	if(userId == null || userId == "") {
-		
 		var cfm = confirm("로그인이 필요합니다. \n 로그인하시겠습니까?");
 		if(!cfm) return false;    //확인
 		location.href = "login.do";
-		return false;
-		
-	} return true;
+		return false;	
+	}
+	else{
+		t.submit();
+	}
+	
 }
 
 </script>
