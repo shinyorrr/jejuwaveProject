@@ -100,10 +100,10 @@ function sorting(sort) {
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 							width="30" height="30">${board.user_id}</td>
 			<!-- 해시태그 -->
-					<td>
+					<td >
 						<c:choose>
 							<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
-							<c:otherwise><span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+							<c:otherwise><span class="hash" style="margin-left: 27px;">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
 						</c:choose>
 						<c:choose>
 							<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
