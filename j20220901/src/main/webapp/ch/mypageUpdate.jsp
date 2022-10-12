@@ -146,10 +146,10 @@ function fn_submit(){
 			<div class="Menu_section">
 				<div class="Menu__profile">
 					<div class="Profiles_image">
-						<c:if test="${member.user_img == null}">
+						<c:if test="${img_sub eq 'null'}">
 						<img class = "profile_img" src="<%=context%>/images/vector_profile_default.svg" style="vertical-align:middle;">
 						</c:if>
-						<c:if test="${member.user_img != null}">
+						<c:if test="${img_sub ne 'null'}">
 						<img class = "profile_img" src="<%=context%>/${member.user_img}" style="vertical-align:middle;">
 						</c:if>
 						<span class = "user_id">	
@@ -194,10 +194,10 @@ function fn_submit(){
 				<h2 class = "mypage_menu_h2">계정관리<span class="user_out"><button class="user_out_button" onclick = "location.href='idDeleteForm.do'">회원탈퇴</button></span></h2>
 				<div class = "user_updateinfo_main">
 					<div class = "image_insert">
-						<c:if test="${member.user_img == null}">
+						<c:if test="${img_sub eq 'null'}">
 							<span><img id="target_img" src="<%=context%>/images/vector_profile_default.svg"></span>
 						</c:if>
-						<c:if test="${member.user_img != null}">
+						<c:if test="${img_sub ne 'null'}">
 							<span><img id="target_img" src="<%=context%>/${member.user_img}" width = "200px"></span>
 						</c:if>
 					</div>
@@ -217,6 +217,7 @@ function fn_submit(){
 						<input type="text" class="input_email" id = "user_email" name = "user_email1" value ="${fn:split(member.user_email,'@')[0]}">@
 						<input type="text" class="input_email" name = "user_email2" disabled>
 							<select id = "eMailForm" name = "eMailForm" onchange="email_check()">
+							  <option value = "${fn:split(member.user_email,'@')[0]}"></option>
 							  <option value = "1">직접입력하세요</option>
 							  <option value="naver.com" 	
 							  	<c:if test = "${fn:split(member.user_email,'@')[1] eq 'naver.com'}"> selected </c:if>>naver.com</option>

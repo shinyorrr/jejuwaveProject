@@ -41,6 +41,7 @@
 			      <th scope="col">제목</th>
 			      <th scope="col">아이디</th>
 			      <th scope="col">테마</th>
+			      <th scope="col">해시태그</th>
 			      <th scope="col">해결여부</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col">삭제</th>
@@ -56,7 +57,22 @@
 			  				</td>
 			  				<td width="100">${qna.user_id}</td>
 			  				<td width="100">${qna.b_theme}</td>
-			  				<td width="100">${qna.b_success}</td>
+			  				<td width="200" >
+			  					<c:if test="${qna.l_hash1 != null }">
+			  						#${qna.l_hash1}&nbsp;
+			  					</c:if>
+				  				<c:if test="${qna.l_hash2 != null }">
+			  						#${qna.l_hash2}&nbsp;
+			  					</c:if>
+			  					<c:if test="${qna.l_hash3 != null }">
+			  						#${qna.l_hash3}&nbsp;
+			  					</c:if>
+			  				</td>
+			  				<td width="100" 
+			  					<c:if test="${qna.b_success eq 'Y'}">style="color:blue; font-weight:bold;"</c:if>
+			  					<c:if test="${qna.b_success eq 'N'}">style="color:red; font-weight:bold;"</c:if>>
+			  					${qna.b_success}
+			  				</td>
 			  				<td width="100">
 			  					<fmt:formatDate value="${qna.b_date}" pattern="yy-MM-dd"/>
 			  				</td>
