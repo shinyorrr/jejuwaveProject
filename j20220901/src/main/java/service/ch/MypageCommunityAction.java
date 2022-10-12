@@ -29,11 +29,11 @@ public class MypageCommunityAction implements CommandProcess {
 		
 		
 		try {
-			int totCnt = my.getTotalCntCommunity(user_id);
+			int totCnt = my.getTotalCntCommunity(user_id,search);
 			String pageNum = request.getParameter("pageNum");
 			if(pageNum == null || pageNum.equals("") || pageNum.equals("0")) {pageNum = "1";}
 			int currentPage = Integer.parseInt(pageNum);
-			int pageSize = 6, blockSize = 10;
+			int pageSize = 5, blockSize = 10;
 			int startRow = (currentPage - 1) * pageSize + 1;
 			int endRow = startRow + pageSize - 1;
 			int startNum = totCnt - startRow + 1;
