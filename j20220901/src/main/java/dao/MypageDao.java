@@ -109,10 +109,11 @@ public class MypageDao {
 				+ "           ) c) \r\n"
 				+ " where   r between ? and ?";
 		System.out.println("travelList sql ===> " + sql);
-		System.out.println("travelList t_dealstatus === > ");
-		// 버튼 클릭시 조건추가 (모집중인 글만 보기)
-		if(t_dealstatus == 0) { sql += "and t_dealstatus = ?"; }
-		
+	
+		// 검색창에 값을 입력했을경우
+		if(search != "fail") {sql += " and t_title like '%"+search+"%' or t_content like '%"+search+"%'";}
+		System.out.println("travelList search sql == " + sql);
+		System.out.println("MypageDao travelList search = " + search);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -123,19 +124,14 @@ public class MypageDao {
 			System.out.println("startRow == > " + startRow);
 			pstmt.setInt(3, endRow);
 			System.out.println("endRow == > " + endRow);
-			// 버튼 클릭시 조건 추가
+			// 버튼 클릭시 조건 추가 	// 버튼 클릭시 조건추가 (모집중인 글만 보기)
 			if(t_dealstatus == 0) {
+				sql += "and t_dealstatus = ?";
 				pstmt.setInt(4,t_dealstatus);
 				rs = pstmt.executeQuery();
 			} else rs = pstmt.executeQuery();
 			
-			// 검색창에 값을 입력했을경우
-			if(search != "fail") {
-				sql += " and t_title like '%"+search+"%' or t_content like '%"+search+"%'";
-				System.out.println("travelList search sql == " + sql);
-				System.out.println("MypageDao travelList search = " + search);
-				rs = pstmt.executeQuery();
-			} else rs = pstmt.executeQuery();
+			
 			
 			System.out.println("travelList sql ===> " + sql);
 			System.out.println("MypageDao travelList rs.next()->"+rs.next());
