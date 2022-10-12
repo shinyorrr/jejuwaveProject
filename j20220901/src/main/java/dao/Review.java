@@ -9,8 +9,6 @@ public class Review {
 	private Date r_date;
 	private int r_avg;
 	private int t_num;
-	private int r_ref;
-	private int r_restep;
 	private int user_avg;
 	
 	
@@ -19,18 +17,6 @@ public class Review {
 	}
 	public void setUser_avg(int user_avg) {
 		this.user_avg = user_avg;
-	}
-	public int getR_ref() {
-		return r_ref;
-	}
-	public void setR_ref(int r_ref) {
-		this.r_ref = r_ref;
-	}
-	public int getR_restep() {
-		return r_restep;
-	}
-	public void setR_restep(int r_restep) {
-		this.r_restep = r_restep;
 	}
 	public int getT_num() {
 		return t_num;
