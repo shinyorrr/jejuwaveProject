@@ -11,7 +11,7 @@ String context = request.getContextPath();
 
 <c:import url="${context}/header.jsp"></c:import>
 <meta charset="UTF-8">
-<title>게시글 수정</title>
+<title>JejuWave QnA</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
@@ -37,7 +37,7 @@ String context = request.getContextPath();
 <script type="text/javascript">
 /* select 에서 선택한 방식으로 정렬 */
 function sorting(sort) {
-	alert(sort);
+	
 	location.href='<%=context %>/qnaList2.do?sort='+ sort;
 	
 }

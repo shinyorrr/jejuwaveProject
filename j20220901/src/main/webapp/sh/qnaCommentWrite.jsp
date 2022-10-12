@@ -11,7 +11,7 @@
 <body>
 <c:if test="${result >0 }">
 	<script type="text/javascript">
-		alert("댓글완료!");		
+		
 		location.href="<%=context %>/qnaWriteCheck.do?b_num=${b_num}"; 
 	</script>
 </c:if>

@@ -15,7 +15,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <meta charset="UTF-8">
-<title>게시판 글쓰기</title>
+<title>JejuWave QnA</title>
 
 <header class="py-5 mb-5"
 	style="background-image: url('<%=context %>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
@@ -32,7 +32,10 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 	<form action="<%=context %>/qnaWritePro.do">
 		
 		<!-- 태그 -->
-		<div class="tag">
+		<span class="tag2">테마</span>
+		<span class="tag">
+			
+		 
 			<div class="form-check form-check-inline" >
 			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="숙박" required="required" >
 			  <label class="form-check-label" for="inlineRadio1">숙박</label>
@@ -49,7 +52,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="카풀" required="required" style="margin-right: auto">
 			  <label class="form-check-label" for="inlineRadio1">카풀</label>
 			</div>
-		</div>
+		</span>
 		<br>
 		
 		<!-- 제목 -->

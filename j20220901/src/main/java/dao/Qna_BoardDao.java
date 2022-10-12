@@ -383,7 +383,7 @@ public class Qna_BoardDao {
 		      
 
 		      String sql1 = "select nvl(max(b_num),0) from qna_board";
-		      String sql = "insert into qna_board (b_num,user_id,b_date,b_title,b_content,b_success,b_theme) values(?,?,sysdate,?,?,?,?)";
+		      String sql = "insert into qna_board (b_num,user_id,b_date,b_title,b_content,b_success,b_theme,com_cnt) values(?,?,sysdate,?,?,?,?,0)";
 		      //해시태그
 		      String sql2 = "insert into qna_hash (b_num, l_hash1 , l_hash2 , l_hash3 ) values(?,?,?,?)";
 		      System.out.println("Qna_BoardDao insert sql2-->"+sql2);
