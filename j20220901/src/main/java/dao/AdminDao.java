@@ -341,35 +341,44 @@ public class AdminDao {
 	// QnA 게시판 조회
 	public List<Qna_Board> qnaList(int startRow, int endRow) throws SQLException {
 		List<Qna_Board> list = new ArrayList<Qna_Board>();
-		Connection 		   conn = null;
+		Connection conn = null;
 		PreparedStatement pstmt = null;
-		ResultSet		 	 rs = null;
-		String sql = "select * "
-				+ "		from (select rownum rn, a.* from (select * from qna_board order by b_date desc) a) "
+		ResultSet rs = null;
+		String sql = "select * from \r\n"
+				+ "    (select rownum rn, a.* from (select b.b_num, b.user_id, b.b_date, b.b_title, b.b_content, b.b_success, b.b_theme, h.l_hash1, h.l_hash2, h.l_hash3\r\n"
+				+ "    from qna_board b, qna_hash h\r\n"
+				+ "    where b.b_num = h.b_num\r\n"
+				+ "    order by b.b_date desc) a) \r\n"
 				+ "where rn between ? and ?";
 		
 		try {
-			conn  = getConnection();
+			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, startRow);
 			pstmt.setInt(2, endRow);
-			rs 	  = pstmt.executeQuery();
+			System.out.println("startRow->"+startRow);
+			System.out.println("endRow->"+endRow);
+			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Qna_Board qb = new Qna_Board();
 				qb.setB_num(rs.getInt("b_num"));
 				qb.setUser_id(rs.getString("user_id"));
 				qb.setB_date(rs.getDate("b_date"));
 				qb.setB_title(rs.getString("b_title"));
+				qb.setB_content(rs.getString("b_content"));
 				qb.setB_success(rs.getString("b_success"));
 				qb.setB_theme(rs.getString("b_theme"));
+				qb.setL_hash1(rs.getString("l_hash1"));
+				qb.setL_hash2(rs.getString("l_hash2"));
+				qb.setL_hash3(rs.getString("l_hash3"));
 				list.add(qb);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if( rs   != null) 	  rs.close();
-			if( pstmt!= null ) pstmt.close();
-			if( conn != null )  conn.close();
+			if(rs!=null) 	rs.close();
+			if(pstmt!=null) pstmt.close();
+			if(conn!=null)  conn.close();
 		}
 		return list;
 	}
