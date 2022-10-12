@@ -31,7 +31,7 @@ public class MypageCommentAction implements CommandProcess {
 		 MypageDao my = MypageDao.getInstance();
 		 
 		 try {
-			 int totCnt = my.getTotalQnaCommentCnt(user_id);
+			 int totCnt = my.getTotalQnaCommentCnt(user_id,search);
 			 String pageNum = request.getParameter("pageNum"); 
 			 if(pageNum==null || pageNum.equals("") || pageNum.equals("0")) {pageNum = "1";}
 			 int currentPage = Integer.parseInt(pageNum);
