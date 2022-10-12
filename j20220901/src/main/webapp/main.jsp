@@ -116,7 +116,7 @@ String context = request.getContextPath();
 			<!-- Section-->
 			<section class="py-1">
 				<div class="board_title"
-					style="font-weight: bold; position: relative; width: 28%; margin-bottom: 15px; padding-left: 350px;">
+					style="font-weight: bold; position: relative; width: 600px; margin-bottom: 15px; padding-left: 350px;">
 					<a href="<%=context%>/travelListForm.do" style="color: #ff3500;">여행 동행자 찾기</a>
 				</div>
 				<div class="container px-4 px-lg-5 mt-3">
