@@ -75,8 +75,10 @@ public class Controller extends HttpServlet {
 			
 			try {
 				// ListAction la = new ListAction();
-				Class commandClass = Class.forName(className); // className을 class로 만들어준다.
-				Object commandInstance = commandClass.newInstance(); // instance 객체 생성
+				// Class commandClass = Class.forName(className); // className을 class로 만들어준다.
+				// Object commandInstance = commandClass.newInstance(); // instance 객체 생성
+				Class<?> commandClass = Class.forName(className);
+				CommandProcess commandInstance = (CommandProcess) commandClass.getDeclaredConstructor().newInstance();
 				//             list.do, service.ListAction(instance)
 				commandMap.put(command, commandInstance);
 			} catch (Exception e) {
