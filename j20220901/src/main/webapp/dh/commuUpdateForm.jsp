@@ -56,19 +56,24 @@
 					<input type="hidden" name="b_c_img_num" value="${img.c_img_num }">
 				</c:forEach>
 				<!-- 이미지 미리보기가 표시될 부분 -->
+				<!-- 수정 전 게시글 이미지 미리보기와 hidden value(수정전 후 비교를 위함) 삭제하면 hidden value또한 삭제 -->
 				<div class="form-group file-group" id="file-list">
-					<!-- 수정 전 게시글 이미지 미리보기와 hidden value(수정전 후 비교를 위함) 삭제하면 hidden value또한 삭제 -->
-					<c:forEach items="${imgList }" var="img">
+					<%-- <c:forEach items="${imgList }" var="img">
 						<div class='file-input'>
 							<input type="hidden" name="c_img_num" value="${img.c_img_num }">
+							<div class="file-name"></div>
 							<img src="<%=context %>/${img.c_img_path}" class='preview' />
 							<a href='#this' name='file-delete' class='delFile'>파일 삭제</a>
 						</div>
-					</c:forEach>
+					</c:forEach> --%>
 				</div>
 				<!-- 파일추가 버튼 -->
-				<div class="file-add">
+				<div class="file-add" style="display: inline-block;">
 					<a href="#this" onclick="addFile()" class='addFile'>파일추가</a>
+				</div>
+				<!-- 파일되돌리기 버튼 -->
+				<div class="file-reset" style="display: inline-block;">
+					<a href="#this" onclick="resetFile()" class="resetFile">되돌리기</a>
 				</div>
 				<div class="form-group">
 					<textarea class="form-control mt-5" id="exampleFormControlTextarea1" rows="9" name="c_content"  placeholder="게시글 내용을 입력하세요" required>${commu.c_content }</textarea>
@@ -124,6 +129,105 @@
 					    document.getElementById('preview'+num).src = "";
 					  }
 				}
+				//사진 수정 전 사진 불러오기
+				$( document ).ready(function() { 
+					var fileList = document.getElementById('file-list');
+					
+					var imgList = new Array();
+					<c:forEach items="${imgList }" var="img">
+						imgList.push({cImgNum : "${img.c_img_num}"
+									,cImgPath : "${img.c_img_path}"
+									});
+					</c:forEach>
+					console.log('imgList : ' + imgList);
+					var fileName = "";
+					for(var i in imgList) {
+						
+						var div = document.createElement('div');
+						div.setAttribute('class', 'file-input');
+						
+						var divFileName = document.createElement('div');
+						divFileName.setAttribute('class', 'file-name'+i);
+						
+						var input = document.createElement('input');
+						input.setAttribute('type', 'hidden');
+						input.setAttribute('name', 'c_img_num');
+						input.setAttribute('value', imgList[i].cImgNum);
+						
+						var img = document.createElement('img');
+						img.setAttribute('class', 'preview');
+						imgSrc = "<%=context%>" + "/" + imgList[i].cImgPath;
+						fileName = ("<%=context%>" + "/" + imgList[i].cImgPath).substring(44);
+						img.src = imgSrc;
+						
+						var a = document.createElement('a');
+						a.setAttribute('href', '#this');
+						a.setAttribute('name', 'file-delete');
+						a.setAttribute('class', 'delFile');
+						
+						fileList.appendChild(div);
+						div.appendChild(divFileName);
+						$('.file-name'+i).text(fileName);
+						div.appendChild(input);
+						div.appendChild(img);
+						div.appendChild(a);
+						$('.delFile').text('파일 삭제');
+					}
+					$("a[name='file-delete']").on("click", function(e) {
+						e.preventDefault();
+						deleteFile($(this));
+					});
+				});
+				//사진 수정 전으로 되돌리기
+				 function resetFile() {
+					 var fileList = document.getElementById('file-list');
+						$("#file-list").empty();
+						
+						var imgList = new Array();
+						<c:forEach items="${imgList }" var="img">
+							imgList.push({cImgNum : "${img.c_img_num}"
+										,cImgPath : "${img.c_img_path}"
+										});
+						</c:forEach>
+						console.log('imgList : ' + imgList);
+						var fileName = "";
+						for(var i in imgList) {
+							
+							var div = document.createElement('div');
+							div.setAttribute('class', 'file-input');
+							
+							var divFileName = document.createElement('div');
+							divFileName.setAttribute('class', 'file-name'+i);
+							
+							var input = document.createElement('input');
+							input.setAttribute('type', 'hidden');
+							input.setAttribute('name', 'c_img_num');
+							input.setAttribute('value', imgList[i].cImgNum);
+							
+							var img = document.createElement('img');
+							img.setAttribute('class', 'preview');
+							imgSrc = "<%=context%>" + "/" + imgList[i].cImgPath;
+							fileName = ("<%=context%>" + "/" + imgList[i].cImgPath).substring(44);
+							img.src = imgSrc;
+							
+							var a = document.createElement('a');
+							a.setAttribute('href', '#this');
+							a.setAttribute('name', 'file-delete');
+							a.setAttribute('class', 'delFile');
+							
+							fileList.appendChild(div);
+							div.appendChild(divFileName);
+							$('.file-name'+i).text(fileName);
+							div.appendChild(input);
+							div.appendChild(img);
+							div.appendChild(a);
+							$('.delFile').text('파일 삭제');
+						}
+						$("a[name='file-delete']").on("click", function(e) {
+							e.preventDefault();
+							deleteFile($(this));
+						});
+					};
 			</script>
 		</div>
 	</div>

@@ -55,13 +55,14 @@ public class CommuWriteProAction implements CommandProcess {
 					if(p.getSize() > 0) {
 						String fileName = p.getSubmittedFileName();
 						String filePath = realPath + File.separator + currentDate + fileName; //서버 저장경로
-						String filePathV = "dh/imgFileSave/" + File.separator + currentDate + fileName; //db에 입력할 경로
+						String filePathV = "dh/imgFileSave/" + File.separator + currentDate + fileName; 
+						String imgPath = filePathV.replace('\\', '/');//db에 입력할 경로
 						System.out.println("filePath->" + filePath);
 						System.out.println("filePathV->" + filePathV);
 						p.write(filePath);
 						//List에 이미지 담기
 						Commu.CommuImg commuImg = new CommuImg();
-						commuImg.setC_img_path(filePathV);
+						commuImg.setC_img_path(imgPath);
 						commuImgList.add(commuImg);
 					}
 				}
