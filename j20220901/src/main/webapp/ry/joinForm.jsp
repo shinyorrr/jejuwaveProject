@@ -87,7 +87,7 @@ function winop() {
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-		<div class="joinform" style="margin-top:200px; margin-left: 28%;">
+		<div class="joinform" style="margin-top:200px; margin-left: 32%;">
 	<form  action="<%=context %>/joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()" enctype="multipart/form-data" >
 		<table>
 		<thead>
@@ -97,7 +97,7 @@ function winop() {
 			<tr>
 				<td style="width: 100px; text-align: center;">아이디</td>
 				<td><input type="text" style="width: 90%;" class="form-control"     name="user_id" id="user_id" required="required"></td>
-				<td style="width: 50px; text-align: center;"><button class="btn btn-outline-warning" onclick="winop()">중복체크</button></td>
+				<td ><button class="btn btn-outline-warning" style="width: 145px;" onclick="winop()">중복체크</button></td>
 			</tr>
 			<tr>
 				<td style="width: 100px; text-align: center;">비밀번호</td>
@@ -118,11 +118,11 @@ function winop() {
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">본인 소개</td>
-				<td><textarea class="form-control" rows="10" cols="45" name="user_info" placeholder="다른 회원님들이 알 수 있도록 소개 부탁드려요!"></textarea> </td>
+				<td><textarea class="form-control" rows="10" cols="45" name="user_info" placeholder="다른 회원님들이 알 수 있도록 소개 부탁드려요!" style="width:125%"></textarea> </td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">생년월일</td>
-				<td><input type="date" class="form-control" name="user_birth" style="width: 30%;"  required="required" pattern="\d{8}" placeholder="생년월일8자리"></td>
+				<td><input type="date" class="form-control" name="user_birth" style="width: 40%;"  required="required" pattern="\d{8}" placeholder="생년월일8자리"></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">성별</td>
@@ -136,11 +136,8 @@ function winop() {
 					title="2,3자리-3,4자리-4자리"></td>
 			</tr>
 			<tr>
-				<td style="width: 120px; text-align: center;">회원구분<input type="hidden" name="user_gubun" value="1"></td>
-			</tr>
-			<tr>
 				<td style="width: 120px; text-align: center;">이미지</td>
-				<td><input type="file" name="user_img"></td>
+				<td><input type="file" name="user_img" style="margin-bottom: 16px;"></td>
 				<!-- <td>이미지</td>
 				<div class="form-group">
 				<td style="text-align: center;">
