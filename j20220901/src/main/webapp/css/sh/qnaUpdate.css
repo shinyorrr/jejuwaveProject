@@ -10,12 +10,14 @@
 		
 
 	.tag{
-	 	width:1050px;
-	 	border: 5px red;
+	 	width:1200px;
+	 	height : 60px;
+	 
 	 	padding: 3px;
 		margin-left: auto; 
 		margin-right: auto;
-		text-align: center;		
+		text-align: center;	
+			
 	}
 	.button{
 		margin-bottom: 150px; 

@@ -30,7 +30,10 @@
 	<input type="hidden" name="b_num" value="${board.b_num }">
 		
 		<!-- 테마 -->
-		<div class="tag">
+		<div class="tag"> 
+		    
+		        테마
+		    
 			<div class="form-check form-check-inline" >
 			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="숙박" required="required">
 			  <label class="form-check-label" for="inlineRadio1">숙박</label>

@@ -9,6 +9,18 @@
 <c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+
+	function deleteChk() {
+		if (confirm("Qna 댓글을 삭제하시겠습니까?") == true){    //확인
+	     return true;
+	 }else{   //취소
+	     return false;
+	 }
+	}
+	
+</script>
 	
 	<!-- 네비게이션메뉴바 -->
 	<nav id="nav" class="nav">
@@ -31,7 +43,7 @@
 	
 	<!-- 본문 -->
 	<article class="article" id="article">
-	  <form id="memform" action="<%=context%>/adQnaComDelete.do" method="post">
+	  <form id="memform" action="<%=context%>/adQnaComDelete.do" method="post" name="frm" onsubmit="return deleteChk()">
 	  <input type="hidden" name="b_num" value="${b_num}">
 	  <input type="hidden" name="pageNum" value="${pageNum}">
 	  

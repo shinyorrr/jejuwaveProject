@@ -33,12 +33,16 @@ public class LoginAction implements CommandProcess {
 			if(result > 0) {
 				String img_sub = img.substring(9);
 				HttpSession session = request.getSession();
+				// 유저 아이디 및 이미지 불러오기 위한 작업
 				session.setAttribute("user_id", user_id);
 				session.setAttribute("img", img);
 				session.setAttribute("img_sub", img_sub);
 				System.out.println("LoginAction img_sub ==>" + img_sub);
 				System.out.println("LoginAction img ==> " + img);
 				session.setAttribute("user_pw", user_pw);
+				
+				// 관리자 페이지 구분하기 위함
+				session.setAttribute("user_gubun", member.getUser_gubun());
 				System.out.println("LoginAction session ==>" + session.getAttribute(img_sub));
 			}
 			

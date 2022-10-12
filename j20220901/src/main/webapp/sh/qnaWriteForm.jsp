@@ -34,7 +34,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 		<!-- 태그 -->
 		<div class="tag">
 			<div class="form-check form-check-inline" >
-			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="숙박" required="required">
+			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="숙박" required="required" >
 			  <label class="form-check-label" for="inlineRadio1">숙박</label>
 			</div>
 			<div class="form-check form-check-inline">
@@ -42,7 +42,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 			  <label class="form-check-label" for="inlineRadio1">레저</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="맛집" required="required">
+			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="맛집" required="required" checked="checked">
 			  <label class="form-check-label" for="inlineRadio1">맛집</label>
 			</div>
 			<div class="form-check form-check-inline">

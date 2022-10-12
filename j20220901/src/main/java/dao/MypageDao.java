@@ -36,18 +36,24 @@ public class MypageDao {
 		System.out.println(conn);
 		return conn;
 	}
-	public int getTotalCnt(String user_id) throws SQLException {
+	public int getTotalCnt(String user_id, int t_dealstatus) throws SQLException {
 		int max = 0;
 		Connection conn = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		
 		String sql = "select count(*)from travel_board where user_id = ? and t_relevel = 0 ";
+		if(t_dealstatus == 0) {sql += "and t_dealstatus = 0";}
+		System.out.println("getTotalCnt sql ==> " + sql);
 		try {
+			// 모집중 조건 추가 됐을 경우
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
 			System.out.println("getTotalCnt user id=>" + user_id);
+			
+			
+			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				max = rs.getInt(1);
@@ -65,14 +71,20 @@ public class MypageDao {
 		return max;
 	}
 	
-	public int getTotalCntBoard(String user_id) throws SQLException {
+	public int getTotalCntBoard(String user_id, String search) throws SQLException {
 		int max = 0;
 		Connection conn = null;
 		ResultSet rs = null;
 		PreparedStatement pstmt = null;
 		
 		String sql = "select count(*)from qna_board where user_id = ?";
-		try {
+		if(search != "fail") {
+			sql += " and b_title like '%"+search+"%' or b_content like '%"+search+"%'";
+			System.out.println("boardList search sql ==> " + sql);
+		}
+		
+		
+		try {	
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, user_id);
@@ -103,17 +115,24 @@ public class MypageDao {
 		String sql = "select * \r\n"
 				+ " from (select rownum r, c.* \r\n"
 				+ "      from (  select a.*, nvl(b.cnt,0) as reply_cnt  \r\n"
-				+ "              from (select * from travel_board where t_Relevel= 0 and user_id = ? ) a, \r\n"
+				+ "              from (select * from travel_board where t_Relevel= 0 and user_id = ?";
+		// 버튼 클릭시 조건 추가 	// 버튼 클릭시 조건추가 (모집중인 글만 보기)
+		if(t_dealstatus == 0) {sql += "and t_dealstatus = 0";}
+		System.out.println("travelList t_dealstatus sql == " + sql);
+	
+		
+		sql += ") a, \r\n"
 				+ "                   (select t_ref, count(t_ref) as cnt  from travel_board where t_relevel !=0 group by t_ref) b \r\n"
 				+ "              where a.t_ref = b.t_ref(+)  order by t_num desc\r\n"
 				+ "           ) c) \r\n"
 				+ " where   r between ? and ?";
+		
 		System.out.println("travelList sql ===> " + sql);
-	
+		
 		// 검색창에 값을 입력했을경우
 		if(search != "fail") {sql += " and t_title like '%"+search+"%' or t_content like '%"+search+"%'";}
-		System.out.println("travelList search sql == " + sql);
 		System.out.println("MypageDao travelList search = " + search);
+		System.out.println("travelList search sql == " + sql);
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -124,12 +143,7 @@ public class MypageDao {
 			System.out.println("startRow == > " + startRow);
 			pstmt.setInt(3, endRow);
 			System.out.println("endRow == > " + endRow);
-			// 버튼 클릭시 조건 추가 	// 버튼 클릭시 조건추가 (모집중인 글만 보기)
-			if(t_dealstatus == 0) {
-				sql += "and t_dealstatus = ?";
-				pstmt.setInt(4,t_dealstatus);
-				rs = pstmt.executeQuery();
-			} else rs = pstmt.executeQuery();
+			rs = pstmt.executeQuery();
 			
 			
 			
@@ -313,12 +327,16 @@ public class MypageDao {
 		
 		return list;
 	}
-	public int getTotalQnaCommentCnt(String user_id) throws SQLException {
+	public int getTotalQnaCommentCnt(String user_id, String search) throws SQLException {
 		int max = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select count(*) from qna_comment where user_id = ?";
+		if(search != "fail") {
+			sql += "and com_content like'%"+search+"%'";
+		}
+		
 		System.out.println("getTotalQnaCommentCnt sql : " + sql);
 		try {
 			conn = getConnection();
@@ -339,13 +357,17 @@ public class MypageDao {
 		}
 		return max;
 	}
-	public int getTotalTravelCommentCnt(String user_id) throws SQLException {
+	public int getTotalTravelCommentCnt(String user_id, String search) throws SQLException {
 		int max = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select count(*) from travel_board where user_id = ? and t_restep != 0 ";
-
+		if(search != "fail") {
+			sql+="and t_content like '%"+search+"%'";
+		}
+		
+		
 		System.out.println("getTotalTravelCommentCnt sql : " + sql);
 		try {
 			conn = getConnection();
@@ -366,12 +388,16 @@ public class MypageDao {
 		}
 		return max;
 	}
-	public int getTotalCntCommunity(String user_id) throws SQLException{
+	public int getTotalCntCommunity(String user_id, String search) throws SQLException{
 		int max = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = "select count(*) from community where user_id = ?";
+		if(search != "fail") {
+			sql += "and c_content like '%"+search+"%' or c_hash like '%"+search+"%'";
+			System.out.println("communityList search sql => " + sql);
+		}
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);

@@ -184,8 +184,12 @@ $(function(){
 						<input type="submit" class = "allDel" value="일괄삭제">
 				</form>	
 				<form action="mypageCommentTravel.do">
-						<input type ="text"  class="search_input"	name="search" placeholder="댓글내용">
-						<input type ="submit" 	value="검색">
+						<div class="search_form">
+							<input type ="text"  class="search_input"	name="search" placeholder="댓글내용">
+							<div class = "search_image">
+								<input type ="submit" class = "search_submit" value="">
+							</div>
+						</div>
 				</form>
 						
 						
