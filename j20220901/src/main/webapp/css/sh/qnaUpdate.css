@@ -1,41 +1,53 @@
 @charset "UTF-8";
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 	.mb-3 input{
 		
 		background-repeat: no-repeat;
 		background-size: 30px;
 		background-position: 15px center;
 		text-indent: 45px;
+		font-family: 'Noto Sans KR', sans-serif;
 	}
 		
 
 	.tag{
-		display: inline-block ;
-		display: table-cell;
-		vertical-align: middle;
-	 	width:900px;
-	 	height : 60px;
-	 	border: 1px solid black;
-	 	
-	 	padding: 15px;
-		
+		float: left;
+	 	width:870px;
+	 	height : 90px;
+	 	border: 1px solid #D5D5D5;
+	 	border-bottom-right-radius:10px;
+	 	border-top-right-radius:10px;
+	 	margin-top: 0.7px;
+	 	padding: 30px;
+		font-family: 'Noto Sans KR', sans-serif;
 		/* margin-right: auto; */
 		text-align: center;	
 			
 	}
 	
 	.tag2{
+		color: white;
+		font-weight: bold;
+		background-color:  #FF3500;
+		border: 1px solid #D5D5D5;
+		float: left;
+		border-bottom-left-radius: 10px;
+		border-top-left-radius: 10px;
+		padding: 30px;
+		text-align: center;
 		vertical-align: middle;
-		margin-bottom: 15px;
-		margin-left: 200px;
+		margin-bottom: 25px;
+		font-family: 'Noto Sans KR', sans-serif;
+		margin-left: 352px;
 		display: inline-block;
 		display: table-cell;
 		border: 1px solid pink;
-		width: 200px;
-		height: 60px;
+		width: 330px;
+		height: 90px;
 		
 	}
 	.button{
 		margin-bottom: 150px; 
+		font-family: 'Noto Sans KR', sans-serif;
 	}
 	
