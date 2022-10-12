@@ -24,7 +24,7 @@ String context = request.getContextPath();
 <!-- this page css -->
 <link rel="stylesheet" href="<%= context %>/css/dh/commuList.css">
 <!-- session chk functions -->
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 	//수정 버튼 session chk
 	function chkSessionUpdate() {
 		var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
@@ -57,7 +57,7 @@ String context = request.getContextPath();
 			alert('작성자만 게시글을 삭제할 수 있습니다.');
 		}
 	}
-</script>
+</script> --%>
 </head>
 <body>
 <!-- main start -->	
