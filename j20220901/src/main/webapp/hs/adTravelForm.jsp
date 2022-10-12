@@ -10,6 +10,18 @@
 <c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+
+	function deleteChk(t_num, t_relevel, pageNum) {
+		if (confirm("동행자 게시글을 삭제하시겠습니까?") == true){    //확인
+		location.href= "<%=context%>/adTravelDelete.do?t_num="+ t_num +"&t_relevel="+ t_relevel+"&pageNum="+pageNum;
+	 }else{   //취소
+	     return false;
+	 }
+	}
+	
+</script>
 
 	<!-- 네비게이션메뉴바 -->
 	<nav id="nav" class="nav">
@@ -89,7 +101,7 @@
 			  				<fmt:parseDate value="${travel.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
 			  				<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
 			  				</td>
-			  				<td width="100"><input type="submit" value="삭제" onclick="location.href='<%=context%>/adTravelDelete.do?t_num=${travel.t_num}&t_relevel=${travel.t_relevel}&pageNum=${pageNum}'"></td>
+			  				<td width="100"><input type="button" value="삭제" onclick="deleteChk(${travel.t_num}, ${travel.t_relevel}, ${pageNum})"></td>
 			  			</tr>
 			  			<c:set var="startNum" value="${startNum - 1}"></c:set>
 			  		</c:forEach>
