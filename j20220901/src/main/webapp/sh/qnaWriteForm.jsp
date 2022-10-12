@@ -32,27 +32,27 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 	<form action="<%=context %>/qnaWritePro.do">
 		
 		<!-- 태그 -->
-		<span class="tag2">테마</span>
-		<span class="tag">
+		<div class="tag2">테 마    선 택</div>
+		<div class="tag">
 			
 		 
 			<div class="form-check form-check-inline" >
 			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="숙박" required="required" >
 			  <label class="form-check-label" for="inlineRadio1">숙박</label>
-			</div>
+			</div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="레저" required="required">
 			  <label class="form-check-label" for="inlineRadio1">레저</label>
-			</div>
+			</div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="맛집" required="required" checked="checked">
 			  <label class="form-check-label" for="inlineRadio1">맛집</label>
-			</div>
+			</div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 			<div class="form-check form-check-inline">
 			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="카풀" required="required" style="margin-right: auto">
 			  <label class="form-check-label" for="inlineRadio1">카풀</label>
 			</div>
-		</span>
+		</div>
 		<br>
 		
 		<!-- 제목 -->

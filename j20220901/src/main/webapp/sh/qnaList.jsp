@@ -106,7 +106,9 @@ function sorting(sort) {
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 							width="40" height="40">${board.user_id}</td>
 						<!-- 해시태그 -->
-						<td><c:choose>
+						<td style="width: 550px;">
+							
+							<c:choose>
 								<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
 								<c:otherwise>
 									<span class="hash" style="margin-left: 27px;">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
@@ -118,8 +120,17 @@ function sorting(sort) {
 								<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
 								<c:otherwise>
 									<span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-							</c:choose></td>
+							</c:choose>
+							</td>
+							<td>
+							
+							<span> <img src="images/comm_icon.png" width="20" height="20" >&nbsp;${board.com_cnt }&nbsp;&nbsp;</span>
+							</td>
+							
+						
+														
 					</tr>
+						
 					<c:set var="startNum" value="${startNum -1 }"></c:set>
 				</c:forEach>
 			</c:if>
