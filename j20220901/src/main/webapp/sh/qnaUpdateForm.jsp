@@ -32,22 +32,26 @@
 		<!-- 테마 -->
 		<div class="tag"> 
 		    
-		        테마
+		        
 		    
 			<div class="form-check form-check-inline" >
-			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="숙박" required="required">
+			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="숙박" required="required"
+			  	<c:if test="${board.b_theme eq '숙박' }">checked</c:if>>
 			  <label class="form-check-label" for="inlineRadio1">숙박</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="레저" required="required">
+			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="레저" required="required"
+			  	<c:if test="${board.b_theme eq '레저' }">checked</c:if>>
 			  <label class="form-check-label" for="inlineRadio1">레저</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="맛집" required="required">
+			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="맛집" required="required"
+			  	<c:if test="${board.b_theme eq '맛집' }">checked</c:if>>
 			  <label class="form-check-label" for="inlineRadio1">맛집</label>
 			</div>
 			<div class="form-check form-check-inline">
-			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="카풀" required="required" style="margin-right: auto">
+			  <input class="form-check-input" type="radio" name="b_theme" id="inlineRadio1" value="카풀" required="required" style="margin-right: auto"
+			  	<c:if test="${board.b_theme eq '카풀' }">checked</c:if>>
 			  <label class="form-check-label" for="inlineRadio1">카풀</label>
 			</div>
 		</div>

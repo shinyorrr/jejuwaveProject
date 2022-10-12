@@ -116,8 +116,8 @@ String context = request.getContextPath();
 			<!-- Section-->
 			<section class="py-1">
 				<div class="board_title"
-					style="font-weight: bold; position: relative; width: 33%; margin-bottom: 15px; padding-left: 400px;">
-					<a href="<%=context%>/travelListForm.do">여행 동행자 찾기</a>
+					style="font-weight: bold; position: relative; width: 28%; margin-bottom: 15px; padding-left: 350px;">
+					<a href="<%=context%>/travelListForm.do" style="color: #ff3500;">여행 동행자 찾기</a>
 				</div>
 				<div class="container px-4 px-lg-5 mt-3">
 					<div
@@ -198,7 +198,7 @@ String context = request.getContextPath();
 				<div class="board_content">
 					<div class="board_title"
 						style="font-weight: bold; position: relative; width: 33%; margin-bottom: 15px;">
-						<a href="<%=context%>/qnaList.do">여행정보 공유해요!</a>
+						<a href="<%=context%>/qnaList.do" style="color: #ff3500;">여행정보 공유해요!</a>
 					</div>
 					<c:forEach var="board" items="${list }">
 						<div class="content_first">
