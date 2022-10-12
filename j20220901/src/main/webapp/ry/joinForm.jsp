@@ -37,6 +37,12 @@ function chk() {
 function chk1() {
 	if (frm.user_pw.value == frm.user_pw2.value) {
 		alert("암호가 같습니다.");
+		frm.user_email.focus();
+		return false;
+	}
+	
+	if (frm.user_pw.value != frm.user_pw2.value) {
+		alert("암호가 다릅니다");
 		frm.user_pw.focus();
 		return false;
 	}

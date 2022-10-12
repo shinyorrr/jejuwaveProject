@@ -89,7 +89,7 @@ String context = request.getContextPath();
 				<c:forEach var="commu" items="${list }" varStatus="status">	
 					<div class="row m-5 justify-content-md-center" >	
 						
-						<div class="col-md-auto"  style="max-width: 580px;">
+						<div class="col-md-auto"  style="max-width: 580px; min-width: 580px;">
 							<div class="card shadow-sm" >
 								<div class="card-header d-flex">
 									<img class="mt-1 mb-1 img-fluid rounded-circle" alt="회원이미지" src="${userImgList[status.index].user_img }" style="height: 30px; margin-right: 5px;">

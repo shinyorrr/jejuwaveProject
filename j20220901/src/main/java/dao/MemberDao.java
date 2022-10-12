@@ -73,6 +73,7 @@ public class MemberDao {
 			pstmt.setString(7, member.getUser_gender());
 			pstmt.setString(8, member.getUser_tel());
 			pstmt.setInt(9, member.getUser_gubun());
+			System.out.println("dao user_gubun" + member.getUser_gubun());
 			pstmt.setString(10, member.getUser_img());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
