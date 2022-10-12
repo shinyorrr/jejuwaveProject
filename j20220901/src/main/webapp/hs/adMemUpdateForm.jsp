@@ -9,6 +9,20 @@
 <c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+	function upchk() {
+		if(frm.user_gubun.value == "none") {
+			alert("다시 선택해주세요");
+			frm.user_gubun.focus();
+			return false;
+		}
+		if(!confirm("수정하시겠습니까?")) {
+			return false;
+		}
+		return true;
+	}
+</script>
 	
 	<!-- 네비게이션메뉴바 -->
 	<nav id="nav" class="nav">
@@ -31,7 +45,7 @@
 	
 	<!-- 본문 -->
 	<article class="article" id="article">
-	  <form id="memform" action="adMemUpdatePro.do" method="post">
+	  <form id="memform" name="frm" action="adMemUpdatePro.do" method="post" onsubmit="return upchk()">
 	  	<input type="hidden" name="user_id" value="${member.user_id}">
 	  	<input type="hidden" name="user_pw" value="${member.user_pw}">
 	  	<input type="hidden" name="user_email" value="${member.user_email}">
