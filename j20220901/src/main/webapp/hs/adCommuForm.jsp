@@ -10,6 +10,18 @@
 <c:import url="${context}/headerAdmin.jsp"></c:import>
 <link rel="stylesheet" href="<%=context%>/hs/css/adminStyle.css">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+
+	function deleteChk(c_num, pageNum) {
+		if (confirm("회원 커뮤니티글을 삭제하시겠습니까?") == true){    //확인
+			location.href= "<%=context%>/adCommuDelete.do?c_num="+c_num+"&pageNum="+pageNum;
+	 }else{   //취소
+	     return false;
+	 }
+	}
+	
+</script>
 	
 	<!-- 네비게이션메뉴바 -->
 	<nav id="nav" class="nav">
@@ -51,12 +63,17 @@
 				  	<tr>
 				  		<th scope="row" width="50">${startNum}</th>
 				  		<td width="600" id="content">${commu.c_content}</td>
-				  		<td width="100">#${commu.c_hash}</td>
+				  		<td width="100">
+				  			<c:set var="hash" value="${commu.c_hash}"></c:set>
+				  			<c:forTokens var="h" items="${hash}" delims=" ">
+				  				#${h}&nbsp;
+				  			</c:forTokens>
+				  		</td>
 				  		<td width="100">${commu.user_id}</td>
 				  		<td width="100">
 				  			<fmt:formatDate value="${commu.c_date}" pattern="yy-MM-dd"/>
 				  		</td>
-				  		<td width="100"><input type="button" value="삭제" onclick="location.href='<%=context%>/adCommuDelete.do?c_num=${commu.c_num}&pageNum=${pageNum}'"></td>
+				  		<td width="100"><input type="button" value="삭제" onclick="deleteChk(${commu.c_num}, ${pageNum})"></td>
 				  	</tr>
 				  	<c:set var="startNum" value="${startNum-1}"></c:set>
 			  		</c:forEach>

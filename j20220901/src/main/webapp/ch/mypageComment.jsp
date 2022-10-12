@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,7 +147,9 @@ $(function(){
 									${board.com_content}								
 									</div>
 								</td>
-								<td class = "c_date">${board.com_date }</td>
+								<td class = "c_date">
+									<fmt:formatDate value="${board.com_date}" pattern="yy-MM-dd"/>
+								</td>
 							</tr>
 							<tr>
 								<td>
@@ -162,8 +165,12 @@ $(function(){
 					<input type="submit" class = "allDel" value="일괄삭제">
 				</form>	
 				<form action="mypageComment.do">
-						<input type ="text"  class="search_input"	name="search" placeholder="댓글내용">
-						<input type ="submit" 	value="검색">
+						<div class="search_form">
+							<input type ="text"  class="search_input"	name="search" placeholder="댓글내용">
+							<div class = "search_image">
+								<input type ="submit" class = "search_submit" value="">
+							</div>
+						</div>
 				</form>
 					
 				<div style="text-align: center; padding-top: 20px;">

@@ -127,4 +127,17 @@ table{
     border-radius: 70%;
     overflow: hidden;
 }
-
+.search_submit{
+	background:url(../../images/common_icons.png);
+	background-repeat: no-repeat;
+	width:25px;
+	height:28px;
+	border: 0;
+}
+.search_form{
+	display : flex;
+}
+.search_image{
+	padding-top: 6px;
+    padding-left: 11px;
+}

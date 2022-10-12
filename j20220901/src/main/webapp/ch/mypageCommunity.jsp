@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,7 +208,7 @@
 											</td>
 											<td>
 												<div class = "community_date">
-													${board.c_date}
+													<fmt:formatDate value="${board.c_date}" pattern="yy-MM-dd"/>
 												</div>
 											</td>
 										</tr>
@@ -236,8 +237,12 @@
 					<input type="submit" class = "allDel" value="일괄삭제">
 					</form>
 					<form action="mypageCommunity.do">
-						<input type ="text"  class="search_input"	name="search" placeholder="제목 + 해시태그">
-						<input type ="submit" 	value="검색">
+						<div class="search_form">
+							<input type ="text"  class="search_input"	name="search" placeholder="제목 + 해시태그">
+							<div class = "search_image">
+								<input type ="submit" class = "search_submit" value="">
+							</div>
+						</div>
 					</form>
 					</div>
 						

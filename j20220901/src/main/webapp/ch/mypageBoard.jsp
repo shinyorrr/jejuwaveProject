@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -124,7 +125,9 @@
 									${board.b_content }
 									</div>
 								</td>
-								<td style="font-size: small;float: right;padding: 5px;">${board.b_date }</td>
+								<td style="font-size: small;float: right;padding: 5px;">
+									<fmt:formatDate value="${board.b_date}" pattern="yy-MM-dd"/>
+								</td>
 							</tr>
 							<tr>
 								<td>
@@ -144,8 +147,12 @@
 				<input type = "submit" class = "allDel" value="일괄삭제">
 				</form>
 				<form action="mypageBoard.do">
-						<input type ="text"  class="search_input"	name="search" placeholder="제목 + 내용">
-						<input type ="submit" 	value="검색">
+						<div class="search_form">
+							<input type ="text"  class="search_input"	name="search" placeholder="제목 + 내용">
+							<div class = "search_image">
+								<input type ="submit" class = "search_submit" value="">
+							</div>
+						</div>
 				</form>
 				</div>
 				

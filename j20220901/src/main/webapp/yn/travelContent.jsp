@@ -193,7 +193,8 @@
 											</div>
 										</div>
 										<!-- 후기 등록 박스 -->
-										<form action="review.do" method="post" name="revBox" onsubmit="return Checkform()">
+										<%-- <c:if test="${user_id !=null }"> --%>
+										<form method="post" name="revBox" id="revBox" onsubmit="return false;">
 										<input name="t_num" type="hidden" value="${travelContent.t_num}">
 											<div class="modal-footer"
 												style="justify-content: flex-start;">
@@ -217,10 +218,11 @@
 													<input name="r_content" id="r_content" type="text" placeholder="동행후기를 한줄평으로 달아보세요!"
 														onfocus="this.placeholder = ''"
 														onblur="this.placeholder = '동행후기를 한줄평으로 달아보세요!'">
-													<button id="reviewBtn" onclick="chk()">등록</button>
+													<button id="reviewBtn">등록</button>
 												</div>
 											</div>
 										</form>
+										<%-- </c:if> --%>
 									</div>
 								</div>
 							</div>
@@ -252,7 +254,7 @@
 
 						<!----------- 댓글 등록 창 --------------->
 						<div class="input-group my-3 ">
-							<button type="button" onclick="userReplyChk()" class="input-group-text" id="commInsBtn">
+							<button onclick="userReplyChk()" class="input-group-text" id="commInsBtn">
 								댓글 등록</button>
 							<textarea required="required" name="t_content" rows="2"
 								class="form-control" style="border-left: none; padding: 10px 10px 10px 15px !important; font-size: 14px;"
@@ -332,7 +334,7 @@
 											<textarea type="text" name="t_content" class="form-control p-1"
 												style="width: 100%; border-right: none;"
 												placeholder="댓글을 남겨 보세요!">@${reply.user_id}  </textarea>
-											<button type="button" onclick="userReplyChk()" class="input-group-text"
+											<button onclick="userReplyChk()" class="input-group-text"
 												id="commInsBtn">댓글 등록</button>
 										</div>
 									</form>
@@ -391,13 +393,23 @@ $(function () {
 	});
 });
 /**************후기등록 경고창JS******************/
-function Checkform() {
-	if(revBox.r_content.value == ""){
-		revBox.r_content.focus();
-		alert("입력해주세요");
-		return false;
-	};		
-};
+var reviewBtn = document.getElementById("reviewBtn");
+reviewBtn.addEventListener("click", function () {
+	var userId = '${userId}';
+	var form = document.getElementById("revBox");
+	if(userId == null || userId == ""){
+		var cfr = confirm("로그인이 필요합니다.\n로그인하시겠습니까?");
+		if (!cfr) return false;   
+			location.href = "login.do";
+			return false;			
+	} else if(r_content.value == ""){
+		alert("한줄평을 남겨주세요.")
+			return false;
+	}
+	form.action = "review.do";
+	form.mothod = "POST";
+	form.submit();
+});
 </script>
 <script type="text/javascript">
 /***************************************************/
@@ -429,11 +441,12 @@ function deleteReplyChk(t_num, t_ref, t_relevel) {
 function userReplyChk() {
 	var userId = '${userId}';
 	if(userId == null || userId == "") {
-		if (confirm("로그인이 필요합니다.\n로그인하시겠습니까?") == true) {    //확인
-			location.href = "login.do";
-		} else {   //취소
-		     return false;
-		}
+		
+		var cfm = confirm("로그인이 필요합니다. \n 로그인하시겠습니까?");
+		if(!cfm) return false;    //확인
+		location.href = "login.do";
+		return false;
+		
 	} return true;
 }
 

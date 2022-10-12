@@ -7,60 +7,39 @@
 <head>
 <meta charset="UTF-8">
 <title>JEJU WAVE</title>
+<!-- jQuery -->
+<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 </head>
 <% 
 String context = request.getContextPath();
 %>
+<!-- chk script -->
+<script type="text/javascript">
+	//삭제버튼 chk msg
+	function chkDelete() {
+		if (!confirm("정말로 삭제하시겠습니까?")) {
+        } else {
+            location.href="<%=context%>/commuDeletePro.do?c_num=${commu.c_num}&pageNum=${currentPage}"
+        }
+	}
+</script>
 <body>
 	<div class="modal-header">
 		<div class="modal-title" style="width: 3000px;">
 			<img class="mt-1 mb-1 img-fluid rounded-circle" alt="회원이미지" src="${member.user_img }" style="height: 30px; margin-right: 5px;">
 			<span class="mt-2">${commu.user_id }</span>
-			<!-- dropdown menu -->
-			<div class="dropdown" style="float: right;">
-  				<button class="btn btn-icon-only" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-  					<span class="bi bi-three-dots-vertical"></span>
-  				</button>
-  				<ul class="dropdown-menu">
-    				<li><a class="dropdown-item" href="javascript:void(0);" onclick="chkSessionUpdate();" style="text-align: center;">수정</a></li>
-					<li><a class="dropdown-item" href="javascript:void(0);" onclick="chkSessionDelete();" style="text-align: center;">삭제</a></li><!-- href='javascript:void(0);confirm();' onclick="ConfirmDel(); -->
-  				</ul>
-  				<!-- 3dot 메뉴 접근권한 session chk script -->
-  				<script type="text/javascript">
-					// 수정버튼 session chk
-  					function chkSessionUpdate() {
-						var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
-						console.log(sessionUser_id);
-						var WriterUser_id = '<c:out value="${commu.user_id}"/>'; 
-						console.log(WriterUser_id);
-						if (sessionUser_id == WriterUser_id) {
-							location.href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}";
-						}
-						else if (sessionUser_id == null) {
-							alert('로그인을 한 후 게시글을 수정할 수 있습니다.');
-						}
-						else {
-							alert('작성자만 게시글을 수정할 수 있습니다.');
-						}
-					}
-					//삭제버튼 session chk
-					function chkSessionDelete() {
-						var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
-						console.log(sessionUser_id);
-						var WriterUser_id = '<c:out value="${commu.user_id}"/>'; 
-						console.log(WriterUser_id);
-						if (sessionUser_id == WriterUser_id) {
-							$("#deleteModal").modal('show');
-						}
-						else if (sessionUser_id == null) {
-							alert('로그인을 한 후 게시글을 삭제할 수 있습니다.');
-						}
-						else {
-							alert('작성자만 게시글을 삭제할 수 있습니다.');
-						}
-					}
-				</script>
-			</div>
+  			<c:if test="${sessionUser_id == commu.user_id}">
+				<!-- dropdown menu -->
+				<div class="dropdown" style="float: right;">
+	  				<button class="btn btn-icon-only" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+	  					<span class="bi bi-three-dots-vertical"></span>
+	  				</button>
+	  				<ul class="dropdown-menu">
+	    				<li><a class="dropdown-item" href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}" style="text-align: center;">수정</a></li>
+						<li><a class="dropdown-item" href="javascript:void(0);" onclick="chkDelete();" style="text-align: center;">삭제</a></li><!-- href='javascript:void(0);confirm();' onclick="ConfirmDel(); -->
+	  				</ul>
+				</div>
+			</c:if> 
 		</div>
     </div>
     <div class="modal-body container justify-content-md-center">

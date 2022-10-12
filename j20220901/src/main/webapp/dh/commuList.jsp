@@ -23,41 +23,7 @@ String context = request.getContextPath();
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- this page css -->
 <link rel="stylesheet" href="<%= context %>/css/dh/commuList.css">
-<!-- session chk functions -->
-<script type="text/javascript">
-	//수정 버튼 session chk
-	function chkSessionUpdate() {
-		var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
-		console.log(sessionUser_id);
-		var WriterUser_id = '<c:out value="${commu.user_id}"/>'; 
-		console.log(WriterUser_id);
-		if (sessionUser_id == WriterUser_id) {
-			location.href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}";
-		}
-		else if (sessionUser_id == null) {
-			alert('로그인을 한 후 게시글을 수정할 수 있습니다.');
-		}
-		else {
-			alert('작성자만 게시글을 수정할 수 있습니다.');
-		}
-	}
-	//삭제 버튼 session chk
-	function chkSessionDelete() {
-		var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
-		console.log(sessionUser_id);
-		var WriterUser_id = '<c:out value="${commu.user_id}"/>'; 
-		console.log(WriterUser_id);
-		if (sessionUser_id == WriterUser_id) {
-			$("#deleteModal").modal('show');
-		}
-		else if (sessionUser_id == null) {
-			alert('로그인을 한 후 게시글을 삭제할 수 있습니다.');
-		}
-		else {
-			alert('작성자만 게시글을 삭제할 수 있습니다.');
-		}
-	}
-</script>
+
 </head>
 <body>
 <!-- main start -->	
@@ -119,26 +85,6 @@ String context = request.getContextPath();
 								</div>
 							</div>
 					    </div>
-					    <!-- deleteModal 삭제메시지 팝업-->
-						<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						  <div class="modal-dialog" role="document">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <h5 class="modal-title" id="exampleModalLabel">게시글 삭제</h5>
-						        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-						          <span aria-hidden="true">&times;</span>
-						        </button>
-						      </div>
-						      <div class="modal-body">
-						        게시글을 정말로 삭제하시겠습니까?
-						      </div>
-						      <div class="modal-footer">
-						        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-						        <button type="button" class="btn btn-primary" onclick="location.href='<%=context%>/commuDeletePro.do?c_num=${commu.c_num}&pageNum=${currentPage}'">삭제</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
 						<!-- end modal -->
 						<!-- Call modalContent.jsp Script 게시글 상세내용 팝업을 위한 script-->
 						<script>

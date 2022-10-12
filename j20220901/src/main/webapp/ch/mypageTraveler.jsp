@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,8 +129,8 @@ function deleteMsg(){
 												<div class = "t_title">${board.t_title }</div>
 											</td>
 											<td class = "t_date">
-												<c:set var = "t_date" value="${board.t_date }" />
-												${fn:substring(t_date,0,11)}
+													<fmt:parseDate value="${board.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
+			  										<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
 											</td>
 										</tr>
 										<tr>
@@ -164,8 +165,12 @@ function deleteMsg(){
 				
 				<!-- 게시글 검색기능 추가 -->
 				<form action="mypageTraveler.do">
-					<input type ="text"  class="search_input"	name="search" placeholder="제목 + 내용">
-					<input type ="submit" 	value="검색">
+						<div class="search_form">
+							<input type ="text"  class="search_input"	name="search" placeholder="제목 + 내용">
+							<div class = "search_image">
+								<input type ="submit" class = "search_submit" value="">
+							</div>
+						</div>
 				</form>
 				
 					
