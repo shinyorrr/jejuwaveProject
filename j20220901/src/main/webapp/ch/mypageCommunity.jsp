@@ -49,14 +49,49 @@
 	});
 
 </script>
+<!-- session chk functions -->
+<script type="text/javascript">
+	//수정 버튼 session chk
+	function chkSessionUpdate() {
+		var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
+		console.log(sessionUser_id);
+		var WriterUser_id = '<c:out value="${commu.user_id}"/>'; 
+		console.log(WriterUser_id);
+		if (sessionUser_id == WriterUser_id) {
+			location.href="<%=context%>/commuUpdateForm.do?c_num=${commu.c_num}&pageNum=${currentPage}";
+		}
+		else if (sessionUser_id == null) {
+			alert('로그인을 한 후 게시글을 수정할 수 있습니다.');
+		}
+		else {
+			alert('작성자만 게시글을 수정할 수 있습니다.');
+		}
+	}
+	//삭제 버튼 session chk
+	function chkSessionDelete() {
+		var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
+		console.log(sessionUser_id);
+		var WriterUser_id = '<c:out value="${commu.user_id}"/>'; 
+		console.log(WriterUser_id);
+		if (sessionUser_id == WriterUser_id) {
+			$("#deleteModal").modal('show');
+		}
+		else if (sessionUser_id == null) {
+			alert('로그인을 한 후 게시글을 삭제할 수 있습니다.');
+		}
+		else {
+			alert('작성자만 게시글을 삭제할 수 있습니다.');
+		}
+	}
+</script>
 </head>
 <body>
 
 <div class = "main" style="background-color: rgb(248,248,248);">
 <main id = "content" style="background-color: rgb(248,248,248);">
 	<!-- Modal page-->
-						<div class="col-md-auto modal bd-modal-xl fade" tabindex="-1" role="dialog" aria-labelledby="bd-modal-xl" aria-hidden="true">
-							<div class="modal-dialog modal-dialog-centered modal-xl">
+						<div class="col-md-auto modal bd-modal-lg fade" tabindex="-1" role="dialog" aria-labelledby="bd-modal-lg" aria-hidden="true">
+							<div class="modal-dialog modal-dialog-centered modal-lg">
 								<div class="modal-content">
 
 								</div>
@@ -85,7 +120,7 @@
 						<!-- end modal -->
 						<!-- Call modalContent.jsp Script -->
 						<script>
-							$('.bd-modal-xl').on('show.bs.modal', function(e) {
+							$('.bd-modal-lg').on('show.bs.modal', function(e) {
 						
 								var button = $(e.relatedTarget);
 								var modal = $(this);
@@ -104,7 +139,7 @@
 							<span><img id="target_img" src="<%=context%>/images/vector_profile_default.svg"></span>
 						</c:if>
 						<c:if test="${img_sub ne 'null'}">
-							<span><img id="target_img" src="<%=context%>/${member.user_img}" width = "200px"></span>
+							<span><img id="target_img" src="<%=context%>/${img}" width = "200px"></span>
 						</c:if>
 						<span class = "user_id">	
 						<c:if test="${user_id != null}">
@@ -159,7 +194,7 @@
 											<td rowspan="3" width = 50>
 												<input type="text" id = "c_num" value = "${board.c_num }" hidden="true">
 												<input type="checkbox" name = "commuChk" value="${board.c_num }">
-												 <button type="button" class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
+												 <button type="button" class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-lg">
 												<div class = "imgboxform">
 													<img class = "imgbox" src="<%=context%>/${board.c_img_path }" width = "120px" padding-bottom = 10px>
 												</div>
@@ -178,7 +213,7 @@
 										</tr>
 										<tr>
 											<td colspan="3" width = 2000>
-										 <button type="button" class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-xl">
+										 <button type="button" class="nav-link" data-remote="commuContent.do?c_num=${board.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-lg">
 												<div class = "t_content">
 													${board.c_content}
 												</div>

@@ -51,7 +51,7 @@
 							<span><img id="target_img" src="<%=context%>/images/vector_profile_default.svg"></span>
 						</c:if>
 						<c:if test="${img_sub ne 'null'}">
-							<span><img id="target_img" src="<%=context%>/${member.user_img}" width = "200px"></span>
+							<span><img id="target_img" src="<%=context%>/${img}" width = "200px"></span>
 						</c:if>
 						<span class = "user_id">	
 						<c:if test="${user_id != null}">
