@@ -198,7 +198,7 @@ function fn_submit(){
 							<span><img id="target_img" src="<%=context%>/images/vector_profile_default.svg"></span>
 						</c:if>
 						<c:if test="${img_sub ne 'null'}">
-							<span><img id="target_img" src="<%=context%>/${member.user_img}" width = "200px"></span>
+							<span><img id="target_img" src="<%=context%>/${img}" width = "200px"></span>
 						</c:if>
 					</div>
 					<form name = "frm" action="<%=context %>/mypageUpdatePro.do" method="post" enctype="multipart/form-data" onsubmit="return disableOff()">
