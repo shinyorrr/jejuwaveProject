@@ -23,9 +23,39 @@
 	font-size: 8pt;
 	font-color: #gray;
 }
+ body {
+ 	 overflow : visible;
+ 	  background-size: contain;
+	 /*  background-repeat : no repeat;
+      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
+      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);  */
+    } 
+
+    .input-form {
+      max-width: 280px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    }
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+const autoHyphen2 = (target) => {
+	 target.value = target.value
+	   .replace(/[^0-9]/g, '')
+	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
+}
 function chk() {
 	if (frm.user_pw.value != frm.user_pw2.value) {
 		alert("암호가 다릅니다");
@@ -53,9 +83,10 @@ function winop() {
 } 
 </script>
 <c:import url="${context }/header.jsp"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-		<tbody>
 		<div class="joinform" style="margin-top:200px; margin-left: 28%;">
 	<form  action="<%=context %>/joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()" enctype="multipart/form-data" >
 		<table>
@@ -64,18 +95,18 @@ function winop() {
 				<th colspan="3" style="text-align: center;"><h3>회원가입</h3></th>
 		</thead>
 			<tr>
-				<td style="width: 120px; text-align: center;">아이디</td>
+				<td style="width: 100px; text-align: center;">아이디</td>
 				<td><input type="text" style="width: 100%;"     name="user_id" id="user_id" required="required"></td>
-				<td style="width: 50px; text-align: center;"><input type="button" value="중복체크" onclick="winop()"></td>
+				<td style="width: 50px; text-align: center;"><button class="btn btn-outline-warning" onclick="winop()">중복체크</button></td>
 			</tr>
 			<tr>
-				<td style="width: 120px; text-align: center;">비밀번호</td>
+				<td style="width: 100px; text-align: center;">비밀번호</td>
 				<td><input type="password" style="width: 100%;"  name="user_pw" id="user_pw" required="required"></td>
 			</tr>
 			<tr>
-				<td style="width: 120px; text-align: center;">비밀번호확인</td>
+				<td style="width: 100px; text-align: center;">비밀번호확인</td>
 				<td><input type="password" style="width: 100%;"  name="user_pw2" id="user_pw2" required="required"></td>
-				<td style="text-align: center;"><input type="button" value="비밀번호체크" onclick="chk1()"></td>
+				<td style="text-align: center;"><button style="width: 145px;" class="btn btn-outline-warning" type="button" onclick="chk1()">비밀번호체크</button></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">이메일</td>
@@ -101,7 +132,7 @@ function winop() {
 			<tr>
 				<td style="width: 120px; text-align: center;">전화번호</td>
 				<td><input type="tel" name="user_tel" required="required" style="width: 100%;" 
-					pattern="\d{2,3}-\d{3,4}-\d{4}" placeholder="010-xxxx-xxxx"
+					pattern="\d{2,3}-\d{3,4}-\d{4}" placeholder="010-xxxx-xxxx" oninput="autoHyphen2(this)" maxlength="13"
 					title="2,3자리-3,4자리-4자리"></td>
 			</tr>
 			<tr>
@@ -224,13 +255,14 @@ function winop() {
 				</td> -->
 				</tr>
 			<tr>
-				<td colspan="3" style="text-align: center;"><input type="submit" value="가입">
-				<input type="reset" value="가입 취소"></td>
+				<td colspan="3" style="text-align: center;">
+				<button class="btn btn-outline-warning" type="submit" >가입</button>
+				<button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/main.do'" >가입취소</button>
+				</td>
 			</tr>
 		</table>
 	</form>	
 		</div>
-	</tbody>
 </body>
 	<footer class="py-5 bg-dark" style="margin-top: 100px;">
 		<div class="container">

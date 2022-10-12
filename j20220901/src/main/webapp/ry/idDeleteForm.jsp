@@ -10,28 +10,61 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="${context }/header.jsp"/>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style type="text/css">
- 	caption {
-	font-size: 24px;
-	}
-.form-box{
-    box-shadow: 10px 10px 10px 10px rgba(89,89,89,0.39);
-    padding:70px 45px 45px 45px;
-    display : inline-block;
-    margin: auto;
-    width : 450px;
-    height: 500px;
-    display : inline-block;
-    text-align: center;
-}
-	pre {
-	font-size: 8pt;
-	font-color: #gray;
-}
+ 	 body {
+ 	 overflow : visible;
+ 	  background-size: contain;
+	  background-repeat : no repeat;
+      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
+      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); 
+    } 
+
+    .input-form {
+      max-width: 280px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+    }
 </style>
 </head>
 <body>
-<tbody>
+<body style="overflow: visible; height: 300px;">
+		 <div class="container1" style="padding: auto;">
+    <div class="input-form-backgroud row" style="margin-top: 20%;">
+      <div class="input-form col-md-4 mx-auto">
+        <h4 class="mb-3" style="text-align: center;">회원 탈퇴</h4>
+        <form class="validation-form" action="<%=context %>/idDeletePro.do">
+          <div class="row">
+            <div class="" ><!-- col-md-3 mb-3 -->
+              <label for="name" style="padding-left: 10px;">비밀 번호</label>
+              <input type="password" class="form-control" id="user_pw"  name="user_pw" placeholder="" value="" required>
+              <div class="invalid-feedback">
+                비밀번호를 입력해주세요.
+              </div>
+            </div>
+          </div>
+          <div class="col" style="margin-top: 10px; text-align: center;">
+          <button class="btn btn-outline-warning" type="submit" value="확인">확인</button>
+          <button class="btn btn-outline-warning" type="reset" value="취소" onclick="location.href='mypageUpdate.do'">취소</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<%-- <tbody>
 		<div class="form-box" style="margin-top:200px; margin-left: 35%; margin-bottom: 50px;">
 	<h2>탈퇴하려면 암호를 입력해주세요</h2><br>
 	<form action="<%=context %>/idDeletePro.do">
@@ -46,11 +79,12 @@
 		</div>
 	</form>
 	</div>
-</tbody>
-<footer class="py-5 bg-dark" style="margin-top: 100px;">
+</tbody> --%>
+<div style="margin-top: 15%;"></div>
+	<footer class="py-5 bg-dark" style="margin-top: 15%;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your	Website 2022</p>
 		</div>
-	</footer>	
+	</footer>
 </body>
 </html>
