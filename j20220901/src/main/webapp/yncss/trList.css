@@ -2,76 +2,144 @@
 
 /* 폰트 등록, 적용 */
 @font-face{
-    font-family : NotoSansKR-Regular;
+	font-family : NotoSansKR-Regular;
     src : url('../font/NotoSansKR-Regular.ttf') format('ttf');
     font-weight : normal;
     font-style : normal;
 }
 @font-face{
     font-family : NotoSansKR-Medium;
-    src : url('../font/NotoSansKR-Medium.ttf') format('ttf'), url('../fonts/NotoSansKR-Medium.woff') format('woff');
+    src : url('../font/NotoSansKR-Medium.ttf') format('ttf')/* , url('../fonts/NotoSansKR-Medium.woff') format('woff') */;
     font-weight : normal;
     font-style : normal;
 }
 
 body{
 	font-family: NotoSansKR-Medium !important;
-	/* color: #000000; */
 }
-/*  * {
-  color: #000000;
-}  */
+
+/* textarea 사이즈 고정 */
 textarea{
 	resize: none !important;
 }
+
+/* 카테고리배너 폰트 컬러 */
 #cateTextM, #cateTextS{
 	color: white !important;
 }
-#cateTextS{
-	color: white !important;
-	padding: 15px !important;
-	/* font-size: 18px !important; */
+
+/*****************************************************/
+/******************   List css   *********************/
+/*****************************************************/
+
+.btn:active, .btn:focus, button:focus { 
+	font-weight: bold !important; 
+	border: 2px; 
+	box-shadow: none !important; 
+	outline:none !important;
 }
 
-/************************************/
-/**********   List css   ************/
-/************************************/
-
-.btn:active, .btn:focus,
-button:focus
-{ font-weight: bold !important; border: 2px; box-shadow: none !important; outline:none !important;}
-
-input:focus, textarea:focus{
+/* input:focus, textarea:focus{
 	outline:none !important;
-	/* outline: 1px solid black !important; */
-	}
-input:focus, textarea:focus{
-	outline:none !important;
-	/* outline: 1px solid black !important; */
-	}
+	} */
 	
+/* 시작날짜, 종료날짜 선택 input id */
+#input_from, #input_to {
+	width:39%; height:34px;
+	cursor: pointer;
+}	
 
-#t_gubuns button {
-	border: none; outline: none; 
+/* 버튼 클릭시 테두리 생김 방지 */
+#t_gubun1, #t_gubun2, #t_gubun3, #t_gubun4,#t_gubun5, #t_gubun6 {
+	border: none;
 }
-#input_to input:focus, #input_from input:focus {
-	outline:none ;
-	/* outline: 1px solid #ff3500 !important; */
+
+#filterBtn, #btnNavbarSearch, #filterBtnSearch {
+	background: #ff3500;
+	color: white;
+}
+#filterBtnSearch {
+	width: 16%; 
+	padding: 4px 20px !important; 
+	float:right; 
+	margin: 0 5px 0 5px;
+}
+
+/* 모집중인 글 조회 버튼 */
+#filterBtn_BF {
+	margin: 3px 0 3px 0 ; 
+	padding: 8px 10px;
+	background: white;
+	border: solid #4C4C4C 2px;
+	color: #000000;
+	border-radius: 30px; 
+	border-collapse: collapse;
+	font-weight: bold;
+	float: right;
+}
+#filterBtn_AF {
+	margin: 3px 0 3px 0 ; 
+	padding:8px 10px;
+	background: #ff3500;
+	border: solid #ff3500 2px; 
+	color:white;	
+	border-radius: 30px; 
+	font-weight: bold;
+	float: right;
 }
 
 
+/* 이미지 영역 */
+#pic:hover {
+	border-radius:3px 3px 0 0;
+}
 
-#title {
+/* 이미지 사이즈 커지게 */
+#pic:hover img {
+	transform: scale(1.1);
+	transition-duration: 0.5s;
+}
+
+/* 이미지 위에 구분, 날짜 */
+#picOnGubun {
+	width: 19%;
+	margin: 10px;
+	font-size: 12px;
+	color: white;
+	position: absolute;
+	opacity: 1;
+	border-radius:20px;
+	padding: 5px 0px 5px 10px;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 1;
+}
+
+ #picOnDate {
+	display: none;
+}
+
+#pic:hover #picOnDate {
+	display: inline;
+	color: white;
+} 
+
+#pic:hover #picOnGubun {
+	width: 48%;
+} 
+
+
+/* 제목, 본문 말줄임표 */
+#title, #content {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
 
-#content {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+/* 댓글영역 */
+#IdComment {
+	margin: 0px;
 }
+
 
 #comment {
 	font-size: 14px;
@@ -105,138 +173,39 @@ input:focus, textarea:focus{
 	border: 1px solid #e9e9e9;
 }
 
-#pic:hover {
-	/* background-color: rgba(0, 0, 0, 0.2); */
-	border-radius:3px 3px 0 0;
-}
-
-#pic:hover img {
-	/* background-color: rgba(0, 0, 0, 0.2); */
-	transform: scale(1.1);
-	transition-duration: 0.5s;
-	/* border-radius:41px 41px 0 0; */
-}
-#picOnGubun {
-	/* visibility: hidden; */
-	width: 19%;
-	margin: 10px;
-	font-size: 12px;
-	color: white;
-	position: absolute;
-	opacity: 1;
-	border-radius:20px;
-	padding: 5px 0px 5px 10px;
-	background-color: rgba(0, 0, 0, 0.8);
-	z-index: 1;
-}
- #picOnDate {
-	/* visibility: hidden; */
-	display: none;
-}
-#pic:hover #picOnDate {
-	display: inline;
-	color: white;
-	} 
-#pic:hover #picOnGubun {
-	width: 48%;
-} 
-
-
-
-
-
-
-
-
-/* #contentDate {
-	opacity: 1;
-	padding: 5px;
-	background-color: rgba(0, 0, 0, 0.5);
-	border-radius: 20px;
-	color: #ffffff;
-	font-size: 12px;
-	width: 80%;
-	display: none; 
-	margin: 10px;
-	position: absolute;
-	font-weight: bold;
-	} */
-/* #pic:hover div {
-	transition-duration: 0.5s;
-	border-radius:50px;
-	opacity: 1;
-} */
 
 .text-left p {
 	margin-bottom: 8px;
 }
 
-#IdComment {
-	margin: 0px;
-}
 
 #optionBox {
 	display: inline-block;
 }
 
-#filterBtn, #btnNavbarSearch {
-	background: #ff3500;
-	color: white;
+
+/* .page-link {
+  color: #000; 
+  background-color: #fff;
+  border: 1px solid #ccc; 
 }
 
-#filterBtn_BF {
-	background: white;
-	border-collapse: collapse;
-	margin-bottom: 3px; 
-	border-radius: 30px; 
-	padding:8px;
-	border: solid #4C4C4C 2px;
-	font-weight: bold;
-	color: #000000;
-}
-#filterBtn_AF {
-	margin-bottom: 3px; 
-	border-radius: 30px; 
-	padding:8px;
-	background: #ff3500;
-	border: solid #ff3500 2px; 
-	color:white;	
-	font-weight: bold;
-}
-#pageNumColor {
-	color: #000000 !important;
+.page-item:active .page-link:active {
+ z-index: 1;
+ color: #555;
+ font-weight:bold !important;
+ background-color: #f1f1f1 !important;
+ border-color: #ccc !important;
+ 
 }
 
-/* #filter {
-	float: right;
-} */
+.page-link:focus, .page-link:hover {
+  color: #000;
+  background-color: #fafafa !important; 
+  border-color: #ccc !important;
+} 
+ */
 
-.fileRegiBtn label {
-	display: inline-block; 
-	padding: .5em .75em; 
-	color: #ffffff; 
-	font-size: inherit; 
-	line-height: normal; 
-	vertical-align: middle; 
-	background-color: #FC7D01; 
-	cursor: pointer; 
-	border: 1px solid #ebebeb; 
-	border-bottom-color: #e2e2e2; 
-	border-radius: .25em;
-}
-
-/*파일선택시 선택된 파일명이 붙는것을 가려준다*/
-
-.fileRegiBtn input[type="file"]{
-	position: absolute; 
-	width: 1px; 
-	height: 1px; 
-	padding: 0; 
-	margin: -1px; 
-	overflow: hidden; 
-	clip:rect(0,0,0,0); 
-	border: 0;
-}
 #searchFilterGubun {
 	font-weight: bold;
 }
@@ -245,7 +214,7 @@ input:focus, textarea:focus{
 }
 
 /************************************/
-/**********   View css   ************/
+/**********   Content css   ************/
 /************************************/
 #dateViwer {
 	font-size: 90%;
@@ -258,20 +227,17 @@ input:focus, textarea:focus{
 	font-size: 90%;
 	color: #9A9A9A;
 }
-#keyColor{
+#keyColor, .keyColor{
 	color:#ff3500;	
 }
-.keyColor{
-	color:#ff3500;
-}
+
 #userBox{
 	border: 1px; 
 	border-color: #e9e9e9 ;
 	border-collapse:collapse;
-	border-radius: round;
+	border-radius: 4px;
 	width: 21%;
 }
-
 
 .fontColorGrey {
 	color:#9A9A9A;
@@ -306,6 +272,15 @@ input:focus, textarea:focus{
 	border-right:none;
 }
 
+#trWriterIcon {
+	background: #ff3500; 
+	color:white; 
+	font-size: 12px; 
+	border-radius:10px; 
+	padding: 3px;
+	
+}
+
 /************************************/
 /**********   Write css   ************/
 /************************************/
@@ -313,7 +288,6 @@ input:focus, textarea:focus{
 #fileName {
 	background-color: #e2e2e2;
 }
-
 
 #image-upload-box {
 	background-color: #E6E6E6;

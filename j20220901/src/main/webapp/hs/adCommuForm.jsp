@@ -39,7 +39,7 @@
 			    <tr>
 			      <th scope="col">번호</th>
 			      <th scope="col">내용</th>
-			      <th scope="col">해시</th>
+			      <th scope="col">해시태그</th>
 			      <th scope="col">아이디</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col">삭제</th>
@@ -51,7 +51,7 @@
 				  	<tr>
 				  		<th scope="row" width="50">${startNum}</th>
 				  		<td width="600" id="content">${commu.c_content}</td>
-				  		<td width="100">${commu.c_hash}</td>
+				  		<td width="100">#${commu.c_hash}</td>
 				  		<td width="100">${commu.user_id}</td>
 				  		<td width="100">
 				  			<fmt:formatDate value="${commu.c_date}" pattern="yy-MM-dd"/>
@@ -74,15 +74,15 @@
 		<nav class="pagenav" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${startPage > blockSize}">
-				<li class="page-item"><a class="page-link" href="<%=context%>/adCommuForm.do?pageNum=${startPage-blocksize}">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adCommuForm.do?pageNum=${startPage-blocksize}">이전</a></li>
 			</c:if>
 		    
 		    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<li class="page-item"><a class="page-link" href="<%=context%>/adCommuForm.do?pageNum=${i}">[${i}]</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adCommuForm.do?pageNum=${i}">${i}</a></li>
 			</c:forEach>
 		    
 		    <c:if test="${endPage < pageCnt}">
-				 <li class="page-item"><a class="page-link" href="<%=context%>/adCommuForm.do?pageNum=${startPage+blockSize }">Next</a></li>
+				 <li class="page-item"><a class="page-link" href="<%=context%>/adCommuForm.do?pageNum=${startPage+blockSize }">다음</a></li>
 			</c:if>
 		  </ul>
 		 </nav>

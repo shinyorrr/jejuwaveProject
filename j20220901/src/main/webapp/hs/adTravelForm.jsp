@@ -42,6 +42,7 @@
 			      <th scope="col">아이디</th>
 			      <th scope="col">테마</th>
 			      <th scope="col">모집인원</th>
+			      <th scope="col">모집완료여부</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col">삭제</th>
 			    </tr>
@@ -51,7 +52,10 @@
 			  		<c:forEach var="travel" items="${list}">
 			  			<tr>
 			  				<th scope="row" width="50">${startNum}</th>
-			  				<td class="left" width="250" id="content">
+			  				<td class="left" width="250" id="content"
+			  				<c:if test="${travel.t_content eq '관리자 의해 삭제된 댓글입니다.'}">style="color:red;"</c:if>
+			  				<c:if test="${travel.t_content eq '삭제된 댓글입니다.'}">style="color:blue;"</c:if>>
+			  				
 							<c:if test="${travel.t_relevel == 0}">
 								${travel.t_title}
 								<c:if test="${travel.reply_cnt != 0 }">
@@ -72,6 +76,14 @@
 							<c:if test="${travel.t_person == 0}">
 								${travel.t_person= ""}
 							</c:if>
+							</td>
+							<td width="100">
+								<c:if test="${travel.t_dealstatus == '1'}">
+									모집완료
+								</c:if>
+								<c:if test="${travel.t_dealstatus == '0'}">
+									모집중
+								</c:if>
 							</td>
 			  				<td width="100">
 			  				<fmt:parseDate value="${travel.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>

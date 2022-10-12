@@ -1,6 +1,7 @@
 package service.ch;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ public class mypageAlldeleteAction implements CommandProcess {
 		String[] chk_commu 		= request.getParameterValues("commuChk");
 		String[] chk_qna 		= request.getParameterValues("chk_qna");
 		String[] chk_trvComment = request.getParameterValues("chk_trvComment");
+		String[] chk_com		= request.getParameterValues("chk_com");
 		
 		if(chk_travel != null) {
 			System.out.println("mypageTrvAlldeleteAction chk_travel.length ==> " + chk_travel.length);
@@ -43,7 +45,24 @@ public class mypageAlldeleteAction implements CommandProcess {
 			MypageDao mypageDao = MypageDao.getInstance();
 			result = mypageDao.trvAllDel(chk_trvComment);
 			if(result == 1) result = 4;
-		} 
+		}  else if(chk_com != null) {
+			
+			// checkbox에서 받은 두개의 값을 자르기 위한 작업
+			String chk_com1 = Arrays.toString(chk_com);
+			System.out.println("mypageAlldeleteAction chk_com1 ==> " + chk_com1); 
+			String newchk = chk_com1.replace(" ", "")
+							.replace("[", "")
+							.replace("]", "");
+			System.out.println("mypageAlldeleteAction newchk ==> " + newchk); 
+			String [] com_result = newchk.split(",");
+			
+			System.out.println("mypageAlldeleteAction com_result ==> " + com_result);
+			System.out.println("mypageAlldeleteAction com_result 길이 ==> " + com_result.length);
+			
+			MypageDao mypageDao = MypageDao.getInstance();
+			result = mypageDao.ComAllDel(com_result);
+			if(result == 1) result = 5;
+		}
 		
 		
 		

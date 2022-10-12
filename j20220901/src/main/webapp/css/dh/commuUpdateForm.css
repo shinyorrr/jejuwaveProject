@@ -41,6 +41,14 @@
 		color: white;
 		cursor: pointer;
 	}
+	.resetFile {
+		height: 40px;
+		padding: 6px 25px;
+ 		background-color:#707070;
+ 		border-radius: 4px;
+		color: white;
+		cursor: pointer;
+	}
 	a:hover {
 	color: white;
 	}
@@ -64,6 +72,7 @@
 		color: white;
 	}
 	.btn-submit:hover {
+		background-color: #FF3500;
 		color: white;
 	}
 	.btn-reset {
@@ -71,5 +80,6 @@
 		color: white;
 	}
 	.btn-reset:hover {
+		background-color:#5c636a;
 		color: white;
 	}

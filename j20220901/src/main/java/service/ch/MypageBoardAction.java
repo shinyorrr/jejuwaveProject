@@ -22,7 +22,14 @@ public class MypageBoardAction implements CommandProcess {
 		 HttpSession session = request.getSession();
 		 String user_id = (String) session.getAttribute("user_id");
 		 System.out.println("session 값 : "  + user_id);
+		 
+		 // 검색 값 받아오기
+		 String search = request.getParameter("search");
+		 if(search == null) search = "fail";
+		 
+		 
 		 MypageDao my = MypageDao.getInstance();
+		 
 		 
 		 try {
 			 int totCnt = my.getTotalCntBoard(user_id);
@@ -35,7 +42,7 @@ public class MypageBoardAction implements CommandProcess {
 			 int startNum = totCnt - startRow + 1;
 			 System.out.println("MypageBoardAction : " + startRow); 
 			 // 작성자가 쓴 글 조회
-			 List<Mypage> list =my.boardList(user_id,startRow,endRow);
+			 List<Mypage> list =my.boardList(user_id,startRow,endRow,search);
 			 
 		 int pageCnt = (int) Math.ceil((double)totCnt/pageSize);
 		 

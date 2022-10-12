@@ -62,6 +62,45 @@ public class Qna_BoardDao {
 		}
 		return tot;
 	}
+	
+	
+	//qnaserch list count
+	public int getSeachTotalCnt() throws SQLException {
+		Connection conn = null;
+		PreparedStatement  pstmt = null;
+		ResultSet rs = null;
+		int tot = 0;
+		String sql = "select count(*) from qna_board  ";
+		
+		/*
+		 * String sql =
+		 * "select count(*) from qna_board where (user_id || b_content || b_title ) like "
+		 * ;
+		 */
+		/* System.out.println("cnt start searchWord->" +searchWord); */
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			/*
+			 * pstmt.setString(1, "%"+searchWord+"%");
+			 * System.out.println("cnt searchWord - >" + searchWord);
+			 */
+			rs = pstmt.executeQuery(sql);
+			if (rs.next())
+				tot = rs.getInt(1);
+		} catch (Exception e) {
+			System.out.println("searchTotalCnt e" + e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
+		return tot;
+	}
+	
 
 
 	public List<Qna_Board> getBoardList(int startRow , int endRow, int sort) throws SQLException {
@@ -191,6 +230,83 @@ public class Qna_BoardDao {
 		return list;
 	}
 
+	//search list get
+	public List<Qna_Board> getqnaSearchBoardList(String searchWord, int startRow , int endRow) throws SQLException {
+		List<Qna_Board> list = new ArrayList<Qna_Board>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = " select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from \r\n"
+				+ "                    (select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success, A.b_date,b.l_hash1,b.l_hash2,b.l_hash3   from   \r\n"
+				+ "                  qna_board A,qna_hash B WHERE  A.B_NUM = B.B_NUM and  (A.user_id || A.b_content || A.b_title) like ? order by A.b_date desc) a )    where rn between ? and ?                    "
+				+ " \r\n"
+				+ "                          ";	
+		
+		System.out.println("Qna_BoardDao getBoardList sql->"+sql);
+		System.out.println("Qna_BoardDao getBoardList startRow->"+startRow);
+		System.out.println("Qna_BoardDao getBoardList endRow->"+endRow);
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, "%"+searchWord+"%");
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			
+			System.out.println(startRow);
+			System.out.println(endRow);
+			
+			
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				
+
+				Qna_Board board = new Qna_Board();
+				board.setB_num(rs.getInt("b_num"));
+				System.out.println(rs.getInt("b_num"));
+				board.setUser_id(rs.getString("user_id"));
+				board.setB_title(rs.getString("b_title"));
+				board.setB_content(rs.getString("b_content"));
+				board.setFn_user_img(rs.getString("fn_user_img"));
+
+				board.setL_hash1(rs.getString("l_hash1"));
+				System.out.println("Qna_BoardDao getBoardList l_hash1->"+rs.getString("l_hash1"));
+				board.setL_hash2(rs.getString("l_hash2"));
+				System.out.println("Qna_BoardDao getBoardList l_hash2->"+rs.getString("l_hash2"));
+				board.setL_hash3(rs.getString("l_hash3"));
+				System.out.println("Qna_BoardDao getBoardList l_hash3->"+rs.getString("l_hash3"));
+
+				if (rs.getString("b_success").equals("Y")) {
+					board.setB_success("채택완료");
+
+				} else {
+					board.setB_success("답변대기");
+				}
+				list.add(board);
+			}
+		} catch (Exception e) {
+			System.out.println("Qna_BoardDao getBoardList getMessage->"+e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (pstmt != null)
+				pstmt.close();
+			if (conn != null)
+				conn.close();
+		}
+		System.out.println("Qna_BoardDao getBoardList list.size()->"+list.size());
+
+		return list;
+	}
+	
+	
+	
+	
+	
 	public Qna_Board select(int b_num) throws SQLException {
 		Connection conn = null;
 		Statement stmt = null;

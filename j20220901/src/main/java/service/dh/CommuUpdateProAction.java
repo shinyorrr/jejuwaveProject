@@ -54,11 +54,12 @@ public class CommuUpdateProAction implements CommandProcess {
 						String filePathV = "dh/imgFileSave/" + File.separator + currentDate + fileName; //db에 입력할 경로
 						System.out.println("filePath->" + filePath);
 						System.out.println("filePathV->" + filePathV);
+						String imgPath = filePathV.replace('\\', '/');//db에 입력할 경로
 						p.write(filePath);
 						//List에 이미지 담기
 						Commu.CommuImg commuImg = new CommuImg();
 						commuImg.setC_num(Integer.parseInt(request.getParameter("c_num")));
-						commuImg.setC_img_path(filePathV);
+						commuImg.setC_img_path(imgPath);
 						commuImgList.add(commuImg);
 					}
 				}

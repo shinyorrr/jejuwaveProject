@@ -120,7 +120,7 @@
 				<div style="text-align: center;"><img src="images/no-data.png" ></div>
 			</c:if>
 			<!-- list end -->
-				<!-- page nav --> -->
+				<!-- page nav -->
 				<nav aria-label="Page navigation example"
 					class="d-flex justify-content-center">
 					<ul class="pagination" id="pageNumColor">

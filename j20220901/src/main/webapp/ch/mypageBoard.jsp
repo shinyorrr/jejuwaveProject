@@ -47,11 +47,11 @@
 			<div class="Menu_section">
 				<div class="Menu__profile">
 					<div class="Profiles_image">
-						<c:if test="${img == null}">
-						<img class = "profile_img" src="<%=context%>/images/vector_profile_default.svg" style="vertical-align:middle;">
+						<c:if test="${img_sub eq 'null'}">
+							<span><img id="target_img" src="<%=context%>/images/vector_profile_default.svg"></span>
 						</c:if>
-						<c:if test="${img != null}">
-						<img class = "profile_img" src="<%=context%>/${img}" style="vertical-align:middle;">
+						<c:if test="${img_sub ne 'null'}">
+							<span><img id="target_img" src="<%=context%>/${member.user_img}" width = "200px"></span>
 						</c:if>
 						<span class = "user_id">	
 						<c:if test="${user_id != null}">
@@ -142,6 +142,10 @@
 					</c:forEach> 
 				</c:if>
 				<input type = "submit" class = "allDel" value="일괄삭제">
+				</form>
+				<form action="mypageBoard.do">
+						<input type ="text"  class="search_input"	name="search" placeholder="제목 + 내용">
+						<input type ="submit" 	value="검색">
 				</form>
 				</div>
 				

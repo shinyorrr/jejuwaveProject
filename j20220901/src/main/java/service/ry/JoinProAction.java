@@ -29,6 +29,10 @@ public class JoinProAction implements CommandProcess {
 		String realPath = request.getSession().getServletContext().getRealPath(fileSave);
 	//	String realPath = getServletContext().getRealPath(fileSave);
 		System.out.println("realPath->" + realPath);
+		File fileSaveDir = new File(realPath);
+		if (!fileSaveDir.exists()) { //저장경로에 해당 폴더가 없으면 만들기
+			fileSaveDir.mkdirs();
+		}
 		MultipartRequest multi = 
 	 	new MultipartRequest(request, realPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
 		Enumeration en = multi.getFileNames();
@@ -59,8 +63,10 @@ public class JoinProAction implements CommandProcess {
 		String pageNum = request.getParameter("pageNum");
 		String name = multi.getParameter("name");
 		String title = multi.getParameter("title");
+		int user_gubun = Integer.parseInt(multi.getParameter("user_gubun"));
 		System.out.println("name ->"+ name);
 		System.out.println("title ->"+ title);
+		System.out.println("action user_gubun ->"+ user_gubun);
 		
 		upLoadFilename = realPath + "\\"+ serverSaveFilename;
 		System.out.println("전달 upLoadFilename ->"+ upLoadFilename);
@@ -76,6 +82,8 @@ public class JoinProAction implements CommandProcess {
 			member.setUser_birth(multi.getParameter("user_birth"));
 			member.setUser_gender(multi.getParameter("user_gender"));
 			member.setUser_tel(multi.getParameter("user_tel"));
+			member.setUser_gubun(user_gubun);
+			
 			member.setUser_img(fileusername);
 			System.out.println("multi.getParameter(fileusername)"+fileusername);
 			int result = md.insert(member);
