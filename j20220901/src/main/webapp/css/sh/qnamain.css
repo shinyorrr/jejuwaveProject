@@ -1,41 +1,41 @@
 @charset "UTF-8";
                            
 .mainTable {
-	width: 1200px;
- 	margin: 0px auto;
+   width: 1200px;
+    margin: 0px auto;
     text-align: left;
-	
+   
 }
 
 
 .last {
-	border-bottom: 1px solid #D5D5D5;
+   border-bottom: 1px solid #D5D5D5;
     text-align: left;
     font-weight: 400;
  
 }
 
 .hash {
-	color: rgb(106, 106, 106);
-	font-size: 13px;
-	background-color: rgb(245, 245, 245);
-	border-radius: 3px;
-	padding: 4px 7px;
+   color: rgb(106, 106, 106);
+   font-size: 13px;
+   background-color: rgb(245, 245, 245);
+   border-radius: 3px;
+   padding: 4px 7px;
 }
 
 .table, td{
-	padding: 20px 0px;
+   padding: 20px 0px;
 
 }
 .table, th{
-	padding-top: 30px;
+   padding-top: 30px;
 
-	vertical-align: super;
-}	
+   vertical-align: super;
+}   
 
 .content1{
-	padding-left: 30px;
-   width:500px;
+   padding-left: 30px;
+   width:730px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -51,8 +51,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-	
+   
 }
-
 
 
