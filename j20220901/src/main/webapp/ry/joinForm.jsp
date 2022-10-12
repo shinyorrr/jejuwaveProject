@@ -96,33 +96,33 @@ function winop() {
 		</thead>
 			<tr>
 				<td style="width: 100px; text-align: center;">아이디</td>
-				<td><input type="text" style="width: 100%;"     name="user_id" id="user_id" required="required"></td>
+				<td><input type="text" style="width: 90%;" class="form-control"     name="user_id" id="user_id" required="required"></td>
 				<td style="width: 50px; text-align: center;"><button class="btn btn-outline-warning" onclick="winop()">중복체크</button></td>
 			</tr>
 			<tr>
 				<td style="width: 100px; text-align: center;">비밀번호</td>
-				<td><input type="password" style="width: 100%;"  name="user_pw" id="user_pw" required="required"></td>
+				<td><input type="password" class="form-control" style="width: 90%;"  name="user_pw" id="user_pw" required="required"></td>
 			</tr>
 			<tr>
 				<td style="width: 100px; text-align: center;">비밀번호확인</td>
-				<td><input type="password" style="width: 100%;"  name="user_pw2" id="user_pw2" required="required"></td>
+				<td><input type="password" class="form-control" style="width: 90%;"  name="user_pw2" id="user_pw2" required="required"></td>
 				<td style="text-align: center;"><button style="width: 145px;" class="btn btn-outline-warning" type="button" onclick="chk1()">비밀번호체크</button></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">이메일</td>
-				<td><input type="email" style="width: 100%;"  name="user_email" required="required" placeholder="example@naver.com" ></td>
+				<td><input type="email" class="form-control" style="width: 90%;"  name="user_email" required="required" placeholder="example@naver.com" ></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">이름</td>
-				<td><input type="text" style="width: 100%;"  name="user_name" required="required"></td>
+				<td><input type="text"  class="form-control" style="width: 90%;"  name="user_name" required="required"></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">본인 소개</td>
-				<td><textarea rows="10" cols="50" name="user_info" placeholder="다른 회원님들이 알 수 있도록 소개 부탁드려요!"></textarea> </td>
+				<td><textarea class="form-control" rows="10" cols="45" name="user_info" placeholder="다른 회원님들이 알 수 있도록 소개 부탁드려요!"></textarea> </td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">생년월일</td>
-				<td><input type="date" name="user_birth" style="width: 100%;"  required="required" pattern="\d{8}" placeholder="생년월일8자리"></td>
+				<td><input type="date" class="form-control" name="user_birth" style="width: 30%;"  required="required" pattern="\d{8}" placeholder="생년월일8자리"></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">성별</td>
@@ -131,7 +131,7 @@ function winop() {
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">전화번호</td>
-				<td><input type="tel" name="user_tel" required="required" style="width: 100%;" 
+				<td><input type="tel" name="user_tel" class="form-control" required="required" style="width: 90%;" 
 					pattern="\d{2,3}-\d{3,4}-\d{4}" placeholder="010-xxxx-xxxx" oninput="autoHyphen2(this)" maxlength="13"
 					title="2,3자리-3,4자리-4자리"></td>
 			</tr>
