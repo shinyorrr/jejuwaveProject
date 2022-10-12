@@ -36,12 +36,14 @@
 	  <input type="hidden" name="pageNum" value="${pageNum}">
 	  
 		  <c:if test="${comtot > 0}">
+			<div class="input-group mb-3">
+				  --&nbsp;&nbsp;총 댓글수는 ${comtot}개입니다.&nbsp;&nbsp;--
+			</div>
 		  	<c:forEach var="qc" items="${list}">
 		  	<input type="hidden" name="com_num" value="${qc.com_num }">
 		  	<input type="hidden" name="user_id" value="${qc.user_id}">
 		  	<input type="hidden" name="com_date" value="${qc.com_date}">
 		  	<input type="hidden" name="com_content" value="${qc.com_content}">
-		  	
 			<div class="input-group mb-3">
 			  아이디 : ${qc.user_id}
 			</div>

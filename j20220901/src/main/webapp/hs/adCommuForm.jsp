@@ -39,7 +39,7 @@
 			    <tr>
 			      <th scope="col">번호</th>
 			      <th scope="col">내용</th>
-			      <th scope="col">해시</th>
+			      <th scope="col">해시태그</th>
 			      <th scope="col">아이디</th>
 			      <th scope="col">작성일</th>
 			      <th scope="col">삭제</th>
@@ -51,7 +51,7 @@
 				  	<tr>
 				  		<th scope="row" width="50">${startNum}</th>
 				  		<td width="600" id="content">${commu.c_content}</td>
-				  		<td width="100">${commu.c_hash}</td>
+				  		<td width="100">#${commu.c_hash}</td>
 				  		<td width="100">${commu.user_id}</td>
 				  		<td width="100">
 				  			<fmt:formatDate value="${commu.c_date}" pattern="yy-MM-dd"/>
