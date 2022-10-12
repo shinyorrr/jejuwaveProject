@@ -110,7 +110,7 @@ public class Qna_BoardDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		if(sort==1) {
-			String sql = "select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from (select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success, A.b_date,b.l_hash1,b.l_hash2,b.l_hash3   from qna_board A, \r\n"
+			String sql = "select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from (select A.B_NUM, A.user_id ,A.com_cnt, A.b_title,A.b_content,A.b_success, A.b_date,b.l_hash1,b.l_hash2,b.l_hash3   from qna_board A, \r\n"
 					+ "		 	qna_hash B WHERE A.B_NUM = B.B_NUM order by A.b_date desc) a )\r\n"
 					+ "		 		 where rn between ? and ?";
 			
@@ -139,7 +139,7 @@ public class Qna_BoardDao {
 					board.setB_title(rs.getString("b_title"));
 					board.setB_content(rs.getString("b_content"));
 					board.setFn_user_img(rs.getString("fn_user_img"));
-	
+					board.setCom_cnt(rs.getInt("com_cnt"));
 					board.setL_hash1(rs.getString("l_hash1"));
 					System.out.println("Qna_BoardDao getBoardList l_hash1->"+rs.getString("l_hash1"));
 					board.setL_hash2(rs.getString("l_hash2"));

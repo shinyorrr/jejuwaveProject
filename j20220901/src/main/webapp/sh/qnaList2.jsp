@@ -117,6 +117,9 @@ function sorting(sort) {
 							<c:otherwise><span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
 						</c:choose>
 					</td>
+					<td>
+						<span> <img src="images/comm_icon.png" width="20" height="20" >&nbsp;${board.com_cnt }&nbsp;&nbsp;</span>
+					</td>
 					</tr>
 					<c:set var="startNum" value="${startNum -1 }"></c:set>
 				</c:forEach>
