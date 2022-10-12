@@ -120,6 +120,7 @@ public class ReviewDao {
 		return list;
 	}
 	
+	// ============ 리뷰 등록 ==================//
 	public int insert(Review review) throws SQLException {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

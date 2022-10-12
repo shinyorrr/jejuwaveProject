@@ -364,6 +364,7 @@ button {
 	height: 400px;
 	overflow: hidden;
 	margin: 0 auto;
+	margin-bottom: 15px;
 }
 
 .main_img {

@@ -193,7 +193,7 @@
 											</div>
 										</div>
 										<!-- 후기 등록 박스 -->
-										<form action="review.do" method="post">
+										<form action="review.do" method="post" name="revBox" onsubmit="return Checkform()">
 										<input name="t_num" type="hidden" value="${travelContent.t_num}">
 											<div class="modal-footer"
 												style="justify-content: flex-start;">
@@ -214,10 +214,10 @@
 																class="fa fa-star"></i>
 														</div>
 													</div>
-													<input name="r_content" type="text" placeholder="동행후기를 한줄평으로 달아보세요!"
+													<input name="r_content" id="r_content" type="text" placeholder="동행후기를 한줄평으로 달아보세요!"
 														onfocus="this.placeholder = ''"
 														onblur="this.placeholder = '동행후기를 한줄평으로 달아보세요!'">
-													<button id="reviewBtn">등록</button>
+													<button id="reviewBtn" onclick="chk()">등록</button>
 												</div>
 											</div>
 										</form>
@@ -390,6 +390,14 @@ $(function () {
 		$('.make_star svg:nth-child(-n+' + targetNum + ')').css({color: '#F05522'});
 	});
 });
+/**************후기등록 경고창JS******************/
+function Checkform() {
+	if(revBox.r_content.value == ""){
+		revBox.r_content.focus();
+		alert("입력해주세요");
+		return false;
+	};		
+};
 </script>
 <script type="text/javascript">
 /***************************************************/
