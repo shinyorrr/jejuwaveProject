@@ -125,8 +125,7 @@ $(function () {
 							</button>
 							<div class="header-mypage-logout">
 								<div style="display: flex; border-bottom: 1px solid #dfdfdf;">
-									<button onClick="location.href='<%=context%>/mypageUpdate.do'"
-										class="header-mypage" style="display: flex;">
+									<button class="header-mypage" style="display: flex;">
 										<div class="header-mypage-icon">
 											<c:if test="${img_sub eq 'null' }">
 												<img src="<%=context%>/images/vector_profile_default.svg"
@@ -139,13 +138,14 @@ $(function () {
 										</div>
 										<div style="text-align: left; margin-left: 15px;">
 											<p style="margin-bottom: 5px;">${user_id }</p>
-											<p style="font-size: 13px; color: #FF3500;">마이페이지 ></p>
-											
+											<p onClick="location.href='<%=context%>/mypageUpdate.do'" style="font-size: 13px; color: #FF3500;">마이페이지 ></p>
+
+										<c:if test="${user_gubun == 0 }">
+											<p onClick="location.href='<%=context%>/admain.do'" style="font-size: 13px; color: #FF3500;">관리자 ></p>
+										</c:if>
 										</div>
 									</button>
-											<c:if test="${user_gubun == 0 }">
-											<p onClick="location.href='<%=context%>/admain.do'" style="font-size: 13px; color: #FF3500;">관리자 ></p>
-											</c:if>
+
 								</div>
 										<div style="text-align: left; margin-left: 15px;">
 										</div>
