@@ -26,6 +26,19 @@
 	
 }
 
+.comment_button3{
+	
+	background-color:#FF3500;
+	color : white;
+	border-radius : 40px;
+	width: 115px;
+	height: 45px;
+	font-size: 15px;
+	font-weight: bold; 
+	font-family: 'Noto Sans KR', sans-serif;
+	
+}
+
 
 
 .select{

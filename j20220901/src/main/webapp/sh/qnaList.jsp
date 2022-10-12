@@ -51,20 +51,21 @@ function sorting(sort) {
 	<div style="margin-bottom: 400px; margin-top: 70px;" class="main">
 		<table class="mainTable">
 		
-			<!-- 채택기다리는 글만보기 -->
-			<div style="margin-left: 1200px;" >
-
+			
+			<div style="margin-left: 1200px; " >
+			
+			<!-- 정렬 -->
 			<select class="select" name="sort" onchange="sorting(this.value);">
 				<option value="0">정렬</option>
 				<option value="1">등록순</option>
 				<option value="2">댓글순</option>			
 			</select>
+			<!-- 채택기다리는 글만보기 -->
 			 <button onclick="location.href='<%=context %>/qnaList2.do?sort=${sort }'" class="comment_button1" >답변을 기다리는 질문만 보기</button>  
 			
 			</div>
-			
 			<!-- 검색어 기능 -->
-			<div class="row m-5 justify-content-md-center">	
+			<div class="row m-5 justify-content-md-center" >	
 				<div class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 					<form action="<%=context %>/qnaSearchList.do">
 						<div width="300px" class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
@@ -74,7 +75,7 @@ function sorting(sort) {
 						</div>
 					</form>
 				</div>
-			</div>	 
+			</div>	
 			
 			
 			<c:if test="${totCnt > 0 }">
@@ -99,10 +100,10 @@ function sorting(sort) {
 							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
 							width="30" height="30">${board.user_id}</td>
 			<!-- 해시태그 -->
-					<td>
+					<td >
 						<c:choose>
 							<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
-							<c:otherwise><span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+							<c:otherwise><span class="hash" style="margin-left: 27px;">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
 						</c:choose>
 						<c:choose>
 							<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
@@ -139,7 +140,7 @@ function sorting(sort) {
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<li class="page-item"><a class="page-link"
-						href='qnaList.do?pageNum=${i}'>${i}</a></li>
+						href='qnaList.do?sort=${sort}&pageNum=${i}'>${i}</a></li>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt}">
 					<li class="page-item"><a class="page-link"

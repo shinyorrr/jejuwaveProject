@@ -38,24 +38,20 @@ String context = request.getContextPath();
 
 <body>
 
-<main role="main" class="container">
 	<div style="margin-bottom: 400px; margin-top: 70px;" class="main">
 		<table class="mainTable">
+		
+			<!-- 목록으로 돌아가기 -->
+			<div style="margin-left: 1200px;" >
 
-			<!-- 채택기다리는 글만보기 -->
-			<div style="margin-left: 1200px;">
-				<select class="select">
-					<option value="1">등록순</option>
-					<option value="2">댓글순</option>
-				</select>
-				<button onclick="location.href='<%=context%>/qnaList.do'"
-					class="comment_button1">답변을 기다리는 질문만 보기</button>
+			 <button onclick="location.href='<%=context %>/qnaList.do?sort=1'" class="comment_button3" >목록으로</button>  
+			
 			</div>
 			
 			<!-- 검색결과 기능 -->
 
 			<section class="jumbotron text-center">
-			<input type="hidden" name="searchWord" value="${searchWord}">
+		
 				<div class="container mt-5">
 					<h1 class="jumbotron-heading">검색결과</h1>
 					<p class="lead text-muted">${searchWord}(이)가 포함된 게시글</p>

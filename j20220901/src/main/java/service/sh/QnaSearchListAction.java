@@ -22,6 +22,7 @@ public class QnaSearchListAction implements CommandProcess {
 		
 		
 		Qna_BoardDao bd = Qna_BoardDao.getInstance();
+		//int sort = Integer.parseInt(request.getParameter("sort"));
 
 		try {
 			
@@ -57,7 +58,7 @@ public class QnaSearchListAction implements CommandProcess {
 
 
 			request.setAttribute("list", list); //게시글 리스트 넘겨주기
-			
+			//request.setAttribute("sort", sort);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("startNum", startNum);

@@ -61,6 +61,21 @@ function sorting(sort) {
 			<button onclick="location.href='<%=context %>/qnaList.do?sort=1'" class="comment_button2" >답변을 기다리는 질문만 보기</button>
 			</div>
 			
+			<!-- 검색어 기능 -->
+			<div class="row m-5 justify-content-md-center" >	
+				<div class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+					<form action="<%=context %>/qnaSearchList.do">
+						<div width="300px" class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+							<span class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
+							<button></button>
+							<input type="text" name="searchWord" placeholder="검색어를 입력하세요">
+						</div>
+					</form>
+				</div>
+			</div>	
+			
+			
+			
 			<c:if test="${totCnt > 0 }">
 				<c:forEach var="board" items="${list}">
 					<th style="vertical-align: super;">
@@ -123,7 +138,7 @@ function sorting(sort) {
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
 					<li class="page-item"><a class="page-link"
-						href='qnaList2.do?pageNum=${i}'>${i}</a></li>
+						href='qnaList2.do?sort=${sort}&pageNum=${i}'>${i}</a></li>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt}">
 					<li class="page-item"><a class="page-link"
