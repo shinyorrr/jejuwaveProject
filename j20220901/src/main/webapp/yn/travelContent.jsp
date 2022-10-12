@@ -9,9 +9,9 @@
 <head>
 <title>JejuWave 동행찾기</title>
 <%
-String context = request.getContextPath();
-String userId = (String) session.getAttribute("user_id");
-request.setAttribute("userId", userId);
+	String context = request.getContextPath();
+	String userId = (String) session.getAttribute("user_id");
+	request.setAttribute("userId", userId);
 %>
 <!-- header 영역 -->
 <c:import url="${context}/header.jsp"></c:import>
@@ -252,7 +252,7 @@ request.setAttribute("userId", userId);
 
 						<!----------- 댓글 등록 창 --------------->
 						<div class="input-group my-3 ">
-							<button type="submit" class="input-group-text" id="commInsBtn">
+							<button type="button" onclick="userReplyChk()" class="input-group-text" id="commInsBtn">
 								댓글 등록</button>
 							<textarea required="required" name="t_content" rows="2"
 								class="form-control" style="border-left: none; padding: 10px 10px 10px 15px !important; font-size: 14px;"
@@ -332,7 +332,7 @@ request.setAttribute("userId", userId);
 											<textarea type="text" name="t_content" class="form-control p-1"
 												style="width: 100%; border-right: none;"
 												placeholder="댓글을 남겨 보세요!">@${reply.user_id}  </textarea>
-											<button type="submit" class="input-group-text"
+											<button type="button" onclick="userReplyChk()" class="input-group-text"
 												id="commInsBtn">댓글 등록</button>
 										</div>
 									</form>
@@ -416,5 +416,18 @@ function deleteReplyChk(t_num, t_ref, t_relevel) {
      return false;
  }
 }
+
+/*********** 댓글 유효성 체크 함수 ***********/
+function userReplyChk() {
+	var userId = '${userId}';
+	if(userId == null || userId == "") {
+		if (confirm("로그인이 필요합니다.\n로그인하시겠습니까?") == true) {    //확인
+			location.href = "login.do";
+		} else {   //취소
+		     return false;
+		}
+	} return true;
+}
+
 </script>
 </html>
