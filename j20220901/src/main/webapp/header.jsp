@@ -140,9 +140,15 @@ $(function () {
 										<div style="text-align: left; margin-left: 15px;">
 											<p style="margin-bottom: 5px;">${user_id }</p>
 											<p style="font-size: 13px; color: #FF3500;">마이페이지 ></p>
+											
 										</div>
 									</button>
+											<c:if test="${user_gubun == 0 }">
+											<p onClick="location.href='<%=context%>/admain.do'" style="font-size: 13px; color: #FF3500;">관리자 ></p>
+											</c:if>
 								</div>
+										<div style="text-align: left; margin-left: 15px;">
+										</div>
 								<div>
 									<button onclick="location.href='<%=context%>/tw/logout.jsp'"
 										class="header-logout">
