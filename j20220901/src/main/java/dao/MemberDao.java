@@ -211,7 +211,7 @@ public class MemberDao {
 		}
 		return id;
 	}
-	public String findpw(String  user_id, String user_name, String user_email) throws SQLException {
+	public String findpw(String  id, String user_name, String user_email) throws SQLException {
 		String pw = null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -221,7 +221,7 @@ public class MemberDao {
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user_id);
+			pstmt.setString(1, id);
 			pstmt.setString(2, user_name);
 			pstmt.setString(3, user_email);
 			rs = pstmt.executeQuery();
