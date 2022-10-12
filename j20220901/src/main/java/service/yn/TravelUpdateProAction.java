@@ -53,8 +53,10 @@ public class TravelUpdateProAction implements CommandProcess {
 				System.out.println("t_gubun==============>" + multi.getParameter("t_person"));
 				if(fullFolder == null ) {
 					fullFolder = multi.getParameter("t_oriImg");
+				} else {
+					fullFolder = "images\\upload\\" +  fullFolder;
 				}
-				travel.setT_img			("images\\upload\\"+fullFolder);
+				travel.setT_img			(fullFolder);
 				travel.setT_title		(multi.getParameter("t_title"));
 				travel.setT_num			(Integer.parseInt(multi.getParameter("t_num")));
 				travel.setT_content		(multi.getParameter("t_content"));
