@@ -23,32 +23,9 @@ String context = request.getContextPath();
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!-- this page css -->
 <link rel="stylesheet" href="<%= context %>/css/dh/commuList.css">
-
-<!-- 커뮤니티 무한스크롤 ajax-->
-<%-- <script type="text/javascript">
-var count = 2;
-$(window).scroll(function(){
-	let scrollLocation = document.documentElement.scrollTop; //현재 스크롤 바 위치
-	let windowHeight = window.innerHeight;                   //화면으로 보이는 스크린 화면의 높이
-	let fullHeight = document.body.scrollHeight;             // 웹 문서 중 body의 스크롤 높이
-	//50 은 웹페이지 margin값
-	if(scrollLocation + windowHeight >= fullHeight - 50) {	/* ($(window).scrollTop() == $(document).height() - $(window).height()) */
-		$.ajax({ 
-			url: "<%=context%>/commuListScroll.do?pageNum="+count,
-			success: function(result){
-						$("#scroll").append(result);
-						count = count+1;
-					}
-		});
-	}
-});	
-console.log(count);
-
-</script> --%>
-
-
 <!-- session chk functions -->
 <script type="text/javascript">
+	//수정 버튼 session chk
 	function chkSessionUpdate() {
 		var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
 		console.log(sessionUser_id);
@@ -64,6 +41,7 @@ console.log(count);
 			alert('작성자만 게시글을 수정할 수 있습니다.');
 		}
 	}
+	//삭제 버튼 session chk
 	function chkSessionDelete() {
 		var sessionUser_id = '<c:out value="${sessionUser_id}"/>';
 		console.log(sessionUser_id);
@@ -165,12 +143,9 @@ console.log(count);
 						<!-- Call modalContent.jsp Script 게시글 상세내용 팝업을 위한 script-->
 						<script>
 							$('.bd-modal-lg').on('show.bs.modal', function(e) {
-						
 								var button = $(e.relatedTarget);
 								var modal = $(this);
-								
 								modal.find('.modal-content').load(button.data("remote"));
-						
 							});
 						</script>
 					</div>
