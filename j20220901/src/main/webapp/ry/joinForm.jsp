@@ -32,9 +32,12 @@ function chk() {
 		frm.user_pw.focus();
 		return false;
 	}
+	return true;
+}
+function chk1() {
 	if (frm.user_pw.value == frm.user_pw2.value) {
-		alert("암호가 같습니다!");
-		frm.user_email.focus();
+		alert("암호가 같습니다.");
+		frm.user_pw.focus();
 		return false;
 	}
 	return true;
@@ -66,7 +69,7 @@ function winop() {
 			<tr>
 				<td style="width: 120px; text-align: center;">비밀번호확인</td>
 				<td><input type="password" style="width: 100%;"  name="user_pw2" id="user_pw2" required="required"></td>
-				<td style="text-align: center;"><input type="button" value="비밀번호체크" onclick="chk()"></td>
+				<td style="text-align: center;"><input type="button" value="비밀번호체크" onclick="chk1()"></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">이메일</td>
