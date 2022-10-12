@@ -78,15 +78,15 @@
 		<nav class="pagenav" aria-label="Page navigation example">
 		  <ul class="pagination">
 		  	<c:if test="${startPage > blockSize}">
-				<li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${startPage-blocksize}">Previous</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${startPage-blocksize}">이전</a></li>
 			</c:if>
 		    
 		    <c:forEach var="i" begin="${startPage}" end="${endPage}">
-				<li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${i}">[${i}]</a></li>
+				<li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${i}">${i}</a></li>
 			</c:forEach>
 		    
 		    <c:if test="${endPage < pageCnt}">
-				 <li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${startPage+blockSize }">Next</a></li>
+				 <li class="page-item"><a class="page-link" href="<%=context%>/adQnaForm.do?pageNum=${startPage+blockSize }">다음</a></li>
 			</c:if>
 		  </ul>
 		 </nav>
