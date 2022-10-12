@@ -56,7 +56,7 @@ function chk() {
 				<div class="Headers_HeaderTopInnerDiv cMXtHR">
 					<img src="images/brand_logo.png" alt="logo"
 						class="WebHeader_LogoImg hsELiP"
-						onClick="location.href='<%=context%>/admain.do'">
+						onClick="location.href='<%=context%>/main.do'">
 				</div>
 				<div class="Headers__HeaderTopInnerDiv-sc-1la7hl4-3 dnYUeR">
 					<div class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
@@ -90,8 +90,7 @@ function chk() {
 							</button>
 							<div class="header-mypage-logout">
 								<div style="display: flex; border-bottom: 1px solid #dfdfdf;">
-									<button onClick="location.href='<%=context%>/admain.do'"
-										class="header-mypage" style="display: flex;">
+									<button class="header-mypage" style="display: flex;">
 										<div class="header-mypage-icon">
 											<c:if test="${img == null }">
 												<img src="<%=context%>/images/vector_profile_default.svg"
@@ -104,7 +103,8 @@ function chk() {
 										</div>
 										<div style="text-align: left; margin-left: 15px;">
 											<p style="margin-bottom: 5px;">${user_id }</p>
-											<p style="font-size: 13px; color: #FF3500;">마이페이지 ></p>
+											<p onClick="location.href='<%=context%>/mypageUpdate.do'" style="font-size: 13px; color: #FF3500;">마이페이지 ></p>
+											<p onClick="location.href='<%=context%>/admain.do'" style="font-size: 13px; color: #FF3500;">관리자 ></p>
 										</div>
 									</button>
 								</div>

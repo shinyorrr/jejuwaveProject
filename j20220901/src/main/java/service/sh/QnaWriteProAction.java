@@ -32,7 +32,7 @@ public class QnaWriteProAction implements CommandProcess {
 			System.out.println("user_id받아오기-->" + user_id);
 			board.setUser_id(user_id);
 			board.setB_title(request.getParameter("b_title"));
-			board.setB_content(request.getParameter("b_content"));
+			board.setB_content(request.getParameter("b_content").replace("\r\n","<br>"));
 			board.setB_theme(request.getParameter("b_theme"));
 			
 			Qna_BoardDao bd = Qna_BoardDao.getInstance();

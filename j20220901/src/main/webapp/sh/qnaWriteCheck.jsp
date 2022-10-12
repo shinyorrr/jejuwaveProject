@@ -47,10 +47,10 @@ String context = request.getContextPath();
 		<div class="basic2_2">
 			<img src="<%=context%>/${board.fn_user_img}"
 				class="userIconColor-1 rounded-circle me-2  align-center bg-white"
-				width="20" height="20">
-			<div></div>
+				width="30" height="30">
+			 <span style="font-size: 18px;" class="basic2_2">${board.user_id}</span>
 		</div>
-		<p class="basic2_2">${board.user_id}</p>
+		<br>
 	</div>
 	<!-- 답변 채택완료/대기중 -->
 	<div  style="border: 1px solid #D5D5D5; margin-right: 1300px;  padding:10px 5px 10px 5px; width:250px;  "  class="gubun">
@@ -78,7 +78,7 @@ String context = request.getContextPath();
 		<p>${board.b_content}</p>
 	</div>
 	<!-- 해시태그 -->
-		<div class="tag1">                                                                                      <!--  현지수정 -->
+		<div class="tag1">                                                                                      
 			<div class="btn-group btn-group-sm" role="group" aria-label="..."       
 				style="margin-bottom: 6px;">
 				<!-- 태그 3개미만일때 # 제거 -->

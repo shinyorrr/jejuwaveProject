@@ -10,7 +10,7 @@
 		height: 80px;
 		margin-left: 350px;
 		display: inline;
-		font-size: 25px;
+		font-size: 30px;
 		font-weight: bold;
 	}
 	.profile {
@@ -27,8 +27,6 @@
 	.main {
 		margin-top: 30px;
 		width: 700px;
-		height: 200px;
-		/* border: 1px solid orange; */
 		margin-left: 350px;
 	}
 
