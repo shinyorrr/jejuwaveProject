@@ -441,11 +441,12 @@ function deleteReplyChk(t_num, t_ref, t_relevel) {
 function userReplyChk() {
 	var userId = '${userId}';
 	if(userId == null || userId == "") {
-		if (confirm("로그인이 필요합니다.\n로그인하시겠습니까?") == true) {    //확인
-			location.href = "login.do";
-		} else {   //취소
-		     return false;
-		}
+		
+		var cfm = confirm("로그인이 필요합니다. \n 로그인하시겠습니까?");
+		if(!cfm) return false;    //확인
+		location.href = "login.do";
+		return false;
+		
 	} return true;
 }
 
