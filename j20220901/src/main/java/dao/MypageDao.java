@@ -399,15 +399,19 @@ public class MypageDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = " select * from( "
-				+ "            select rownum rn, a.* from "
-				+ "            (select i.c_num, c_hash, c_content, c_date, c_img_path "
-				+ "            from community c, community_img i "
-				+ "            where c.c_num = i.c_num "
-				+ "            and rownum <= 1 "
-				+ "            and c.user_id = ? "
-				+ "            ) a) "
-				+ "where rn between ? and ? ";
+		String sql = " select * "
+				+ " from ( "
+				+ "        select rownum rn , a.* "
+				+ "        from ( "
+				+ "                select ci.c_num, c.user_id, c_hash, c_content, c_date , min(c_img_path) keep (DENSE_RANK last order by ci.c_num) as c_img_path "
+				+ "                from community c, community_img ci "
+				+ "                where c.c_num = ci.c_num "
+				+ "                and user_id=? "
+				+ "                group by ci.c_num, c_hash, c_content, c_date ,user_id "
+				+ "                order by ci.c_num desc "
+				+ "             ) a "
+				+ "     ) "
+				+ " where rn between ? and ?";
 		System.out.println("communityList sql =>" + sql);
 		
 		if(search != "fail") {
