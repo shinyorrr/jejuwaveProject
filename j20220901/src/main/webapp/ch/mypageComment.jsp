@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -146,7 +147,9 @@ $(function(){
 									${board.com_content}								
 									</div>
 								</td>
-								<td class = "c_date">${board.com_date }</td>
+								<td class = "c_date">
+									<fmt:formatDate value="${board.com_date}" pattern="yy-MM-dd"/>
+								</td>
 							</tr>
 							<tr>
 								<td>

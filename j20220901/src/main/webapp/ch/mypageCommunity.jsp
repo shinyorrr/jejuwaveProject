@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,7 +208,7 @@
 											</td>
 											<td>
 												<div class = "community_date">
-													${board.c_date}
+													<fmt:formatDate value="${board.c_date}" pattern="yy-MM-dd"/>
 												</div>
 											</td>
 										</tr>

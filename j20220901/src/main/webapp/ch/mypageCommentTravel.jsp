@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,8 +167,8 @@ $(function(){
 										</div>
 									</td>
 									<td class = "c_date">
-										<c:set var = "t_date" value="${board.t_date }" />
-										${fn:substring(t_date,0,11)}
+										<fmt:parseDate value="${board.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
+			  							<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
 									</td>
 								</tr>
 								<tr>
