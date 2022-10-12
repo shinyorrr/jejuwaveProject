@@ -113,11 +113,11 @@ $(function () {
 					<c:if test="${user_id !=null }">
 						<div class="Button__ButtonWrapper-sc-1vcxcg6-0 oIYRc">
 							<button class="user-imfo usImfo">
-								<c:if test="${img ==null }">
+								<c:if test="${img_sub eq 'null'}">
 									<img src="<%=context%>/images/vector_profile_default.svg"
 										style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;">
 								</c:if>
-								<c:if test="${img != null }">
+								<c:if test="${img_sub ne 'null'}">
 									<img src="<%=context%>/${img}"
 										style="vertical-align: middle; width: 50px; height: 50px; border-radius: 60%;">
 								</c:if>
@@ -128,11 +128,11 @@ $(function () {
 									<button onClick="location.href='<%=context%>/mypageUpdate.do'"
 										class="header-mypage" style="display: flex;">
 										<div class="header-mypage-icon">
-											<c:if test="${img == null }">
+											<c:if test="${img_sub eq 'null' }">
 												<img src="<%=context%>/images/vector_profile_default.svg"
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
-											<c:if test="${img != null }">
+											<c:if test="${img_sub ne 'null' }">
 												<img src="<%=context %>/${img}"
 													style="vertical-align: middle; width: 38px; height: 38px; border-radius: 60%; margin: 10px 0px 0px 15px;">
 											</c:if>
