@@ -59,7 +59,7 @@ public class TravelUpdateProAction implements CommandProcess {
 				travel.setT_img			(fullFolder);
 				travel.setT_title		(multi.getParameter("t_title"));
 				travel.setT_num			(Integer.parseInt(multi.getParameter("t_num")));
-				travel.setT_content		(multi.getParameter("t_content"));
+				travel.setT_content		(multi.getParameter("t_content").replace("\r\n","<br>"));
 				travel.setT_gubun		(multi.getParameter("t_gubun"));
 				travel.setT_person		(Integer.parseInt(multi.getParameter("t_person")));
 				travel.setT_start		(multi.getParameter("t_start"));

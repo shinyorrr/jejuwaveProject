@@ -111,7 +111,7 @@
 				<!------------- 제목 ------------->
 				<div class="mb-2">
 					<input name="t_title" class="form-control form-control-lg" type="text" 
-						   style="font-size: 14px; font-weight: bold;" 
+						   style="font-size: 14px; font-weight: bold;" maxlength="65"
 						   placeholder="제목을 입력하세요" aria-label=".form-control-lg example">
 				</div>
 				
@@ -120,7 +120,7 @@
 				
 				<!------------- 본문 ------------->
 				<div class="mb-3">
-					<textarea name="t_content" class="form-control form-control-lg col-sm-12" 
+					<textarea name="t_content" class="form-control form-control-lg col-sm-12" maxlength="1000"
 							  style="font-size: 14px; padding: 16px;" rows="20" placeholder="내용을 입력하세요"></textarea>
 				</div>
 				
