@@ -16,7 +16,7 @@ String context = request.getContextPath();
 
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JejuWave QnA</title>
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">

@@ -14,7 +14,7 @@
 <c:if test="${result >0 }">
 	<script type="text/javascript">
 		alert("수정완료!");
-		location.href="<%=context %>/qnaList.do";
+		location.href="<%=context %>/qnaList.do?sort=1";
 	</script>
 </c:if>
 <c:if test="${result ==0 }">

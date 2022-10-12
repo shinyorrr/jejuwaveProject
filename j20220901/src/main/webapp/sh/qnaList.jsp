@@ -11,7 +11,7 @@ String context = request.getContextPath();
 
 <c:import url="${context}/header.jsp"></c:import>
 <meta charset="UTF-8">
-<title>게시글 수정</title>
+<title>JejuWave QnA</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
@@ -36,9 +36,8 @@ String context = request.getContextPath();
 <script type="text/javascript">
 
 function sorting(sort) {
-	alert(sort);
-	location.href='<%=context%>
-	/qnaList.do?sort=' + sort;
+	
+	location.href='<%=context%>/qnaList.do?sort=' + sort;
 
 	}
 </script>
@@ -54,18 +53,18 @@ function sorting(sort) {
 			<!-- 검색어 기능 -->
 
 
-			<div  style="margin-left: 900px; height: 60px; width: 1000px;"
-				class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+			<div  style="margin-left: 900px; height: 60px; width: 1000px;" class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 				<form action="<%=context%>/qnaSearchList.do">
 					<div style="width: 1100px;">
 						<div width="300px"
 							class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 							<span
 								class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
-							<button></button>
-							<input type="text" name="searchWord" placeholder="검색어를 입력하세요">
+							
+							<input  type="text" name="searchWord" placeholder="검색어를 입력하세요">
+							
 				</form>
-
+			
    
 				<!-- 정렬 -->
 				<select  class="select" name="sort" onchange="sorting(this.value);">
