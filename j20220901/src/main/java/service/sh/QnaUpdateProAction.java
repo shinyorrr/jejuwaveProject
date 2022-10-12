@@ -21,7 +21,7 @@ public class QnaUpdateProAction implements CommandProcess {
 			Qna_Board board = new Qna_Board();
 			board.setB_num(Integer.parseInt(request.getParameter("b_num")));
 			board.setB_title(request.getParameter("b_title"));
-			board.setB_content(request.getParameter("b_content"));
+			board.setB_content(request.getParameter("b_content").replace("<br>", "\r\n"));
 			board.setB_theme(request.getParameter("b_theme"));
 			//해시태그받기
 			String hashString = request.getParameter("hashString");
