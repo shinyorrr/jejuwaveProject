@@ -9,7 +9,7 @@
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Insert title here</title>
+<title>JeJu Wave</title>
 <%
 String context = request.getContextPath();
 %>
@@ -115,8 +115,11 @@ String context = request.getContextPath();
 			</div>
 			<!-- Section-->
 			<section class="py-1">
+				<div class="board_title"
+					style="font-weight: bold; position: relative; width: 33%; margin-bottom: 15px; padding-left: 400px;">
+					<a href="<%=context%>/travelListForm.do">여행 동행자 찾기</a>
+				</div>
 				<div class="container px-4 px-lg-5 mt-3">
-
 					<div
 						class="row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
 						<c:if test="${totCnt > 0}">
@@ -161,8 +164,8 @@ String context = request.getContextPath();
 													<p id="content">${travel.t_content}</p>
 
 													<p id="IdComment">
-														<img src='<%=context%>/${travel.user_img}' width="28" height="28"
-															style="margin: 0 5px 2px 0;"
+														<img src='<%=context%>/${travel.user_img}' width="28"
+															height="28" style="margin: 0 5px 2px 0;"
 															class="userIconColor-1 rounded-circle me-1  align-center ">
 														${travel.user_id}
 
@@ -232,12 +235,9 @@ String context = request.getContextPath();
 				</div>
 				<!-- 날씨 API -->
 				<div class="weather">
-					<div
-						style="font-weight: bold; position: relative; width: 33%; padding-top: 15px;">
+					<div style="font-weight: bold; position: relative; width: 33%; padding-top: 15px;">
 						제주날씨</div>
-					<div class="today"
-						style="display: flex; align-items: center; padding-left: 60px; padding-top: 20px;">
-
+					<div class="today" style="display: flex; align-items: center; padding-left: 60px; padding-top: 20px;">
 						<div class="icon"></div>
 						<div class="ctemp"></div>
 					</div>

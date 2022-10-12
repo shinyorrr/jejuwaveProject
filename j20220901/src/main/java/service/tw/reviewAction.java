@@ -37,7 +37,6 @@ public class reviewAction implements CommandProcess {
 		int result = 0;
 		try {
 			result = rd.insert(review);
-			System.out.println(review + "                   00");
 			request.setAttribute("result", result);
 			request.setAttribute("t_num", Integer.parseInt(request.getParameter("t_num")));
 		} catch (SQLException e) {
