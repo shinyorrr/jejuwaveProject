@@ -89,7 +89,7 @@ public class ReviewDao {
 		ResultSet rs = null;
 		String sql = "select * "
 					+"from(select rownum rn, a.*"
-					+"from (select * from review where t_num = ?  order by r_ref desc, r_restep) a)"
+					+"from (select * from review where t_num = ?  order by r_date asc) a)"
 					+"where rn between ? and ?";
 		try {
 			conn = getConnection();
@@ -106,8 +106,6 @@ public class ReviewDao {
 				review.setR_content(rs.getString("r_content"));
 				review.setR_date(rs.getDate("r_date"));
 				review.setR_avg(rs.getInt("r_avg"));
-				review.setR_ref(rs.getInt("r_ref"));
-				review.setR_restep(rs.getInt("r_restep"));
 				list.add(review);
 			}
 		} catch (Exception e) {
@@ -125,7 +123,7 @@ public class ReviewDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "insert into review values (review_seq.nextval,?,?,sysdate,?,?,?,?)";
+		String sql = "insert into review values (review_seq.nextval,?,?,sysdate,?,?)";
 		try {
 			System.out.println(review.getUser_id());
 			conn = getConnection();
@@ -135,10 +133,7 @@ public class ReviewDao {
 			
 			pstmt.setInt(3, review.getR_avg());
 			pstmt.setInt(4, review.getT_num());
-			
-			 pstmt.setInt(5, review.getR_ref()); 
-			 pstmt.setInt(6, review.getR_restep());
-			
+
 			result = pstmt.executeUpdate();
 			if(result > 0) {
 				System.out.println("insert 완료");
