@@ -63,7 +63,12 @@
 				  	<tr>
 				  		<th scope="row" width="50">${startNum}</th>
 				  		<td width="600" id="content">${commu.c_content}</td>
-				  		<td width="100">#${commu.c_hash}</td>
+				  		<td width="100">
+				  			<c:set var="hash" value="${commu.c_hash}"></c:set>
+				  			<c:forTokens var="h" items="${hash}" delims=" ">
+				  				#${h}&nbsp;
+				  			</c:forTokens>
+				  		</td>
 				  		<td width="100">${commu.user_id}</td>
 				  		<td width="100">
 				  			<fmt:formatDate value="${commu.c_date}" pattern="yy-MM-dd"/>
