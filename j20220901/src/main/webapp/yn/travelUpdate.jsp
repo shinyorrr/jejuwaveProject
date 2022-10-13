@@ -22,7 +22,7 @@ String context = request.getContextPath();
 
 <!-------- Header 카테고리 -------->
 <header class=" py-5" 
-		style="background-image: url('images/travelerList_cate.jpg'); margin-top:148px; background-size: cover;">
+		style="background-image: url('images/travelerList_cate.jpg'); background-position: center; vertical-align:middle;  margin-top:148px; background-size: cover;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5" >
 		<div class="text-center text-white">
 			<h3 id="cateTextM" class="display-5 fw-bolder">동행자 게시판</h3>
@@ -119,7 +119,7 @@ String context = request.getContextPath();
 			<!-------- 제목 -------->
 			<div class="mb-2">
 				<input name="t_title" class="form-control form-control-lg" type="text" 
-						style="font-size: 14px; font-weight: bold; color: #000000; "
+						style="font-size: 14px; font-weight: bold; color: #000000;" maxlength="65"
 						value="${travelContent.t_title}" aria-label=".form-control-lg example">
 			</div>
 			
@@ -128,7 +128,7 @@ String context = request.getContextPath();
 			
 			<!-------- 본문 -------->
 			<div class="mb-3">
-				<textarea name="t_content" class="form-control form-control-lg col-sm-12" 
+				<textarea name="t_content" class="form-control form-control-lg col-sm-12" maxlength="1000"
 				style="font-size: 14px; color: #000000;"rows="20" >${travelContent.t_content}</textarea>
 			</div>
 			

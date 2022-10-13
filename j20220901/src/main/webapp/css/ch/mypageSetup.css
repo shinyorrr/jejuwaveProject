@@ -8,6 +8,9 @@
 	font-family: 'NotoSansKR';
 	font-size: smaller;
 }
+.mypage_name:hover{
+	color : white;
+}
 a{
 	text-decoration-line : none;
 	color: inherit;
@@ -55,7 +58,8 @@ li, ul{
 	margin-bottom: 30px;
 }
 li:hover{
-	background-color: rgba(255,53,0,0.1);
+	background-color: #FF3500;
+	color : white;
 }
 .link_mypage::after{
 	content: url("../../images/form_arrow_lightGray.svg");
@@ -105,12 +109,11 @@ table{
 	border-bottom: 1px dashed rgba(204,204,204);
 }
 .allDel{
-	width: 76px;
-    height: 32px;
-    background-color: rgba(255,053,0,0.5);
+	width: 72px;
+    height: 26px;
     border: 0;
-    color: white;
-    margin-top: 10px;
+    margin-top: 8px;
+    font-family: 'NotoSansKR';
 }
 .search_input{
 	margin-left: 171px;

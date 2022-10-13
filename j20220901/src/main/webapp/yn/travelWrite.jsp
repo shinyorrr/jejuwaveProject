@@ -21,7 +21,7 @@
 
 	<!------------------------ 동행자 카테고리 배너 ------------------------>
 	<header class=" py-5" 
-			style="background-image: url('images/travelerList_cate.jpg'); margin-top:148px;background-size: cover;">
+			style="background-image: url('images/travelerList_cate.jpg'); background-position: center; margin-top:148px; vertical-align:middle; background-size: cover;">
 		<div class="container px-4 px-lg-5 mt-5 mb-5" >
 			<div class="text-center text-white">
 				<h3 id="cateTextM" class="display-5 fw-bolder">동행자 게시판</h3>
@@ -111,7 +111,7 @@
 				<!------------- 제목 ------------->
 				<div class="mb-2">
 					<input name="t_title" class="form-control form-control-lg" type="text" 
-						   style="font-size: 14px; font-weight: bold;" 
+						   style="font-size: 14px; font-weight: bold;" maxlength="65"
 						   placeholder="제목을 입력하세요" aria-label=".form-control-lg example">
 				</div>
 				
@@ -120,7 +120,7 @@
 				
 				<!------------- 본문 ------------->
 				<div class="mb-3">
-					<textarea name="t_content" class="form-control form-control-lg col-sm-12" 
+					<textarea name="t_content" class="form-control form-control-lg col-sm-12" maxlength="1000"
 							  style="font-size: 14px; padding: 16px;" rows="20" placeholder="내용을 입력하세요"></textarea>
 				</div>
 				

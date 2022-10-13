@@ -117,7 +117,7 @@ $(function(){
 						</li>
 						<li class="link_mypage_comment">
 							<a class="link index_link" href="<%=context%>/mypageComment.do">
-								<span class="mypage_name">내 코멘트</span>
+								<span class="mypage_name" id ="comment_side">내 코멘트</span>
 							</a>
 						</li>
 					</ul>
@@ -139,11 +139,11 @@ $(function(){
 						<c:forEach var="board" items="${list }">
 						<table>
 							<tr>
-								<td colspan="3">
+								<td colspan="3" >
 								<input type="text" id = "b_num" name = "b_num" value="${board.b_num }" hidden="true">
 								<input type="text" id = "com_num" name = "com_num" value="${board.com_num }" hidden="true">
 								<input type="checkbox" name="chk_com" value="${board.b_num },${board.com_num}">
-									<div class = "c_content" >
+									<div class = "c_content" style = "cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
 									${board.com_content}								
 									</div>
 								</td>
@@ -162,7 +162,7 @@ $(function(){
 							<c:set var="startNum" value="${startNum - 1 }" />
 						</c:forEach> 
 					</c:if>
-					<input type="submit" class = "allDel" value="일괄삭제">
+					<input type="submit" class = "allDel" value="삭제">
 				</form>	
 				<form action="mypageComment.do">
 						<div class="search_form">
