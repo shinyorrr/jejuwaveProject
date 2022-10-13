@@ -111,14 +111,14 @@ String context = request.getContextPath();
 		<!-- Main 이미지 -->
 		<main class="main_page">
 			<div class="magin_image_box mibox">
-				<img class="main_img" src="images/main.jpg">
+				<img class="main_img" src="images/jejuMain_Fall_370_1.jpg" >
 			</div>
-			<div style="height: 60px;"></div>
+			<!-- <div style="height: 50px;"></div> -->
 			<!-- Section-->
-			<section class="py-1">
-				<div class="container px-4 px-lg-5 mt-3">
+			<section class="py-4">
+				<div class="container px-4 px-lg-5 ">
 				<div class="board_title"
-					style="font-weight: bold; /* position: relative; *//*  width: 600px; */ margin-bottom: 15px;/*  padding-left: 350px; */">
+					style="font-weight: bold; /* position: relative;  width: 600px; */  margin-bottom: 25px;/*  padding-left: 350px; */">
 					<a href="<%=context%>/travelListForm.do" style="color: #ff3500; ">여행 동행자 찾기</a>
 				</div>
 					<div
@@ -198,7 +198,7 @@ String context = request.getContextPath();
 			<section class="board">
 				<div class="board_content">
 					<div class="board_title"
-						style="font-weight: bold; position: relative; width: 33%; margin-bottom: 15px;">
+						style="font-weight: bold; position: relative; width: 33%; margin-bottom: 20px;">
 						<a href="<%=context%>/qnaList.do?sort=1" style="color: #ff3500;">여행정보 공유해요!</a>
 					</div>
 					<c:forEach var="board" items="${list }">
@@ -253,7 +253,7 @@ String context = request.getContextPath();
 		</main>
 
 	</div>
-	<footer class="py-5 bg-dark">
+	<footer class="py-5 bg-dark" style="margin-top: 20px;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your
 				Website 2022</p>
