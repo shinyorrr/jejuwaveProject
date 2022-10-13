@@ -58,8 +58,8 @@ String context = request.getContextPath();
 						<div class="col-md-auto"  style="max-width: 580px; min-width: 580px;">
 							<div class="card shadow-sm" >
 								<div class="card-header d-flex">
-									<img class="mt-1 mb-1 img-fluid rounded-circle" alt="회원이미지" src="${userImgList[status.index].user_img }" style="height: 30px; margin-right: 5px;">
-									<span class="mt-2">${commu.user_id }</span>
+									<img class="mt-1 mb-1 img-fluid rounded-circle" alt="회원이미지" src="${userImgList[status.index].user_img }" style="height: 30px; width:30px; margin-right: 10px;">
+									<span class="" style="margin-top: 5px;">${commu.user_id }</span>
 								</div>
 								<button class="nav-link" data-remote="<%=context%>/commuContent.do?c_num=${commu.c_num}&pageNum=${currentPage}" class="" data-bs-toggle="modal" data-bs-target=".bd-modal-lg">
 			<!-- 게시글이미지 -->	<img class="rounded card-img-top" src="${imgList[status.index].c_img_path }">

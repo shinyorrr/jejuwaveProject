@@ -58,7 +58,7 @@
 	<c:if test="${pw != null}">
 	<div class="container1" style="padding: auto;">
     <div class="input-form-backgroud row" style="margin-top: 300px;">
-      <div class="input-form col-md-6 mx-auto">
+      <div class="input-form col-md-3 mx-auto">
         <h4 class="mb-3" style="text-align: center;">비밀번호 찾기</h4>
 	        <form class="validation-form">
 	          <div class="row">
@@ -68,8 +68,8 @@
 	            </div>
 	          </div>
 	          <div class="col" style="margin-top: 10px; text-align: center;">
-	          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">아이디찾기</button>
-	          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">뒤로가기</button>
+	          <button class="ButtonStyle kRVxKH" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">아이디찾기</button>
+	          <button class="ButtonStyle kRVxKH" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">뒤로가기</button>
 	          </div>
 	        </form>
       </div>
