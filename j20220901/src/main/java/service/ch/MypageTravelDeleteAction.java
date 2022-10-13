@@ -21,6 +21,7 @@ public class MypageTravelDeleteAction implements CommandProcess {
 		
 		int result = mypageDao.deleteTraveler(t_num);
 		
+		request.setAttribute("result", result);
 		return "ch/mypageTravelerDelte.jsp";
 		
 	}

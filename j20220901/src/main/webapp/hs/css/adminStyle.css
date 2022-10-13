@@ -15,7 +15,7 @@
 	height: 100%;
 	overflow: hidden;
 	margin-top : 100px;
-	border: 1px solid #D5D5D5;
+	border: 1px solid #e2e2e2;
 	background-color: white;
 }
 
@@ -59,7 +59,8 @@
 }
 
 #navmenu button:active {
-	background-color: black;
+	background-color: #e2e2e2;
+	color: black;
 }
 
 /* 공지사항 */
@@ -79,7 +80,7 @@
 
 /* 회원정보 수정페이지 */
 #memform {
-	border: 1px solid #D5D5D5;
+	border: 1px solid #e2e2e2;
 	width : 500px;
 	height: 100%;
 	padding: 20px;
@@ -110,6 +111,9 @@ table {
 	width: 100%;
 }
 
+table a:hover {
+  color: black;
+}
 
 
 /* 페이징 */
@@ -131,6 +135,20 @@ table {
 }
 
 #content:hover {
+	overflow: visible;
+	white-space: inherit;
+	text-overflow: inherit;
+	max-width: none; 
+}
+
+#hash {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 50px;
+}
+
+#hash:hover {
 	overflow: visible;
 	white-space: inherit;
 	text-overflow: inherit;

@@ -80,7 +80,7 @@
 						</li>
 						<li class="link_mypage_board">
 							<a class="link index_link" href="<%=context%>/mypageBoard.do">
-								<span class="mypage_name">내 게시글</span>
+								<span class="mypage_name" id = "board_side">내 게시글</span>
 							</a>
 						</li>
 						<li class="link_mypage">
@@ -111,10 +111,10 @@
 								<td>
 									<div class = "dealstatus">
 									<c:if test="${board.b_success eq 'Y'}">
-										답변완료
+										<span style = "color : #9A9A9A">답변완료</span>
 									</c:if>
 									<c:if test="${board.b_success eq 'N'}">
-										<sqan style = "color : red">답변대기중</sqan>	
+										<sqan style = "color : #FF3500">답변대기중</sqan>	
 									</c:if>
 									</div>
 								</td>
@@ -144,7 +144,7 @@
 						</table>
 					</c:forEach> 
 				</c:if>
-				<input type = "submit" class = "allDel" value="일괄삭제">
+				<input type = "submit" class = "allDel" value="삭제">
 				</form>
 				<form action="mypageBoard.do">
 						<div class="search_form">

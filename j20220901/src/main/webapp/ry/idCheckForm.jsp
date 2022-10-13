@@ -20,6 +20,17 @@
        window.close(); 
         }
 </script>
+<style type="text/css">
+.kRVxKH {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;;
+	width: 80px;
+	height: 30px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+}
+</style>
 </head>
 <body>
    <h2>아이디 중복 체크</h2>
@@ -27,8 +38,8 @@
       <br>
          <form action="<%=context %>/idCheckPro.do">
          아이디 <input type="text" id="user_id" name="user_id" value="${user_id }"><br><br>
-         <input type="submit" value="중복체크">
-         <input id="useBtn" type="submit" value="사용하기" onclick="setParentText()">
+         <button class="ButtonStyle kRVxKH" type="submit">중복체크</button>
+         <button class="ButtonStyle kRVxKH" id="useBtn" type="submit" onclick="setParentText()">사용하기</button>
          </form>
 
 </body>
