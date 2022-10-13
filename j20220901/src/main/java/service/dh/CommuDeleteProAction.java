@@ -23,8 +23,10 @@ public class CommuDeleteProAction implements CommandProcess {
 			System.out.println("DeProAc pageNum->" + pageNum);
 			//get dao instance
 			CommuDao cd = CommuDao.getInstance();
+			//서버 실제 파일 삭제를 위한 get realPath 
+			String realPath = request.getServletContext().getRealPath("dh/imgFileSave");
 			//delete dao 요청
-			int result = cd.delete(c_num);
+			int result = cd.delete(c_num, realPath);
 			System.out.println("DeProAc result->" + result);
 			//setAttribute
 			request.setAttribute("c_num"  , c_num);
