@@ -61,6 +61,8 @@ public class MypageTravelerAction implements CommandProcess {
 		 
 		 if (endPage > pageCnt) endPage = pageCnt; 
 		 
+		 
+		 request.setAttribute("t_dealstatus",t_dealstatus);
 		 request.setAttribute("totCnt",totCnt);
 		 request.setAttribute("pageNum", pageNum);
 		 request.setAttribute("currentPage", currentPage);
