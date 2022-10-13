@@ -62,8 +62,8 @@ $(function(){
 		$('.myComment_button').css("color","black");
 		$('.myComment_button').css("border","0");
 		$(this).css("background-color","white");
-		$(this).css("color","rgb(0, 206, 124)");
-		$(this).css("border","1px solid rgb(0, 206, 124)");
+		$(this).css("color","#FF3500");
+		$(this).css("border","1px solid #FF3500");
 		
 	});
 });
