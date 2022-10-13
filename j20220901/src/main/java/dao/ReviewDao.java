@@ -123,7 +123,7 @@ public class ReviewDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "insert into review values (review_seq.nextval,?,?,sysdate,?,?)";
+		String sql = "insert into review values (SEQ_REVIEW.nextval,?,?,sysdate,?,?)";
 		try {
 			System.out.println(review.getUser_id());
 			conn = getConnection();
