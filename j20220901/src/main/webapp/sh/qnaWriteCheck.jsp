@@ -9,14 +9,14 @@
 <%
 String context = request.getContextPath();
 %>
-
+<title>JEJU WAVE Q&A</title>
 <c:import url="../header.jsp"></c:import>
 <!DOCTYPE html>
 <html>
 
 
 <meta charset="UTF-8">
-<title>JEJU WAVE Q&A</title>
+
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
 <link rel="stylesheet" href="<%=context%>/css/sh/qnamain.css">
@@ -137,7 +137,7 @@ String context = request.getContextPath();
 					<!--내가 쓴 댓글일때 만 삭제 -->
 					<c:if test="${user_id eq comment.user_id }">
 						<span><a class="delete" href="<%=context %>/qnaCommentDelete.do?com_num=${comment.com_num}&b_num=${b_num}">
-						삭제<img src="<%=context %>/sh_images/trash" width="16" height="16" style="vertical-align: sub;" >
+						삭제<img src="<%=context %>/sh_images/trash.png" width="16" height="16" style="vertical-align: sub;" >
 						</a></span>
 					</c:if>
 				

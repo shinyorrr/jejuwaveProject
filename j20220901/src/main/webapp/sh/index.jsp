@@ -2,12 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<title>JEJU WAVE Q&A</title>
 <head>
 <%
    String context = request.getContextPath();
 %>
 <meta charset="UTF-8">
-<title>JEJU WAVE Q&A</title>
+
 </head>
 <body>
 <script type="text/javascript">

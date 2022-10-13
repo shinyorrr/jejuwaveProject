@@ -7,11 +7,13 @@
 <%
 String context = request.getContextPath();
 %>
-
+<title>JEJU WAVE Q&A</title>
 
 <c:import url="${context}/header.jsp"></c:import>
 <meta charset="UTF-8">
-<title>JEJU WAVE Q&A</title>
+
+
+
 <link
    href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
    rel="stylesheet">
