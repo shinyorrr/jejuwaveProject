@@ -238,8 +238,8 @@ String context = request.getContextPath();
 				<div class="weather" style="background-image: url('images/tw/color.png'); background-size: cover; border-radius: 5%;">
 					<div style="font-weight: bolder; position: relative; width: 33%; padding-top: 15px; padding-left: 35px; font-size:24px; color: white;">
 						현재 날씨</div>
-					<div class="today" style="display: flex; align-items: center; padding-left: 60px; padding-top: 20px;">
-						<div class="icon"></div>
+					<div class="today" style="display: flex; align-items: center; padding-left: 60px; padding-top: 20px; color: white;">
+						<div class="icon" style="padding-right: 10px;"></div>
 						<div class="ctemp"></div>
 					</div>
 					<div class="week" id="weather_result"
