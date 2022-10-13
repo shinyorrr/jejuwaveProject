@@ -45,7 +45,7 @@ String context = request.getContextPath();
 						<div width="300px" class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
 							<span class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
 							<button></button>
-							<input type="text" name="searchWord" placeholder="검색어를 입력하세요">
+							<input type="text" name="searchWord" placeholder="검색어를 입력하세요" required="required">
 						</div>
 					</form>
 				</div>

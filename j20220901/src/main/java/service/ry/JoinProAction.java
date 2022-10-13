@@ -60,12 +60,13 @@ public class JoinProAction implements CommandProcess {
 			}
 		}
 		String fileusername = "fileSave\\"+serverSaveFilename;
+		System.out.println("fileusername--> " + fileusername);
 		String pageNum = request.getParameter("pageNum");
 		String name = multi.getParameter("name");
-		String title = multi.getParameter("title");
-		int user_gubun = Integer.parseInt(multi.getParameter("user_gubun"));
 		System.out.println("name ->"+ name);
+		String title = multi.getParameter("title");
 		System.out.println("title ->"+ title);
+		int user_gubun = Integer.parseInt(multi.getParameter("user_gubun"));
 		System.out.println("action user_gubun ->"+ user_gubun);
 		
 		upLoadFilename = realPath + "\\"+ serverSaveFilename;
