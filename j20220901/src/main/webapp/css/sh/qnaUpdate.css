@@ -13,7 +13,7 @@
 	.tag{
 		float: left;
 	 	width:870px;
-	 	height : 90px;
+	 	height : 80px;
 	 	border: 1px solid #D5D5D5;
 	 	border-bottom-right-radius:10px;
 	 	border-top-right-radius:10px;
@@ -38,12 +38,11 @@
 		vertical-align: middle;
 		margin-bottom: 25px;
 		font-family: 'Noto Sans KR', sans-serif;
-		margin-left: 352px;
+		margin-left: 250px;
 		display: inline-block;
 		display: table-cell;
-		border: 1px solid pink;
 		width: 330px;
-		height: 90px;
+		height: 80px;
 		
 	}
 	.button{

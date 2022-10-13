@@ -23,7 +23,7 @@
     } 
 	.kRVxKH {
 	color: rgb(255, 255, 255);
-	background-color: #FF3500;;
+	background-color: #FF3500;
 	width: 100px;
 	height: 40px;
 	border-radius: 4px;

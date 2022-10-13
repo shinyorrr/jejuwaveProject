@@ -45,13 +45,13 @@
 
 .title2{
  
-   width:200px;
+  width:200px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-   
+
 }
 
 

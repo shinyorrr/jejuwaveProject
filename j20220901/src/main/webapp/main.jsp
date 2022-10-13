@@ -219,8 +219,8 @@ String context = request.getContextPath();
 							</p>
 							<p>
 								<c:choose>
-									<c:when test="${fn:length(board.b_content) > 40 }">
-										<c:out value="${fn:substring(board.b_content,0,39)}" />...
+									<c:when test="${fn:length(board.b_content) > 70 }">
+										<c:out value="${fn:substring(board.b_content,0,65)}" />...
 								</c:when>
 									<c:otherwise>
 										<c:out value="${board.b_content}" />
@@ -228,24 +228,25 @@ String context = request.getContextPath();
 								</c:choose>
 							</p>
 							<p id="IdComment">
-								<img style="width: 20px; height: 20px; margin: 0 5px 6px 0;"
+								<img style="width: 28px; height: 28px; margin: 0 5px 6px 0; border-radius: 50%!important;"
 									src="<%=context%>/${board.fn_user_img}">${board.user_id}
 							</p>
 						</div>
 					</c:forEach>
 				</div>
 				<!-- 날씨 API -->
-				<div class="weather">
-					<div style="font-weight: bold; position: relative; width: 33%; padding-top: 15px;">
-						제주날씨</div>
+				<div class="weather" style="background-image: url('images/tw/color.png'); background-size: cover; border-radius: 5%;">
+					<div style="font-weight: bolder; position: relative; width: 33%; padding-top: 15px; padding-left: 35px; font-size:24px; color: white;">
+						현재 날씨</div>
 					<div class="today" style="display: flex; align-items: center; padding-left: 60px; padding-top: 20px;">
 						<div class="icon"></div>
 						<div class="ctemp"></div>
 					</div>
 					<div class="week" id="weather_result"
-						style="display: flex; justify-content: space-between; width: 90%; min-height: 255px; align-items: center; padding-right: 10px;">
+						style="display: flex; justify-content: space-between; width: 90%; min-height: 255px; align-items: center; padding-right: 10px; color: white;
+								font-size: 18px;">
 						<span
-							style="position: relative; padding: 10px 0px 200px 60px; font-weight: bolder;">주간
+							style="position: relative; padding: 10px 0px 200px 60px; font-size: 24px; font-weight: bolder; color: white;">주간
 							날씨</span>
 					</div>
 				</div>

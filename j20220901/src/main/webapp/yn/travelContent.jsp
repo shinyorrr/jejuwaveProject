@@ -375,21 +375,21 @@ $(function () {
 	
 	rating.each(function () {
 		var targetScore = $(this).attr('data-rate');
-		$(this).find('.fa-star:nth-child(-n+'+ targetScore + ')').attr('style','color: #f05522 !important');
+		$(this).find('.fa-star:nth-child(-n+'+ targetScore + ')').attr('style','color: #ff3500 !important');
 	});
 	
 	var userScore = $('#r_avg');
 	userScore.change(function () {
 		var userScoreNum = $(this).val();
 		$('.make_star .fa-star').css({color:'#000'});
-		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').attr('style','color: #f05522 !important');
+		$('.make_star .fa-star:nth-child(-n+' + userScoreNum + ')').attr('style','color: #ff3500 !important');
 	});
 	
 	/* .attr('style','color: #f05522 !important'); */
 	$('.make_star svg').click(function () {
 		var targetNum = $(this).index() + 1;
 		$('.make_star svg').css({color:'#000'});
-		$('.make_star svg:nth-child(-n+' + targetNum + ')').css({color: '#F05522'});
+		$('.make_star svg:nth-child(-n+' + targetNum + ')').css({color: '#ff3500'});
 	});
 });
 /**************후기등록 경고창JS******************/
