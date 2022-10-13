@@ -139,11 +139,11 @@ $(function(){
 						<c:forEach var="board" items="${list }">
 						<table>
 							<tr>
-								<td colspan="3">
+								<td colspan="3" >
 								<input type="text" id = "b_num" name = "b_num" value="${board.b_num }" hidden="true">
 								<input type="text" id = "com_num" name = "com_num" value="${board.com_num }" hidden="true">
 								<input type="checkbox" name="chk_com" value="${board.b_num },${board.com_num}">
-									<div class = "c_content" >
+									<div class = "c_content" style = "cursor: pointer" onclick="location.href='qnaWriteCheck.do?b_num=${board.b_num}';">
 									${board.com_content}								
 									</div>
 								</td>
