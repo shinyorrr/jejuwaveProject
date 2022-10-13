@@ -89,10 +89,11 @@ function winop() {
 <body>
 		<div class="joinform" style="margin-top:200px; margin-left: 32%;">
 	<form  action="<%=context %>/joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()" enctype="multipart/form-data" >
+			<input type="hidden" class="form-control" name="user_gubun" value="1">
 		<table>
 		<thead>
 			<tr>
-				<th colspan="3" style="text-align: center;"><h3>회원가입</h3></th>
+				<th colspan="3" style="text-align: center; margin-bottom: 50px;"><h3>회원가입</h3></th>
 		</thead>
 			<tr>
 				<td style="width: 100px; text-align: center;">아이디</td>
