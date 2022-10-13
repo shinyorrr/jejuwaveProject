@@ -68,16 +68,17 @@
 			  				<c:if test="${travel.t_content eq '관리자 의해 삭제된 댓글입니다.'}">style="color:red;"</c:if>
 			  				<c:if test="${travel.t_content eq '삭제된 댓글입니다.'}">style="color:blue;"</c:if>>
 			  				
-							<c:if test="${travel.t_relevel == 0}">
-								${travel.t_title}
-								<c:if test="${travel.reply_cnt != 0 }">
-									<span class="badge rounded-pill bg-secondary">${travel.reply_cnt}</span>
+								<c:if test="${travel.t_relevel == 0}">
+									<a href='<%=context%>/travelContent.do?t_num=${travel.t_num}'>${travel.t_title}</a>
+									
+									<c:if test="${travel.reply_cnt != 0 }">
+										<span class="badge rounded-pill bg-secondary">${travel.reply_cnt}</span>
+									</c:if>
 								</c:if>
-							</c:if>
-							<c:if test="${travel.t_relevel > 0}">
-								<img src="<%=context%>/hs_images/adreply.png" width="${travel.t_relevel*10 }">
-								${travel.t_content}
-							</c:if>
+								<c:if test="${travel.t_relevel > 0}">
+									<img src="<%=context%>/hs_images/adreply.png" width="${travel.t_relevel*10 }">
+									${travel.t_content}
+								</c:if>
 							</td >
 			  				<td width="100">${travel.user_id}</td>
 			  				<td width="100">${travel.t_gubun}</td>
@@ -98,8 +99,8 @@
 								</c:if>
 							</td>
 			  				<td width="100">
-			  				<fmt:parseDate value="${travel.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
-			  				<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
+				  				<fmt:parseDate value="${travel.t_date}" var="dateFmt" pattern="yyyy-MM-dd HH:mm:ss"/>
+				  				<fmt:formatDate value="${dateFmt}" pattern="yy-MM-dd"/>
 			  				</td>
 			  				<td width="100"><input type="button" value="삭제" onclick="deleteChk(${travel.t_num}, ${travel.t_relevel}, ${pageNum})"></td>
 			  			</tr>
