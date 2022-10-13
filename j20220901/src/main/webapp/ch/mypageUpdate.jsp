@@ -217,7 +217,7 @@ function fn_submit(){
 						<input type="text" class="input_email" id = "user_email" name = "user_email1" value ="${fn:split(member.user_email,'@')[0]}">@
 						<input type="text" class="input_email" name = "user_email2" disabled>
 							<select id = "eMailForm" name = "eMailForm" onchange="email_check()">
-							  <option value = "${fn:split(member.user_email,'@')[0]}"></option>
+							  <option value = "${fn:split(member.user_email,'@')[1]}"></option>
 							  <option value = "1">직접입력하세요</option>
 							  <option value="naver.com" 	
 							  	<c:if test = "${fn:split(member.user_email,'@')[1] eq 'naver.com'}"> selected </c:if>>naver.com</option>
@@ -228,7 +228,9 @@ function fn_submit(){
 							  <option value="nate.com"
 							  	<c:if test = "${fn:split(member.user_email,'@')[1] eq 'nate.com'}"> selected </c:if>>nate.com</option>
 							  <option value="kakao.com"
-							  <c:if test = "${fn:split(member.user_email,'@')[1] eq 'kakao.com'}"> selected </c:if>>kakao.com</option>
+							  	<c:if test = "${fn:split(member.user_email,'@')[1] eq 'kakao.com'}"> selected </c:if>>kakao.com</option>
+							  <option value="icloud.com"
+							  	<c:if test = "${fn:split(member.user_email,'@')[1] eq 'icloud.com'}"> selected </c:if>>icloud.com</option>
 							</select>
 							<div class = "submitMain">
 								<input type="submit" id = "submit" value = "수정완료">
