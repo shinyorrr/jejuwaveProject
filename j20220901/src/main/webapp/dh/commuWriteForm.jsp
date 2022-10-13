@@ -64,7 +64,7 @@
 				<!-- 확인 취소 -->
 				<div class="mt-5 row">
 					<div class="col-md-6">
-						<button type="reset" class="btn btn-reset btn-block" style="width: 100%; height: 50px;">취소</button>
+						<button type="reset" onclick="history.go(-1)" class="btn btn-reset btn-block" style="width: 100%; height: 50px;">취소</button>
 					</div>
 					<div class="col-md-6">
 						<button type="submit" class="btn btn-submit btn-block" style="width: 100%;  height: 50px;">확인</button>
