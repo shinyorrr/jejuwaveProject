@@ -8,7 +8,8 @@
 <%
    String context = request.getContextPath();
 %>
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JEJU WAVE 중복체크</title>
 </head>
 <body>
 	<c:if test="${result > 0 }">

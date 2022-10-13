@@ -233,7 +233,7 @@ public class Qna_BoardDao {
 
 		String sql = " select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from \r\n"
 				+ "                    (select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success, A.b_date, A.com_cnt, b.l_hash1,b.l_hash2,b.l_hash3   from   \r\n"
-				+ "                  qna_board A,qna_hash B WHERE  A.B_NUM = B.B_NUM and  (A.user_id || A.b_content || A.b_title) like ? order by A.b_date desc) a )    where rn between ? and ?                    "
+				+ "                  qna_board A,qna_hash B WHERE  A.B_NUM = B.B_NUM and  (A.user_id || A.b_content || A.b_title || B.l_hash1 || B.l_hash2 || B.l_hash3) like ? order by A.b_date desc) a )    where rn between ? and ?                    "
 				+ " \r\n" + "                          ";
 
 		System.out.println("Qna_BoardDao getBoardList sql->" + sql);

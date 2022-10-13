@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JEJU WAVE 마이페이지</title>
 <%
    String context = request.getContextPath();
 %>
@@ -95,9 +95,16 @@ function deleteMsg(){
 				<div class = "travelForm">
 				<h2 class = mypage_menu_h2>내 게시글
 				<span>
-					<button id = "change" onclick = "location.href = '<%=context%>/mypageTraveler.do?t_dealstatus=0'">
+				<c:if test="${t_dealstatus eq 1}">
+					<button id = "change1" onclick = "location.href = '<%=context%>/mypageTraveler.do?t_dealstatus=0'">
 					모집중인 글만 보기
 					</button>
+				</c:if>
+				<c:if test="${t_dealstatus eq 0}">
+					<button id = "change" onclick = "location.href = '<%=context%>/mypageTraveler.do'">
+					모집중인 글만 보기
+					</button>
+				</c:if>
 				</span>
 				</h2>
 				
