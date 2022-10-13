@@ -11,7 +11,7 @@
 	<c:if test="${result != 0}">
 		<script type="text/javascript">
 			alert("삭제되었습니다");
-			location.href = "mypageCommentTravelDelete.do";
+			location.href = "mypageCommentTravel.do";
 		</script>
 	</c:if>
 	<c:if test="${result == 0}">

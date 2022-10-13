@@ -113,13 +113,14 @@ String context = request.getContextPath();
 			<div class="magin_image_box mibox">
 				<img class="main_img" src="images/main.jpg">
 			</div>
+			<div style="height: 60px;"></div>
 			<!-- Section-->
 			<section class="py-1">
-				<div class="board_title"
-					style="font-weight: bold; position: relative; width: 600px; margin-bottom: 15px; padding-left: 350px;">
-					<a href="<%=context%>/travelListForm.do" style="color: #ff3500;">여행 동행자 찾기</a>
-				</div>
 				<div class="container px-4 px-lg-5 mt-3">
+				<div class="board_title"
+					style="font-weight: bold; /* position: relative; *//*  width: 600px; */ margin-bottom: 15px;/*  padding-left: 350px; */">
+					<a href="<%=context%>/travelListForm.do" style="color: #ff3500; ">여행 동행자 찾기</a>
+				</div>
 					<div
 						class="row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 ">
 						<c:if test="${totCnt > 0}">
@@ -198,7 +199,7 @@ String context = request.getContextPath();
 				<div class="board_content">
 					<div class="board_title"
 						style="font-weight: bold; position: relative; width: 33%; margin-bottom: 15px;">
-						<a href="<%=context%>/qnaList.do" style="color: #ff3500;">여행정보 공유해요!</a>
+						<a href="<%=context%>/qnaList.do?sort=1" style="color: #ff3500;">여행정보 공유해요!</a>
 					</div>
 					<c:forEach var="board" items="${list }">
 						<div class="content_first">
