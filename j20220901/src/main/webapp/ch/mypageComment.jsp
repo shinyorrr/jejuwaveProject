@@ -117,7 +117,7 @@ $(function(){
 						</li>
 						<li class="link_mypage_comment">
 							<a class="link index_link" href="<%=context%>/mypageComment.do">
-								<span class="mypage_name">내 코멘트</span>
+								<span class="mypage_name" id ="comment_side">내 코멘트</span>
 							</a>
 						</li>
 					</ul>

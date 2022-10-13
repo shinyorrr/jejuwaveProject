@@ -163,7 +163,7 @@
 						</li>
 						<li class="link_mypage_community">
 							<a class="link index_link" href="<%=context%>/mypageCommunity.do">
-								<span class="mypage_name">내 커뮤니티글</span>
+								<span class="mypage_name" id = "comunity_side">내 커뮤니티글</span>
 							</a>
 						</li>
 						<li class="link_mypage">

@@ -21,10 +21,13 @@ public class MypageUpdateAction implements CommandProcess {
 		HttpSession session = request.getSession();
 		String user_id = (String)session.getAttribute("user_id");
 		
-		
 		try {
 			MypageDao my = MypageDao.getInstance();
+			String img = my.imageSelect(user_id);
+			String img_sub = img.substring(9);
 			Member member = my.select(user_id);
+			
+			session.setAttribute("img_sub", img_sub);
 			request.setAttribute("user_id", user_id);
 			request.setAttribute("member", member);
 			System.out.println("MypageUpdateAction : " + member);
