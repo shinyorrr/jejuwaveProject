@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-		<title>JejuWave 동행찾기</title>
+	<title>JEJU WAVE 동행찾기</title>
 	<%
 	String context = request.getContextPath();
 	%>
