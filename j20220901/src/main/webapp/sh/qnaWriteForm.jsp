@@ -31,8 +31,9 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 	<form action="<%=context %>/qnaWritePro.do">
 		
 		<!-- 테마 -->
+		
 		<div class="tag2">테 마    선 택</div>
-		<div class="tag">
+		<div class="tag" style="">
 			
 		 
 			<div class="form-check form-check-inline" >
@@ -52,6 +53,7 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 			  <label class="form-check-label" for="inlineRadio1">카풀</label>
 			</div>
 		</div>
+		
 		<br>
 		
 		<!-- 제목 -->
