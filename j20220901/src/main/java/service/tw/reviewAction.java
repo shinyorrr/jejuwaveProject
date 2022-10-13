@@ -23,10 +23,11 @@ public class reviewAction implements CommandProcess {
 		HttpSession session = request.getSession();
 		
 		String user_id = session.getAttribute("user_id").toString();
-		System.out.println(user_id);
+		System.out.println("user_id ====>"+ user_id);
 		Review review = new Review();
-		System.out.println(request.getParameter("r_avg"));
-		System.out.println(request.getParameter("r_content"));
+		System.out.println("request.getParameter(\"r_avg\")=========>" +request.getParameter("r_avg"));
+		System.out.println("request.getParameter(\"r_content\"=========>"+request.getParameter("r_content"));
+		System.out.println("Integer.parseInt(request.getParameter(\"t_num\")=========>"+Integer.parseInt(request.getParameter("t_num")));
 		review.setR_content(request.getParameter("r_content"));
 		review.setR_avg(Integer.parseInt(request.getParameter("r_avg")));
 		review.setUser_id(user_id);
