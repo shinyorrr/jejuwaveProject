@@ -52,6 +52,7 @@
 	  	<input type="hidden" name="user_name" value="${member.user_name}">
 	  	<input type="hidden" name="user_birth" value="${member.user_birth}">
 	  	<input type="hidden" name="user_tel" value="${member.user_tel}">
+	  	<input type="hidden" name="user_gender" value="${member.user_gender}">
 	  	<input type="hidden" name="user_info" value="${member.user_info}">
 		<input type="hidden" name="pageNum" value="${pageNum}">
 		
@@ -66,6 +67,14 @@
 		</div>
 		<div class="input-group mb-3">
 		  이름 : ${member.user_name}
+		</div>
+		<div class="input-group mb-3">
+		  <c:if test="${member.user_gender eq 'F'}">
+		  	성별 : 여자
+		  </c:if>
+		  <c:if test="${member.user_gender eq 'M'}">
+		  	성별 : 남자
+		  </c:if>
 		</div>
 		<div class="input-group mb-3">
 		  생년월일 : ${member.user_birth}
