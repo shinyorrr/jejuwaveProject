@@ -69,7 +69,7 @@ function deleteMsg(){
 						</li>
 						<li class="link_mypage_traveler">
 							<a class="link index_link" href="<%=context%>/mypageTraveler.do">
-								<span class="mypage_name">내 동행게시글</span>
+								<span class="mypage_name" id = "travel_side">내 동행게시글</span>
 							</a>
 						</li>
 						<li class="link_mypage">
@@ -118,10 +118,10 @@ function deleteMsg(){
 											<td class = "dealstatusTd" width = 90>
 												<div class = "dealstatus"  style="width: 100px;">
 														<c:if test="${board.t_dealstatus == 1 }">
-														모집완료	
+														<span style = "color : #9A9A9A">모집완료</span>	
 														</c:if>
 														<c:if test="${board.t_dealstatus == 0 }">
-														<sqan style = "color : red">모집중</sqan>	
+														<sqan style = "color : #FF3500">모집중</sqan>	
 														</c:if>
 												</div>
 											</td>

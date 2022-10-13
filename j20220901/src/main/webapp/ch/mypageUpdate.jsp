@@ -163,7 +163,7 @@ function fn_submit(){
 					<ul class="mypage_menu">
 						<li class="link_mypage_userinfo">
 							<a class="link index_link" href="<%=context%>/mypageUpdate.do">
-								<span class="mypage_name">계정관리</span>
+								<span class="mypage_name" id = "my_side">계정관리</span>
 							</a>
 						</li>
 						<li class="link_mypage">
