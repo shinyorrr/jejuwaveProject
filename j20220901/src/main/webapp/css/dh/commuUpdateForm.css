@@ -76,10 +76,10 @@
 		color: white;
 	}
 	.btn-reset {
-		background-color:#5c636a;
-		color: white;
+		background-color:#e2e2e2;
+		color: black;
 	}
 	.btn-reset:hover {
-		background-color:#5c636a;
-		color: white;
+		background-color:#e2e2e2;
+		color: black;
 	}

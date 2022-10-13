@@ -509,31 +509,32 @@ public class Qna_BoardDao {
 
 	}
 
-	/*
-	 * main화면 QnA list public List<Qna_Board> mainbdlist(int startRow, int endRow)
-	 * throws SQLException { List<Qna_Board> list = new ArrayList<Qna_Board>();
-	 * Connection conn = null; PreparedStatement pstmt = null; ResultSet rs = null;
-	 * String sql =
-	 * "select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from (select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success, A.b_date,b.l_hash1,b.l_hash2,b.l_hash3   from qna_board A, \r\n"
-	 * +
-	 * "		 	qna_hash B WHERE A.B_NUM = B.B_NUM order by A.b_date desc) a )\r\n"
-	 * + "		 		 where rn between ? and ?";
-	 * 
-	 * System.out.println("mainbdlist startRow ->" + startRow);
-	 * System.out.println("mainbdlist endRow ->" + endRow); try { conn =
-	 * getConnection(); pstmt = conn.prepareStatement(sql); pstmt.setInt(1,
-	 * startRow); pstmt.setInt(2, endRow); rs = pstmt.executeQuery(); while
-	 * (rs.next()) { Qna_Board board = new Qna_Board();
-	 * board.setB_num(rs.getInt("b_num"));
-	 * board.setUser_id(rs.getString("user_id"));
-	 * board.setB_title(rs.getString("b_title"));
-	 * board.setB_content(rs.getString("b_content"));
-	 * board.setB_date(rs.getDate("b_date"));
-	 * board.setFn_user_img(rs.getString("fn_user_img")); list.add(board); } } catch
-	 * (Exception e) { System.out.println(e.getMessage()); } finally { if (rs !=
-	 * null) rs.close(); if (pstmt != null) pstmt.close(); if (conn != null)
-	 * conn.close(); } return list; }
-	 */
+	
+	/* main화면 QnA list */
+	  public List<Qna_Board> mainbdlist(int startRow, int endRow)
+	  throws SQLException { List<Qna_Board> list = new ArrayList<Qna_Board>();
+	  Connection conn = null; PreparedStatement pstmt = null; ResultSet rs = null;
+	  String sql =
+	  "select * from ( select rownum rn, a.*, fn_user_img(a.user_id) fn_user_img from (select A.B_NUM, A.user_id , A.b_title,A.b_content,A.b_success, A.b_date,b.l_hash1,b.l_hash2,b.l_hash3   from qna_board A, \r\n"
+	  +
+	  "		 	qna_hash B WHERE A.B_NUM = B.B_NUM order by A.b_date desc) a )\r\n"
+	  + "		 		 where rn between ? and ?";
+	  
+	  System.out.println("mainbdlist startRow ->" + startRow);
+	  System.out.println("mainbdlist endRow ->" + endRow); try { conn =
+	  getConnection(); pstmt = conn.prepareStatement(sql); pstmt.setInt(1,
+	  startRow); pstmt.setInt(2, endRow); rs = pstmt.executeQuery(); while
+	  (rs.next()) { Qna_Board board = new Qna_Board();
+	  board.setB_num(rs.getInt("b_num"));
+	  board.setUser_id(rs.getString("user_id"));
+	  board.setB_title(rs.getString("b_title"));
+	  board.setB_content(rs.getString("b_content"));
+	  board.setB_date(rs.getDate("b_date"));
+	 board.setFn_user_img(rs.getString("fn_user_img")); list.add(board); } } catch
+	  (Exception e) { System.out.println(e.getMessage()); } finally { if (rs !=
+	  null) rs.close(); if (pstmt != null) pstmt.close(); if (conn != null)
+	  conn.close(); } return list; }
+	 
 
 	public int choose(int b_num, int com_num) throws SQLException {
 		Connection conn = null;
