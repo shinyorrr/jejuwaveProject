@@ -9,7 +9,7 @@
 	height:50px;
 	line-height: 50px;
 	text-align: left;
-	background-color: rgba(255,53,0,0.5);
+	background-color: #FF3500;
 	border : 1px solid rgba(204,204,204,0.2);
 	width : 100%;
 	padding-left: 30px;
@@ -19,6 +19,9 @@
 	content: url("../../images/form_arrow_lightGray.svg");
 	position: absolute;
 	left: 23.5%;
+}
+#travel_side{
+	color : white;
 }
 .onerow{
 	display: flex;
@@ -68,7 +71,6 @@
     float: left;
     font-family: 'korean';
     font-size: 14px;
-    background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
     margin-right: 8px;
 }
@@ -78,7 +80,6 @@
     color: rgb(106, 106, 106);
     font-family: 'korean';
     font-size: 14px;
-    background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
 }
 table {
@@ -110,6 +111,6 @@ table {
 #change{
 	float: right;
     border: 1px solid azure;
-    background-color: coral;
-    color: blanchedalmond;
+    background-color:#FF3500;
+    color: white;
 }

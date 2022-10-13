@@ -11,16 +11,24 @@
 <title>Insert title here</title>
 <style type="text/css">
  	 body {
- 	 overflow : visible;
+ 	 /* overflow : visible;
  	  background-size: contain;
 	  background-repeat : no repeat;
       background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
       background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); 
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);  */
     } 
-
+	.kRVxKH {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;;
+	width: 100px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+}
     .input-form {
       max-width: 280px;
 
@@ -58,8 +66,8 @@
 	            </div>
 	          </div>
 	          <div class="col" style="margin-top: 10px; text-align: center;">
-	          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">비밀번호찾기</button>
-	          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">뒤로가기</button>
+	          <button class="ButtonStyle kRVxKH" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">비밀번호찾기</button>
+	          <button class="ButtonStyle kRVxKH" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">뒤로가기</button>
 	          </div>
 	        </form>
       </div>
@@ -75,8 +83,8 @@
         <form class="validation-form">
           <div class="col" style="margin-top: 10px; text-align: center;">
           <br>
-          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">비밀번호찾기</button>
-          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">뒤로가기</button>
+          <button class="ButtonStyle kRVxKH" type="button" onclick="location.href = '<%=context %>/pwFindForm.do'">비밀번호찾기</button>
+          <button class="ButtonStyle kRVxKH" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">뒤로가기</button>
           </div>
         </form>
       </div>

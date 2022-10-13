@@ -4,7 +4,7 @@
 	height:50px;
 	line-height: 50px;
 	text-align: left;
-	background-color: rgb(255,53,0,0.5);
+	background-color: #FF3500;
 	border : 1px solid rgba(204,204,204,0.2);
 	width : 100%;
 	padding-left: 30px;
@@ -14,6 +14,9 @@
 	content: url("../../images/form_arrow_lightGray.svg");
 	position: absolute;
 	left: 23.5%;
+}
+#my_side{
+	color : white;
 }
 .user_out{
 	display : flex;
@@ -41,7 +44,7 @@
 	width: 250px;
 	height: 40px;
 	font-size : 18px;
-	background-color : rgba(255,053,0,0.5);
+	background-color : #FF3500	;
 	border : 0;
 	color : white;
 	font-family: 'NotoSansKR'
@@ -99,7 +102,7 @@ textarea:focus {
 }
 #newPassword3{
 	display: none;
-	background-color : rgba(255,053,0,0.5);
+	background-color : #FF3500;
 	border : 0;
 	color : white;
 	font-family: 'NotoSansKR';
