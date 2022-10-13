@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JEJU WAVE 동행찾기</title>
 </head>
 <body>
 <c:if test="${result > 0 }">
