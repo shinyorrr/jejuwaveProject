@@ -5,9 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file = "header.jsp" %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JEJU WAVE 마이페이지</title>
 <%
    String context = request.getContextPath();
 %>

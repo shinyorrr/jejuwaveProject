@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>JejuWave 동행찾기</title>
+	<title>JEJU WAVE 동행찾기</title>
 	<meta charset="UTF-8">
 	<% String context = request.getContextPath();%>
 	<link rel="stylesheet" href="yncss/trList.css" type="text/css">	

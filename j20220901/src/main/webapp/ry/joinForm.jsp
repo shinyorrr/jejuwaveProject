@@ -8,7 +8,8 @@
    String context = request.getContextPath();
 %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JEJU WAVE 회원가입</title>
 
 <style type="text/css">
  	caption {
