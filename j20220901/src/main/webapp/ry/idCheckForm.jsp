@@ -7,9 +7,11 @@
    String context = request.getContextPath();
 %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JEJU WAVE 중복체크</title>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
+	
    function winop() {
       function winop() {
          window.open("<%=context %>/idCheckPro.do?=user_id"+$(user_id).val(), "kkk",   "width=300 height=300");
@@ -19,6 +21,7 @@
        opener.document.getElementById("user_id").value = document.getElementById("user_id").value     
        window.close(); 
         }
+   
 </script>
 <style type="text/css">
 .kRVxKH {
@@ -39,7 +42,7 @@
    <h3 style="text-align: center;">아이디 중복 체크</h3>
       <hr>
       <br>
-         <form action="<%=context %>/idCheckPro.do">
+         <form action="<%=context %>/idCheckPro.do" name="frm" id="frm">
          <div style="text-align: center; width: 50%;" class="container">
          <input type="text" class="form-control" id="user_id" name="user_id" value="${user_id }"><br>
          </div>

@@ -7,7 +7,7 @@
    String context = request.getContextPath();
 %>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JEJU WAVE Q&A</title>
 </head>
 <body>
 <script type="text/javascript">

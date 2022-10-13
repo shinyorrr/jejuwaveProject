@@ -35,12 +35,19 @@
 
 .content1{
    padding-left: 30px;
-   width:730px;
+   width:650px;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
+  font-weight: lighter
+}
+
+.theme{
+	font-weight: bolder;
+	font-size: 15px;
+	color: #ff3500;
 }
 
 .title2{
