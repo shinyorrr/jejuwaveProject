@@ -69,10 +69,10 @@
 		  이름 : ${member.user_name}
 		</div>
 		<div class="input-group mb-3">
-		  <c:if test="${member.user_gender eq 'F'}">
+		  <c:if test="${member.user_gender eq '1'}">
 		  	성별 : 여자
 		  </c:if>
-		  <c:if test="${member.user_gender eq 'M'}">
+		  <c:if test="${member.user_gender eq '0'}">
 		  	성별 : 남자
 		  </c:if>
 		</div>
