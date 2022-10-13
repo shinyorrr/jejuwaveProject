@@ -97,7 +97,8 @@ public class CommuUpdateProAction implements CommandProcess {
 			//list 가 string 타입이므로 integer로 형변환
 			List<Integer> targetNums = targetList1.stream().map(s -> Integer.parseInt(s)).collect(Collectors.toList());
 			// deleteImg dao 요청 (수정form에서 삭제된 이미지 삭제)
-			int resultDeleteImg = cd.deleteImg(targetNums);	
+			String FileRealPath = request.getServletContext().getRealPath("dh/imgFileSave"); //서버 실제 파일 삭제를 위한 get realPath 
+			int resultDeleteImg = cd.deleteImg(targetNums, FileRealPath);	
 			
 			// Community_img insert (수정form에서 새로 추가된 이미지 추가)
 			int resultInsertImg = 0;

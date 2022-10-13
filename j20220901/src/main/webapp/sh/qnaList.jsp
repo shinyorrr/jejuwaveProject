@@ -36,7 +36,7 @@ String context = request.getContextPath();
 <script type="text/javascript">
 
 function sorting(sort) {
-   alert(sort);
+ 
    location.href='<%=context%>/qnaList.do?sort=' + sort;
 
    }
@@ -53,7 +53,7 @@ function sorting(sort) {
          <!-- 검색어 기능 -->
 
 
-         <div  style="margin-left: 1020px; height: 60px; width: 1000px;" class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+         <div  style="margin-left: 900px; height: 60px; width: 1000px;" class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
             <form action="<%=context%>/qnaSearchList.do">
                <div style="width: 1100px;">
                   <div width="300px"
@@ -64,13 +64,15 @@ function sorting(sort) {
                      <input type="text" name="searchWord" placeholder="검색어를 입력하세요">
                      
             </form>
-
+              
    
             <!-- 정렬 -->
             <select  class="select" name="sort" onchange="sorting(this.value);">
-               <option value="0">정렬</option>
-               <option value="1">등록순</option>
-               <option value="2">댓글순</option>
+               <option    value="0" disabled="disabled" >정렬</option>
+               
+               <option  value="1" <c:if test= "${sort eq '1'}"> selected="selected" </c:if> > 등록순</option>
+              
+               <option value="2" <c:if test= "${sort eq '2'}"> selected="selected" </c:if>>댓글순</option>
             </select>
 
 
@@ -121,8 +123,8 @@ function sorting(sort) {
                      </c:choose>
                      </td>
                      <td>
-						<span style="font-size: 13px; color: gray;"> <img src="images/comm_icon.png" width="15" height="15" >&nbsp;${board.com_cnt }&nbsp;&nbsp;</span>
-					</td>
+                  <span style="font-size: 13px; color: gray;"> <img src="images/comm_icon.png" width="15" height="15" >&nbsp;${board.com_cnt }&nbsp;&nbsp;</span>
+               </td>
                </tr>
                <c:set var="startNum" value="${startNum -1 }"></c:set>
             </c:forEach>

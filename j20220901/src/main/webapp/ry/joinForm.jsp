@@ -48,6 +48,24 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
     }
+    .kRVxKH {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;;
+	width: 80px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+}
+    .kRVxKH1 {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;;
+	width: 90px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -57,29 +75,46 @@ const autoHyphen2 = (target) => {
 	  .replace(/^(\d{0,3})(\d{0,4})(\d{0,4})$/g, "$1-$2-$3").replace(/(\-{1,2})$/g, "");
 }
 function chk() {
-	if (frm.user_pw.value != frm.user_pw2.value) {
-		alert("암호가 다릅니다");
+	if (frm.user_pw.value != null) {
+		alert("암호를 입력해주세요");
 		frm.user_pw.focus();
 		return false;
 	}
 	return true;
 }
-function chk1() {
-	if (frm.user_pw.value == frm.user_pw2.value) {
-		alert("암호가 같습니다.");
-		frm.user_email.focus();
-		return false;
-	}
-	
+function chk() {
 	if (frm.user_pw.value != frm.user_pw2.value) {
 		alert("암호가 다릅니다");
 		frm.user_pw.focus();
+		return false;
+	}
+}
+function chk1() {
+	if (frm.user_pw.value == null || frm.user_pw.value=="") {
+		alert("암호를 입력해주세요");
+		frm.user_pw.focus();
+		return false;
+	}
+	
+	if (frm.user_pw2.value == null || frm.user_pw2.value=="") {
+		alert("확인할 암호를 입력해주세요");
+		frm.user_pw2.focus();
+		return false;
+	}
+	if (frm.user_pw.value != frm.user_pw2.value && frm.user_pw.value!=null && frm.user_pw2.value!=null) {
+		alert("암호가 다릅니다");
+		frm.user_pw.focus();
+		return false;
+	}
+	if (frm.user_pw.value == frm.user_pw2.value && frm.user_pw.value!=null && frm.user_pw2.value!=null) {
+		alert("암호가 같습니다.");
+		frm.user_email.focus();
 		return false;
 	}
 	return true;
 }
 function winop() {
-	window.open("<%=context %>/idCheckForm.do?user_id="+$('#user_id').val(), "kkk",	"width=500 height=300");
+	window.open("<%=context %>/idCheckForm.do?user_id="+$('#user_id').val(), "kkk",	"width=500 height=250");
 } 
 </script>
 <c:import url="${context }/header.jsp"/>
@@ -89,15 +124,16 @@ function winop() {
 <body>
 		<div class="joinform" style="margin-top:200px; margin-left: 32%;">
 	<form  action="<%=context %>/joinPro.do" method="post" id="frm" name="frm" onsubmit="return chk()" enctype="multipart/form-data" >
+			<input type="hidden" class="form-control" name="user_gubun" value="1">
 		<table>
 		<thead>
 			<tr>
-				<th colspan="3" style="text-align: center;"><h3>회원가입</h3></th>
+				<th colspan="3" style="text-align: center; margin-bottom: 50px;"><h3>회원가입</h3></th>
 		</thead>
 			<tr>
 				<td style="width: 100px; text-align: center;">아이디</td>
 				<td><input type="text" style="width: 90%;" class="form-control"     name="user_id" id="user_id" required="required"></td>
-				<td ><button class="btn btn-outline-warning" style="width: 145px;" onclick="winop()">중복체크</button></td>
+				<td ><button class="ButtonStyle kRVxKH1" style="width: 105px;" onclick="winop()">중복체크</button></td>
 			</tr>
 			<tr>
 				<td style="width: 100px; text-align: center;">비밀번호</td>
@@ -106,7 +142,7 @@ function winop() {
 			<tr>
 				<td style="width: 100px; text-align: center;">비밀번호확인</td>
 				<td><input type="password" class="form-control" style="width: 90%;"  name="user_pw2" id="user_pw2" required="required"></td>
-				<td style="text-align: center;"><button style="width: 145px;" class="btn btn-outline-warning" type="button" onclick="chk1()">비밀번호체크</button></td>
+				<td style="text-align: center;"><button style="width: 105px;" class="ButtonStyle kRVxKH1" type="button" onclick="chk1()">비밀번호체크</button></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">이메일</td>
@@ -253,8 +289,8 @@ function winop() {
 				</tr>
 			<tr>
 				<td colspan="3" style="text-align: center;">
-				<button class="btn btn-outline-warning" type="submit" >가입</button>
-				<button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/main.do'" >가입취소</button>
+				<button class="ButtonStyle kRVxKH" type="submit" style="width: 80px;">가입</button>
+				<button class="ButtonStyle kRVxKH" type="button" style="width: 80px;" onclick="location.href = '<%=context %>/main.do'" >가입취소</button>
 				</td>
 			</tr>
 		</table>

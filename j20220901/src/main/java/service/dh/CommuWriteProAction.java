@@ -44,6 +44,7 @@ public class CommuWriteProAction implements CommandProcess {
 			//part 인터페이스를 사용해 mulipart형식으로 보내진 데이터들 받기
 			Collection<Part> parts = request.getParts(); // 모든 part들을 가져옴
 			String realPath = request.getServletContext().getRealPath("dh/imgFileSave");
+			System.out.println("realPath ->" + realPath);
 			File fileSaveDir = new File(realPath);
 			if (!fileSaveDir.exists()) { //저장경로에 해당 폴더가 없으면 만들기
 				fileSaveDir.mkdirs();

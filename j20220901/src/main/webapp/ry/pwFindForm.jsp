@@ -12,16 +12,42 @@
 
 <style type="text/css">
  	 body {
- 	 overflow : visible;
+ 	/*  overflow : visible;
  	  background-size: contain;
 	  background-repeat : no repeat;
       background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
       background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); 
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);  */
     } 
-
+	.kRVxKH {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;
+	width: 100px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+	}
+	.kRVxKH1 {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;;
+	width: 110px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+	}
+	.kRVxKH2 {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;;
+	width: 60px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+	}
     .input-form {
       max-width: 280px;
 
@@ -63,7 +89,7 @@
 	<body style="overflow: visible; height: 300px;">
 		 <div class="container1" style="padding: auto;">
     <div class="input-form-backgroud row" style="margin-top: 300px;">
-      <div class="input-form col-md-4 mx-auto">
+      <div class="input-form col-md-3 mx-auto">
         <h4 class="mb-3" style="text-align: center;">비밀번호 찾기</h4>
         <form class="validation-form" action="<%=context %>/pwFindPro.do" method="post" id="frm" name="frm">
           <div class="row">
@@ -75,7 +101,7 @@
               </div>
             </div>
             <div class="" ><!-- col-md-3 mb-3 -->
-              <label for="name" style="padding-left: 10px;">이름</label>
+              <label for="name" style="padding-left: 10px; margin-top: 10px;">이름</label>
               <input type="text" class="form-control" id="user_name"  name="user_name" placeholder="" value="" required>
               <div class="invalid-feedback">
                 이름을 입력해주세요.
@@ -84,7 +110,7 @@
           </div>
           <div class="row">
           <div class="">
-            <label for="email" style="padding-left: 10px;">이메일</label>
+            <label for="email" style="padding-left: 10px; margin-top: 10px;">이메일</label>
             <input type="email" class="form-control" id="user_email" name="user_email" placeholder="you@example.com" required>
             <div class="invalid-feedback">
               이메일을 입력해주세요.
@@ -92,9 +118,9 @@
           </div>
 		 </div>
           <div class="col" style="margin-top: 10px; text-align: center;">
-          <button class="btn btn-outline-warning" type="submit">비밀번호 찾기</button>
-          <button class="btn btn-outline-warning" type="reset">취소</button>
-          <button class="btn btn-outline-warning" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">아이디 찾기</button>
+          <button class="ButtonStyle kRVxKH1" type="submit">비밀번호찾기</button>
+          <button class="ButtonStyle kRVxKH2" type="reset">취소</button>
+          <button class="ButtonStyle kRVxKH" type="button" onclick="location.href = '<%=context %>/idFindForm.do'">아이디 찾기</button>
           </div>
         </form>
       </div>
@@ -132,11 +158,11 @@
 	</form>	
 		</div>
 	</tbody> --%>
-	<div style="margin-top: 15%;"></div>
-	<footer class="py-5 bg-dark" style="bottom: 0;">
+	<div style="margin-top: 20%;"></div>
+	<footer class="py-5 bg-dark" >
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your	Website 2022</p>
 		</div>
-	</footer>	
+	</footer>
 </body>
 </html>

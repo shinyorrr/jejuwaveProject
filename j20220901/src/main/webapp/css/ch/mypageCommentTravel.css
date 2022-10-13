@@ -4,7 +4,7 @@
 	height:50px;
 	line-height: 50px;
 	text-align: left;
-	background-color: rgba(255,53,0,0.5);
+	background-color: #FF3500;
 	border : 1px solid rgba(204,204,204,0.2);
 	width : 100%;
 	padding-left: 30px;
@@ -31,7 +31,6 @@
     float: left;
     font-family: 'NotoSansKR';
     font-size: 14px;
-    background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
     margin-right: 8px;
 }
@@ -41,7 +40,6 @@
     color: rgb(106, 106, 106);
     font-family: 'NotoSansKR';
     font-size: 14px;
-    background: rgba(0, 206, 124 ,0.3);
     border-radius: 80%;
 }
 .c_content{
