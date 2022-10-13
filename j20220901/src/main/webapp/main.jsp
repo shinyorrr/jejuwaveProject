@@ -199,7 +199,7 @@ String context = request.getContextPath();
 				<div class="board_content">
 					<div class="board_title"
 						style="font-weight: bold; position: relative; width: 33%; margin-bottom: 15px;">
-						<a href="<%=context%>/qnaList.do" style="color: #ff3500;">여행정보 공유해요!</a>
+						<a href="<%=context%>/qnaList.do?sort=1" style="color: #ff3500;">여행정보 공유해요!</a>
 					</div>
 					<c:forEach var="board" items="${list }">
 						<div class="content_first">

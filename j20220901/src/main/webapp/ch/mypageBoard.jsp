@@ -144,7 +144,7 @@
 						</table>
 					</c:forEach> 
 				</c:if>
-				<input type = "submit" class = "allDel" value="일괄삭제">
+				<input type = "submit" class = "allDel" value="삭제">
 				</form>
 				<form action="mypageBoard.do">
 						<div class="search_form">

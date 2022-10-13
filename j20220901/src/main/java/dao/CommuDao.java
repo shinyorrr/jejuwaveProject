@@ -1,5 +1,6 @@
 package dao;
 
+import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.ServletContext;
 import javax.sql.DataSource;
 
 import dao.Commu.CommuImg;
@@ -322,16 +324,33 @@ public class CommuDao {
 	}
 	
 	// (게시글수정용)deleteImages
-	public int deleteImg(List<Integer> targetNums) throws SQLException {
+	public int deleteImg(List<Integer> targetNums , String FileRealPath) throws SQLException {
 		System.out.println("deleteImg dao start..");
 		int resultDeleteImg = 0;
-		String sql = "delete community_img where c_img_num=?";
+		String sql = "delete from community_img where c_img_num=?";
+		String sql1 = "select c_img_path from community_img where c_img_num = ?";
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
 		
 		try {
 			conn = getConnection();
-			
+			for (Integer targetNum : targetNums) {
+				pstmt = conn.prepareStatement(sql1);
+				pstmt.setInt(1, targetNum);
+				rs = pstmt.executeQuery();
+				if (rs.next()) {
+					String DbPath = rs.getString(1);
+					System.out.println("DbPath-> " + DbPath);
+					String FileName = DbPath.substring(16);
+					System.out.println("FileName-->" + FileName);
+					File file = new File(FileRealPath + "\\" + FileName);
+					if (file.exists()) {
+						file.delete();
+						System.out.println("fileDelete(update) after");
+					}
+				}
+			}
 			for (Integer targetNum : targetNums) {
 				pstmt = conn.prepareStatement(sql);
 				pstmt.setInt(1, targetNum);
@@ -404,14 +423,39 @@ public class CommuDao {
 	}
 	
 	// 게시글 삭제
-	public int delete(int c_num) throws SQLException {
+	public int delete(int c_num, String realPath) throws SQLException {
 		int result = 0;
-		String sql = "delete community where c_num = ?";
+		String sql  = "delete from community where c_num = ?";
+		String sql1 = "select c_img_path from community_img where c_num = ?";
 		Connection        conn  = null;
 		PreparedStatement pstmt = null;
+		ResultSet         rs    = null;
 		
 		try {
 			conn = getConnection();
+			// 서버 실제 파일 삭제
+			pstmt = conn.prepareStatement(sql1);
+			pstmt.setInt(1, c_num);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				String DbPath = rs.getString(1);
+				System.out.println("DbFilePath-> " + DbPath);
+				String FileName = "";
+				if (DbPath.contains("dh_images")) {
+					 FileName = DbPath.substring(10);
+				} else if (DbPath.contains("images")) {
+					 FileName = DbPath.substring(7);
+				} else FileName = DbPath.substring(16);
+				System.out.println("FileName-->" + FileName);
+				File file = new File(realPath + "\\" + FileName);
+				if (file.exists()) {
+					file.delete();
+					System.out.println("fileDelete after");
+				}
+			}
+			rs.close();
+			pstmt.close();
+			// db 파일 path 삭제
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, c_num);
 			result = pstmt.executeUpdate();
