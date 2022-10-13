@@ -15,14 +15,14 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <style type="text/css">
  	 body {
- 	 overflow : visible;
+ 	 /* overflow : visible;
  	  background-size: contain;
 	  background-repeat : no repeat;
       background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
       background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%); 
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); 
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);  */
     } 
 
     .input-form {
@@ -39,13 +39,22 @@
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
     }
+    .kRVxKH {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;;
+	width: 80px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+}
 </style>
 </head>
 <body>
 <body style="overflow: visible; height: 300px;">
 		 <div class="container1" style="padding: auto;">
-    <div class="input-form-backgroud row" style="margin-top: 20%;">
-      <div class="input-form col-md-4 mx-auto">
+    <div class="input-form-backgroud row" style="margin-top: 10%;">
+      <div class="input-form col-md-6 mx-auto">
         <h4 class="mb-3" style="text-align: center;">회원 탈퇴</h4>
         <form class="validation-form" action="<%=context %>/idDeletePro.do">
           <div class="row">
@@ -58,8 +67,8 @@
             </div>
           </div>
           <div class="col" style="margin-top: 10px; text-align: center;">
-          <button class="btn btn-outline-warning" type="submit" value="확인">확인</button>
-          <button class="btn btn-outline-warning" type="reset" value="취소" onclick="location.href='mypageUpdate.do'">취소</button>
+          <button class="ButtonStyle kRVxKH" type="submit" value="확인">확인</button>
+          <button class="ButtonStyle kRVxKH" type="reset" value="취소" onclick="location.href='mypageUpdate.do'">취소</button>
           </div>
         </form>
       </div>
@@ -81,8 +90,7 @@
 	</form>
 	</div>
 </tbody> --%>
-<div style="margin-top: 15%;"></div>
-	<footer class="py-5 bg-dark" style="margin-top: 15%;">
+	<footer class="py-5 bg-dark" style="margin-top: 26%;">
 		<div class="container">
 			<p class="m-0 text-center text-white">Copyright &copy; Your	Website 2022</p>
 		</div>

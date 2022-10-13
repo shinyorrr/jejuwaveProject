@@ -57,7 +57,7 @@
 <c:if test="${id != null}">
 	<div class="container1" style="padding: auto;">
     <div class="input-form-backgroud row" style="margin-top: 300px;">
-      <div class="input-form col-md-4 mx-auto">
+      <div class="input-form col-md-3 mx-auto">
         <h4 class="mb-3" style="text-align: center;">아이디 찾기</h4>
 	        <form class="validation-form">
 	          <div class="row">
