@@ -37,7 +37,7 @@ String context = request.getContextPath();
 <script type="text/javascript">
 /* select 에서 선택한 방식으로 정렬 */
 function sorting(sort) {
-   alert(sort);
+
    location.href='<%=context %>/qnaList2.do?sort='+ sort;
    
 }
@@ -53,7 +53,7 @@ function sorting(sort) {
          <!-- 검색어 기능 -->
 
 
-         <div style="margin-left: 1020px; height: 60px;       "
+         <div style="margin-left: 900px; height: 60px;       "
             class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
             <form action="<%=context%>/qnaSearchList.do">
                <div style="width: 1100px;">
@@ -67,9 +67,9 @@ function sorting(sort) {
 
             <!-- 정렬 -->
             <select class="select" name="sort" onchange="sorting(this.value);">
-               <option value="0">정렬</option>
-               <option value="1">등록순</option>
-               <option value="2">댓글순</option>
+               <option value="0" disabled="disabled" >정렬</option>
+               <option value="1" <c:if test= "${sort eq '1'}"> selected="selected" </c:if> >등록순</option>
+               <option value="2" <c:if test= "${sort eq '2'}"> selected="selected" </c:if>>댓글순</option>
             </select>
 
 
