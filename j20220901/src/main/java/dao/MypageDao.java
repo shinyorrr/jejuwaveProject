@@ -700,13 +700,13 @@ public class MypageDao {
 		int result = 0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
-		String sql = "delete travel_board where t_num = ?";
+		String sql = "update travel_board set t_content='삭제된 댓글입니다.' where t_num=?";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, t_num);
 			result = pstmt.executeUpdate();
-			
+			if(result != 0) result = 1;
 		} catch (Exception e) {
 			System.out.println("MypageDao qnaComDelete 오류" +  e.getMessage());
 		} finally {
