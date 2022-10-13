@@ -30,7 +30,8 @@
 	<input type="hidden" name="b_num" value="${board.b_num }">
 		
 		<!-- 테마 -->
-		<div class="tag"> 
+		<div class="tag2">테 마    선 택</div>
+		<div class="tag">
 		    
 		        
 		    
@@ -55,11 +56,14 @@
 			  <label class="form-check-label" for="inlineRadio1">카풀</label>
 			</div>
 		</div>
+		<br>
 			
 		<!-- 제목 -->
-		<div class="mb-3" style="width: 1200px; margin-left: auto; margin-right: auto;"> 	 		
-  			<input type="text" name="b_title" value="${board.b_title }" class="form-control card-title" style="height: 60px">
-		</div>	
+		<input type="hidden" name="b_num" value="${b_num }">
+		<div class="mb-3" style="width: 1200px; margin-left: auto; margin-right: auto; ">	 		
+  			<input type="text" name="b_title" value="${board.b_title }" class="form-control card-title"  placeholder="물음표로 끝나는 제목을 입력해보세요 (100자 이내)" 
+  					style="height: 60px; background-image: url('<%=context %>/sh_images/q.png');">
+		</div>		
 		
 		<!-- 내용 -->
 		<div style="display: flex; justify-content: center;" >
