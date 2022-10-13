@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
  <% String context = request.getContextPath(); %>
+ <title>JEJU WAVE Q&A</title>
 <c:import url="../header.jsp"></c:import>
  <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
@@ -15,7 +16,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <meta charset="UTF-8">
-<title>JejuWave QnA</title>
 
 <header class="py-5 mb-5"
 	style="background-image: url('<%=context %>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
@@ -58,13 +58,13 @@ integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jI
 		<!-- 제목 -->
 		<input type="hidden" name="b_num" value="${b_num }">
 		<div class="mb-3" style="width: 1200px; margin-left: auto; margin-right: auto; ">	 		
-  			<input type="text" name="b_title" class="form-control card-title" maxlength="150" placeholder="물음표로 끝나는 제목을 입력해보세요 (100자 이내)" 
+  			<input type="text" name="b_title" class="form-control card-title" maxlength="150" required="required" placeholder="물음표로 끝나는 제목을 입력해보세요 (100자 이내)" 
   					style="height: 60px; background-image: url('<%=context %>/sh_images/q.png');  ">
 		</div>	
 		
 		<!-- 내용 -->
 		<div style="display: flex; justify-content: center;" >
-	  		<textarea placeholder="내용을 입력해주세요" name="b_content" maxlength="1500" style="width: 1200px; height: 700px ;border-color:#ced4da  ;"></textarea>	  		
+	  		<textarea placeholder="내용을 입력해주세요" name="b_content" maxlength="1500" required="required" style="width: 1200px; height: 700px ;border-color:#ced4da  ;"></textarea>	  		
 		</div>
 		<br>
 		

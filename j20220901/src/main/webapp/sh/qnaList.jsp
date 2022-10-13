@@ -7,11 +7,13 @@
 <%
 String context = request.getContextPath();
 %>
-
+<title>JEJU WAVE Q&A</title>
 
 <c:import url="${context}/header.jsp"></c:import>
 <meta charset="UTF-8">
-<title>Jeju Wave QnA</title>
+
+
+
 <link
    href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
    rel="stylesheet">
@@ -50,36 +52,45 @@ function sorting(sort) {
 
 
 
-         <!-- 검색어 기능 -->
-
-
-         <div  style="margin-left: 900px; height: 60px; width: 1000px;" class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+ <!-- 검색어 기능 -->
+         <div style=" width: 1000px; margin-left: auto; margin-right: 200px; margin-bottom: 40px;" 
+            class="col-md-auto Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
             <form action="<%=context%>/qnaSearchList.do">
-               <div style="width: 1100px;">
-                  <div width="300px"
-                     class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
-                     <span
-                        class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
-                     <button></button>
-                     <input type="text" name="searchWord" placeholder="검색어를 입력하세요">
-                     
-            </form>
-              
-   
-            <!-- 정렬 -->
-            <select  class="select" name="sort" onchange="sorting(this.value);">
-               <option    value="0" disabled="disabled" >정렬</option>
+               <div width="300px"
+                  class="Search__SearchInputWrappper-sc-1ef83fv-0 beOSqn">
+                  <span
+                     class="CommonIconSet__InitialIcon-sc-15eoam-0 CommonIconSet__MagnifierGrayIconContent-sc-15eoam-1 jZNHYY QjNCN"></span>
+
+                  <input type="text" name="searchWord" placeholder="검색어를 입력하세요">
+               </div>
                
-               <option  value="1" <c:if test= "${sort eq '1'}"> selected="selected" </c:if> > 등록순</option>
-              
-               <option value="2" <c:if test= "${sort eq '2'}"> selected="selected" </c:if>>댓글순</option>
-            </select>
+               <div style="font-size: 14px; color: #808080" >정렬&nbsp&nbsp&nbsp| </div>
+            </form>
+             
+
+            <div style="margin-left: 10px;"> 
+            
+            
+
+               <!-- 정렬 -->
+               <select class="select" name="sort" onchange="sorting(this.value);">
+                  
+                  <option value="0" disabled="disabled">정렬</option>
+                  <option value="1" <c:if test= "${sort eq '1'}"> selected="selected" </c:if> >등록순</option>
+                  <option value="2"<c:if test= "${sort eq '2'}"> selected="selected" </c:if> >댓글순</option>
+               </select>
+
+               <!-- 채택기다리는 글만보기 -->
+               <button
+                  onclick="location.href='<%=context %>/qnaList2.do?sort=${sort }'"
+                  class="comment_button1">답변을 기다리는 질문만 보기</button>
+
+            </div>
 
 
-            <!-- 채택기다리는 글만보기 -->
-            <button style="width: 215px; margin-left: 300px"
-               onclick="location.href='<%=context %>/qnaList2.do?sort=${sort }'"
-               class="comment_button1">답변을 기다리는 질문만 보기</button>
+
+
+
          </div>
 
       
@@ -98,10 +109,12 @@ function sorting(sort) {
                <th class=" title2"><a
                   href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
                      ${board.b_title}</a></th>
+               <!--  내용 , 테마 -->
                <th><a
                   href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
-                     <span style="font-weight: lighter;" class="content1">${board.b_content }</span>
+                   <span class="content1"><span class="theme">#${board.b_theme}</span>&nbsp; &nbsp; ${board.b_content }</span>
                </a></th>
+               <!-- 아이디 -->
                <tr class="last">
                   <td></td>
                   <td><img src="<%=context%>/${board.fn_user_img}"

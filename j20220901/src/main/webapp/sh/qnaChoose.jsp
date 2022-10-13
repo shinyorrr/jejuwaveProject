@@ -4,9 +4,10 @@
 <% String context = request.getContextPath();%>
 <!DOCTYPE html>
 <html>
+<title>JEJU WAVE Q&A</title>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
 </head>
 <body>
 	

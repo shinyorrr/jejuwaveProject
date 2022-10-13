@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JEJU WAVE</title>
+<title>JEJU WAVE 커뮤니티</title>
 <!-- jQuery -->
 <!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script> -->
 </head>
@@ -44,7 +44,7 @@ String context = request.getContextPath();
     </div>
     <div class="modal-body container justify-content-md-center" style="padding-bottom: 0px">
     	<c:forEach var="image" items="${imgList }" varStatus="status">
-    		<div class="row"> <img class="rounded" src="<%=context %>/${image.c_img_path }"></div>
+    		<div class="row"> <img class="" style="border-radius: 0.375rem;" src="<%=context %>/${image.c_img_path }"></div>
     		<div class="white_space" style="min-height: 16px;"></div>
     	</c:forEach>
     </div>

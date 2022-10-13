@@ -4,9 +4,10 @@
 <!DOCTYPE html>
 <html>
 <%String context = request.getContextPath();%>
+<title>JEJU WAVE Q&A</title>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+
 </head>
 <body>
 	<c:if test="${result >0 }">

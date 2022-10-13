@@ -8,10 +8,11 @@
 String context = request.getContextPath();
 %>
 
-
+<title>JEJU WAVE Q&A</title>
 <c:import url="${context}/header.jsp"></c:import>
 <meta charset="UTF-8">
-<title>Jeju Wave QnA</title>
+
+
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
@@ -41,12 +42,7 @@ String context = request.getContextPath();
 	<div style="margin-bottom: 400px; margin-top: 70px;" class="main">
 		<table class="mainTable">
 		
-			<!-- 목록으로 돌아가기 -->
-			<div style="margin-left: 1200px;" >
 
-			 <button onclick="location.href='<%=context %>/qnaList.do?sort=1'" class="comment_button3" >목록으로</button>  
-			
-			</div>
 			
 			<!-- 검색결과 기능 -->
 
@@ -74,56 +70,69 @@ String context = request.getContextPath();
 							<input type="text" name="searchWord" placeholder="검색어를 입력하세요">
 						</div>
 					</form>
+				<div  >
+			 		<button onclick="location.href='<%=context %>/qnaList.do?sort=1'" class="comment_button3" >목록으로</button>  			
+				</div>
 				</div>
 			</div>
+						<!-- 목록으로 돌아가기 -->
 
 
-			<c:if test="${totCnt > 0 }">
-				<c:forEach var="board" items="${list}">
-					<th style="vertical-align: super;">
-						<!-- 채택완료/답변대기 --> <c:if test="${board.b_success eq '채택완료' }">
-							<span>${board.b_success }</span>
-						</c:if> <c:if test="${board.b_success ne '채택완료' }">
-							<span style="color: #FF3500;">${board.b_success }</span>
-						</c:if>
-					</th>
-					<!-- 제목 -->
-					<th class=" title2"><a
-						href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
-							${board.b_title}</a></th>
-					<th><a
-						href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
-							<span class="content1">${board.b_content }</span>
-					</a></th>
-					<tr class="last">
-						<td></td>
-						<td><img src="<%=context%>/${board.fn_user_img}"
-							class="userIconColor-1 rounded-circle me-2  align-center bg-white"
-							width="30" height="30">${board.user_id}</td>
-						<!-- 해시태그 -->
-						<td><c:choose>
-								<c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
-								<c:otherwise>
-									<span class="hash">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-							</c:choose> <c:choose>
-								<c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
-								<c:otherwise>
-									<span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-							</c:choose> <c:choose>
-								<c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
-								<c:otherwise>
-									<span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
-							</c:choose></td>
-					</tr>
-					<c:set var="startNum" value="${startNum -1 }"></c:set>
-				</c:forEach>
-			</c:if>
-			<c:if test="${totCnt ==0 }">
-				<tr>
-					<td colspan=7>데이터가 없네ㅜ</td>
-				</tr>
 
-			</c:if>
+         <c:if test="${totCnt > 0 }">
+            <c:forEach var="board" items="${list}">
+               <th style="vertical-align: super;">
+                  <!-- 채택완료/답변대기 --> <c:if test="${board.b_success eq '채택완료' }">
+                     <span>${board.b_success }</span>
+                  </c:if> <c:if test="${board.b_success ne '채택완료' }">
+                     <span style="color: #FF3500;">${board.b_success }</span>
+                  </c:if>
+               </th>
+               <!-- 제목 -->
+               <th class=" title2"><a
+                  href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
+                     ${board.b_title}</a></th>
+               <!--  내용 , 테마 -->
+               <th><a
+                  href='qnaWriteCheck.do?b_num=${board.b_num}&user_id=${user_id}'>
+                   <span class="content1"><span class="theme">#${board.b_theme}</span>&nbsp; &nbsp; ${board.b_content }</span>
+               </a></th>
+               <!-- 아이디 -->
+               <tr class="last">
+                  <td></td>
+                  <td><img src="<%=context%>/${board.fn_user_img}"
+                     class="userIconColor-1 rounded-circle me-2  align-center bg-white"
+                     width="40" height="40">${board.user_id}</td>
+                  <!-- 해시태그 -->
+                  <td><c:choose>
+                        <c:when test="${null eq board.l_hash1 }">&nbsp; &nbsp; &nbsp;</c:when>
+                        <c:otherwise>
+                           <span class="hash" style="margin-left: 27px;">#${board.l_hash1}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+                     </c:choose> <c:choose>
+                        <c:when test="${null eq board.l_hash2 }">&nbsp; &nbsp; &nbsp;</c:when>
+                        <c:otherwise>
+                           <span class="hash">#${board.l_hash2}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+                     </c:choose> <c:choose>
+                        <c:when test="${null eq board.l_hash3 }">&nbsp; &nbsp; &nbsp;</c:when>
+                        <c:otherwise>
+                           <span class="hash">#${board.l_hash3}</span>&nbsp; &nbsp; &nbsp;</c:otherwise>
+                     </c:choose>
+                   
+                  	<span class="com_cnt" > <img src="images/comm_icon.png" width="15" height="15" >&nbsp;${board.com_cnt }&nbsp;&nbsp;</span>
+               	  
+                     </td>
+                   <!-- 댓글수 -->
+  
+               </tr>
+               <c:set var="startNum" value="${startNum -1 }"></c:set>
+            </c:forEach>
+         </c:if>
+         <c:if test="${totCnt ==0 }">
+            <tr>
+               <td colspan=7>데이터가 없네ㅜ</td>
+            </tr>
+
+         </c:if>
 
 		</table>
 

@@ -6,9 +6,12 @@
 %>
 <!DOCTYPE html>
 <html>
+<title>JEJU WAVE Q&A</title>
 <head>
 <meta charset="UTF-8">
-<title>Jeju Wave QnA</title>
+
+
+
 </head>
 <body>
 <c:if test="${result >0 }">

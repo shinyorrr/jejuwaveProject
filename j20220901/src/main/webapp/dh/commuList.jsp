@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">	
-<title>JEJU WAVE</title>
+<title>JEJU WAVE 커뮤니티</title>
 <% 
 String context = request.getContextPath();
 %>

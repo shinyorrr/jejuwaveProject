@@ -7,7 +7,7 @@
 <%
    String context = request.getContextPath();
 %>
-<title>Insert title here</title>
+<title>JEJU WAVE 로그인</title>
 <link rel="stylesheet" href="<%= context %>/css/ch/loginForm.css">
 <script src="<%= context %>/js/jquery.js"></script>
 <script>
