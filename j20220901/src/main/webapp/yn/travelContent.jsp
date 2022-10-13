@@ -254,9 +254,9 @@
 
 						<!----------- 댓글 등록 창 --------------->
 						<div class="input-group my-3 ">
-							<button onclick="userReplyChk()" class="input-group-text" id="commInsBtn">
+							<button onclick="return userReplyChk()" class="input-group-text" id="commInsBtn">
 								댓글 등록</button>
-							<textarea required="required" name="t_content" rows="2"
+							<textarea required="required" name="t_content" rows="2" maxlength="300"
 								class="form-control" style="border-left: none; padding: 10px 10px 10px 15px !important; font-size: 14px;"
 								placeholder="댓글을 남겨 보세요!" aria-label="Input group example"
 								aria-describedby="basic-addon1"></textarea>
@@ -332,9 +332,9 @@
 										<!------ 대댓글 작성 창 ------>
 										<div style="display: flex; width: 250%;">
 											<textarea type="text" name="t_content" class="form-control p-1"
-												style="width: 100%; border-right: none;"
+												style="width: 100%; border-right: none;" maxlength="300"
 												placeholder="댓글을 남겨 보세요!">@${reply.user_id}  </textarea>
-											<button onclick="userReplyChk()" class="input-group-text"
+											<button onclick="return userReplyChk()" class="input-group-text"
 												id="commInsBtn">댓글 등록</button>
 										</div>
 									</form>
