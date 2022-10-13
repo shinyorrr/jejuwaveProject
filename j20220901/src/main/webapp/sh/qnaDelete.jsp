@@ -6,7 +6,7 @@
 <%String context = request.getContextPath();%>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Jeju Wave QnA</title>
 </head>
 <body>
 	<c:if test="${result >0 }">

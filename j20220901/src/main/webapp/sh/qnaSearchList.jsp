@@ -11,7 +11,7 @@ String context = request.getContextPath();
 
 <c:import url="${context}/header.jsp"></c:import>
 <meta charset="UTF-8">
-<title>게시글 수정</title>
+<title>Jeju Wave QnA</title>
 <link
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
 	rel="stylesheet">
