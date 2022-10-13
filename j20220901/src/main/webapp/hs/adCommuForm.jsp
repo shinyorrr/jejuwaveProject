@@ -62,8 +62,10 @@
 			  		<c:forEach var="commu" items="${list}">
 				  	<tr>
 				  		<th scope="row" width="50">${startNum}</th>
-				  		<td width="600" id="content">${commu.c_content}</td>
-				  		<td width="100">
+				  		<td width="600" id="content">
+				  			<a href="<%=context%>/commuList.do">${commu.c_content}</a>
+				  		</td>
+				  		<td width="100" id="hash">
 				  			<c:set var="hash" value="${commu.c_hash}"></c:set>
 				  			<c:forTokens var="h" items="${hash}" delims=" ">
 				  				#${h}&nbsp;

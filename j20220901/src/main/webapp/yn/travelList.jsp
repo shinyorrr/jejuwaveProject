@@ -21,7 +21,9 @@
 <body style="color: #000000;">
 
 <!------------------------ 동행자 카테고리 배너 ------------------------>
-<header class="py-5" style="background-image: url('images/travelerList_cate.jpg'); background-size: cover; margin-top:148px;">
+<header class="py-5" style="background-image: url('images/travelerList_cate.jpg'); vertical-align:middle; background-size: cover;
+background-position: center;
+ margin-top:148px; width: 100%;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">
 		<div  class="text-center">
 			<h3 id="cateTextM" class="display-5 fw-bolder">동행자 게시판</h3>
