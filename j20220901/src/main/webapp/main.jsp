@@ -111,7 +111,7 @@ String context = request.getContextPath();
 		<!-- Main 이미지 -->
 		<main class="main_page">
 			<div class="magin_image_box mibox">
-				<img class="main_img" src="images/main.jpg">
+				<img class="main_img" src="images/jejuMain_Fall_370_1.jpg">
 			</div>
 			<div style="height: 60px;"></div>
 			<!-- Section-->
