@@ -51,7 +51,16 @@
     .kRVxKH {
 	color: rgb(255, 255, 255);
 	background-color: #FF3500;;
-	width: 100px;
+	width: 80px;
+	height: 40px;
+	border-radius: 4px;
+	cursor: pointer;
+	transition: all 0.1s ease-out 0s;
+}
+    .kRVxKH1 {
+	color: rgb(255, 255, 255);
+	background-color: #FF3500;;
+	width: 90px;
 	height: 40px;
 	border-radius: 4px;
 	cursor: pointer;
@@ -105,7 +114,7 @@ function chk1() {
 	return true;
 }
 function winop() {
-	window.open("<%=context %>/idCheckForm.do?user_id="+$('#user_id').val(), "kkk",	"width=500 height=300");
+	window.open("<%=context %>/idCheckForm.do?user_id="+$('#user_id').val(), "kkk",	"width=500 height=250");
 } 
 </script>
 <c:import url="${context }/header.jsp"/>
@@ -124,7 +133,7 @@ function winop() {
 			<tr>
 				<td style="width: 100px; text-align: center;">아이디</td>
 				<td><input type="text" style="width: 90%;" class="form-control"     name="user_id" id="user_id" required="required"></td>
-				<td ><button class="ButtonStyle kRVxKH" style="width: 145px;" onclick="winop()">중복체크</button></td>
+				<td ><button class="ButtonStyle kRVxKH1" style="width: 105px;" onclick="winop()">중복체크</button></td>
 			</tr>
 			<tr>
 				<td style="width: 100px; text-align: center;">비밀번호</td>
@@ -133,7 +142,7 @@ function winop() {
 			<tr>
 				<td style="width: 100px; text-align: center;">비밀번호확인</td>
 				<td><input type="password" class="form-control" style="width: 90%;"  name="user_pw2" id="user_pw2" required="required"></td>
-				<td style="text-align: center;"><button style="width: 145px;" class="ButtonStyle kRVxKH" type="button" onclick="chk1()">비밀번호체크</button></td>
+				<td style="text-align: center;"><button style="width: 105px;" class="ButtonStyle kRVxKH1" type="button" onclick="chk1()">비밀번호체크</button></td>
 			</tr>
 			<tr>
 				<td style="width: 120px; text-align: center;">이메일</td>
@@ -280,8 +289,8 @@ function winop() {
 				</tr>
 			<tr>
 				<td colspan="3" style="text-align: center;">
-				<button class="ButtonStyle kRVxKH" type="submit" >가입</button>
-				<button class="ButtonStyle kRVxKH" type="button" onclick="location.href = '<%=context %>/main.do'" >가입취소</button>
+				<button class="ButtonStyle kRVxKH" type="submit" style="width: 80px;">가입</button>
+				<button class="ButtonStyle kRVxKH" type="button" style="width: 80px;" onclick="location.href = '<%=context %>/main.do'" >가입취소</button>
 				</td>
 			</tr>
 		</table>
