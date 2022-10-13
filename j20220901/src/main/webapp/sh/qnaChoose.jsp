@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>JEJU WAVE Q&A</title>
 </head>
 <body>
 	

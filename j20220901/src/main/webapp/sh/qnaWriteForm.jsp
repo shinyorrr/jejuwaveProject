@@ -15,8 +15,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" 
 integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <meta charset="UTF-8">
-<title>JejuWave QnA</title>
-
+<title>JEJU WAVE Q&A</title>
 <header class="py-5 mb-5"
 	style="background-image: url('<%=context %>/sh_images/jeju_air44.jpg'); background-size: cover; margin-top: 150px;">
 	<div class="container px-4 px-lg-5 mt-5 mb-5">

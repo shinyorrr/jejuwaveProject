@@ -16,8 +16,7 @@ String context = request.getContextPath();
 
 
 <meta charset="UTF-8">
-<title>JejuWave QnA</title>
-
+<title>JEJU WAVE Q&A</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap">
 <link rel="stylesheet" href="<%=context%>/css/sh/qnamain.css">
