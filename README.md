@@ -1,7 +1,8 @@
 
 
-<img src="https://github.com/user-attachments/assets/92eb1e05-5bc8-4fd0-a86e-581650b205dc" width="600">
+<img src="https://github.com/user-attachments/assets/92eb1e05-5bc8-4fd0-a86e-581650b205dc" width="500">
 <br>
+
 ![JejuWave_동행자커뮤니티_JSP_page-0002](https://github.com/user-attachments/assets/f3afd363-b59a-492a-89af-acb7ae901069)
 ![JejuWave_동행자커뮤니티_JSP_page-0003](https://github.com/user-attachments/assets/ca187c1e-8e17-431a-9413-ebc805abd824)
 ![JejuWave_동행자커뮤니티_JSP_page-0005](https://github.com/user-attachments/assets/78fc4740-fa5a-4cbe-ab4f-4cdc361eaaed)
