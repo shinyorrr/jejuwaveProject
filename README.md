@@ -5,7 +5,7 @@
 
 <div align=center>
   
-# Jeju Wave | 여행 동행자 커뮤니티 
+# JEJU WAVE | 여행 동행자 커뮤니티 🍊
 </div>
 <br>
 
