@@ -3,6 +3,12 @@
 <img src="https://github.com/user-attachments/assets/92eb1e05-5bc8-4fd0-a86e-581650b205dc" width="350">
 </p>
 
+<div align=center>
+  
+# Jeju Wave | 여행 동행자 커뮤니티 
+</div>
+<br>
+
 <br>
 <br>
 
