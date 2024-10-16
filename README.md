@@ -1,3 +1,6 @@
+![11](https://github.com/user-attachments/assets/92eb1e05-5bc8-4fd0-a86e-581650b205dc)
+
+
 ![JejuWave_동행자커뮤니티_JSP_page-0001](https://github.com/user-attachments/assets/752ac258-760d-4d49-89c8-68630509fbb6)
 ![JejuWave_동행자커뮤니티_JSP_page-0002](https://github.com/user-attachments/assets/f3afd363-b59a-492a-89af-acb7ae901069)
 ![JejuWave_동행자커뮤니티_JSP_page-0003](https://github.com/user-attachments/assets/ca187c1e-8e17-431a-9413-ebc805abd824)
